@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use http\Client\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Match;
-
+use Carbon\Carbon;
 
 
 class HomeController extends Controller
@@ -18,10 +18,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        $mytime = Carbon\Carbon::now();
+        $mytime = Carbon::now();
+      $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d');
 
-        $matches = Match::where('date',$mytime->toDateTimeString());
+        $matches = Match::where('date', $today)->get();
         return view('home',\compact('matches'));
-        return view('home');
+
     }
 }

@@ -46,7 +46,6 @@ class MatchesController extends Controller
                 'away_club_id' => 'required',
                 'time' => 'required',
                 'date' => 'required',                
-                'result' => '',
                 'stadium_id' => 'required',
                 'tour_id' => 'required',
             ]);
@@ -78,8 +77,8 @@ class MatchesController extends Controller
      */
     public function edit($id)
     {
-        $matche_data = $this->objectName::where('id', $id)->first();
-        return view($this->folderView.'edit', \compact('matche_data'));
+        $match_data = $this->objectName::where('id', $id)->first();
+        return view($this->folderView.'edit', \compact('match_data'));
     }
 
     public function update(Request $request, $id)
@@ -89,10 +88,13 @@ class MatchesController extends Controller
                 'home_club_id' => 'required',
                 'away_club_id' => 'required',
                 'time' => 'required',
-                'date' => 'required',                
-                'result' => '',
+                'date' => 'required',  
+                'home_score' => 'required',  
+                'away_score' => 'required',                                
                 'stadium_id' => 'required',
                 'tour_id' => 'required',
+                'status' => 'required',
+                
             ]);
 
         $club = $this->objectName::where('id',$id)->update($data);

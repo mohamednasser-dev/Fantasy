@@ -5,7 +5,7 @@
         <div class="navbar-header">
             <ul class="nav navbar-nav">
                 <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="icon-menu5 font-large-1"></i></a></li>
-                <li class="nav-item"><a href="index.html" class="navbar-brand nav-link"><img alt="logo" src="{{ asset('/app-assets/images/logo/robust-logo-.png') }}"
+                <li class="nav-item"><a  class="navbar-brand nav-link"><img alt="logo" src="{{ asset('/app-assets/images/logo/robust-logo-.png') }}"
                                                                                              data-expand="{{ asset('/app-assets/images/logo/robust-logo-.png') }}"
                                                                                              data-collapse="{{ asset('/app-assets/images/logo/robust-logo-.png') }}"
                                                                                              class="brand-logo"></a></li>

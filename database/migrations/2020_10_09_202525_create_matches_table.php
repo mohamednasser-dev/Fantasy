@@ -24,10 +24,11 @@ class CreateMatchesTable extends Migration
 
             $table->time('time');
             $table->date('date');
-            $table->string('result')->default('0  -  0');
+            $table->string('home_score')->default('0');
+            $table->string('away_score')->default('0');
             $table->enum('status',['not started','started','ended'])->default('not started');
             $table->bigInteger('stadium_id')->unsigned();
-            $table->foreign('stadium_id')->references('id')->on('stadiums');
+            $table->foreign('stadium_id')->references('id')->on('stadiums')->onDelete('cascade');
 
 
             $table->bigInteger('tour_id')->unsigned();

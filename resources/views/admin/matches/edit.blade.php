@@ -29,46 +29,60 @@
 
                         {!! Form::model($match_data, ['url' => ['matches/'.$match_data->id.'/update'] , 'method'=>'post' ,'files'=> true]) !!}
                         {{ csrf_field() }}
-                        
-                        <div class="form-group">
-                        <strong>Club name</strong>
-                                {{ Form::select('club_id',$match_data->id,App\Club::pluck('club_name','id'),$player_data->club_id
-                                ,["class"=>"form-control" ,'placeholder'=>'choose Club' ]) }}
-                            </div>
+  
 
                             <div class="form-group">
                         <strong>Home club name</strong>
-                            {{ Form::select('home_club_id',$match_data->home_club_id,App\Club::pluck('club_name','id'),null
+                            {{ Form::select('home_club_id',App\Club::pluck('club_name','id'),$match_data->home_club_id
                             ,["class"=>"form-control" ,'placeholder'=>'Choose home club' ]) }}
                         </div>
 
                         <div class="form-group">
+                        <strong>Home score</strong>
+                        {{ Form::number('home_score',$match_data->home_score,["class"=>"form-control round" ,"required",'placeholder'=>'home score','min'=>'1', 'max'=>'5000']) }}
+                        </div>
+
+                        <div class="form-group">
+                        <strong>Away score</strong>
+                        {{ Form::number('away_score',$match_data->away_score,["class"=>"form-control round" ,"required",'placeholder'=>'away score','min'=>'1', 'max'=>'5000']) }}
+                        </div>
+
+                        <div class="form-group">
                         <strong>Away club name</strong>
-                        
-                                {{ Form::select('away_club_id',$match_data->away_club_id,App\Club::pluck('club_name','id'),null
+                                {{ Form::select('away_club_id',App\Club::pluck('club_name','id'),$match_data->away_club_id
                                 ,["class"=>"form-control" ,'placeholder'=>'Choose away club' ]) }}
                             </div>
                         
                         <div class="form-group">
                         <strong>Stadium name</strong>
-                            {{ Form::select('stadium_id',$match_data->stadium_id,App\Stadium::pluck('stadium_name','id'),null
+                            {{ Form::select('stadium_id',App\Stadium::pluck('stadium_name','id'),$match_data->stadium_id
                             ,["class"=>"form-control" ,'placeholder'=>'choose stadium' ]) }}
                         </div>
 
                         <div class="form-group">
                         <strong>Tournament name</strong>                        
-                            {{ Form::select('tournament_id',$match_data->tournament_id,App\Tournament::pluck('tour_name','id'),null
+                            {{ Form::select('tour_id',App\Tournament::pluck('tour_name','id'),$match_data->tour_id
                             ,["class"=>"form-control" ,'placeholder'=>'choose tournament' ]) }}
                         </div>
-
+                        <div class="form-group">
+                        <strong>Status</strong> 
+                        {{Form::select('status',
+                            ['not started' => 'not started',
+                             'started' => 'started',
+                             'ended' => 'ended'
+                             ],
+                             $match_data->status
+                             ,["class"=>"form-control round" ,"required",'placeholder'=>'Status' ])}}
+                             </div>
+                       
                         <div class="form-group">
                         <strong>Match date</strong>                       
-                        {{ Form::date('date',\Carbon\Carbon::now()->format('Y-MM-ddd'),["class"=>"form-control round" ,"required",'placeholder'=>'match date' ]) }}
+                        {{ Form::date('date',$match_data->date,["class"=>"form-control round" ,"required",'placeholder'=>'match date' ]) }}
                         </div>
 
                         <div class="form-group">
                         <strong>Match time</strong>                       
-                        {{ Form::time('time',\Carbon\Carbon::now()->format('Y-MM-ddd'),["class"=>"form-control round" ,"required",'placeholder'=>'match time' ]) }}
+                        {{ Form::time('time',$match_data->time,["class"=>"form-control round" ,"required",'placeholder'=>'match time' ]) }}
                         </div>
 
 

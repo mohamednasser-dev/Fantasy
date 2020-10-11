@@ -58,14 +58,14 @@
                                         <tr>
                                             <th class="text-lg-center">#</th>
                                             <th class="text-lg-center">Home Club</th>
-                                            <th class="text-lg-center">Away Club</th>
                                             <th class="text-lg-center">result</th>
+                                            <th class="text-lg-center">Away Club</th>                                            
                                             <th class="text-lg-center">Status</th>                                            
                                             <th class="text-lg-center">Stadium</th>
                                             <th class="text-lg-center">Tournament</th>                                            
                                             <th class="text-lg-center">Time</th>                                            
                                             <th class="text-lg-center">Date</th>
-                                            <th class="text-lg-center"></th>
+                                            <th class="text-lg-center">Actions</th>
 
                                         </tr>
                                         </thead>
@@ -74,11 +74,35 @@
                                         @foreach($matches as $match)
                                             <tr>
                                                 <th scope="row" class="text-lg-center">{{$match->id}}</th>
-                                                <td class="text-lg-center">{{$match->getHomeclub->club_name}}</td>
-                                                <td class="text-lg-center">{{$match->getAwayclub->club_name}}</td>
-                                                <td class="text-lg-center">{{$match->result}}</td>                                                
-                                                <td class="text-lg-center">{{$match->Status}}</td>                                                
-                                                <td class="text-lg-center">{{$match->getStadium->stadium_name}}</td>                                                
+                                                <td class="text-lg-center">
+                                                <img src="{{ url($match->getHomeclub->image) }}" style="width:75px;height:75px;"/>
+                                                {{$match->getHomeclub->club_name}}</td>
+
+                                         
+                                                <td class="text-lg-center">
+                                                <a href=" {{url('matches/'.$match->id.'/edit')}}">
+                                                {{$match->home_score}} - {{$match->away_score}} 
+                                                </a>
+                                                </td>  
+
+                                                       <td class="text-lg-center">
+                                                <img src="{{ url($match->getAwayclub->image) }}" style="width:75px;height:75px;"/>
+                                                {{$match->getAwayclub->club_name}}</td>
+
+                                                <td class="text-lg-center">
+                                                @if($match->status == 'not started')
+                                                <button class="btn btn-warning btn-min-width mr-1 mb-1">{{$match->status}}</button>
+                                                @elseif($match->status == 'started')
+                                                <button class="btn btn-success btn-min-width mr-1 mb-1">{{$match->status}}</button>                                                
+                                                @else
+                                                <button class="btn btn-danger btn-min-width mr-1 mb-1">{{$match->status}}</button>                                                
+                                             @endif
+                                               </td> 
+
+                                                <td class="text-lg-center">
+                                                <img src="{{ url($match->getStadium->image) }}" style="width:75px;height:75px;"/>                                                
+                                                {{$match->getStadium->stadium_name}}</td>     
+
                                                 <td class="text-lg-center">{{$match->getTournament->tour_name}}</td>                                                
                                                 <td class="text-lg-center">{{$match->time}}</td>                                                
                                                 <td class="text-lg-center">{{$match->date}}</td>

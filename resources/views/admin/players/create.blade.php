@@ -39,17 +39,17 @@
                             {{ Form::text('player_name',old('player_name'),["class"=>"form-control round" ,"required",'placeholder'=>'player name' ]) }}
                         </div>
                         <div class="form-group">
-                        <select id="center_name" name="center_name" required
-                                                        class="form-control">
-                                                    <option value="LWB" selected="selected">LWB : Left Wing Back</option>
-                                                    <option value="CDM">CDM : Center Defensive Midfielder</option>
-                                                    <option value="CM">CM : Center Midfielder</option>
-                                                    <option value="LM">LM : Left Midfielder</option>
-                                                    <option value="RM">RM : Right Midfielder</option>
-                                                    <option value="CAM">CAM : Central Attacking Midfielder</option>
-                                                    <option value="CF">CF : Center Forward</option>
-                                                    <option value="08">ST : Striker</option>
-                                                </select>
+                        {{Form::select('center_name',
+                            ['LWB' => 'LWB : Left Wing Back',
+                             'CDM' => 'CDM : Center Defensive Midfielder',
+                             'CM' => 'CM : Center Midfielder',
+                             'LM' => 'LM : Left Midfielder', 
+                             'RM' => 'RM : Right Midfielder',
+                             'CAM' => 'CAM : Central Attacking Midfielder',
+                             'CF' => 'CF : Center Forward', 
+                             'ST' => 'ST : Striker'],
+                             null
+                             ,["class"=>"form-control round" ,"required",'placeholder'=>'center name' ])}}
                                                 </div>
                         
                         <div class="form-group">
