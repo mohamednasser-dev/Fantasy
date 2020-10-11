@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="form-group">
-                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control round' ,"required",'placeholder'=>'Club image')) }}
+                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control round','placeholder'=>'Club image')) }}
                         </div>
 
                         <div class="center">

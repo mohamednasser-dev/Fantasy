@@ -40,7 +40,7 @@ class StadiumsController extends Controller
     {
         $data = $this->validate(\request(),
             [
-                'image' => 'required|nullable|image|mimes:jpg,jpeg,png,gif,bmp',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
                 'stadium_name' => 'required|unique:stadiums,stadium_name',
             ]);
 
@@ -56,6 +56,9 @@ class StadiumsController extends Controller
 
             $data['image'] = $fileNewName;
 
+        }else{
+            $data['image'] = 'default_stadium.png';
+            
         }
         $stadium = $this->objectName::create($data);
         $stadium->save();

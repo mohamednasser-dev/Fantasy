@@ -5,15 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Match;
-
+use Carbon\Carbon;
 
 class MatchesController extends Controller
 {
     public $objectName;
     public $folderView;
     public $flash;
-
-
+    
 
     public function __construct(Match $model)
     {
@@ -21,7 +20,6 @@ class MatchesController extends Controller
         $this->objectName = $model;
         $this->folderView = 'admin.matches.';
         $this->flash = 'match Data Has Been ';
-
     }
     // this function to  select all Coaches
     public function index()
@@ -39,23 +37,22 @@ class MatchesController extends Controller
 // this to add new recourd of club in database
     public function store(Request $request)
     {
-       $club_id= $request->club_id;
-        $data = $this->validate(\request(),
-            [
-                'home_club_id' => 'required',
-                'away_club_id' => 'required',
-                'time' => 'required',
-                'date' => 'required',                
-                'stadium_id' => 'required',
-                'tour_id' => 'required',
-            ]);
-
-        $club = $this->objectName::create($data);
-        $club->save();
-        session()->flash('success', 'New match Added successfuly');
-        return redirect(url('matches'));
-
-
+        $mytime = Carbon::now();
+        $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d');
+            $data = $this->validate(\request(),
+                [
+                    'home_club_id' => 'required',
+                    'away_club_id' => 'required|not_in:'.$request->home_club_id,
+                    'time' => 'required',
+                    'date' => 'required|after:'.$today,          
+                    'stadium_id' => 'required',
+                    'tour_id' => 'required',
+                ]);
+            
+            $club = $this->objectName::create($data);
+            $club->save();
+            session()->flash('success', 'New match Added successfuly');
+            return redirect(url('matches'));
     }
 
     /**
@@ -86,7 +83,7 @@ class MatchesController extends Controller
         $data = $this->validate(\request(),
             [
                 'home_club_id' => 'required',
-                'away_club_id' => 'required',
+                'away_club_id' => 'required|not_in:'.$request->home_club_id,
                 'time' => 'required',
                 'date' => 'required',  
                 'home_score' => 'required',  
@@ -94,7 +91,6 @@ class MatchesController extends Controller
                 'stadium_id' => 'required',
                 'tour_id' => 'required',
                 'status' => 'required',
-                
             ]);
 
         $club = $this->objectName::where('id',$id)->update($data);

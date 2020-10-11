@@ -39,12 +39,12 @@
 
                         <div class="form-group">
                         <strong>Home score</strong>
-                        {{ Form::number('home_score',$match_data->home_score,["class"=>"form-control round" ,"required",'placeholder'=>'home score','min'=>'1', 'max'=>'5000']) }}
+                        {{ Form::number('home_score',$match_data->home_score,["class"=>"form-control round" ,"required",'placeholder'=>'home score','min'=>'0', 'max'=>'5000']) }}
                         </div>
 
                         <div class="form-group">
                         <strong>Away score</strong>
-                        {{ Form::number('away_score',$match_data->away_score,["class"=>"form-control round" ,"required",'placeholder'=>'away score','min'=>'1', 'max'=>'5000']) }}
+                        {{ Form::number('away_score',$match_data->away_score,["class"=>"form-control round" ,"required",'placeholder'=>'away score','min'=>'0', 'max'=>'5000']) }}
                         </div>
 
                         <div class="form-group">

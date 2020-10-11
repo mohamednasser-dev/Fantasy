@@ -42,7 +42,7 @@ class PlayersController extends Controller
        $club_id= $request->club_id;
         $data = $this->validate(\request(),
             [
-                'image' => 'required|nullable|image|mimes:jpg,jpeg,png,gif,bmp',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
                 'player_name' => 'required|unique:players,player_name',
                 'club_id' => 'required',
                 'center_name' => 'required',
@@ -63,6 +63,9 @@ class PlayersController extends Controller
 
             $data['image'] = $fileNewName;
 
+        }else{
+            $data['image'] = 'default_player.png';
+            
         }
         $club = $this->objectName::create($data);
         $club->save();

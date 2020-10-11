@@ -32,6 +32,7 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
+                        <strong>Club name</strong>
                                 {{ Form::select('club_id',App\Club::pluck('club_name','id'),null
                                 ,["class"=>"form-control" ,'placeholder'=>'choose Club' ]) }}
                             </div>
@@ -48,7 +49,7 @@
                         </div>
                  
                         <div class="form-group">
-                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control round' ,"required",'placeholder'=>'Player image')) }}
+                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control round' ,'placeholder'=>'Player image')) }}
                         </div>
 
                         <div class="center">

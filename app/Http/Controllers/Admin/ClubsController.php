@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Club;
+use Carbon\Carbon;
+
 
 class ClubsController extends Controller
 {
@@ -38,11 +40,14 @@ class ClubsController extends Controller
 // this to add new recourd of club in database
     public function store(Request $request)
     {
+        $mytime = Carbon::now();
+        $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d');
+  
         $data = $this->validate(\request(),
             [
-                'image' => 'required|nullable|image|mimes:jpg,jpeg,png,gif,bmp',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
                 'club_name' => 'required|unique:clubs,club_name',
-                'date_created' => 'required|date',
+                'date_created' => 'required|date|before:'.$today,
                 'tournaments' => '',
                 'desc' => '',
     
@@ -60,6 +65,9 @@ class ClubsController extends Controller
 
             $data['image'] = $fileNewName;
 
+        }else{
+            $data['image'] = 'default_club.png';
+            
         }
         $club = $this->objectName::create($data);
         $club->save();

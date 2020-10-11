@@ -49,7 +49,7 @@
                              'CF' => 'CF : Center Forward', 
                              'ST' => 'ST : Striker'],
                              null
-                             ,["class"=>"form-control round" ,"required",'placeholder'=>'center name' ])}}
+                             ,["class"=>"form-control round" ,"required",'placeholder'=>'Choose center name' ])}}
                                                 </div>
                         
                         <div class="form-group">
@@ -61,7 +61,7 @@
                         </div>
                  
                         <div class="form-group">
-                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control round' ,"required",'placeholder'=>'Player image')) }}
+                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control round','placeholder'=>'Player image')) }}
                         </div>
 
                         <div class="center">

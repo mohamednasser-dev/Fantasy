@@ -42,9 +42,9 @@ class CoachesController extends Controller
        $club_id= $request->club_id;
         $data = $this->validate(\request(),
             [
-                'image' => 'required|nullable|image|mimes:jpg,jpeg,png,gif,bmp',
+                'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
                 'coach_name' => 'required|unique:coaches,coach_name',
-                'club_id' => 'required',
+                'club_id' => 'required|unique:coaches,club_id',
                 'age' => 'required',                
                 'desc' => '',
                 'center_name' => '',
@@ -64,7 +64,11 @@ class CoachesController extends Controller
 
             $data['image'] = $fileNewName;
 
+        }else{
+            $data['image'] = 'default_coach.png';
+            
         }
+
         $club = $this->objectName::create($data);
         $club->save();
         session()->flash('success', 'New coach Added successfuly');
@@ -118,7 +122,6 @@ class CoachesController extends Controller
             // Move Image To Folder ..
             $fileNewName = 'img_' . time() . '.' . $ext;
             $file->move(public_path('uploads/coaches_images'), $fileNewName);
-
             $data['image'] = $fileNewName;
 
         }
