@@ -6,11 +6,11 @@
     <div class="app-content content container-fluid">
         <div class="breadcrumb-wrapper col-xs-12">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('home')}}">Home</a>
+                <li class="breadcrumb-item"><a href="{{url('home')}}">{{trans('admin.nav_home')}} </a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{url('stadiums')}}">Stadiums</a>
+                <li class="breadcrumb-item"><a href="{{url('stadiums')}}">{{trans('admin.nav_stadiums')}}</a>
                 </li>
-                <li class="breadcrumb-item"> Add new stadium
+                <li class="breadcrumb-item"> {{trans('admin.add_new_stad')}}
                 </li>
 
             </ol>
@@ -22,7 +22,7 @@
             @include('layouts.messages')
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Add new stadium</h3>
+                    <h3 class="card-title">{{trans('admin.add_new_stad')}}</h3>
                 </div>
             <!-- /.card-header -->
                 <div class="card-body">
@@ -30,15 +30,15 @@
                         {{ Form::open( ['url' => ['stadiums/store'],'method'=>'post', 'files'=>'true'] ) }}
                         {{ csrf_field() }}
                         <div class="form-group">
-                            {{ Form::text('stadium_name',old('stadium_name'),["class"=>"form-control round" ,"required",'placeholder'=>'stadium name' ]) }}
+                            {{ Form::text('stadium_name',old('stadium_name'),["class"=>"form-control" ,"required",'placeholder'=>trans('admin.stad_name') ]) }}
                         </div>
 
                         <div class="form-group">
-                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control round','placeholder'=>'stadium image')) }}
+                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control','placeholder'=>trans('admin.stad_image'))) }}
                         </div>
 
                         <div class="center">
-                            {{ Form::submit( 'Add' ,['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
+                            {{ Form::submit( trans('admin.public_Add') ,['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
 
                         </div>
                         {{ Form::close() }}

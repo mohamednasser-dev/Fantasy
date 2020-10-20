@@ -6,11 +6,11 @@
     <div class="app-content content container-fluid">
         <div class="breadcrumb-wrapper col-xs-12">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('home')}}">Home</a>
+                <li class="breadcrumb-item"><a href="{{url('home')}}">{{trans('admin.nav_home')}} </a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{url('matches')}}">matches</a>
+                <li class="breadcrumb-item"><a href="{{url('matches')}}">{{trans('admin.nav_matches')}}</a>
                 </li>
-                <li class="breadcrumb-item"> Update player data
+                <li class="breadcrumb-item">{{trans('admin.update_match')}}
                 </li>
             </ol>
         </div>
@@ -21,7 +21,7 @@
             @include('layouts.messages')
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Update match data</h3>
+                    <h3 class="card-title">{{trans('admin.update_match')}}</h3>
                 </div>
             <!-- /.card-header -->
                 <div class="card-body">
@@ -34,59 +34,49 @@
                             <div class="form-group">
                         <strong>Home club name</strong>
                             {{ Form::select('home_club_id',App\Club::pluck('club_name','id'),$match_data->home_club_id
-                            ,["class"=>"form-control" ,'placeholder'=>'Choose home club' ]) }}
+                            ,["class"=>"form-control" ,'placeholder'=>trans('admin.choose_home_club') ]) }}
                         </div>
 
                         <div class="form-group">
-                        <strong>Home score</strong>
-                        {{ Form::number('home_score',$match_data->home_score,["class"=>"form-control round" ,"required",'placeholder'=>'home score','min'=>'0', 'max'=>'5000']) }}
-                        </div>
-
-                        <div class="form-group">
-                        <strong>Away score</strong>
-                        {{ Form::number('away_score',$match_data->away_score,["class"=>"form-control round" ,"required",'placeholder'=>'away score','min'=>'0', 'max'=>'5000']) }}
-                        </div>
-
-                        <div class="form-group">
-                        <strong>Away club name</strong>
+                        <strong>{{trans('admin.away_club_name')}}</strong>
                                 {{ Form::select('away_club_id',App\Club::pluck('club_name','id'),$match_data->away_club_id
-                                ,["class"=>"form-control" ,'placeholder'=>'Choose away club' ]) }}
+                                ,["class"=>"form-control" ,'placeholder'=>trans('admin.choose_away_club') ]) }}
                             </div>
                         
                         <div class="form-group">
-                        <strong>Stadium name</strong>
+                        <strong>{{trans('admin.stad_name')}}</strong>
                             {{ Form::select('stadium_id',App\Stadium::pluck('stadium_name','id'),$match_data->stadium_id
-                            ,["class"=>"form-control" ,'placeholder'=>'choose stadium' ]) }}
+                            ,["class"=>"form-control" ,'placeholder'=>trans('admin.choose_stad') ]) }}
                         </div>
 
                         <div class="form-group">
-                        <strong>Tournament name</strong>                        
+                        <strong>{{trans('admin.tour_name')}}</strong>                        
                             {{ Form::select('tour_id',App\Tournament::pluck('tour_name','id'),$match_data->tour_id
-                            ,["class"=>"form-control" ,'placeholder'=>'choose tournament' ]) }}
+                            ,["class"=>"form-control" ,'placeholder'=>trans('admin.choose_tour') ]) }}
                         </div>
                         <div class="form-group">
-                        <strong>Status</strong> 
+                        <strong>{{trans('admin.status')}}</strong> 
                         {{Form::select('status',
                             ['not started' => 'not started',
                              'started' => 'started',
                              'ended' => 'ended'
                              ],
                              $match_data->status
-                             ,["class"=>"form-control round" ,"required",'placeholder'=>'Status' ])}}
+                             ,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.status') ])}}
                              </div>
                        
                         <div class="form-group">
-                        <strong>Match date</strong>                       
-                        {{ Form::date('date',$match_data->date,["class"=>"form-control round" ,"required",'placeholder'=>'match date' ]) }}
+                        <strong>{{trans('admin.match_date')}}</strong>                       
+                        {{ Form::date('date',$match_data->date,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.match_date') ]) }}
                         </div>
 
                         <div class="form-group">
-                        <strong>Match time</strong>                       
-                        {{ Form::time('time',$match_data->time,["class"=>"form-control round" ,"required",'placeholder'=>'match time' ]) }}
+                        <strong>{{trans('admin.match_time')}}</strong>                       
+                        {{ Form::time('time',$match_data->time,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.match_time') ]) }}
                         </div>
 
 
-                        {{ Form::submit( 'Edit',['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
+                        {{ Form::submit( trans('admin.public_Edit'),['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
                         {{ Form::close() }}
                     </div>
                 </div>

@@ -11,7 +11,7 @@ class TournamentsController extends Controller
 {
     public $objectName;
     public $folderView;
-    public $flash;
+
 
 
 
@@ -20,7 +20,7 @@ class TournamentsController extends Controller
         $this->middleware('auth');
         $this->objectName = $model;
         $this->folderView = 'admin.tournaments.';
-        $this->flash = 'Tournament Data Has Been ';
+
 
     }
     // this function to  select all tournaments
@@ -42,11 +42,13 @@ class TournamentsController extends Controller
         $data = $this->validate(\request(),
             [
                 'tour_name' => 'required|unique:tournaments,tour_name',
+                'classification' => 'required',
+
             ]);
 
         $tournament = $this->objectName::create($data);
         $tournament->save();
-        session()->flash('success', 'New tournament Added successfuly');
+        session()->flash('success',  trans('admin.addedsuccess'));
         return redirect(url('tournaments'));
 
 
@@ -80,13 +82,15 @@ class TournamentsController extends Controller
         $data = $this->validate(\request(),
             [
                 'tour_name' => 'required|unique:tournaments,tour_name,'.$id,
+                'classification' => 'required',
+
             ]);
 
 
 
         $tournament = $this->objectName::where('id',$id)->update($data);
 
-        session()->flash('success', 'Data Updated Successfully');
+        session()->flash('success', trans('admin.updatSuccess'));
         return redirect(url('tournaments'));
     }
 
@@ -100,7 +104,7 @@ class TournamentsController extends Controller
     {
         $tournament = $this->objectName::where('id', $id)->first();
         $tournament->delete();
-        session()->flash('success', 'Data Deleted Successfully');
+        session()->flash('success',trans('admin.deleteSuccess'));
         return redirect(url('tournaments'));
 
     }

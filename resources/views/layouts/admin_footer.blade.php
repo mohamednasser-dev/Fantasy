@@ -23,6 +23,7 @@
 <!-- END ROBUST JS-->
 <script src="{{ asset('/app-assets/js/scripts/pages/dashboard-lite.js') }}"
         type="text/javascript"></script>
+
 <!-- BEGIN PAGE LEVEL JS-->
 @yield('scripts')
 <!-- END PAGE LEVEL JS-->

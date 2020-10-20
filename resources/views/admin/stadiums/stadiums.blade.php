@@ -5,9 +5,9 @@
         <div class="breadcrumb-wrapper col-xs-12">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{url('home')}}">Home</a>
+                    <a href="{{url('home')}}"> {{trans('admin.nav_home')}}</a>
                 </li>
-                <li class="breadcrumb-item">Stadiums
+                <li class="breadcrumb-item">{{trans('admin.nav_stadiums')}}
                 </li>
 
             </ol>
@@ -20,7 +20,7 @@
 
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
-        <h1>Stadiums</h1>
+        <h1>{{trans('admin.nav_stadiums')}}</h1>
         <!-- For Display success and warning messages in page  -->
         @include('layouts.errors')
        @include('layouts.messages')
@@ -36,13 +36,10 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="{{url('stadiums/create')}} "
-                               class="btn btn-info btn-bg">Add new stadium</a>
+                               class="btn btn-info btn-bg">{{trans('admin.add_new_stad')}}</a>
                             <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                             <div class="heading-elements">
-                                <ul class="list-inline mb-0">
-                                    <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-                                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
-                                </ul>
+                               
                             </div>
                         </div>
                         <div class="card-body">
@@ -53,10 +50,9 @@
                                     <table class="table table-hover table-bordered mb-0" id="datatabelexample">
                                         <thead>
                                         <tr>
-                                            <th class="text-lg-center">#</th>
-                                            <th class="text-lg-center">stadium name</th>                                         
-                                            <th class="text-lg-center">image</th>
-                                            <th class="text-lg-center"></th>
+                                            <th class="text-lg-center">{{trans('admin.stad_name')}}</th>                                         
+                                            <th class="text-lg-center">{{trans('admin.image')}}</th>
+                                            <th class="text-lg-center">{{trans('admin.actions')}}</th>
 
                                         </tr>
                                         </thead>
@@ -64,7 +60,6 @@
                        
                                         @foreach($stadiums as $stadium)
                                             <tr>
-                                                <th scope="row" class="text-lg-center">{{$stadium->id}}</th>
                                                 <td class="text-lg-center">{{$stadium->stadium_name}}</td>
         
                                                 <td class="text-lg-center">
@@ -78,7 +73,7 @@
                                                     {{csrf_field()}}
                                                     <!-- {{method_field('delete')}} -->
                                                     </form>
-                                                    <button onclick="if(confirm('Are you sure to delete the stadium ?'))
+                                                    <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
                                                         {
                                                         event.preventDefault();
                                                         document.getElementById('delete-form-{{ $stadium->id }}').submit();

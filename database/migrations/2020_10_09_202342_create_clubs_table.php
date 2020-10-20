@@ -15,6 +15,7 @@ class CreateClubsTable extends Migration
     {
         Schema::create('clubs', function (Blueprint $table) {
             $table->id();
+            $table->enum('classification',['1st','2nd'])->default('1st');
             $table->string('club_name');
             $table->string('tournaments')->nullable;
             $table->string('date_created');

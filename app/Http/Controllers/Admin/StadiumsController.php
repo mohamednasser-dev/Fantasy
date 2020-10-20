@@ -10,7 +10,6 @@ class StadiumsController extends Controller
 {
     public $objectName;
     public $folderView;
-    public $flash;
 
 
 
@@ -19,7 +18,6 @@ class StadiumsController extends Controller
         $this->middleware('auth');
         $this->objectName = $model;
         $this->folderView = 'admin.stadiums.';
-        $this->flash = 'Stadium Data Has Been ';
 
     }
     // this function to  select all stadiums
@@ -62,7 +60,7 @@ class StadiumsController extends Controller
         }
         $stadium = $this->objectName::create($data);
         $stadium->save();
-        session()->flash('success', 'New stadium Added successfuly');
+        session()->flash('success', trans('admin. addedsuccess'));
         return redirect(url('stadiums'));
 
 
@@ -115,7 +113,7 @@ class StadiumsController extends Controller
 
         $stadium = $this->objectName::where('id',$id)->update($data);
 
-        session()->flash('success', 'Data Updated Successfully');
+        session()->flash('success',  trans('admin.updatSuccess'));
         return redirect(url('stadiums'));
     }
 
@@ -129,7 +127,7 @@ class StadiumsController extends Controller
     {
         $stadium = $this->objectName::where('id', $id)->first();
         $stadium->delete();
-        session()->flash('success', 'Data Deleted Successfully');
+        session()->flash('success', trans('admin.deleteSuccess'));
         return redirect(url('stadiums'));
 
     }

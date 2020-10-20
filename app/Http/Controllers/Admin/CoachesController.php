@@ -11,7 +11,7 @@ class CoachesController extends Controller
 {
     public $objectName;
     public $folderView;
-    public $flash;
+
 
 
 
@@ -20,7 +20,7 @@ class CoachesController extends Controller
         $this->middleware('auth');
         $this->objectName = $model;
         $this->folderView = 'admin.coaches.';
-        $this->flash = 'Coach Data Has Been ';
+
 
     }
     // this function to  select all Coaches
@@ -71,7 +71,7 @@ class CoachesController extends Controller
 
         $club = $this->objectName::create($data);
         $club->save();
-        session()->flash('success', 'New coach Added successfuly');
+        session()->flash('success',trans('admin.addedsuccess'));
         return redirect(url('coaches'));
 
 
@@ -128,7 +128,7 @@ class CoachesController extends Controller
 
         $club = $this->objectName::where('id',$id)->update($data);
 
-        session()->flash('success', 'Data Updated Successfully');
+        session()->flash('success',  trans('admin.updatSuccess'));
         return redirect(url('coaches'));
     }
 
@@ -142,7 +142,7 @@ class CoachesController extends Controller
     {
         $coach = $this->objectName::where('id', $id)->first();
         $coach->delete();
-        session()->flash('success', 'Data Deleted Successfully');
+        session()->flash('success', trans('admin.deleteSuccess'));
         return redirect(url('coaches'));
 
     }

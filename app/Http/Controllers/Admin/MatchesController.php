@@ -11,7 +11,7 @@ class MatchesController extends Controller
 {
     public $objectName;
     public $folderView;
-    public $flash;
+
     
 
     public function __construct(Match $model)
@@ -19,12 +19,12 @@ class MatchesController extends Controller
         $this->middleware('auth');
         $this->objectName = $model;
         $this->folderView = 'admin.matches.';
-        $this->flash = 'match Data Has Been ';
+   
     }
     // this function to  select all Coaches
     public function index()
     {
-        $matches = $this->objectName::all();
+        $matches = $this->objectName::paginate(10);
         return view($this->folderView.'matches',\compact('matches'));
     }
 
@@ -37,8 +37,10 @@ class MatchesController extends Controller
 // this to add new recourd of club in database
     public function store(Request $request)
     {
+        //this two lines for get today date
         $mytime = Carbon::now();
         $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d');
+
             $data = $this->validate(\request(),
                 [
                     'home_club_id' => 'required',
@@ -51,7 +53,7 @@ class MatchesController extends Controller
             
             $club = $this->objectName::create($data);
             $club->save();
-            session()->flash('success', 'New match Added successfuly');
+            session()->flash('success',trans('admin.addedsuccess'));
             return redirect(url('matches'));
     }
 
@@ -85,9 +87,7 @@ class MatchesController extends Controller
                 'home_club_id' => 'required',
                 'away_club_id' => 'required|not_in:'.$request->home_club_id,
                 'time' => 'required',
-                'date' => 'required',  
-                'home_score' => 'required',  
-                'away_score' => 'required',                                
+                'date' => 'required',                               
                 'stadium_id' => 'required',
                 'tour_id' => 'required',
                 'status' => 'required',
@@ -95,7 +95,7 @@ class MatchesController extends Controller
 
         $club = $this->objectName::where('id',$id)->update($data);
 
-        session()->flash('success', 'Data Updated Successfully');
+        session()->flash('success',  trans('admin.updatSuccess'));
         return redirect(url('matches'));
     }
 
@@ -109,7 +109,7 @@ class MatchesController extends Controller
     {
         $match = $this->objectName::where('id', $id)->first();
         $match->delete();
-        session()->flash('success', 'Data Deleted Successfully');
+        session()->flash('success', trans('admin.deleteSuccess'));
         return redirect(url('matches'));
 
     }

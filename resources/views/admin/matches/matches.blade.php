@@ -5,9 +5,9 @@
         <div class="breadcrumb-wrapper col-xs-12">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{url('home')}}">Home</a>
+                    <a href="{{url('home')}}"> {{trans('admin.nav_home')}}</a>
                 </li>
-                <li class="breadcrumb-item">Matches
+                <li class="breadcrumb-item">{{trans('admin.nav_matches')}}
                 </li>
 
             </ol>
@@ -20,7 +20,7 @@
 
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
-        <h1>Matches</h1>
+        <h1>{{trans('admin.nav_matches')}}</h1>
       <!-- For Display success and warning messages in page  -->
         @include('layouts.errors')
         @include('layouts.messages')
@@ -36,11 +36,11 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="{{url('matches/create')}} "
-                               class="btn btn-info btn-bg">Add new match</a>
+                               class="btn btn-info btn-bg">{{trans('admin.add_new_match')}}</a>
                             <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
-                                    <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
+                                  
                                     <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
                                 </ul>
                             </div>
@@ -53,19 +53,18 @@
 
 
                                 <div class="table-responsive">
-                                    <table class="table table-hover table-bordered mb-0" id="datatabelexample">
+                                    <table class="table table-hover table-bordered mb-0" id="myTable">
                                         <thead>
                                         <tr>
-                                            <th class="text-lg-center">#</th>
-                                            <th class="text-lg-center">Home Club</th>
-                                            <th class="text-lg-center">result</th>
-                                            <th class="text-lg-center">Away Club</th>                                            
-                                            <th class="text-lg-center">Status</th>                                            
-                                            <th class="text-lg-center">Stadium</th>
-                                            <th class="text-lg-center">Tournament</th>                                            
-                                            <th class="text-lg-center">Time</th>                                            
-                                            <th class="text-lg-center">Date</th>
-                                            <th class="text-lg-center">Actions</th>
+                                            <th class="text-lg-center">{{trans('admin.home_club')}}</th>
+                                            <th class="text-lg-center">{{trans('admin.result')}}</th>
+                                            <th class="text-lg-center">{{trans('admin.away_club')}}</th>                                            
+                                            <th class="text-lg-center">{{trans('admin.status')}}</th>                                            
+                                            <th class="text-lg-center">{{trans('admin.stadium')}}</th>
+                                            <th class="text-lg-center">{{trans('admin.tour')}}</th>                                            
+                                            <th class="text-lg-center">{{trans('admin.time')}}</th>                                            
+                                            <th class="text-lg-center">{{trans('admin.date')}}</th>
+                                            <th class="text-lg-center">{{trans('admin.actions')}}</th>
 
                                         </tr>
                                         </thead>
@@ -73,7 +72,6 @@
                        
                                         @foreach($matches as $match)
                                             <tr>
-                                                <th scope="row" class="text-lg-center">{{$match->id}}</th>
                                                 <td class="text-lg-center">
                                                 <img src="{{ url($match->getHomeclub->image) }}" style="width:75px;height:75px;"/>
                                                 {{$match->getHomeclub->club_name}}</td>
@@ -116,7 +114,7 @@
                                                     {{csrf_field()}}
                                                     <!-- {{method_field('delete')}} -->
                                                     </form>
-                                                    <button onclick="if(confirm('Are you sure to delete the match?'))
+                                                    <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
                                                         {
                                                         event.preventDefault();
                                                         document.getElementById('delete-form-{{ $match->id }}').submit();
@@ -136,6 +134,7 @@
                      
                                         </tbody>
                                     </table>
+                                    {{ $matches->links()}}
 
                                 </div>
                                 

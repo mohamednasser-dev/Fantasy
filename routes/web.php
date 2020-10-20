@@ -17,8 +17,12 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+// this route for login and register
 Auth::routes();
 
+
+Route::group(['middleware' => ['auth']],
+    function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Club routes
@@ -68,4 +72,21 @@ Route::get('matches/create', 'Admin\MatchesController@create');
 Route::get('matches/{id}/edit', 'Admin\MatchesController@edit');
 Route::post('matches/{id}/update', 'Admin\MatchesController@update');
 Route::get('matches/{id}/delete', 'Admin\MatchesController@destroy');
+
+//News
+
+//  news category routes
+Route::resource('categories', 'Admin\CategoryController');
+Route::get('categories/{id}/delete', 'Admin\CategoryController@destroy');
+
+//  news  routes
+Route::resource('news', 'Admin\NewsController');
+Route::get('news/{id}/delete', 'Admin\NewsController@destroy');
+
+
+//  users  routes
+Route::resource('users', 'Admin\usersController');
+Route::get('users/{id}/delete', 'Admin\usersController@destroy');
+
+});
 

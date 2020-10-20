@@ -12,7 +12,7 @@ class ClubsController extends Controller
 {
     public $objectName;
     public $folderView;
-    public $flash;
+
 
 
 
@@ -21,7 +21,7 @@ class ClubsController extends Controller
         $this->middleware('auth');
         $this->objectName = $model;
         $this->folderView = 'admin.clubs.';
-        $this->flash = 'Club Data Has Been ';
+     
 
     }
     // this function to  select all clubs
@@ -46,6 +46,7 @@ class ClubsController extends Controller
         $data = $this->validate(\request(),
             [
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
+                'classification' => 'required',
                 'club_name' => 'required|unique:clubs,club_name',
                 'date_created' => 'required|date|before:'.$today,
                 'tournaments' => '',
@@ -71,7 +72,7 @@ class ClubsController extends Controller
         }
         $club = $this->objectName::create($data);
         $club->save();
-        session()->flash('success', 'New Club Added successfuly');
+        session()->flash('success', trans('admin.addedsuccess'));
         return redirect(url('clubs'));
 
 
@@ -105,6 +106,7 @@ class ClubsController extends Controller
         $data = $this->validate(\request(),
             [
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
+                'classification' => 'required',
                 'club_name' => 'required|unique:clubs,club_name,'.$id,
                 'date_created' => 'required|date',
                 'tournaments' => '',
@@ -127,7 +129,7 @@ class ClubsController extends Controller
 
         $club = $this->objectName::where('id',$id)->update($data);
 
-        session()->flash('success', 'Data Updated Successfully');
+        session()->flash('success',  trans('admin.updatSuccess'));
         return redirect(url('clubs'));
     }
 
@@ -141,7 +143,7 @@ class ClubsController extends Controller
     {
         $club = $this->objectName::where('id', $id)->first();
         $club->delete();
-        session()->flash('success', 'Data Deleted Successfully');
+        session()->flash('success',trans('admin.deleteSuccess'));
         return redirect(url('clubs'));
 
     }

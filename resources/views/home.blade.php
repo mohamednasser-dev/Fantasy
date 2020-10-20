@@ -11,7 +11,7 @@
             </div>
             <div class="content-body"><!-- stats -->
 
-                <h1>Home page</h1>
+                <h1>الصفحة الرئيسية</h1>
                
 
  <!-- stats -->
@@ -19,7 +19,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                          <h3>Today`s matches</h3>
+                          <h3>مباريات اليوم</h3>
                         </div>
                         <div class="card-body">
 
@@ -32,14 +32,14 @@
                                     <table class="table table-hover table-bordered mb-0" id="datatabelexample">
                                         <thead>
                                         <tr>
-                                        <th class="text-lg-center">Home Club</th>
-                                        <th class="text-lg-center">result</th>
-                                        <th class="text-lg-center">Away Club</th>                                            
-                                        <th class="text-lg-center">Status</th>                                            
-                                        <th class="text-lg-center">Stadium</th>
-                                        <th class="text-lg-center">Tournament</th>                                            
-                                        <th class="text-lg-center">Time</th>                                            
-                                        <th class="text-lg-center">Date</th>
+                                        <th class="text-lg-center">النادى الاول</th>
+                                        <th class="text-lg-center">النتيجة</th>
+                                        <th class="text-lg-center">النادى الثانى</th>                                            
+                                        <th class="text-lg-center">الحالة</th>                                            
+                                        <th class="text-lg-center">الاستاد</th>
+                                        <th class="text-lg-center">البطولة</th>                                            
+                                        <th class="text-lg-center">الوقت</th>                                            
+                                        <th class="text-lg-center">التاريخ</th>
                            
                                         </tr>
                                         </thead>

@@ -6,11 +6,11 @@
     <div class="app-content content container-fluid">
         <div class="breadcrumb-wrapper col-xs-12">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('home')}}">Home</a>
+                <li class="breadcrumb-item"><a href="{{url('home')}}">{{trans('admin.nav_home')}}</a>
+                </li
+                <li class="breadcrumb-item"><a href="{{url('coaches')}}">{{trans('admin.nav_coaches')}}</a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{url('coaches')}}">Coaches</a>
-                </li>
-                <li class="breadcrumb-item"> Update coach data
+                <li class="breadcrumb-item"> {{trans('admin.update_coach')}}
                 </li>
             </ol>
         </div>
@@ -21,7 +21,7 @@
             @include('layouts.messages')
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Update coach data</h3>
+                    <h3 class="card-title">{{trans('admin.update_coach')}}</h3>
                 </div>
             <!-- /.card-header -->
                 <div class="card-body">
@@ -31,29 +31,29 @@
                         {{ csrf_field() }}
                         
                         <div class="form-group">
-                        <strong>Club name</strong>
+                        <strong>{{trans('admin.club_name')}}</strong>
                                 {{ Form::select('club_id',App\Club::pluck('club_name','id'),$coach_data->club_id
-                                ,["class"=>"form-control" ,'placeholder'=>'choose Club' ]) }}
+                                ,["class"=>"form-control" ,'placeholder'=>trans('admin.choose_club') ]) }}
                             </div>
 
                         <div class="form-group">
-                        <strong>Coach name</strong>
-                        {{ Form::text('coach_name',$coach_data->coach_name,["class"=>"form-control round" ,"required",'placeholder'=>'club name' ]) }}
+                        <strong>{{trans('admin.coach_name')}}</strong>
+                        {{ Form::text('coach_name',$coach_data->coach_name,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.club_name') ]) }}
                          </div>
 
                          <div class="form-group">
-                        <strong>Age</strong>
-                        {{ Form::number('age',$coach_data->age,["class"=>"form-control round" ,"required",'placeholder'=>'age' ]) }}
+                        <strong>{{trans('admin.age')}}</strong>
+                        {{ Form::number('age',$coach_data->age,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.age') ]) }}
                          </div>
 
                         <div class="form-group">
-                        <strong>description</strong>      
-                            {{ Form::textArea('desc',$coach_data->desc,["class"=>"form-control round",'placeholder'=>'write club description' ]) }}
+                        <strong>{{trans('admin.desc')}}</strong>      
+                            {{ Form::textArea('desc',$coach_data->desc,["class"=>"form-control",'placeholder'=>trans('admin.write_club_desc')]) }}
                         </div>
 
                         <div class="form-group">
-                        <strong>Change coach image</strong>                 
-                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control round')) }}
+                        <strong>{{trans('admin.change_coach_image')}}</strong>                 
+                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control')) }}
                             @if(!empty($coach_data->image))
                                 <img src="{{ url($coach_data->image) }}"
                                      style="width:250px;height:250px;"/>
@@ -61,7 +61,7 @@
                         </div>
 
 
-                        {{ Form::submit( 'Edit',['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
+                        {{ Form::submit( trans('admin.public_Edit'),['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
                         {{ Form::close() }}
                     </div>
                 </div>

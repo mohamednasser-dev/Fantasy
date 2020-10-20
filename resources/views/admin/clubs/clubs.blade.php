@@ -5,9 +5,9 @@
         <div class="breadcrumb-wrapper col-xs-12">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{url('home')}}">Home</a>
+                    <a href="{{url('home')}}"> {{trans('admin.nav_home')}}</a>
                 </li>
-                <li class="breadcrumb-item">Clubs
+                <li class="breadcrumb-item">{{trans('admin.nav_clubs')}} 
                 </li>
 
             </ol>
@@ -20,7 +20,7 @@
 
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
-        <h1>Clubs</h1>
+        <h1>{{trans('admin.nav_clubs')}} </h1>
         <!-- For Display success and warning messages in page  -->
         @include('layouts.errors')
        @include('layouts.messages')
@@ -36,12 +36,11 @@
                     <div class="card">
                         <div class="card-header">
                             <a href="{{url('clubs/create')}} "
-                               class="btn btn-info btn-bg">Add club</a>
+                               class="btn btn-info btn-bg">{{trans('admin.add_new_club')}}</a>
                             <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
-                                    <li><a data-action="collapse"><i class="icon-minus4"></i></a></li>
-                                    <li><a data-action="expand"><i class="icon-expand2"></i></a></li>
+                               
                                 </ul>
                             </div>
                         </div>
@@ -53,13 +52,11 @@
                                     <table class="table table-hover table-bordered mb-0" id="datatabelexample">
                                         <thead>
                                         <tr>
-                                            <th class="text-lg-center">#</th>
-                                            <th class="text-lg-center">club name</th>
-                                            <th class="text-lg-center">tournaments</th>
-                                            <th class="text-lg-center">date created</th>
-                                            <th class="text-lg-center">desc</th>                                            
-                                            <th class="text-lg-center">image</th>
-                                            <th class="text-lg-center"></th>
+                                            <th class="text-lg-center">{{trans('admin.club_name')}}</th>
+                                            <th class="text-lg-center">{{trans('admin.date_created')}}</th>
+                                            <th class="text-lg-center">{{trans('admin.classification')}}</th>
+                                            <th class="text-lg-center">{{trans('admin.image')}}</th>
+                                            <th class="text-lg-center">{{trans('admin.actions')}}</th>
 
                                         </tr>
                                         </thead>
@@ -67,11 +64,10 @@
                        
                                         @foreach($clubs as $club)
                                             <tr>
-                                                <th scope="row" class="text-lg-center">{{$club->id}}</th>
                                                 <td class="text-lg-center">{{$club->club_name}}</td>
-                                                <td class="text-lg-center">{{$club->tournaments}}</td>
                                                 <td class="text-lg-center">{{$club->date_created}}</td>
-                                                <td class="text-lg-center">{{$club->desc}}</td>
+                                                <td class="text-lg-center">{{$club->classification}}</td>
+
                                                 <td class="text-lg-center">
                                                 <img src="{{ url($club->image) }}" style="width:75px;height:75px;"/></td>
                                                 <td class="text-lg-center">
@@ -83,7 +79,7 @@
                                                     {{csrf_field()}}
                                                     <!-- {{method_field('delete')}} -->
                                                     </form>
-                                                    <button onclick="if(confirm('Are you sure to delete the club and all the players and coach included?'))
+                                                    <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
                                                         {
                                                         event.preventDefault();
                                                         document.getElementById('delete-form-{{ $club->id }}').submit();

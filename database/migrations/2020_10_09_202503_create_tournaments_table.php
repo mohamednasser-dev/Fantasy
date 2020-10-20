@@ -16,6 +16,7 @@ class CreateTournamentsTable extends Migration
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
             $table->string('tour_name');
+            $table->enum('classification',['1st','2nd'])->default('1st');
             $table->timestamps();
         });
     }
