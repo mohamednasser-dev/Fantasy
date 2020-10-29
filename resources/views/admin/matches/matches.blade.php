@@ -105,6 +105,11 @@
                                                          @endif
                                                     @endforeach
                                                 @endif
+
+                                                           <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_match')}}">
+                                                            {{trans('admin.monitor_match')}}
+                                                           </a>
+                                                      
                                     </td>
                                 </tr>
                             @endforeach

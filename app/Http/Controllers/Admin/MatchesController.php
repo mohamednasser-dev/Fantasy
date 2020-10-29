@@ -38,6 +38,10 @@ class MatchesController extends Controller
         $matches = $this->objectName::paginate(10);
         return view($this->folderView.'matches',\compact('matches','clubArray'));
     }
+    public function monitor_match()
+    {
+            return view($this->folderView.'match_log.monitor_match');
+    }   
     public function gwla_matches($id)
     {
         $matches = $this->objectName::where('gwla_id',$id)->paginate(10);

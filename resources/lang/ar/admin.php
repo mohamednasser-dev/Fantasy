@@ -76,6 +76,10 @@ return [
     'monitor_clubs' => 'النوادى',
     'add_new_clubs' => 'اختيار فريق جديد',
     'add_new_monitor_club' => 'اضافة فريق جديد للمراقب',
+
+    //monitor
+    'monitor_match' => 'متابعة المباراه',
+
     
     
     
