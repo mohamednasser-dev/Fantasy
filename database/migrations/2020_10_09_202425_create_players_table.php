@@ -18,7 +18,7 @@ class CreatePlayersTable extends Migration
             $table->string('player_name');
             $table->string('age');
             $table->string('center_name');
-            $table->string('desc');
+            $table->string('desc')->nullable();
             $table->string('image');
 
             $table->bigInteger('club_id')->unsigned();

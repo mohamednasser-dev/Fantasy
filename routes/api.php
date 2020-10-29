@@ -9,70 +9,32 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//this routes for user actions
+Route::post('login', 'Api\AuthController@login');
+Route::post('logout', 'Api\AuthController@logout');
+Route::post('register', 'Api\AuthController@store');
+Route::post('update_user_data', 'Api\AuthController@update_user_data');
+Route::post('select_user_data', 'Api\AuthController@select_user_data');
 
-Route::post('login', 'API\AuthController@login');
-Route::post('logout', 'API\AuthController@logout');
+//main home page 
+Route::post('today_matches', 'Api\MatchesController@today_matches');
 
-Route::post('register', 'API\UserApiController@store');
-Route::post('salonHome', 'API\HomeApiController@index');
+// Squad Routes
+Route::post('store_squad', 'Api\SquadsController@store_squad');
+Route::post('store_squad_player', 'Api\SquadsController@store_squad_player');
 
-Route::post('products', 'API\productApiController@allProducts');
+// to fill option component with data
+Route::post('coaches_by_classif', 'Api\CoachesController@coaches_by_classif');
+Route::post('players_by_classif', 'Api\PlayersController@players_by_classif');
+Route::post('clubs_by_classif', 'Api\ClubsController@clubs_by_classif');
+Route::post('players_by_club', 'Api\PlayersController@players_by_club');
 
-Route::post('services', 'API\serviceApiController@allServices');
-
-Route::post('servicesWithCat', 'API\serviceApiController@servicesWithCat');
-Route::post('productsWithCat', 'API\productApiController@productsWithCat');
-
-Route::post('selectedSalon', 'API\HomeApiController@selectedSalon');
-Route::post('service_offers', 'API\serviceApiController@service_offers');
-
-Route::post('products_offers', 'API\productApiController@products_offers');
-
-
-Route::post('categoryProduct', 'API\productApiController@CategoryProduct');
-Route::post('categoryService', 'API\serviceApiController@CategoryService');
-
-Route::post('updateProfil', 'API\UserApiController@updateProfil');
-
-Route::post('products_offers_withCat', 'API\productApiController@products_offers_withCat');
-Route::post('service_offers_withCat', 'API\serviceApiController@service_offers_withCat');
-
-
-Route::post('products_offers_withCat','API\productApiController@products_offers_withCat');
-Route::post('service_offers_withCat','API\serviceApiController@service_offers_withCat');
-
-Route::post('productsWithName','API\productApiController@products_with_Name');
-Route::post('servicesWithName','API\serviceApiController@service_with_Name');
-
-Route::post('changePass','API\UserApiController@changePass');
-Route::post('update_logo','API\UserApiController@update_logo');
-
-
-Route::post('user_reservation','API\ReservationController@user_reservation');
-Route::post('reservation_with_status','API\ReservationController@reservation_with_status');
+Route::post('remove_player_squad', 'Api\PlayersController@remove_player_squad');
+Route::post('transfer_player_position', 'Api\PlayersController@transfer_player_position');
 
 
 
 
-
-Route::post('addtocart','API\CartController@addToCart');
-Route::post('allCart','API\CartController@allCart');
-Route::post('availabletime','API\CartController@availabletime');
-Route::post('checkout','API\CartController@checkout');
-Route::post('reservation','API\CartController@reservation');
-Route::post('addcount','API\CartController@addcount');
-Route::post('minuscount','API\CartController@minuscount');
-Route::post('editServiceCart','API\CartController@editServiceCart');
-Route::post('deleteCart','API\CartController@deleteCart');
-Route::post('cancelreservation','API\CartController@cancelReservation');
+Route::post('my_squad', 'Api\SquadsController@index');
 
 
-
-Route::post('productsWithName','API\productApiController@products_with_Name');
-Route::post('servicesWithName','API\serviceApiController@service_with_Name');
-
-Route::post('cartcount', 'API\CartController@cartcount');
-
-
-Route::post('productsWithName', 'API\productApiController@products_with_Name');
-Route::post('servicesWithName', 'API\serviceApiController@service_with_Name');

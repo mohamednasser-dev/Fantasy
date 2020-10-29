@@ -1,46 +1,51 @@
-
 <!DOCTYPE html>
+<html lang="en" dir="rtl">
 
-<html lang="en" data-textdirection="ltr" class="loading">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>{{trans('admin.website_title')}}</title>
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('/app-assets/images/ico/apple-icon-60.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/app-assets/images/ico/apple-icon-76.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('/app-assets/images/ico/apple-icon-120.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('/app-assets/images/ico/apple-icon-152.png') }}">
-    <!-- <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/app-assets/images/ico/favicon.ico') }}"> -->
-    <!-- <link rel="shortcut icon" type="image/png" href="{{ asset('/app-assets/images/ico/favicon-32.png') }}"> -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <!-- BEGIN VENDOR CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/bootstrap.css') }}">
-    <!-- font icons-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/fonts/icomoon.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/fonts/flag-icon-css/css/flag-icon.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/vendors/css/extensions/pace.css') }}">
-    <!-- END VENDOR CSS-->
-    <!-- BEGIN ROBUST CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/bootstrap-extended.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/app.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/colors.css') }}">
-    <!-- END ROBUST CSS-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- BEGIN Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/assets/css/style.css') }}">
-    <!-- END Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/core/menu/menu-types/vertical-overlay-menu.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/app-assets/css/core/colors/palette-gradient.css') }}">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-{{--    Begain Page Level Style--}}
+ <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap">
+    <style>
+      body {
+        font-family: 'Lalezar', cursive;
+        font-size: 48px;
+      }
+    </style>
 
-    @yield('styles')
+
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/assets/images/favicon.png') }}">
+    <title>My website</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ asset('/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
+    <!-- This page CSS -->
+
+    <!--c3 CSS -->
+    <link href="{{ asset('/assets/plugins/c3-master/c3.min.css') }}" rel="stylesheet">
+    <!--Toaster Popup message CSS -->
+    <link href="{{ asset('/assets/plugins/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
+    <!-- Dashboard 1 Page CSS -->
+    <link href="{{ asset('/css/pages/dashboard1.css') }}" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="{{ asset('/css/colors/default-dark.css') }}" id="theme" rel="stylesheet">
+    <link href="{{ asset('/assets/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('/assets/plugins/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+ @yield('styles')
 </head>
-<body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
+
+<body class="fix-header fix-sidebar card-no-border">

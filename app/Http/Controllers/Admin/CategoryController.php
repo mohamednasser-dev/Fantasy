@@ -56,7 +56,7 @@ class CategoryController extends Controller
         $cat = $this->objectName::create($data);
         $cat->save();
         session()->flash('success', trans('admin.addedsuccess'));
-        return redirect(url('categories'));
+        return redirect(url('categories/create'));
 
 
     }

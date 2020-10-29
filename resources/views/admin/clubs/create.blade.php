@@ -2,74 +2,95 @@
 
 
 @section('content')
-    <br>
-    <div class="app-content content container-fluid">
-        <div class="breadcrumb-wrapper col-xs-12">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('home')}}">{{trans('admin.nav_home')}} </a>
-                </li>
-                <li class="breadcrumb-item"><a href="{{url('clubs')}}">{{trans('admin.nav_clubs')}} </a>
-                </li>
-                <li class="breadcrumb-item"> {{trans('admin.add_new_club')}}
-                </li>
 
-            </ol>
-        </div>
-    </div>
-    <div class="app-content content container-fluid">
-        <div class="content-wrapper">
-            @include('layouts.errors')
-            @include('layouts.messages')
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">{{trans('admin.add_new_club')}}</h3>
+
+ <div class="row page-titles">
+                    <div class="col-md-5 align-self-center">
+                        <h3 class="text-themecolor">{{trans('admin.add_new_club')}}</h3>
+                    </div>
+                    <div class="col-md-7 align-self-center">
+                        <ol class="breadcrumb">
+                             <li class="breadcrumb-item">{{trans('admin.add_new_club')}}</li>
+                            <li class="breadcrumb-item"><a href="{{url('clubs')}}">{{trans('admin.nav_clubs')}}</a></li>
+                            <li class="breadcrumb-item active"><a href="{{url('home')}}" >{{trans('admin.nav_home')}}</a> </li>
+                        </ol>
+                    </div>
+                   
                 </div>
-            <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="card-block">
-                        {{ Form::open( ['url' => ['clubs/store'],'method'=>'post', 'files'=>'true'] ) }}
+
+
+
+
+     <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                            
+                                <h4 class="card-title">{{trans('admin.club_info')}}</h4>
+                               
+                               <hr>
+                             
+ {{ Form::open( ['url' => ['clubs/store'],'method'=>'post', 'files'=>'true' , 'class'=>'form'] ) }}
                         {{ csrf_field() }}
 
-                        <div class="form-group">
-                        {{Form::select('classification',
-                            ['1st' => '1st',
-                             '2nd' => '2nd'
-                             ],
-                             null
-                             ,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.choose_classification') ])}}
+
+                                     <div class="form-group row">
+                                         <label for="example-month-input" class="col-md-2 col-form-label">{{trans('admin.classification')}}</label>
+
+                                          <div class="col-md-10">
+                                    {{Form::select('classification',
+                                        ['1st' => trans('admin.1st'),
+                                         '2nd' => trans('admin.2nd')
+                                         ],
+                                         null
+                                         ,["class"=>"custom-select col-12" ,"required",'placeholder'=>trans('admin.choose_classification') ])}}
+
+                                                </div>
                                                 </div>
 
-                        <div class="form-group">
-                            {{ Form::text('club_name',old('club_name'),["class"=>"form-control" ,"required",'placeholder'=>trans('admin.club_name')]) }}
-                        </div>
+                                    <div class="form-group m-t-40 row">
+                                        <label for="example-text-input" class="col-md-2 col-form-label">{{trans('admin.club_name')}}</label>
+                                        <div class="col-md-10">
+                                 
 
-                        <div class="form-group">
-                            {{ Form::textArea('tournaments',old('tournaments'),["class"=>"form-control","required",'placeholder'=>trans('admin.tours') ]) }}
-                        </div>
-                        <div class="form-group">
-                            {{ Form::textArea('desc',old('desc'),["class"=>"form-control",'placeholder'=>trans('admin.write_club_desc') ]) }}
-                        </div>
-                        <div class="form-group">
-                        <strong>{{trans('admin.date_created')}}</strong>
+                                         {{ Form::text('club_name',old('club_name'),["class"=>"form-control" ,"required",'placeholder'=>trans('admin.club_name')]) }}
+                                              </div>
+                                    </div>
 
-                            {{ Form::date('date_created',\Carbon\Carbon::now()->format('Y-MM-ddd'),["class"=>"form-control" ,"required" ]) }}
-                        </div>
+                                    <div class="form-group row">
+                                        <label for="example-search-input" class="col-md-2 col-form-label">{{trans('admin.tours')}}</label>
+                                        <div class="col-md-10">
+                                         {{ Form::textArea('tournaments',old('tournaments'),["class"=>"form-control","required"]) }}
+                                        </div>
+                                    </div>
 
-                        <div class="form-group">
-                        <strong>{{trans('admin.club_image')}}</strong>
-                        
-                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control')) }}
-                        </div>
+                                    <div class="form-group row">
+                                        <label for="example-email-input" class="col-md-2 col-form-label">{{trans('admin.desc')}}</label>
+                                        <div class="col-md-10">
+                                            {{ Form::textArea('desc',old('desc'),["class"=>"form-control",'placeholder'=>trans('admin.write_club_desc') ]) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="example-url-input" class="col-md-2 col-form-label">{{trans('admin.date_created')}}</label>
+                                        <div class="col-md-10">
+                                             {{ Form::date('date_created',\Carbon\Carbon::now()->format('Y-MM-ddd'),["class"=>"form-control" ,"required" ]) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="example-tel-input" class="col-md-2 col-form-label">{{trans('admin.club_image')}}</label>
+                                        <div class="col-md-10">
+                                            {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control')) }}
+                                        </div>
+                                    </div>
+                                   
 
-                        <div class="center">
-                            {{ Form::submit( trans('admin.public_Add') ,['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
-
+                                      <div class="center">
+                            {{ Form::submit( trans('admin.public_Add') ,['class'=>'btn btn-info','style'=>'margin:10px']) }}
                         </div>
-                        {{ Form::close() }}
+                                {{ Form::close() }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 @endsection
 

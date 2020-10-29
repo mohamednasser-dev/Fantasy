@@ -14,8 +14,6 @@ class ClubsController extends Controller
     public $folderView;
 
 
-
-
     public function __construct(Club $model)
     {
         $this->middleware('auth');
@@ -73,7 +71,7 @@ class ClubsController extends Controller
         $club = $this->objectName::create($data);
         $club->save();
         session()->flash('success', trans('admin.addedsuccess'));
-        return redirect(url('clubs'));
+        return redirect(url('clubs/create'));
 
 
     }

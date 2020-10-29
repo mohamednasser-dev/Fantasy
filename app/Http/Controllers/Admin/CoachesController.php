@@ -1,27 +1,17 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Coach;
-
-
 class CoachesController extends Controller
 {
     public $objectName;
     public $folderView;
-
-
-
-
     public function __construct(Coach $model)
     {
         $this->middleware('auth');
         $this->objectName = $model;
         $this->folderView = 'admin.coaches.';
-
-
     }
     // this function to  select all Coaches
     public function index()
@@ -29,17 +19,15 @@ class CoachesController extends Controller
         $coaches = $this->objectName::all();
         return view($this->folderView.'coaches',\compact('coaches'));
     }
-
   // to prepar to add new club
     public function create()
     {
         return view($this->folderView.'create');
     }
-
 // this to add new recourd of club in database
     public function store(Request $request)
     {
-       $club_id= $request->club_id;
+        $club_id= $request->club_id;
         $data = $this->validate(\request(),
             [
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
@@ -48,35 +36,24 @@ class CoachesController extends Controller
                 'age' => 'required',                
                 'desc' => '',
                 'center_name' => '',
-                
-    
             ]);
-
         if ($request['image'] != null) {
             // This is Image Information ...
             $file = $request->file('image');
             $name = $file->getClientOriginalName();
             $ext = $file->getClientOriginalExtension();
-
             // Move Image To Folder ..
             $fileNewName = 'img_' . time() . '.' . $ext;
             $file->move(public_path('uploads/coaches_images'), $fileNewName);
-
             $data['image'] = $fileNewName;
-
         }else{
             $data['image'] = 'default_coach.png';
-            
         }
-
         $club = $this->objectName::create($data);
         $club->save();
         session()->flash('success',trans('admin.addedsuccess'));
-        return redirect(url('coaches'));
-
-
+        return redirect(url('coaches/create'));
     }
-
     /**
      * Display the specified resource.
      *
@@ -87,7 +64,6 @@ class CoachesController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -99,7 +75,6 @@ class CoachesController extends Controller
         $coach_data = $this->objectName::where('id', $id)->first();
         return view($this->folderView.'edit', \compact('coach_data'));
     }
-
     public function update(Request $request, $id)
     {
         $data = $this->validate(\request(),
@@ -109,29 +84,22 @@ class CoachesController extends Controller
                 'age' => 'required',
                 'club_id' => 'required',
                 'desc' => '',
-                'center_name' => '',
-                
+                'center_name' => '', 
             ]);
-
         if ($request['image'] != null) {
             // This is Image Information ...
             $file = $request->file('image');
             $name = $file->getClientOriginalName();
             $ext = $file->getClientOriginalExtension();
-
             // Move Image To Folder ..
             $fileNewName = 'img_' . time() . '.' . $ext;
             $file->move(public_path('uploads/coaches_images'), $fileNewName);
             $data['image'] = $fileNewName;
-
         }
-
         $club = $this->objectName::where('id',$id)->update($data);
-
         session()->flash('success',  trans('admin.updatSuccess'));
         return redirect(url('coaches'));
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -144,6 +112,5 @@ class CoachesController extends Controller
         $coach->delete();
         session()->flash('success', trans('admin.deleteSuccess'));
         return redirect(url('coaches'));
-
     }
 }

@@ -28,6 +28,8 @@
             <!-- /.card-header -->
                 <div class="card-body">
                     <div class="card-block">
+                    <div class="col-md-6 offset-md-3">
+
                         {{ Form::open( ['url' => ['categories'],'method'=>'post', 'files'=>'true'] ) }}
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -37,9 +39,10 @@
                         <div class="center">
                             {{ Form::submit( trans('admin.public_Add'),['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
 
-                        </div>
+                            <div class="form-actions center">
                         {{ Form::close() }}
                     </div>
+                </div>
                 </div>
             </div>
         </div>

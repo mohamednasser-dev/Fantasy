@@ -60,8 +60,8 @@ class StadiumsController extends Controller
         }
         $stadium = $this->objectName::create($data);
         $stadium->save();
-        session()->flash('success', trans('admin. addedsuccess'));
-        return redirect(url('stadiums'));
+        session()->flash('success', trans('admin.addedsuccess'));
+        return redirect(url('stadiums/create'));
 
 
     }

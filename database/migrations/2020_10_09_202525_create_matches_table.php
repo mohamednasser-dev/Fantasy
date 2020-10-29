@@ -14,26 +14,20 @@ class CreateMatchesTable extends Migration
     public function up()
     {
         Schema::create('matches', function (Blueprint $table) {
+
+            //remove id after migrate from this table and ad complix primaryKey [home_id,away_id,gwla_id] and add id manul but not primary key will be
+            // autoIncrement and unique only
             $table->id();
-
             $table->bigInteger('home_club_id')->unsigned();
-            $table->foreign('home_club_id')->references('id')->on('clubs')->onDelete('cascade');
-
             $table->bigInteger('away_club_id')->unsigned();
-            $table->foreign('away_club_id')->references('id')->on('clubs')->onDelete('cascade');
-
             $table->time('time');
             $table->date('date');
             $table->string('home_score')->default('0');
             $table->string('away_score')->default('0');
             $table->enum('status',['not started','started','ended'])->default('not started');
             $table->bigInteger('stadium_id')->unsigned();
-            $table->foreign('stadium_id')->references('id')->on('stadiums')->onDelete('cascade');
-
-
             $table->bigInteger('tour_id')->unsigned();
-            $table->foreign('tour_id')->references('id')->on('tournaments')->onDelete('cascade');
-            
+            $table->bigInteger('gwla_id')->unsigned();
             $table->timestamps();
         });
     }

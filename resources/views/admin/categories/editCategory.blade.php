@@ -27,15 +27,19 @@
             <!-- /.card-header -->
                 <div class="card-body">
                     <div class="card-block">
+                    <div class="col-md-6 offset-md-3">
+
                         {!! Form::model($cat_data, ['route' => ['categories.update',$cat_data->id] , 'method'=>'put' ,'files'=> true]) !!}
                         {{ csrf_field() }}
 
                         <div class="form-group">
                             {{ Form::text('name',$cat_data->name,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.name')]) }}
                         </div>
-
+                        <div class="form-actions center">
                         {{ Form::submit( trans('admin.public_Edit') ,['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
                         {{ Form::close() }}
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

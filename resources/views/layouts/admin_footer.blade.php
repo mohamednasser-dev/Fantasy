@@ -1,31 +1,58 @@
+  </div>
 
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer"> © 2020 BIT - Be in Track </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
 
-<footer >
-</footer>
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="{{ asset('/assets/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src="{{ asset('/assets/plugins/bootstrap/js/popper.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="{{ asset('/js/perfect-scrollbar.jquery.min.js') }}"></script>
+    <!--Wave Effects -->
+    <script src="{{ asset('/js/waves.js') }}"></script>
+    <!--Menu sidebar -->
+    <script src="{{ asset('/js/sidebarmenu.js') }}"></script>
+    <!--Custom JavaScript -->
+    <script src="{{ asset('/js/custom.min.js') }}"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--sparkline JavaScript -->
+    <script src="{{ asset('/assets/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
+    <!--morris JavaScript -->
+    <!--c3 JavaScript -->
+    <script src="{{ asset('/assets/plugins/d3/d3.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/c3-master/c3.min.js') }}"></script>
+    <!-- Popup message jquery -->
+    <script src="{{ asset('/assets/plugins/toast-master/js/jquery.toast.js') }}"></script>
+    <!-- Chart JS -->
+    <script src="{{ asset('/js/dashboard1.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="{{ asset('/assets/plugins/styleswitcher/jQuery.style.switcher.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/toastr/toastr.js') }}"></script>
 
-<!-- BEGIN VENDOR JS-->
-<script src="{{ asset('/app-assets/js/core/libraries/jquery.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/app-assets/vendors/js/ui/tether.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/app-assets/js/core/libraries/bootstrap.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/app-assets/vendors/js/ui/perfect-scrollbar.jquery.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/app-assets/vendors/js/ui/unison.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/app-assets/vendors/js/ui/blockUI.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/app-assets/vendors/js/ui/jquery.matchHeight-min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/app-assets/vendors/js/ui/screenfull.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/app-assets/vendors/js/extensions/pace.min.js') }}" type="text/javascript"></script>
-<!-- BEGIN VENDOR JS-->
-<!-- BEGIN PAGE VENDOR JS-->
-<script src="{{ asset('/app-assets/vendors/js/charts/chart.min.js') }}" type="text/javascript"></script>
-<!-- END PAGE VENDOR JS-->
-<!-- BEGIN ROBUST JS-->
-<script src="{{ asset('/app-assets/js/core/app-menu.js') }}" type="text/javascript"></script>
-<script src="{{ asset('/app-assets/js/core/app.js') }}" type="text/javascript"></script>
-<!-- END ROBUST JS-->
-<script src="{{ asset('/app-assets/js/scripts/pages/dashboard-lite.js') }}"
-        type="text/javascript"></script>
-
-<!-- BEGIN PAGE LEVEL JS-->
 @yield('scripts')
-<!-- END PAGE LEVEL JS-->
+
 </body>
+
 </html>
+
+

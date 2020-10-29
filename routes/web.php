@@ -17,13 +17,28 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
+// all type of users have appelety to view all this routes ..
+
 // this route for login and register
 Auth::routes();
-
-
-Route::group(['middleware' => ['auth']],
-    function () {
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('matches', 'Admin\MatchesController@index');
+
+
+Route::group(['middleware' => ['auth','editor']], function () {
+
+Route::get('match/{match_id}/{home_id}/{away_id}/view_match_formation', 'Editor\ClubFormationsController@index');
+Route::post('club_formations/store', 'Editor\ClubFormationsController@store');
+Route::post('club_formations/store_away', 'Editor\ClubFormationsController@store_away');
+Route::get('club_formations/{id}/delete', 'Editor\ClubFormationsController@destroy');
+
+Route::post('getPlayerInfo', 'Editor\ClubFormationsController@getPlayerInfo');
+Route::post('getPlayerInfo_away', 'Editor\ClubFormationsController@getPlayerInfo_away');
+
+
+});
+
+Route::group(['middleware' => ['auth','admin']], function () {
 
 //Club routes
 Route::get('clubs', 'Admin\ClubsController@index');
@@ -65,13 +80,29 @@ Route::get('tournaments/{id}/edit', 'Admin\TournamentsController@edit');
 Route::post('tournaments/{id}/update', 'Admin\TournamentsController@update');
 Route::get('tournaments/{id}/delete', 'Admin\TournamentsController@destroy');
 
+
+//tournament gwalat routes
+Route::get('gwalat/{id}', 'Admin\TournamentsController@gwalat');
+Route::get('gwalat/{id}/create', 'Admin\TournamentsController@create_gawla');
+Route::post('gwalat/store', 'Admin\TournamentsController@store_gawla');
+Route::get('gwalat/{id}/delete', 'Admin\TournamentsController@destroy_gawla');
+Route::get('gwla_matches/{id}', 'Admin\MatchesController@gwla_matches');
+
+
+
+
 //match routes
-Route::get('matches', 'Admin\MatchesController@index');
+
 Route::post('matches/store', 'Admin\MatchesController@store');
 Route::get('matches/create', 'Admin\MatchesController@create');
-Route::get('matches/{id}/edit', 'Admin\MatchesController@edit');
-Route::post('matches/{id}/update', 'Admin\MatchesController@update');
-Route::get('matches/{id}/delete', 'Admin\MatchesController@destroy');
+Route::get('matches/{gwla_id}/{home_id}/{away_id}/edit', 'Admin\MatchesController@edit');
+Route::post('matches/{gwla_id}/{home_id}/{away_id}/update', 'Admin\MatchesController@update');
+Route::get('matches/{gwla_id}/{home_id}/{away_id}/delete', 'Admin\MatchesController@destroy');
+
+Route::get('GetGwalat/{id}', 'Admin\MatchesController@GetGwalat');
+Route::get('GetClubs/{id}', 'Admin\MatchesController@GetClubs');
+Route::get('GetTours/{id}', 'Admin\MatchesController@GetTours');
+
 
 //News
 
@@ -83,10 +114,32 @@ Route::get('categories/{id}/delete', 'Admin\CategoryController@destroy');
 Route::resource('news', 'Admin\NewsController');
 Route::get('news/{id}/delete', 'Admin\NewsController@destroy');
 
+// Target news
+Route::get('news_target/{id}/delete', 'Admin\NewsController@destroyTarget');
+
 
 //  users  routes
 Route::resource('users', 'Admin\usersController');
 Route::get('users/{id}/delete', 'Admin\usersController@destroy');
 
+// editors and monitors routes
+Route::get('editors', 'Admin\usersController@all_editors');
+Route::get('editors/create', 'Admin\usersController@create_editor');
+Route::post('editors/store', 'Admin\usersController@store_editor');
+Route::get('editors/{id}/delete', 'Admin\usersController@destroy');
+
+Route::get('monitor_Clubs/{user_id}', 'Admin\usersController@monitor_Clubs');
+Route::get('monitor_Clubs/{id}/create', 'Admin\usersController@create_monitor_clubs');
+Route::post('monitor_Clubs/store', 'Admin\usersController@store_monitor_clubs');
+Route::get('monitor_clubs/{club_id}/delete', 'Admin\usersController@destroy_monitor_club');
+
+
+
+
+
+
+
+
 });
+
 

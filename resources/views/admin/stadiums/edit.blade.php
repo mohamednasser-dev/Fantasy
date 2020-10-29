@@ -1,45 +1,48 @@
 @extends('admin_temp')
 
 @section('content')
-    <br>
 
-    <div class="app-content content container-fluid">
-        <div class="breadcrumb-wrapper col-xs-12">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{url('home')}}">{{trans('admin.nav_home')}} </a>
-                </li>
-                <li class="breadcrumb-item"><a href="{{url('stadiums')}}">{{trans('admin.nav_stadiums')}}</a>
-                </li>
-                <li class="breadcrumb-item"> {{trans('admin.update_stad')}}
-                </li>
-            </ol>
-        </div>
-    </div>
-    <div class="app-content content container-fluid">
-        <div class="content-wrapper">
-            @include('layouts.errors')
-            @include('layouts.messages')
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">{{trans('admin.update_stad')}}</h3>
-                </div>
-            <!-- /.card-header -->
-                <div class="card-body">
-                    <div class="card-block">
+    <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">{{trans('admin.update_stad')}}</h3>
+            </div>
+            <div class="col-md-7 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">{{trans('admin.update_stad')}}</li>
+                    <li class="breadcrumb-item active"><a href="{{url('stadiums')}}" >{{trans('admin.nav_stadiums')}}</a> </li>
 
-                        {!! Form::model($stadium_data, ['url' => ['stadiums/'.$stadium_data->id.'/update'] , 'method'=>'post' ,'files'=> true]) !!}
+                    <li class="breadcrumb-item active"><a href="{{url('home')}}" >{{trans('admin.nav_home')}}</a> </li>
+                </ol>
+            </div>
+     </div>
+
+<div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                            
+                                <h4 class="card-title">{{trans('admin.stad_info')}}</h4>
+                               
+                               <hr>
+                       
+                         {!! Form::model($stadium_data, ['url' => ['stadiums/'.$stadium_data->id.'/update'] , 'method'=>'post' ,'files'=> true]) !!}
                         {{ csrf_field() }}
-                        
-                 
-                        <div class="form-group">
-          
-                        <strong>{{trans('admin.stad_name')}}</strong>
-                        {{ Form::text('stadium_name',$stadium_data->name,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.stad_name') ]) }}
-                    </div>
-                    
-                        <div class="form-group">
-                        <strong>{{trans('admin.change_stad_image')}}</strong>
-                                             
+
+
+                                     <div class="form-group row">
+                                         <label for="example-month-input" class="col-md-2 col-form-label">{{trans('admin.stad_name')}}</label>
+
+                                          <div class="col-md-10">
+                                   
+                                           {{ Form::text('stadium_name',$stadium_data->name,["class"=>"form-control" ,"required"]) }}
+                                     </div>
+                                                </div>
+
+                                
+                                    <div class="form-group row">
+                                        <label for="example-tel-input" class="col-md-2 col-form-label">{{trans('admin.stad_image')}}</label>
+                                        <div class="col-md-10">
+                                                               
                             {{ Form::file('image',array('accept'=>'image/*','class'=>'form-control')) }}
                             @if(!empty($stadium_data->image))
                                 <img src="{{ url($stadium_data->image) }}"
@@ -47,16 +50,18 @@
 
                             @endif
 
+                                        </div>
+                                    </div>
+                                   
+
+                                      <div class="form-actions center">
+                         {{ Form::submit( trans('admin.public_Edit'),['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
                         </div>
-
-
-                        {{ Form::submit( trans('admin.public_Edit'),['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
-                        {{ Form::close() }}
+                                {{ Form::close() }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
 @endsection
 

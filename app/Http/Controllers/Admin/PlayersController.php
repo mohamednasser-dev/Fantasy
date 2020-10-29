@@ -43,7 +43,7 @@ class PlayersController extends Controller
         $data = $this->validate(\request(),
             [
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
-                'player_name' => 'required|unique:players,player_name',
+                'player_name' => 'required',
                 'club_id' => 'required',
                 'center_name' => 'required',
                 'age' => 'required',                
@@ -67,8 +67,10 @@ class PlayersController extends Controller
             $data['image'] = 'default_player.png';
             
         }
+      
         $club = $this->objectName::create($data);
         $club->save();
+     
         session()->flash('success', trans('admin.addedsuccess'));
         return redirect(url('players/create'));
 
@@ -103,7 +105,7 @@ class PlayersController extends Controller
         $data = $this->validate(\request(),
             [
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
-                'player_name' => 'required|unique:players,player_name,'.$id,
+                'player_name' => 'required',
                 'club_id' => 'required',
                 'center_name' => 'required',
                 'age' => 'required',                

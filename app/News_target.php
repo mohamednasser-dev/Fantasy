@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class News_target extends Model
 {
     protected $fillable = [
-        'type','news_id','target_id'
+        'model','news_id','target_id'
      ];
+
+     public function getNews()
+     {
+         return $this->hasOne('App\News', 'id', 'news_id');
+     }
 }

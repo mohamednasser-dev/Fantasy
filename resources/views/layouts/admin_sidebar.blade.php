@@ -1,72 +1,85 @@
-<!-- main menu-->
-<div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow">
+   <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
 
-    <!-- main menu content-->
-    <div class="main-menu-content">
-        <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
-
-            <li class=" nav-item">
-                <a href="{{url('home')}}"><i class="icon-home3"></i>
-                    <span data-i18n="nav.dash.main"
-                          class="menu-title">{{trans('admin.nav_home')}}</span></a>
-            </li>
+                <li> <a class="waves-effect waves-dark" href="{{url('home')}}" aria-expanded="false"><i class="mdi mdi-home"></i><span class="hide-menu">{{trans('admin.nav_home')}}</span></a>
+                </li>
 
             @if(Auth::user()->type == "admin")
-            
-                <li class=" nav-item">
-                    <a href="{{url('clubs')}}"><i class="icon-cube"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_clubs')}}</span></a>
 
+                <li> <a class="waves-effect waves-dark" href="{{url('users')}}" aria-expanded="false"><i class="mdi mdi-account-location"></i><span class="hide-menu">{{trans('admin.nav_users')}}</span></a>        
+                </li>
+               
+                <li> <a class="waves-effect waves-dark" href="{{url('editors')}}" aria-expanded="false"><i class="mdi mdi-access-point"></i><span class="hide-menu">{{trans('admin.nav_editors')}}</span></a>        
+                </li>
+      
+                <li> <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">{{trans('admin.nav_clubs')}}</span></a>
+
+                    <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('clubs')}}">{{trans('admin.view_clubs')}}</a></li>
+                                <li><a href="{{url('clubs/create')}} ">{{trans('admin.add_new_club')}}</a></li>
+
+                            </ul>
                 </li>
 
-                <li class=" nav-item">
-                    <a href="{{url('coaches')}}"><i class="icon-head"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_coaches')}}</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-account"></i><span class="hide-menu">{{trans('admin.nav_coaches')}}</span></a>
+                <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('coaches')}}">{{trans('admin.view_coaches')}}</a></li>
+                                <li><a href="{{url('coaches/create')}} ">{{trans('admin.add_new_coach')}}</a></li>
 
+                            </ul>
+                </li>
+      
+
+                <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">{{trans('admin.nav_players')}}</span></a>        
+                <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('players')}}">{{trans('admin.view_players')}}</a></li>
+                                <li><a href="{{url('players/create')}} ">{{trans('admin.add_new_player')}}</a></li>
+
+                            </ul>
                 </li>
 
+                <li> <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">{{trans('admin.nav_stadiums')}}</span></a>        
+                <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('stadiums')}}">{{trans('admin.view_stadiums')}}</a></li>
+                                <li><a href="{{url('stadiums/create')}} ">{{trans('admin.add_new_stad')}}</a></li>
 
-                <li class=" nav-item">
-                    <a href="{{url('players')}}"><i class="icon-users"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_players')}}</span></a>
-
-                </li>
-				
-				 <li class=" nav-item">
-                    <a href="{{url('stadiums')}}"><i class="icon-archive3"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_stadiums')}}</span></a>
-
-                </li>
-				
-				 <li class=" nav-item">
-                    <a href="{{url('tournaments')}}"><i class="icon-flag4"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_tours')}}</span></a>
-                              
-                </li>
-				
-				<li class=" nav-item">
-                    <a href="{{url('matches')}}"><i class="icon-help2"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_matches')}}</span></a>
-
+                            </ul>
                 </li>
 
-                <li class=" nav-item">
-                    <a href="{{url('users')}}"><i class="icon-help2"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_users')}}</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-airplay"></i><span class="hide-menu">{{trans('admin.nav_tours')}}</span></a>        
+                <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('tournaments')}}">{{trans('admin.view_tours')}}</a></li>
+                                <li><a href="{{url('tournaments/create')}} ">{{trans('admin.add_new_tour')}}</a></li>
 
+                            </ul>
                 </li>
+      
+  @endif
 
-                <li class=" navigation-header"><span data-i18n="nav.category.support">{{trans('admin.nav_news')}}</span><i data-toggle="tooltip" data-placement="right" data-original-title="Support" class="icon-ellipsis icon-ellipsis"></i>
-          </li>
+   @if(Auth::user()->type != "user" )
 
-          <li class=" nav-item">
+                <li> <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-alarm"></i><span class="hide-menu">{{trans('admin.nav_matches')}}</span></a>        
+                <ul aria-expanded="false" class="collapse">
+                                <li><a href="{{url('matches')}}">{{trans('admin.view_matches')}}</a></li>
+                                
+                                @if(Auth::user()->type == "admin" )
+                                <li><a href="{{url('matches/create')}} ">{{trans('admin.add_new_match')}}</a></li>
+                                @endif
+
+                            </ul>
+                </li>
+  @endif
+                 
+               
+
+                <!-- <li class=" navigation-header"><span data-i18n="nav.category.support">{{trans('admin.nav_news')}}</span><i data-toggle="tooltip" data-placement="right" data-original-title="Support" class="icon-ellipsis icon-ellipsis"></i>
+                 </li>
+
+                 <li class=" nav-item">
                     <a href="{{url('categories')}}"><i class="icon-grid2"></i>
                         <span data-i18n="nav.dash.main"
                               class="menu-title">{{trans('admin.nav_categories')}}</span></a>
@@ -77,40 +90,24 @@
                         <span data-i18n="nav.dash.main"
                               class="menu-title">{{trans('admin.nav_create_new_news')}}</span></a>
 
-                </li>
+                </li> -->
 
 
-                @endif
-
-                @if(Auth::user()->type == "user")
-                <li class=" nav-item">
-                    <a><i class="icon-whatshot"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_create_team')}}</span></a>
-
-                </li>
-
-                <li class=" nav-item">
-                    <a><i class="icon-whatshot"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_my_points')}}</span></a>
-
-                </li>
+               
 
 
-                <li class=" nav-item">
-                    <a><i class="icon-whatshot"></i>
-                        <span data-i18n="nav.dash.main"
-                              class="menu-title">{{trans('admin.nav_my_account')}} </span></a>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
 
-                </li>
+   <div class="page-wrapper">
 
-                @endif
-
-        </ul>
-
-    </div>
-    <!-- /main menu content-->
-
-</div>
-<!-- / main menu-->
+        @include('layouts.errors')
+        @include('layouts.messages')
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">

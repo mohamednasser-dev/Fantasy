@@ -19,6 +19,6 @@ class Coach extends Model
 
     public function getClub()
     {
-        return $this->hasOne('App\Club', 'id', 'club_id');
+        return $this->belongsTo(Club::class, 'club_id');
     }
 }

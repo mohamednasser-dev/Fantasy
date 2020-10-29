@@ -86,7 +86,7 @@ return [
     'min'       => [
         'numeric' => 'يجب أن تكون قيمة :attribute مساوية أو أكبر من :min.',
         'file'    => 'يجب أن يكون حجم الملف :attribute على الأقل :min كيلوبايت.',
-        'string'  => 'يجب أن يكون طول نص :attribute على الأقل :min حروفٍ/حرفًا.',
+        'string'  => 'يجب أن يكون طول نص :attribute على الأقل :min حروف.',
         'array'   => 'يجب أن يحتوي :attribute على الأقل على :min عُنصرًا/عناصر.',
     ],
     'not_in'               => 'العنصر :attribute غير صحيح.',
@@ -152,14 +152,23 @@ return [
         'away_club_id'=>'النادى الثانى',
         'stadium_id'=>'الاستاد',
         'tour_id'=>'البطولة',
-
+        'gwla_id'=>'الجولة',
+        'player_id'=>'اسم اللاعب',
+        
+        'player_name'=>'اسم اللاعب',
+        'tour_name'=>'اسم البطولة',
+        'date'=>'تاريخ المباراه',
+        'date_created'=>'تاريخ الانشاء',
+        'status'=>'الحالة',
+       
         //for login page and register ..
         'password'=>'كلمة المرور',
         'email'=>'البريد الالكترونى',
         'name'=>'الاسم',
 
+        'squad_name'=>'الفريق',
 
-
+        
         'stadium_id'=>'staduim',
         
         

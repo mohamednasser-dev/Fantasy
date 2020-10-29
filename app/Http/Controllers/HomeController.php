@@ -18,8 +18,9 @@ class HomeController extends Controller
 
     public function index()
     {
+        // to select today date ..
         $mytime = Carbon::now();
-      $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d');
+        $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d');
 
         $matches = Match::where('date', $today)->get();
         return view('home',\compact('matches'));
