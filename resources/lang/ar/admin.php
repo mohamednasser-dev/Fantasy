@@ -79,7 +79,12 @@ return [
 
     //monitor
     'monitor_match' => 'متابعة المباراه',
-
+    'play' => 'لاعبى',
+    'basic' => 'اساسى',
+    'replacement' => 'البدلاء',
+    'match_ended' => 'انتهت المباراه',
+    'done' => 'تنفيذ',
+    
     
     
     

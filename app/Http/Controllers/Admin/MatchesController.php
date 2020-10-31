@@ -10,6 +10,8 @@ use Carbon\Carbon;
 use App\User;
 use App\Player;
 use App\User_club;
+use App\Club_formation;
+
 use Illuminate\Database\QueryException;
 class MatchesController extends Controller
 {
@@ -38,9 +40,39 @@ class MatchesController extends Controller
         $matches = $this->objectName::paginate(10);
         return view($this->folderView.'matches',\compact('matches','clubArray'));
     }
-    public function monitor_match()
+    public function monitor_match($match_id)
     {
-            return view($this->folderView.'match_log.monitor_match');
+        $selected_match=Match::where('id',$match_id)->first();
+        $home_club =Club::where('id',$selected_match->home_club_id)->first();
+        $away_club =Club::where('id',$selected_match->away_club_id)->first();
+        $home_players =club_formation::where('club_id',$selected_match->home_club_id)->orderBy('position','ASC')->get();
+        $away_players = club_formation::where('club_id',$selected_match->away_club_id)->orderBy('position','ASC')->get();
+        if(count($home_players)!=0){
+             $home_Player_Array;
+             $i=0;
+            foreach ($home_players as $player) {
+               $home_Player_Array[$i]= $player->player_id;
+               $i++;
+            }
+            $home_replacement_players = Player::where('club_id',$selected_match->home_club_id)
+            ->whereNotIn('id',$home_Player_Array)->get();
+        }else{
+        $home_replacement_players = Player::where('club_id',$selected_match->home_club_id)->get();     
+        }
+        if(count($away_players)!=0){
+             $away_Player_Array;
+             $i=0;
+            foreach ($away_players as $player) {
+               $away_Player_Array[$i]= $player->player_id;
+               $i++;
+            }
+            $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)
+            ->whereNotIn('id',$away_Player_Array)->get();
+        }else{
+        $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)->get();     
+        }
+        return view($this->folderView.'match_log.monitor_match',compact('selected_match','home_players','away_players','home_replacement_players',
+            'away_replacement_players'));
     }   
     public function gwla_matches($id)
     {

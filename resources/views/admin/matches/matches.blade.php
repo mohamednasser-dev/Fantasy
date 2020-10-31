@@ -100,16 +100,14 @@
                                                     @foreach($clubArray as $club_id )
                                                         @if($club_id == $match->home_club_id || $club_id == $match->away_club_id)
                                                            <a class='btn waves-effect waves-light btn-secondary' href=" {{url('match/'.$match->id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/view_match_formation')}}">
-                                                            {{trans('admin.match_formation')}}
+                                                              {{trans('admin.match_formation')}}
+                                                           </a>
+                                                           <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_match/'.$match->id)}}">
+                                                              {{trans('admin.monitor_match')}}
                                                            </a>
                                                          @endif
                                                     @endforeach
-                                                @endif
-
-                                                           <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_match')}}">
-                                                            {{trans('admin.monitor_match')}}
-                                                           </a>
-                                                      
+                                                @endif              
                                     </td>
                                 </tr>
                             @endforeach
