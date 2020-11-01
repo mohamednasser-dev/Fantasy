@@ -8,6 +8,7 @@ use App\coach;
 use App\User;
 use App\Player;
 use App\Club_formation;
+use App\User_club;
 use Illuminate\Database\QueryException;
 class ClubFormationsController extends Controller
 {
@@ -28,9 +29,10 @@ class ClubFormationsController extends Controller
         $home_players_in_match = $this->objectName::where('club_id',$home_id)->get();
         $away_players_in_match = $this->objectName::where('club_id',$away_id)->get();
                 if(count($home_players_in_match)!=0){
-                         $home_player_Array;
-                         $i=0;
-                        foreach ($home_players_in_match as $Hplayers) {
+                        $home_player_Array;
+                        $i=0;
+                        foreach ($home_players_in_match as $Hplayers) 
+                        {
                            $home_player_Array[$i]= $Hplayers->player_id;
                            $i++;
                         }
@@ -39,23 +41,32 @@ class ClubFormationsController extends Controller
                 }else{
                    $home_players =Player::where('club_id',$home_id)->pluck('player_name','id');
                 }
-// ------------------------------------
+                // ------------------------------------
                 if(count($away_players_in_match)!=0){
-                         $away_player_Array;
-                         $i=0;
-
-                        foreach ($away_players_in_match as $Aplayers) {
+                        $away_player_Array;
+                        $i=0;
+                        foreach ($away_players_in_match as $Aplayers) 
+                        {
                            $away_player_Array[$i]= $Aplayers->player_id;
                            $i++;
                         }
-
                         $away_players = Player::where('club_id',$away_id)
                         ->whereNotIn('id',$away_player_Array)->pluck('player_name','id');
                 }else{
                    $away_players =Player::where('club_id',$away_id)->pluck('player_name','id');
                 }
-          // Home players in formation
-
+                // to filter user lubs to view his club formation
+                if(auth()->user()->type == 'editor')
+                {
+                    $editor_clubs = User_club::where('user_id',auth()->user()->id)->get();
+                    $i=0;
+                        foreach ($editor_clubs as $user_club) 
+                        {
+                           $editor_clubArray[$i]= $user_club->club_id;
+                           $i++;
+                        }
+                }
+              // Home players in formation
          $GK_Players = $this->objectName::where('club_id',$home_id)
         ->where('position','GK')
         ->get();
@@ -102,7 +113,7 @@ class ClubFormationsController extends Controller
         $away_players_in_match['LF_Players_away']=$LF_Players_away;
 
         return view($this->folderView.'match_formation', \compact('match_data','home_players','away_players',
-            'home_players_in_match','away_players_in_match','home_coach','away_coach'));
+            'home_players_in_match','away_players_in_match','home_coach','away_coach','editor_clubArray'));
     }
     // this to Get Player Info 
     public function getPlayerInfo(Request $request)

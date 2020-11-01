@@ -17,91 +17,99 @@
         <div class="content-wrapper">
             <section id="html-headings-default" class="row match-height">
                 <div class="col-sm-12 col-md-3">
-                    <div class="card">
-                        <a href="javascript:void(0)" style="margin-right: 10px; margin-top: 10px;">
-                            <img src="{{ url($selected_match->getHomeclub->image) }}" style="width: 35px;" alt="user-img" class="img-circle"> 
-                            <span>{{trans('admin.play')}} {{$selected_match->getHomeclub->club_name}}</span>
-                        </a>
-                        <div class="scroll">
-                            <div class="card-body">
-                                <div class="card-block">
-                                    <h5>{{trans('admin.basic')}}</h5>
-                                        @foreach($home_players as $player)
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                    {!! Form::checkbox('home_player_id',$player->player_id,false,['class'=>'form-control']) !!}
-                                                </div>
-                                                <div class="col-md-8">   
-                                                    {!! Form::label('player_name',$player->getPlayer->player_name,false,['class'=>'form-control']) !!}
-                                                </div>
-                                                 <div class="col-md-2">   
-                                                    {!! Form::label('position',$player->position,false,['class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        <hr>
-                                        <h5>{{trans('admin.replacement')}}</h5>
-                                        @foreach($home_replacement_players as $player)
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                    {!! Form::checkbox('selected_players[]',$player->id,false,['class'=>'form-control']) !!}
-                                                </div>
-                                                <div class="col-md-8">   
-                                                    {!! Form::label('player_name',$player->player_name,false,['class'=>'form-control']) !!}
-                                                </div>
-                                                <div class="col-md-2">   
-                                                    {!! Form::label('position',$player->center_name,false,['class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-                                        @endforeach
+                    @foreach($monitor_clubArray as $club_id )
+                        @if($club_id == $selected_match->home_club_id)
+                            <div class="card" style="width: 250px;">
+                                <a href="javascript:void(0)" style="margin-right: 10px; margin-top: 10px;">
+                                    <img src="{{ url($selected_match->getHomeclub->image) }}" style="width: 35px;" alt="user-img" class="img-circle"> 
+                                    <span>{{trans('admin.play')}} {{$selected_match->getHomeclub->club_name}}</span>
+                                </a>
+                                <div class="scroll">
+                                    <div class="card-body">
+                                        <div class="card-block">
+                                            <h5>{{trans('admin.basic')}}</h5>
+                                                @foreach($home_players as $player)
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            {!! Form::checkbox('home_player_id',$player->player_id,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                        <div class="col-md-8">   
+                                                            {!! Form::label('player_name',$player->getPlayer->player_name,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                         <div class="col-md-2">   
+                                                            {!! Form::label('position',$player->position,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <hr>
+                                                <h5>{{trans('admin.replacement')}}</h5>
+                                                @foreach($home_replacement_players as $player)
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            {!! Form::checkbox('selected_players[]',$player->id,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                        <div class="col-md-8">   
+                                                            {!! Form::label('player_name',$player->player_name,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                        <div class="col-md-2">   
+                                                            {!! Form::label('position',$player->center_name,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <a href="javascript:void(0)" style="margin-right: 10px; margin-top: 10px;">
-                            <img src="{{ url($selected_match->getAwayclub->image) }}" style="width: 35px;" alt="user-img" class="img-circle"> 
-                            <span>{{trans('admin.play')}} {{$selected_match->getAwayclub->club_name}}</span>
-                        </a>
-                        <div class="scroll">
-                            <div class="card-body">
-                                <div class="card-block">
-                                    <h5>{{trans('admin.basic')}}</h5>
-                                        @foreach($away_players as $player)
-                                       
-                                             <div class="row">
-                                                <div class="col-md-1">
-                                                    {!! Form::checkbox('away_player_id',$player->player_id,false,['class'=>'form-control']) !!}
-                                                </div>
-                                                <div class="col-md-8"> 
-                                                     <a>
-                                                        {{$player->getPlayer->player_name}}
-                                                     </a>
-                                                </div>
-                                                <div class="col-md-2">   
-                                                    {!! Form::label('position',$player->position,false,['class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                        <hr>
-                                        <h5>{{trans('admin.replacement')}}</h5>
-                                        @foreach($away_replacement_players as $player)
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                    {!! Form::checkbox('selected_players[]',$player->id,false,['class'=>'form-control']) !!}
-                                                </div>
-                                                <div class="col-md-8">   
-                                                    {!! Form::label('player_name',$player->player_name,false,['class'=>'form-control']) !!}
-                                                </div>
-                                                <div class="col-md-2">   
-                                                    {!! Form::label('position',$player->center_name,false,['class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-                                        @endforeach
+                        @endif
+                    @endforeach
+                    @foreach($monitor_clubArray as $club_id )
+                        @if($club_id == $selected_match->away_club_id)
+                            <div class="card" style="width: 250px;">
+                                <a href="javascript:void(0)" style="margin-right: 10px; margin-top: 10px;">
+                                    <img src="{{ url($selected_match->getAwayclub->image) }}" style="width: 35px;" alt="user-img" class="img-circle"> 
+                                    <span>{{trans('admin.play')}} {{$selected_match->getAwayclub->club_name}}</span>
+                                </a>
+                                <div class="scroll">
+                                    <div class="card-body">
+                                        <div class="card-block">
+                                            <h5>{{trans('admin.basic')}}</h5>
+                                                @foreach($away_players as $player)
+                                               
+                                                     <div class="row">
+                                                        <div class="col-md-1">
+                                                            {!! Form::checkbox('away_player_id',$player->player_id,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                        <div class="col-md-8"> 
+                                                             <a>
+                                                                {{$player->getPlayer->player_name}}
+                                                             </a>
+                                                        </div>
+                                                        <div class="col-md-2">   
+                                                            {!! Form::label('position',$player->position,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                                <hr>
+                                                <h5>{{trans('admin.replacement')}}</h5>
+                                                @foreach($away_replacement_players as $player)
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            {!! Form::checkbox('selected_players[]',$player->id,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                        <div class="col-md-8">   
+                                                            {!! Form::label('player_name',$player->player_name,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                        <div class="col-md-2">   
+                                                            {!! Form::label('position',$player->center_name,false,['class'=>'form-control']) !!}
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        @endif
+                    @endforeach
                 </div>
                  <div class="col-sm-12 col-md-9">
                      <div class="card">
@@ -173,24 +181,13 @@
                     <!-- Begin action panel  -->
                     <div class="card" style="margin-top: -18px;">
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <ul class="chat-list p-20" style="margin-top: -60px;">
-                                        <li>
-                                            <div class="chat-img"><img src="{{ asset('/assets/images/users/1.jpg') }}" alt="user" /></div>
-                                            <div class="chat-content">
-                                                <h5 style="margin-top: 12px;">James Anderson</h5>
-                                            </div>
-                                        </li>
-                                    </ul>  
-                                </div>
-                                <div class="col-md-5" style="margin-right: -80px;">
+                            <div class="row" style="margin-right: 75px;">
+                                <div class="col-md-8">
                                      <div class="form-group row">
                                         <div class="col-md-12">
-                                            <select class="form-control custom-select">
-                                                <option>Roule 1</option>
-                                                <option>Roule 2</option>
-                                            </select>
+                                            {{ Form::select('event_id',App\Event::pluck('key','id'),null
+                                          ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
+
                                         </div>
                                     </div>
                                 </div>

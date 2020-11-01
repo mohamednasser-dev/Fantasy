@@ -66,8 +66,8 @@
                                             </i>
                                         </button>
                                             <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_Clubs/'.$user->id)}}">
-                                            {{trans('admin.monitor_clubs')}}
-                                            </a>
+                                                        {{trans('admin.monitor_clubs')}}
+                                            </a>   
                                     </td>
                                 </tr>
                             @endforeach

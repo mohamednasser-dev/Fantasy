@@ -32,7 +32,6 @@ return [
 
 
     //navigation  sidebar
-
     'nav_home' => 'الصفحة الرئيسية',
     'nav_clubs' => 'النوادى',
     'nav_coaches' => 'المدربين',
@@ -60,6 +59,8 @@ return [
 
 //home page
     'today_matches' => 'مباريات اليوم',
+    'logout' => 'تسجيل الخروج',
+    
 
     //editors
     'add_new_editor' => 'اضافة مراقب جديد',
@@ -136,6 +137,7 @@ return [
     'edit_match_events' => 'تعديل احداث المباراه',
     'match_formation' => 'تشكيلة الفرق',
     'choose_player' => 'اختر لاعب',
+    'choose_event' => 'اختر الحدث',
     
     
     'stadium' => 'الملعب',

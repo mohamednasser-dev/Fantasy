@@ -35,11 +35,10 @@ Route::get('club_formations/{id}/delete', 'Editor\ClubFormationsController@destr
 Route::post('getPlayerInfo', 'Editor\ClubFormationsController@getPlayerInfo');
 Route::post('getPlayerInfo_away', 'Editor\ClubFormationsController@getPlayerInfo_away');
 
-
 });
 Route::group(['middleware' => ['auth','monitor']], function () {
+	Route::get('monitor_match/{match_id}', 'Admin\MatchesController@monitor_match');
 });
-Route::get('monitor_match/{match_id}', 'Admin\MatchesController@monitor_match');
 
 Route::group(['middleware' => ['auth','admin']], function () {
 

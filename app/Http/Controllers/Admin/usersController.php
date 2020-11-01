@@ -68,7 +68,8 @@ class usersController extends Controller
     public function create_monitor_clubs($id)
     {
         $user_id =$id;
-        $user_clubs = User_club::all();
+        $selected_user = User::where('id',$user_id)->first();
+        $user_clubs = User_club::where('type',$selected_user->type)->get();
         if(count($user_clubs)!=0){
              $clubArray;
              $i=0;
@@ -92,13 +93,15 @@ class usersController extends Controller
              'user_id' => 'required',
              'selectedClubs' => 'required'
                ]);
-           $input = $request->all();
-           $user_id = $input['user_id'];
+            $input = $request->all();
+            $user_id = $input['user_id'];
+            $selected_user = User::where('id',$user_id)->first();
           // for saving selected monitor`s clubs ....
            foreach ($input['selectedClubs'] as $club_id) 
            {
               $monitor_club_data['user_id']=$user_id ;
               $monitor_club_data['club_id']=$club_id ;
+              $monitor_club_data['type']=$selected_user->type;
               try{
                    $User_clubs = User_club::create($monitor_club_data);
                    $User_clubs->save();

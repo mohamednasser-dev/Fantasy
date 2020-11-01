@@ -56,11 +56,9 @@
                         <!-- ============================================================== -->
                         <!-- Profile -->
                         <!-- ============================================================== -->
-                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('/assets/images/users/1.jpg') }}" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
-
                                 <ul class="dropdown-user">
                                     <li>
                                         <div class="dw-user-box">
@@ -71,24 +69,13 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li role="separator" class="divider">
-                                       
-                                    </li>
-                               
                                     <li>
-
-
-                            <a class="fa fa-power-off" href="{{ route('logout') }}"
-                                                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                Logout
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                                      
-
+                                        <a class="fa fa-power-off" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            {{trans('admin.logout')}}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
                                     </li>
                                 </ul>
                             </div>

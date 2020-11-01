@@ -26,19 +26,31 @@ class MatchesController extends Controller
     // this function to  select all Coaches
     public function index()
     {
-       $clubArray=null;
-                if(auth()->user()->type == 'editor')
-                {
-                    $editor_clubs = User_club::where('user_id',auth()->user()->id)->get();
-                    $i=0;
+       $editor_clubArray=null;
+       $monitor_clubArray=null;
+       $matches = $this->objectName::paginate(10);
+            if(auth()->user()->type == 'editor')
+            {
+                $editor_clubs = User_club::where('user_id',auth()->user()->id)->get();
+                $i=0;
                     foreach ($editor_clubs as $user_club) 
                     {
-                       $clubArray[$i]= $user_club->club_id;
+                       $editor_clubArray[$i]= $user_club->club_id;
                        $i++;
                     }
-                }
-        $matches = $this->objectName::paginate(10);
-        return view($this->folderView.'matches',\compact('matches','clubArray'));
+                    return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','editor_clubs'));  
+            }
+            if(auth()->user()->type == 'monitor')
+            {
+                $monitor_clubs = User_club::where('user_id',auth()->user()->id)->get();
+                $i_monitor=0;
+                    foreach ($monitor_clubs as $user_club) 
+                    {
+                       $monitor_clubArray[$i_monitor]= $user_club->club_id;
+                       $i_monitor++;
+                    }
+                    return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','monitor_clubs'));
+            }
     }
     public function monitor_match($match_id)
     {
@@ -47,32 +59,42 @@ class MatchesController extends Controller
         $away_club =Club::where('id',$selected_match->away_club_id)->first();
         $home_players =club_formation::where('club_id',$selected_match->home_club_id)->orderBy('position','ASC')->get();
         $away_players = club_formation::where('club_id',$selected_match->away_club_id)->orderBy('position','ASC')->get();
-        if(count($home_players)!=0){
-             $home_Player_Array;
-             $i=0;
-            foreach ($home_players as $player) {
-               $home_Player_Array[$i]= $player->player_id;
-               $i++;
+                if(auth()->user()->type == 'monitor')
+                {
+                    $monitor_clubs = User_club::where('user_id',auth()->user()->id)->get();
+                    $i_monitor=0;
+                        foreach ($monitor_clubs as $user_club) 
+                        {
+                           $monitor_clubArray[$i_monitor]= $user_club->club_id;
+                           $i_monitor++;
+                        }
+                }
+            if(count($home_players)!=0){
+                 $home_Player_Array;
+                 $i=0;
+                foreach ($home_players as $player) {
+                   $home_Player_Array[$i]= $player->player_id;
+                   $i++;
+                }
+                $home_replacement_players = Player::where('club_id',$selected_match->home_club_id)
+                ->whereNotIn('id',$home_Player_Array)->get();
+            }else{
+            $home_replacement_players = Player::where('club_id',$selected_match->home_club_id)->get();     
             }
-            $home_replacement_players = Player::where('club_id',$selected_match->home_club_id)
-            ->whereNotIn('id',$home_Player_Array)->get();
-        }else{
-        $home_replacement_players = Player::where('club_id',$selected_match->home_club_id)->get();     
-        }
-        if(count($away_players)!=0){
-             $away_Player_Array;
-             $i=0;
-            foreach ($away_players as $player) {
-               $away_Player_Array[$i]= $player->player_id;
-               $i++;
+            if(count($away_players)!=0){
+                 $away_Player_Array;
+                 $i=0;
+                foreach ($away_players as $player) {
+                   $away_Player_Array[$i]= $player->player_id;
+                   $i++;
+                }
+                $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)
+                ->whereNotIn('id',$away_Player_Array)->get();
+            }else{
+            $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)->get();     
             }
-            $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)
-            ->whereNotIn('id',$away_Player_Array)->get();
-        }else{
-        $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)->get();     
-        }
         return view($this->folderView.'match_log.monitor_match',compact('selected_match','home_players','away_players','home_replacement_players',
-            'away_replacement_players'));
+            'away_replacement_players','monitor_clubArray'));
     }   
     public function gwla_matches($id)
     {

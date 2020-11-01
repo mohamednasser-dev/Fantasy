@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class User_club extends Model
 {
 	  protected $fillable = [
-        'user_id', 'club_id'
+        'user_id', 'club_id','type'
     ];
     
      public function getClub()

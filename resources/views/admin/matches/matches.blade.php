@@ -80,34 +80,44 @@
                                             <a class='btn btn-success btn-circle' href=" {{url('matches/'.$match->gwla_id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/edit')}}">
                                             <i class="fa fa-edit"></i>
                                             </a>
-                                                <form method="get" id='delete-form-{{ $match->id }}' action="{{url('matches/'.$match->gwla_id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/delete')}}" style='display: none;'>
-                                                {{csrf_field()}}
-                                                <!-- {{method_field('delete')}} -->
-                                                </form>
-                                                <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
-                                                    {
-                                                    event.preventDefault();
-                                                    document.getElementById('delete-form-{{ $match->id }}').submit();
-                                                    }else {
-                                                    event.preventDefault();
-                                                    }"
-                                                        class='btn btn-danger btn-circle' href=" "><i
-                                                        class="fa fa-trash" aria-hidden='true'>
-                                                    </i>
-                                                </button>
-                                                @endif
-                                                @if(Auth::user()->type == "editor" )
-                                                    @foreach($clubArray as $club_id )
-                                                        @if($club_id == $match->home_club_id || $club_id == $match->away_club_id)
-                                                           <a class='btn waves-effect waves-light btn-secondary' href=" {{url('match/'.$match->id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/view_match_formation')}}">
-                                                              {{trans('admin.match_formation')}}
-                                                           </a>
-                                                           <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_match/'.$match->id)}}">
-                                                              {{trans('admin.monitor_match')}}
-                                                           </a>
-                                                         @endif
-                                                    @endforeach
-                                                @endif              
+                                            <form method="get" id='delete-form-{{ $match->id }}' action="{{url('matches/'.$match->gwla_id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/delete')}}" style='display: none;'>
+                                            {{csrf_field()}}
+                                            <!-- {{method_field('delete')}} -->
+                                            </form>
+                                            <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
+                                                {
+                                                event.preventDefault();
+                                                document.getElementById('delete-form-{{ $match->id }}').submit();
+                                                }else {
+                                                event.preventDefault();
+                                                }"
+                                                    class='btn btn-danger btn-circle' href=" "><i
+                                                    class="fa fa-trash" aria-hidden='true'>
+                                                </i>
+                                            </button>
+                                        @endif
+                                        @if(Auth::user()->type == "editor" )
+                                            @if(count($editor_clubs)>0)
+                                                @foreach($editor_clubArray as $club_id )
+                                                    @if($club_id == $match->home_club_id || $club_id == $match->away_club_id)
+                                                       <a class='btn waves-effect waves-light btn-secondary' href=" {{url('match/'.$match->id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/view_match_formation')}}">
+                                                          {{trans('admin.match_formation')}}
+                                                       </a>
+                                                     @endif
+                                                @endforeach
+                                            @endif       
+                                        @endif       
+                                        @if(Auth::user()->type == "monitor" )
+                                            @if(count($monitor_clubs)>0)
+                                               @foreach($monitor_clubArray as $club_id )
+                                                    @if($club_id == $match->home_club_id || $club_id == $match->away_club_id)
+                                                       <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_match/'.$match->id)}}">
+                                                         {{trans('admin.monitor_match')}}
+                                                       </a>
+                                                     @endif
+                                                @endforeach
+                                            @endif    
+                                        @endif    
                                     </td>
                                 </tr>
                             @endforeach
