@@ -31,7 +31,7 @@
                                                 @foreach($home_players as $player)
                                                     <div class="row">
                                                         <div class="col-md-1">
-                                                            {!! Form::checkbox('home_player_id',$player->player_id,false,['class'=>'form-control']) !!}
+                                                            {!! Form::checkbox('home_player_id',$player->player_id,false,['class'=>'form-control','data-player'=>$player->player_id,'id'=>'selected_player']) !!}
                                                         </div>
                                                         <div class="col-md-8">   
                                                             {!! Form::label('player_name',$player->getPlayer->player_name,false,['class'=>'form-control']) !!}
@@ -185,14 +185,18 @@
                                 <div class="col-md-8">
                                      <div class="form-group row">
                                         <div class="col-md-12">
-                                            {{ Form::select('event_id',App\Event::pluck('key','id'),null
-                                          ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
-
+                                            {{ Form::open( ['url' => ['club_formations/store'],'method'=>'post' ,'id'=>'match_event_form'])}}
+                                                {{ csrf_field() }}
+                                                {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
+                                                {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txtPlayer" ]) }}
+                                                {{ Form::select('event_id',App\Event::pluck('key','id'),null
+                                              ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                     <button class="btn btn-info btn-min-width mr-1 mb-1" style="width: 90px;">{{trans('admin.done')}}</button>
+                                        {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
+                                    {{ Form::close() }}
                                 </div>
                             </div>
                         </div>
@@ -202,3 +206,34 @@
         </div>
     </div>
 @endsection
+@section('scripts')
+    <script>
+        var player_id ;
+        $(document).on('click', '#selected_player', function () {
+            player_id = $(this).data('player');
+            $("#txtPlayer").val(player_id);
+              console.log(player_id);
+           
+        });
+        $('#match_event_form').submit(function (e) {
+            e.preventDefault();
+            // console.log($('#match_event_form').serialize());
+            $.ajax({
+                url: "{{url('monitor_match/store')}}",
+                type:'POST',
+                data: {inputs: $('#match_event_form').serialize(),"_token": "{{ csrf_token() }}"},
+                success: function (data) {
+                    // el.parent().parent().html(data);
+                    if(data.status){
+                            toastr.success(data.msg);
+                        }else{
+                            toastr.error(data.msg);
+                        }
+                }
+            })
+        });
+    </script>
+@endsection
+
+
+

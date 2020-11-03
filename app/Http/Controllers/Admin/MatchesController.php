@@ -11,7 +11,7 @@ use App\User;
 use App\Player;
 use App\User_club;
 use App\Club_formation;
-
+use App\MatchEvent;
 use Illuminate\Database\QueryException;
 class MatchesController extends Controller
 {
@@ -149,12 +149,19 @@ class MatchesController extends Controller
         session()->flash('success',trans('admin.addedsuccess'));
         return redirect(url('matches/create'));
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
+     public function store_match_event(Request $request)
+    {
+        parse_str($request->inputs, $data);
+        try
+        {
+            $match_event = MatchEvent::create($data);
+            return response(['status' => true, 'msg' => trans('admin.formationAdded'),'data' => $match_event]);
+        }catch(QueryException $ex)
+         {
+            return response(['status' => false, 'msg' => 'من فضلك اختر الاعب والحدث !!!']);                   
+         }
+    }
     public function show($id)
     {
         //

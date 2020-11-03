@@ -109,12 +109,12 @@
                                         @endif       
                                         @if(Auth::user()->type == "monitor" )
                                             @if(count($monitor_clubs)>0)
-                                               @foreach($monitor_clubArray as $club_id )
+                                                @foreach($monitor_clubArray as $club_id )
                                                     @if($club_id == $match->home_club_id || $club_id == $match->away_club_id)
                                                        <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_match/'.$match->id)}}">
                                                          {{trans('admin.monitor_match')}}
                                                        </a>
-                                                     @endif
+                                                    @endif
                                                 @endforeach
                                             @endif    
                                         @endif    
