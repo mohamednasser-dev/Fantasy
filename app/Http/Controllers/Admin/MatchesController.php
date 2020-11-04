@@ -13,6 +13,9 @@ use App\User_club;
 use App\Club_formation;
 use App\MatchEvent;
 use Illuminate\Database\QueryException;
+use App\Events\MatchEnded;
+
+
 class MatchesController extends Controller
 {
     public $objectName;
@@ -28,72 +31,74 @@ class MatchesController extends Controller
     {
        $editor_clubArray=null;
        $monitor_clubArray=null;
+       $monitor_clubs=null;
        $matches = $this->objectName::paginate(10);
-            if(auth()->user()->type == 'editor')
+        if(auth()->user()->type == 'editor')
+        {
+            $editor_clubs = User_club::where('user_id',auth()->user()->id)->get();
+            $i=0;
+            foreach ($editor_clubs as $user_club) 
             {
-                $editor_clubs = User_club::where('user_id',auth()->user()->id)->get();
-                $i=0;
-                    foreach ($editor_clubs as $user_club) 
-                    {
-                       $editor_clubArray[$i]= $user_club->club_id;
-                       $i++;
-                    }
-                    return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','editor_clubs'));  
+               $editor_clubArray[$i]= $user_club->club_id;
+               $i++;
             }
-            if(auth()->user()->type == 'monitor')
+            return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','editor_clubs'));  
+        }elseif(auth()->user()->type == 'monitor'){
+            $monitor_clubs = User_club::where('user_id',auth()->user()->id)->get();
+            $i_monitor=0;
+            foreach ($monitor_clubs as $user_club) 
             {
-                $monitor_clubs = User_club::where('user_id',auth()->user()->id)->get();
-                $i_monitor=0;
-                    foreach ($monitor_clubs as $user_club) 
-                    {
-                       $monitor_clubArray[$i_monitor]= $user_club->club_id;
-                       $i_monitor++;
-                    }
-                    return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','monitor_clubs'));
+               $monitor_clubArray[$i_monitor]= $user_club->club_id;
+               $i_monitor++;
             }
+            return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','monitor_clubs'));
+        }else{
+            return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','monitor_clubs'));
+        }
     }
     public function monitor_match($match_id)
     {
+        $events = MatchEvent::where('match_id',$match_id)->get();
         $selected_match=Match::where('id',$match_id)->first();
         $home_club =Club::where('id',$selected_match->home_club_id)->first();
         $away_club =Club::where('id',$selected_match->away_club_id)->first();
         $home_players =club_formation::where('club_id',$selected_match->home_club_id)->orderBy('position','ASC')->get();
         $away_players = club_formation::where('club_id',$selected_match->away_club_id)->orderBy('position','ASC')->get();
-                if(auth()->user()->type == 'monitor')
+        if(auth()->user()->type == 'monitor')
+        {
+            $monitor_clubs = User_club::where('user_id',auth()->user()->id)->get();
+            $i_monitor=0;
+                foreach ($monitor_clubs as $user_club) 
                 {
-                    $monitor_clubs = User_club::where('user_id',auth()->user()->id)->get();
-                    $i_monitor=0;
-                        foreach ($monitor_clubs as $user_club) 
-                        {
-                           $monitor_clubArray[$i_monitor]= $user_club->club_id;
-                           $i_monitor++;
-                        }
+                   $monitor_clubArray[$i_monitor]= $user_club->club_id;
+                   $i_monitor++;
                 }
-            if(count($home_players)!=0){
-                 $home_Player_Array;
-                 $i=0;
-                foreach ($home_players as $player) {
-                   $home_Player_Array[$i]= $player->player_id;
-                   $i++;
-                }
-                $home_replacement_players = Player::where('club_id',$selected_match->home_club_id)
-                ->whereNotIn('id',$home_Player_Array)->get();
-            }else{
+        }
+        if(count($home_players)!=0){
+             $home_Player_Array;
+             $i=0;
+            foreach ($home_players as $player) {
+               $home_Player_Array[$i]= $player->player_id;
+               $i++;
+            }
+            $home_replacement_players = Player::where('club_id',$selected_match->home_club_id)
+            ->whereNotIn('id',$home_Player_Array)->get();
+        }else{
             $home_replacement_players = Player::where('club_id',$selected_match->home_club_id)->get();     
+        }
+        if(count($away_players)!=0){
+             $away_Player_Array;
+             $i=0;
+            foreach ($away_players as $player) {
+               $away_Player_Array[$i]= $player->player_id;
+               $i++;
             }
-            if(count($away_players)!=0){
-                 $away_Player_Array;
-                 $i=0;
-                foreach ($away_players as $player) {
-                   $away_Player_Array[$i]= $player->player_id;
-                   $i++;
-                }
-                $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)
-                ->whereNotIn('id',$away_Player_Array)->get();
-            }else{
+            $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)
+            ->whereNotIn('id',$away_Player_Array)->get();
+        }else{
             $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)->get();     
-            }
-        return view($this->folderView.'match_log.monitor_match',compact('selected_match','home_players','away_players','home_replacement_players',
+        }
+        return view($this->folderView.'match_log.monitor_match',compact('events','selected_match','home_players','away_players','home_replacement_players',
             'away_replacement_players','monitor_clubArray'));
     }   
     public function gwla_matches($id)
@@ -156,7 +161,7 @@ class MatchesController extends Controller
         try
         {
             $match_event = MatchEvent::create($data);
-            return response(['status' => true, 'msg' => trans('admin.formationAdded'),'data' => $match_event]);
+            return response(['status' => true, 'msg' => trans('admin.Event_success'),'data' => $match_event]);
         }catch(QueryException $ex)
          {
             return response(['status' => false, 'msg' => 'من فضلك اختر الاعب والحدث !!!']);                   
@@ -224,6 +229,13 @@ public function view_match_events()
         session()->flash('success', trans('admin.deleteSuccess'));
         return redirect(url('matches'));
     }
+    public function match_destroy(Request $request)
+    {
+        $match = Match::where('id',$request->match_id)->first();
+        $match->status = 'ended';
+        $match->save();
+        event(new MatchEnded($match));
+    }    
      // in create Match page
      // For Get Gawalat Options
      public function GetGwalat($id)

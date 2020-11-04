@@ -36,6 +36,7 @@ Route::post('getPlayerInfo_away', 'Editor\ClubFormationsController@getPlayerInfo
 Route::group(['middleware' => ['auth','monitor']], function () {
 	Route::get('monitor_match/{match_id}', 'Admin\MatchesController@monitor_match');
 	Route::post('monitor_match/store', 'Admin\MatchesController@store_match_event');
+	Route::post('monitor_match/destroy', 'Admin\MatchesController@match_destroy');
 });
 
 Route::group(['middleware' => ['auth','admin']], function () {

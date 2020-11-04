@@ -84,6 +84,7 @@ return [
     'basic' => 'اساسى',
     'replacement' => 'البدلاء',
     'match_ended' => 'انتهت المباراه',
+    'Event_success' => 'تم إضافة الحدث بنجاح',
     'done' => 'تنفيذ',
     
     
