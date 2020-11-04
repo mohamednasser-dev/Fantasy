@@ -46,14 +46,15 @@ class usersController extends Controller
     {
              $data = $this->validate(\request(),
             [
-                    'type' => 'required',
                     'name' => 'required|unique:users',
                     'email' => 'required|unique:users',
                     'password' => 'required|min:6|confirmed',
                     'password_confirmation' => 'required|min:6', 
                 ]);
+
             if($request['password'] != null  && $request['password_confirmation'] != null ){
                 $data['password'] = bcrypt(request('password'));
+                $data['type'] = 'monitor';
                 $user = User::create($data);
                 $user->save();
                 session()->flash('success', trans('admin.addedsuccess'));
@@ -97,6 +98,7 @@ class usersController extends Controller
             $user_id = $input['user_id'];
             $selected_user = User::where('id',$user_id)->first();
           // for saving selected monitor`s clubs ....
+            // dd($input['selectedClubs']);
            foreach ($input['selectedClubs'] as $club_id) 
            {
               $monitor_club_data['user_id']=$user_id ;

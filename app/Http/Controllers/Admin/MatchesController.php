@@ -29,21 +29,12 @@ class MatchesController extends Controller
     // this function to  select all Coaches
     public function index()
     {
-       $editor_clubArray=null;
        $monitor_clubArray=null;
        $monitor_clubs=null;
        $matches = $this->objectName::paginate(10);
-        if(auth()->user()->type == 'editor')
+        if(auth()->user()->type == 'monitor')
         {
-            $editor_clubs = User_club::where('user_id',auth()->user()->id)->get();
-            $i=0;
-            foreach ($editor_clubs as $user_club) 
-            {
-               $editor_clubArray[$i]= $user_club->club_id;
-               $i++;
-            }
-            return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','editor_clubs'));  
-        }elseif(auth()->user()->type == 'monitor'){
+       // dd(auth()->user()->id);
             $monitor_clubs = User_club::where('user_id',auth()->user()->id)->get();
             $i_monitor=0;
             foreach ($monitor_clubs as $user_club) 
@@ -51,9 +42,10 @@ class MatchesController extends Controller
                $monitor_clubArray[$i_monitor]= $user_club->club_id;
                $i_monitor++;
             }
-            return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','monitor_clubs'));
+            // dd($monitor_clubArray);
+            return view($this->folderView.'matches',\compact('matches','monitor_clubArray','monitor_clubs'));
         }else{
-            return view($this->folderView.'matches',\compact('matches','editor_clubArray','monitor_clubArray','monitor_clubs'));
+            return view($this->folderView.'matches',\compact('matches','monitor_clubArray','monitor_clubs'));
         }
     }
     public function monitor_match($match_id)

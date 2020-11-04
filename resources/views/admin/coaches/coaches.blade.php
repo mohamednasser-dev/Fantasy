@@ -18,7 +18,7 @@
 
                                         <div class="row">
                
-                    <div class="col-lg-12 col-xlg-9">
+                    <div class="col-lg-12">
                         <div class="card">
                                 <div class="card-header">
                             <a href="{{url('coaches/create')}} "

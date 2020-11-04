@@ -20,17 +20,6 @@
                   <hr>          
                     {{ Form::open( ['url' => ['editors/store'],'method'=>'post' , 'class'=>'form'] ) }}
                    {{ csrf_field() }}
-                                  <div class="form-group row">
-                                      <label for="example-month-input" class="col-md-2 col-form-label">{{trans('admin.secialization')}}</label>
-                                        <div class="col-md-10">
-                                          {{Form::select('type',
-                                              ['editor' => trans('admin.editor'),
-                                               'monitor' => trans('admin.monitor')
-                                               ],
-                                               null
-                                               ,["class"=>"custom-select col-12" ,"required",'placeholder'=>trans('admin.choose_type') ])}}
-                                        </div>
-                                  </div>
                                   <div class="form-group m-t-40 row">
                                       <label for="example-text-input" class="col-md-2 col-form-label">{{trans('admin.name')}}</label>
                                         <div class="col-md-10">

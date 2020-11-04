@@ -23,6 +23,7 @@ class ClubFormationsController extends Controller
     // this function to  select all Coaches
     public function index($match_id,$home_id,$away_id)
     {
+        $editor_clubArray=null;
         $match_data = Match::where('id', $match_id)->first();
         $home_coach = coach::where('club_id', $home_id)->first();
         $away_coach = coach::where('club_id', $away_id)->first();
@@ -56,7 +57,7 @@ class ClubFormationsController extends Controller
                    $away_players =Player::where('club_id',$away_id)->pluck('player_name','id');
                 }
                 // to filter user lubs to view his club formation
-                if(auth()->user()->type == 'editor')
+                if(auth()->user()->type == 'monitor')
                 {
                     $editor_clubs = User_club::where('user_id',auth()->user()->id)->get();
                     $i=0;

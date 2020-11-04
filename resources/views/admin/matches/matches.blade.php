@@ -96,20 +96,22 @@
                                                 </i>
                                             </button>
                                         @endif
-                                        @if(Auth::user()->type == "editor" )
-                                            @if(in_array($match->home_club_id,$editor_clubArray) || in_array($match->away_club_id,$editor_clubArray))
-                                                <a class='btn waves-effect waves-light btn-secondary' href="{{url('match/'.$match->id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/view_match_formation')}}">
-                                                    {{trans('admin.match_formation')}}
-                                                </a>
-                                            @endif       
-                                        @endif     
-                                        @if(Auth::user()->type == "monitor" )
-                                            @if(in_array($match->home_club_id,$monitor_clubArray) || in_array($match->away_club_id,$monitor_clubArray))
-                                                <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_match/'.$match->id)}}">
-                                                    {{trans('admin.monitor_match')}}
-                                                </a>
-                                            @endif       
-                                        @endif    
+                                        @if($match->status != 'ended')  
+                                            @if(Auth::user()->type == "monitor" )
+                                                @if(in_array($match->home_club_id,$monitor_clubArray) || in_array($match->away_club_id,$monitor_clubArray))
+                                                    @if($match->status == 'not started')
+                                                    <a class='btn waves-effect waves-light btn-secondary' href="{{url('match/'.$match->id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/view_match_formation')}}">
+                                                        {{trans('admin.match_formation')}}
+                                                    </a>
+                                                    @endif
+                                                    @if($match->status == 'started')
+                                                    <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_match/'.$match->id)}}">
+                                                        {{trans('admin.monitor_match')}}
+                                                    </a>
+                                                    @endif       
+                                                @endif       
+                                            @endif  
+                                        @endif  
                                     </td>
                                 </tr>
                             @endforeach

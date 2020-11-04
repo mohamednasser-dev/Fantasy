@@ -24,19 +24,19 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('matches', 'Admin\MatchesController@index');
 
-Route::group(['middleware' => ['auth','editor']], function () {
-Route::get('match/{match_id}/{home_id}/{away_id}/view_match_formation', 'Editor\ClubFormationsController@index');
-Route::post('club_formations/store', 'Editor\ClubFormationsController@store');
-Route::post('club_formations/store_away', 'Editor\ClubFormationsController@store_away');
-Route::get('club_formations/{id}/delete', 'Editor\ClubFormationsController@destroy');
-Route::post('getPlayerInfo', 'Editor\ClubFormationsController@getPlayerInfo');
-Route::post('getPlayerInfo_away', 'Editor\ClubFormationsController@getPlayerInfo_away');
-});
 
 Route::group(['middleware' => ['auth','monitor']], function () {
 	Route::get('monitor_match/{match_id}', 'Admin\MatchesController@monitor_match');
 	Route::post('monitor_match/store', 'Admin\MatchesController@store_match_event');
 	Route::post('monitor_match/destroy', 'Admin\MatchesController@match_destroy');
+
+	//match formation
+	Route::get('match/{match_id}/{home_id}/{away_id}/view_match_formation', 'Editor\ClubFormationsController@index');
+	Route::post('club_formations/store', 'Editor\ClubFormationsController@store');
+	Route::post('club_formations/store_away', 'Editor\ClubFormationsController@store_away');
+	Route::get('club_formations/{id}/delete', 'Editor\ClubFormationsController@destroy');
+	Route::post('getPlayerInfo', 'Editor\ClubFormationsController@getPlayerInfo');
+	Route::post('getPlayerInfo_away', 'Editor\ClubFormationsController@getPlayerInfo_away');
 });
 
 Route::group(['middleware' => ['auth','admin']], function () {
