@@ -46,7 +46,7 @@
                                                 @foreach($home_replacement_players as $player)
                                                     <div class="row">
                                                         <div class="col-md-1">
-                                                            {!! Form::checkbox('selected_players[]',$player->id,false,['class'=>'form-control']) !!}
+                                                            {!! Form::checkbox('selected_players[]',$player->id,false,['class'=>'form-control','data-player'=>$player->player_id,'id'=>'selected_player']) !!}
                                                         </div>
                                                         <div class="col-md-8">   
                                                             {!! Form::label('player_name',$player->player_name,false,['class'=>'form-control']) !!}
@@ -77,7 +77,7 @@
                                                
                                                      <div class="row">
                                                         <div class="col-md-1">
-                                                            {!! Form::checkbox('away_player_id',$player->player_id,false,['class'=>'form-control']) !!}
+                                                            {!! Form::checkbox('away_player_id',$player->player_id,false,['class'=>'form-control','data-player'=>$player->player_id,'id'=>'selected_player']) !!}
                                                         </div>
                                                         <div class="col-md-8"> 
                                                              <a>
@@ -94,7 +94,7 @@
                                                 @foreach($away_replacement_players as $player)
                                                     <div class="row">
                                                         <div class="col-md-1">
-                                                            {!! Form::checkbox('selected_players[]',$player->id,false,['class'=>'form-control']) !!}
+                                                            {!! Form::checkbox('selected_players[]',$player->id,false,['class'=>'form-control','data-player'=>$player->player_id,'id'=>'selected_player']) !!}
                                                         </div>
                                                         <div class="col-md-8">   
                                                             {!! Form::label('player_name',$player->player_name,false,['class'=>'form-control']) !!}
