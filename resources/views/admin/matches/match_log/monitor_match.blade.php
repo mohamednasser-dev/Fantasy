@@ -29,16 +29,12 @@
                                         <div class="card-block">
                                             <h5>{{trans('admin.basic')}}</h5>
                                                 @foreach($home_players as $player)
-                                                    <div class="row">
-                                                        <div class="col-md-1">
-                                                            {!! Form::checkbox('home_player_id',$player->player_id,false,['class'=>'form-control','data-player'=>$player->player_id,'id'=>'selected_player']) !!}
-                                                        </div>
-                                                        <div class="col-md-8">   
-                                                            {!! Form::label('player_name',$player->getPlayer->player_name,false,['class'=>'form-control']) !!}
-                                                        </div>
-                                                         <div class="col-md-2">   
-                                                            {!! Form::label('position',$player->position,false,['class'=>'form-control']) !!}
-                                                        </div>
+                                                    <div class="radio-list">
+                                                        <label class="custom-control custom-radio">
+                                                            <input id="radio3" name="home_player_id" data-player="{{$player->player_id}}" type="radio" checked="" class="custom-control-input">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">{{$player->getPlayer->player_name}}</span>
+                                                        </label>
                                                     </div>
                                                 @endforeach
                                                 <hr>
