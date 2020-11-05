@@ -20,9 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('lat')->nullable();
             $table->string('gender')->nullable();
             $table->string('phone')->nullable();
+            $table->bigInteger('points')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('api_token');
             $table->enum('type',['admin','user','monitor','editor'])->default('user');
             $table->rememberToken();
             $table->timestamps();
