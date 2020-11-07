@@ -31,6 +31,7 @@
                             <tr>
                                 <th class="text-lg-center">{{trans('admin.user_name')}}</th>
                                 <th class="text-lg-center">{{trans('admin.email')}}</th>
+                                <th class="text-lg-center">{{trans('admin.type')}}</th>
                                 <th class="text-lg-center">{{trans('admin.actions')}}</th>
                             </tr>
                         </thead>
@@ -39,6 +40,13 @@
                                 <tr>
                                     <td class="text-lg-center">{{$user->name}}</td>
                                     <td class="text-lg-center">{{$user->email}}</td>
+                                    <td class="text-lg-center">
+                                        @if($user->type == 'editor')
+                                        {{trans('admin.editor')}}
+                                        @elseif($user->type == 'monitor')
+                                        {{trans('admin.monitor')}}
+                                        @endif
+                                    </td>
                                     <td class="text-lg-center">
                                         <form method="get" id='delete-form-{{ $user->id }}'
                                               action="{{url('users/'.$user->id.'/delete')}}"
@@ -57,9 +65,11 @@
                                                 class="fa fa-trash" aria-hidden='true'>
                                             </i>
                                         </button>
+                                        @if($user->type == 'monitor')
                                             <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_Clubs/'.$user->id)}}">
                                                         {{trans('admin.monitor_clubs')}}
                                             </a>   
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

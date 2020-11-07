@@ -18,35 +18,46 @@
               <div class="card-body">
                   <h4 class="card-title">{{trans('admin.editor_info')}}</h4>
                   <hr>          
-                    {{ Form::open( ['url' => ['editors/store'],'method'=>'post' , 'class'=>'form'] ) }}
-                   {{ csrf_field() }}
-                                  <div class="form-group m-t-40 row">
-                                      <label for="example-text-input" class="col-md-2 col-form-label">{{trans('admin.name')}}</label>
-                                        <div class="col-md-10">
-                                          {{ Form::text('name',null,["class"=>"form-control" ,"required"]) }}
-                                        </div>
-                                  </div>
-                                  <div class="form-group m-t-40 row">
-                                      <label for="example-text-input" class="col-md-2 col-form-label">{{trans('admin.email')}}</label>
-                                        <div class="col-md-10">
-                                          {{ Form::email('email',null,["class"=>"form-control" ,"required"]) }}
-                                        </div>
-                                  </div>
-                                  <div class="form-group row">
-                                      <label for="example-password-input" class="col-md-2 col-form-label">{{trans('admin.password')}}</label>
-                                        <div class="col-md-10">
-                                          <input class="form-control" type="password" name="password"  id="example-password-input" required>
-                                        </div>
-                                  </div>
-                                  <div class="form-group row">
-                                    <label for="example-password-input2" class="col-md-2 col-form-label">{{trans('admin.password_confirmation')}}</label>
-                                      <div class="col-md-10">
-                                          <input class="form-control" type="password" name="password_confirmation"  id="example-password-input2" required>
-                                      </div>
-                                  </div>
-                                  <div class="center">
-                                          {{ Form::submit( trans('admin.public_Add') ,['class'=>'btn btn-info','style'=>'margin:10px']) }}
-                                  </div>
+                  {{ Form::open( ['url' => ['editors/store'],'method'=>'post' , 'class'=>'form'] ) }}
+                  {{ csrf_field() }}
+                  <div class="form-group row">
+                      <label for="example-month-input" class="col-md-2 col-form-label">{{trans('admin.type')}}</label>
+                      <div class="col-md-10">
+                          {{Form::select('type',
+                              ['monitor' => trans('admin.monitor'),
+                               'editor' => trans('admin.editor')
+                               ],
+                               null
+                               ,["class"=>"custom-select col-12" ,"required",'placeholder'=>trans('admin.choose_type') ])}}
+                      </div>
+                  </div>
+                  <div class="form-group m-t-40 row">
+                      <label for="example-text-input" class="col-md-2 col-form-label">{{trans('admin.name')}}</label>
+                        <div class="col-md-10">
+                          {{ Form::text('name',null,["class"=>"form-control" ,"required"]) }}
+                        </div>
+                  </div>
+                  <div class="form-group m-t-40 row">
+                      <label for="example-text-input" class="col-md-2 col-form-label">{{trans('admin.email')}}</label>
+                        <div class="col-md-10">
+                          {{ Form::email('email',null,["class"=>"form-control" ,"required"]) }}
+                        </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="example-password-input" class="col-md-2 col-form-label">{{trans('admin.password')}}</label>
+                        <div class="col-md-10">
+                          <input class="form-control" type="password" name="password"  id="example-password-input" required>
+                        </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="example-password-input2" class="col-md-2 col-form-label">{{trans('admin.password_confirmation')}}</label>
+                      <div class="col-md-10">
+                          <input class="form-control" type="password" name="password_confirmation"  id="example-password-input2" required>
+                      </div>
+                  </div>
+                  <div class="center">
+                          {{ Form::submit( trans('admin.public_Add') ,['class'=>'btn btn-info','style'=>'margin:10px']) }}
+                  </div>
                    {{ Form::close() }}
               </div>
           </div>

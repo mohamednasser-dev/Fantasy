@@ -47,6 +47,7 @@ class usersController extends Controller
              $data = $this->validate(\request(),
             [
                     'name' => 'required|unique:users',
+                    'type' => 'required',
                     'email' => 'required|unique:users',
                     'password' => 'required|min:6|confirmed',
                     'password_confirmation' => 'required|min:6', 
@@ -54,7 +55,6 @@ class usersController extends Controller
 
             if($request['password'] != null  && $request['password_confirmation'] != null ){
                 $data['password'] = bcrypt(request('password'));
-                $data['type'] = 'monitor';
                 $user = User::create($data);
                 $user->save();
                 session()->flash('success', trans('admin.addedsuccess'));
