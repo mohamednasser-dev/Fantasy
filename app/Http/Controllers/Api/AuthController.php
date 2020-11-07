@@ -167,7 +167,7 @@ class AuthController extends Controller
             {
                 $top_ten_users =User::select('id','name','points')
                     ->where('type', 'user' )
-                    ->orderBy('points','asc')
+                    ->orderBy('points','desc')
                     ->limit(10)
                     ->get();
                 return $this->sendResponse(200, 'تم اظهار اول 10 مستخدمين بواسطه النقاط', $top_ten_users);
