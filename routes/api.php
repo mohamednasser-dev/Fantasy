@@ -22,6 +22,9 @@ Route::post('rank_user', 'Api\AuthController@rank_user');
 //main home page 
 Route::post('today_matches', 'Api\MatchesController@today_matches');
 
+//matches
+Route::post('match_by_date', 'Api\MatchesController@match_by_date');
+
 // Squad Routes
 Route::post('store_squad', 'Api\SquadsController@store_squad');
 Route::post('store_squad_player', 'Api\SquadsController@store_squad_player');

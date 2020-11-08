@@ -39,39 +39,64 @@ class MatchesController extends Controller
         }
     }
 
-    public function today_matches(Request $request)
-    {
+    public function today_matches(Request $request){
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'api_token' => 'required',
             ]);
-            if (!is_array($validate)) {
+        if (!is_array($validate)) {
 
             $api_token = $request->input('api_token');
             $user = User::where('api_token',$api_token)->first();
 
             if($user != null){
-  
-            // to get today`s matches
-            $mytime = Carbon::now();
-            $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d');
-      
-            $matches = Match::where('date', $today)->get();
-            
-            // this line for check numbers of matches if exists
-           if(count($matches)>0){
-            return $this->sendResponse(200, 'تم اظهار مباريات اليوم ',  $matches);
+                // to get today`s matches
+                $mytime = Carbon::now();
+                $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d');
+          
+                $matches = Match::where('date', $today)->get();
+                
+                // this line for check numbers of matches if exists
+                if(count($matches)>0){
+                    return $this->sendResponse(200, 'تم اظهار مباريات اليوم ',  $matches);
 
-           }else{
-            return $this->sendResponse(403, 'لا يوجد مباريات اليوم',null);
-           }
-        }else{
-            return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                }else{
+                    return $this->sendResponse(403, 'لا يوجد مباريات اليوم',null);
+                }
+            }else{
+                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+            }
+        }else {
+            return $this->sendResponse(403, $validate, null);
         }
-    }else {
-        return $this->sendResponse(403, $validate, null);
+    } 
+    public function match_by_date(Request $request){
+        $input = $request->all();
+        $validate = $this->makeValidate($input,[
+            'api_token' => 'required',
+            'date' => 'required|date',
+            ]);
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                // to get  matches by selected date
+                $matches = Match::where('date', $request->input('date'))
+                ->with('getHomeclub')
+                ->with('getAwayclub')
+                ->get();
+                // this line for check numbers of matches if exists
+                if(count($matches)>0){
+                    return $this->sendResponse(200, 'تم اظهار مباريات اليوم ',  $matches);
+                }else{
+                    return $this->sendResponse(403, 'لا يوجد مباريات اليوم',null);
+                }
+            }else{
+                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+            }
+        }else {
+            return $this->sendResponse(403, $validate, null);
+        }
     }
-}
-
 }
 
