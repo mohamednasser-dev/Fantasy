@@ -18,7 +18,7 @@
               <div class="card-body">
                   <h4 class="card-title">{{trans('admin.editor_info')}}</h4>
                   <hr>          
-                  {{ Form::open( ['url' => ['editors/store'],'method'=>'post' , 'class'=>'form'] ) }}
+                  {{ Form::open( ['url'  => ['editors/store'],'method'=>'post' , 'class'=>'form'] ) }}
                   {{ csrf_field() }}
                   <div class="form-group row">
                       <label for="example-month-input" class="col-md-2 col-form-label">{{trans('admin.type')}}</label>
