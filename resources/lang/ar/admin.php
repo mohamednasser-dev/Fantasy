@@ -86,6 +86,7 @@ return [
     'match_ended' => 'انتهت المباراه',
     'Event_success' => 'تم إضافة الحدث بنجاح',
     'done' => 'تنفيذ',
+    'match_events' => 'احداث المباراه',
 
     //Categories
     'add_new_cat' => 'اضافة تصنيف جديد',

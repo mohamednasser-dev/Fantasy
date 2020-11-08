@@ -15,7 +15,6 @@
 
     <!-- /.card-header -->
    <div class="row">
-               
                     <div class="col-lg-12">
                         <div class="card">
                                 <div class="card-header">
@@ -32,7 +31,7 @@
                                
 
                                    <!-- Start home table -->
-                             
+                             <div class="table-responsive">
                                     <table id="myTable" class="table full-color-table full-primary-table">
                                         <thead>
                                         <tr>
@@ -85,6 +84,7 @@
                                         </tbody>
                                     </table>
                                 
+                            </div>
                             </div>
                         </div>
                     </div>

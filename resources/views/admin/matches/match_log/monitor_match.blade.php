@@ -43,13 +43,35 @@
                                                 @foreach($home_replacement_players as $player)
                                                     <div class="radio-list">
                                                         <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="home_player_id" data-player="{{$player->player_id}}" type="radio" class="custom-control-input">
+                                                            <input id="radio3" name="home_player_id" data-player="{{$player->id}}" type="radio"  class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">{{$player->player_name}} </span>
                                                             <small style="position: absolute;left: 0;color: red;">{{$player->center_name}}</small>
                                                         </label>
                                                     </div>
                                                 @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            {{ Form::open( [null,'method'=>'post' ,'id'=>'match_event_form'])}}
+                                                        {{ csrf_field() }}
+                                                        {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
+                                                        {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txtPlayer" ]) }}
+                                                        {{ Form::select('event_id',$all_events,null
+                                                      ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-actions center">
+                                                {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
+                                                {{ Form::close() }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +92,7 @@
                                                 @foreach($away_players as $player)
                                                     <div class="radio-list">
                                                         <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="home_player_id" data-player="{{$player->player_id}}" type="radio"  class="custom-control-input">
+                                                            <input id="radio3" name="away_player_id" data-player="{{$player->player_id}}" type="radio"  class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">{{$player->getPlayer->player_name}}</span>
                                                             <small style="position: absolute;left: 0;color: red;">{{$player->getPlayer->center_name}}</small>
@@ -82,13 +104,35 @@
                                                 @foreach($away_replacement_players as $player)
                                                     <div class="radio-list">
                                                         <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="home_player_id" data-player="{{$player->player_id}}" type="radio" class="custom-control-input">
+                                                            <input id="radio3" name="away_player_id" data-player="{{$player->id}}" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">{{$player->player_name}} </span>
                                                             <small style="position: absolute;left: 0;color: red;">{{$player->center_name}}</small>
                                                         </label>
                                                     </div>
                                                 @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            {{ Form::open( [null,'method'=>'post' ,'id'=>'match_event_form2'])}}
+                                                        {{ csrf_field() }}
+                                                        {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
+                                                        {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txtPlayer2" ]) }}
+                                                        {{ Form::select('event_id',$all_events,null
+                                                      ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-actions center">
+                                                {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
+                                                {{ Form::close() }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +144,7 @@
                      <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div>
+                                <div style="padding-bottom: 20px;">
                                         <a href="javascript:void(0)">
                                             <img src="{{ url($selected_match->getHomeclub->image) }}" style="width: 55px;" alt="user-img" class="img-circle"> 
                                             <span>{{$selected_match->getHomeclub->club_name}}</span>
@@ -113,7 +157,7 @@
                                             <img src="{{ url($selected_match->getAwayclub->image) }}" style="width: 55px;" alt="user-img" class="img-circle"> 
                                         </a>
                                 </div>  
-                                <div style="margin-right: 330px;">
+                                <div style="margin-right: 100px;">
                                     {{ Form::open( ['url' => ['monitor_match/destroy'],'method'=>'post' ,'id'=>'match_event_end'])}}
                                         {{ csrf_field() }}
                                         {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
@@ -124,7 +168,8 @@
                         </div>
                     </div>
                     <div class="card " >
-                        <div class="message-scroll">
+                        <h4 style="margin-right: 20px;margin-top: 20px;">{{trans('admin.match_events')}}</h4>
+                        <div class="message-scroll" style="height: 400px;">
                             <div class="card-body">
                                 <div class="card shadow-none">
                                     <div class="inbox-center table-responsive">
@@ -163,28 +208,6 @@
                         </div>
                     </div>
                     <!-- Begin action panel  -->
-                    <div class="card" style="margin-top: -18px;">
-                        <div class="card-body">
-                            <div class="row" style="margin-right: 75px;">
-                                <div class="col-md-8">
-                                     <div class="form-group row">
-                                        <div class="col-md-12">
-                                            {{ Form::open( ['url' => ['club_formations/store'],'method'=>'post' ,'id'=>'match_event_form'])}}
-                                                {{ csrf_field() }}
-                                                {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
-                                                {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txtPlayer" ]) }}
-                                                {{ Form::select('event_id',$all_events,null
-                                              ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                        {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
-                                    {{ Form::close() }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
         </div>
@@ -198,12 +221,33 @@
             $("#txtPlayer").val(player_id);
               console.log(player_id);
         });
+        $(document).on('click', 'input[name="away_player_id"]', function () {
+            player_id = $(this).data('player');
+            $("#txtPlayer2").val(player_id);
+              console.log(player_id);
+        });
         $('#match_event_form').submit(function (e) {
             e.preventDefault();
             $.ajax({
                 url: "{{url('monitor_match/store')}}",
                 type:'POST',
                 data: {inputs: $('#match_event_form').serialize(),"_token": "{{ csrf_token() }}"},
+                success: function (data) {
+                    // el.parent().parent().html(data);
+                    if(data.status){
+                        location.reload();
+                    }else{
+                        toastr.error(data.msg);
+                    }
+                }
+            })
+        });
+        $('#match_event_form2').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{url('monitor_match/store')}}",
+                type:'POST',
+                data: {inputs: $('#match_event_form2').serialize(),"_token": "{{ csrf_token() }}"},
                 success: function (data) {
                     // el.parent().parent().html(data);
                     if(data.status){

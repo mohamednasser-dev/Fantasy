@@ -26,55 +26,57 @@
                 </div>
                 <div class="card-body">
                        <!-- Start home table -->
-                    <table id="myTable" class="table full-color-table full-primary-table">
-                        <thead>
-                            <tr>
-                                <th class="text-lg-center">{{trans('admin.user_name')}}</th>
-                                <th class="text-lg-center">{{trans('admin.email')}}</th>
-                                <th class="text-lg-center">{{trans('admin.type')}}</th>
-                                <th class="text-lg-center">{{trans('admin.actions')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($users as $user)
+                    <div class="table-responsive">
+                        <table id="myTable" class="table full-color-table full-primary-table">
+                            <thead>
                                 <tr>
-                                    <td class="text-lg-center">{{$user->name}}</td>
-                                    <td class="text-lg-center">{{$user->email}}</td>
-                                    <td class="text-lg-center">
-                                        @if($user->type == 'editor')
-                                        {{trans('admin.editor')}}
-                                        @elseif($user->type == 'monitor')
-                                        {{trans('admin.monitor')}}
-                                        @endif
-                                    </td>
-                                    <td class="text-lg-center">
-                                        <form method="get" id='delete-form-{{ $user->id }}'
-                                              action="{{url('users/'.$user->id.'/delete')}}"
-                                              style='display: none;'>
-                                        {{csrf_field()}}
-                                        <!-- {{method_field('delete')}} -->
-                                        </form>
-                                        <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
-                                            {
-                                            event.preventDefault();
-                                            document.getElementById('delete-form-{{ $user->id }}').submit();
-                                            }else {
-                                            event.preventDefault();
-                                            }"
-                                                class='btn btn-danger btn-circle' href=" "><i
-                                                class="fa fa-trash" aria-hidden='true'>
-                                            </i>
-                                        </button>
-                                        @if($user->type == 'monitor')
-                                            <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_Clubs/'.$user->id)}}">
-                                                        {{trans('admin.monitor_clubs')}}
-                                            </a>   
-                                        @endif
-                                    </td>
+                                    <th class="text-lg-center">{{trans('admin.user_name')}}</th>
+                                    <th class="text-lg-center">{{trans('admin.email')}}</th>
+                                    <th class="text-lg-center">{{trans('admin.type')}}</th>
+                                    <th class="text-lg-center">{{trans('admin.actions')}}</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach($users as $user)
+                                    <tr>
+                                        <td class="text-lg-center">{{$user->name}}</td>
+                                        <td class="text-lg-center">{{$user->email}}</td>
+                                        <td class="text-lg-center">
+                                            @if($user->type == 'editor')
+                                            {{trans('admin.editor')}}
+                                            @elseif($user->type == 'monitor')
+                                            {{trans('admin.monitor')}}
+                                            @endif
+                                        </td>
+                                        <td class="text-lg-center">
+                                            <form method="get" id='delete-form-{{ $user->id }}'
+                                                  action="{{url('users/'.$user->id.'/delete')}}"
+                                                  style='display: none;'>
+                                            {{csrf_field()}}
+                                            <!-- {{method_field('delete')}} -->
+                                            </form>
+                                            <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
+                                                {
+                                                event.preventDefault();
+                                                document.getElementById('delete-form-{{ $user->id }}').submit();
+                                                }else {
+                                                event.preventDefault();
+                                                }"
+                                                    class='btn btn-danger btn-circle' href=" "><i
+                                                    class="fa fa-trash" aria-hidden='true'>
+                                                </i>
+                                            </button>
+                                            @if($user->type == 'monitor')
+                                                <a class='btn waves-effect waves-light btn-secondary' href=" {{url('monitor_Clubs/'.$user->id)}}">
+                                                            {{trans('admin.monitor_clubs')}}
+                                                </a>   
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

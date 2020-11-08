@@ -22,39 +22,41 @@
                 </div>
                 <div class="card-body">
                        <!-- Start home table -->
-                    <table id="myTable" class="table full-color-table full-primary-table">
-                        <thead>
-                            <tr>
-                                <th class="text-lg-center">{{trans('admin.team_name')}}</th>
-                                <th class="text-lg-center">{{trans('admin.actions')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($clubs as $club)
+                    <div class="table-responsive">
+                        <table id="myTable" class="table full-color-table full-primary-table">
+                            <thead>
                                 <tr>
-                                    <td class="text-lg-center">{{$club->getClub->club_name}}</td>
-                                    <td class="text-lg-center">
-                                        <form method="get" id='delete-form-{{ $club->club_id }}'
-                                              action="{{url('monitor_clubs/'.$club->club_id.'/delete')}}"
-                                              style='display: none;'>
-                                        {{csrf_field()}}
-                                        <!-- {{method_field('delete')}} -->
-                                        </form>
-                                        <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
-                                            {
-                                            event.preventDefault();
-                                            document.getElementById('delete-form-{{ $club->club_id }}').submit();
-                                            }else {
-                                            event.preventDefault();
-                                            }"
-                                            class='btn btn-danger btn-circle' href="">
-                                            <i class="fa fa-trash" aria-hidden='true'></i>
-                                        </button>
-                                    </td>
+                                    <th class="text-lg-center">{{trans('admin.team_name')}}</th>
+                                    <th class="text-lg-center">{{trans('admin.actions')}}</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach($clubs as $club)
+                                    <tr>
+                                        <td class="text-lg-center">{{$club->getClub->club_name}}</td>
+                                        <td class="text-lg-center">
+                                            <form method="get" id='delete-form-{{ $club->club_id }}'
+                                                  action="{{url('monitor_clubs/'.$club->club_id.'/delete')}}"
+                                                  style='display: none;'>
+                                            {{csrf_field()}}
+                                            <!-- {{method_field('delete')}} -->
+                                            </form>
+                                            <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
+                                                {
+                                                event.preventDefault();
+                                                document.getElementById('delete-form-{{ $club->club_id }}').submit();
+                                                }else {
+                                                event.preventDefault();
+                                                }"
+                                                class='btn btn-danger btn-circle' href="">
+                                                <i class="fa fa-trash" aria-hidden='true'></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                </div>
                 </div>
             </div>
         </div>
