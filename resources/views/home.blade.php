@@ -26,7 +26,6 @@
                             
 
                                    <!-- Start home table -->
-                             <div class="table-responsive">
                              
                                     <table id="myTable" class="table full-color-table full-primary-table">
                                         <thead>
@@ -82,7 +81,6 @@
                                         </tbody>
                                     </table>
                                 
-                            </div>
                             </div>
                         </div>
                     </div>
