@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class AuthController extends Controller
 {
     public $objectName;
@@ -153,8 +154,7 @@ class AuthController extends Controller
                 return $this->sendResponse(403, $validate[0], null);
         }
     }
-    public function select_top_ten(Request $request)
-    {
+    public function select_top_ten(Request $request){
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'api_token' => 'required',        
@@ -178,6 +178,42 @@ class AuthController extends Controller
                 return $this->sendResponse(403, $validate[0], null);
         }
     }
+    public function rank_user(Request $request) {
+
+        $input = $request->all();
+        $validate = $this->makeValidate($input,[
+            'api_token' => 'required',        
+        ]);
+        if (!is_array($validate)) 
+        {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null)
+            {
+                $rank_user = DB::select("SELECT @curRow := @curRow + 1 AS RANK_POS, a.id
+                            FROM users AS a
+                            where type = 'user'
+                            order by points desc ");
+
+                return $this->sendResponse(200, 'تم اظهار اول 10 مستخدمين بواسطه النقاط', $rank_user);
+            }else{
+                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+            }
+        }else {
+                return $this->sendResponse(403, $validate[0], null);
+        }
+
+        return DB::select("SELECT @curRow := @curRow + 1 AS RANK_POS, a.id as uid, a.user, 
+                            IFNULL(b.NUMBER_OF_POSTS, 0) AS NUMBER_OF_POSTS
+                            FROM users AS a
+                            LEFT JOIN (
+                               SELECT uid, count(*) as NUMBER_OF_POSTS
+                               FROM posts
+                               GROUP BY uid
+                            ) AS b ON a.id = b.uid  
+                            JOIN  (SELECT @curRow := 0) r
+                            order by NUMBER_OF_POSTS desc ");
+        }
     public function logout(Request $request)
     {
         $input = $request->all();

@@ -8,16 +8,10 @@ use Validator;
 use App\User;
 use App\Match;
 use Carbon\Carbon;
-
-
-
-
 class MatchesController extends Controller
 {
-    
     public function sendResponse($code = null, $msg = null, $data = null)
     {
-
         return response(
             [
                 'code' => $code,
@@ -25,9 +19,7 @@ class MatchesController extends Controller
                 'data' => $data
             ]
         );
-
     }
-
     public function validationErrorsToString($errArray)
     {
         $valArr = array();
@@ -37,10 +29,8 @@ class MatchesController extends Controller
         }
         return $valArr;
     }
-
     public function makeValidate($inputs, $rules)
     {
-
         $validator = Validator::make($inputs, $rules);
         if ($validator->fails()) {
             return $this->validationErrorsToString($validator->messages());

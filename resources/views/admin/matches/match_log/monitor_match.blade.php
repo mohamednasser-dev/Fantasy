@@ -43,13 +43,36 @@
                                                 @foreach($home_replacement_players as $player)
                                                     <div class="radio-list">
                                                         <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="home_player_id" data-player="{{$player->player_id}}" type="radio" class="custom-control-input">
+                                                            <input id="radio3" name="home_player_id" data-player="{{$player->id}}" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">{{$player->player_name}} </span>
                                                             <small style="position: absolute;left: 0;color: red;">{{$player->center_name}}</small>
                                                         </label>
                                                     </div>
                                                 @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Begin action panel  -->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <div class="col-md-10">
+                                           {{ Form::open( [null,'method'=>'post' ,'id'=>'match_home_event_form'])}}
+                                                        {{ csrf_field() }}
+                                                        {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
+                                                        {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txt_home_Player" ]) }}
+                                                        {{ Form::select('event_id',$all_events,null
+                                                      ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <div class="form-actions center">
+                                                    {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
+                                                    {{ Form::close() }}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +93,7 @@
                                                 @foreach($away_players as $player)
                                                     <div class="radio-list">
                                                         <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="home_player_id" data-player="{{$player->player_id}}" type="radio"  class="custom-control-input">
+                                                            <input id="radio3" name="away_player_id" data-player="{{$player->player_id}}" type="radio"  class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">{{$player->getPlayer->player_name}}</span>
                                                             <small style="position: absolute;left: 0;color: red;">{{$player->getPlayer->center_name}}</small>
@@ -82,13 +105,35 @@
                                                 @foreach($away_replacement_players as $player)
                                                     <div class="radio-list">
                                                         <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="home_player_id" data-player="{{$player->player_id}}" type="radio" class="custom-control-input">
+                                                            <input id="radio3" name="away_player_id" data-player="{{$player->id}}" type="radio" class="custom-control-input">
                                                             <span class="custom-control-indicator"></span>
                                                             <span class="custom-control-description">{{$player->player_name}} </span>
                                                             <small style="position: absolute;left: 0;color: red;">{{$player->center_name}}</small>
                                                         </label>
                                                     </div>
                                                 @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <div class="col-md-10">
+                                           {{ Form::open( [null,'method'=>'post' ,'id'=>'match_away_event_form'])}}
+                                                        {{ csrf_field() }}
+                                                        {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
+                                                        {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txt_away_Player" ]) }}
+                                                        {{ Form::select('event_id',$all_events,null
+                                                      ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <div class="form-actions center">
+                                                    {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
+                                                    {{ Form::close() }}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +185,6 @@
                                                     }elseif($event->Event->key == 'score_goal'){
                                                         $label = 'label-success';
                                                     }
-
                                                 @endphp
                                                     <tr class="unread">
                                                         <td class="hidden-xs-down">{{$event->Player->player_name}}</td>
@@ -162,29 +206,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Begin action panel  -->
-                    <div class="card" style="margin-top: -18px;">
-                        <div class="card-body">
-                            <div class="row" style="margin-right: 75px;">
-                                <div class="col-md-8">
-                                     <div class="form-group row">
-                                        <div class="col-md-12">
-                                            {{ Form::open( ['url' => ['club_formations/store'],'method'=>'post' ,'id'=>'match_event_form'])}}
-                                                {{ csrf_field() }}
-                                                {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
-                                                {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txtPlayer" ]) }}
-                                                {{ Form::select('event_id',$all_events,null
-                                              ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                        {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
-                                    {{ Form::close() }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
         </div>
@@ -195,15 +216,36 @@
         var player_id ;
         $(document).on('click', 'input[name="home_player_id"]', function () {
             player_id = $(this).data('player');
-            $("#txtPlayer").val(player_id);
+            $("#txt_home_Player").val(player_id);
               console.log(player_id);
         });
-        $('#match_event_form').submit(function (e) {
+        $(document).on('click', 'input[name="away_player_id"]', function () {
+            player_id = $(this).data('player');
+            $("#txt_away_Player").val(player_id);
+              console.log(player_id);
+        });
+        $('#match_home_event_form').submit(function (e) {
             e.preventDefault();
             $.ajax({
                 url: "{{url('monitor_match/store')}}",
                 type:'POST',
-                data: {inputs: $('#match_event_form').serialize(),"_token": "{{ csrf_token() }}"},
+                data: {inputs: $('#match_home_event_form').serialize(),"_token": "{{ csrf_token() }}"},
+                success: function (data) {
+                    // el.parent().parent().html(data);
+                    if(data.status){
+                        location.reload();
+                    }else{
+                        toastr.error(data.msg);
+                    }
+                }
+            })
+        });
+        $('#match_away_event_form').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{url('monitor_match/store')}}",
+                type:'POST',
+                data: {inputs: $('#match_away_event_form').serialize(),"_token": "{{ csrf_token() }}"},
                 success: function (data) {
                     // el.parent().parent().html(data);
                     if(data.status){

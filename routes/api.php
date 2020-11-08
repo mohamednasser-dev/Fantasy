@@ -16,6 +16,7 @@ Route::post('register', 'Api\AuthController@store');
 Route::post('update_user_data', 'Api\AuthController@update_user_data');
 Route::post('select_user_data', 'Api\AuthController@select_user_data');
 Route::post('select_top_ten', 'Api\AuthController@select_top_ten');
+Route::post('rank_user', 'Api\AuthController@rank_user');
 
 
 //main home page 
