@@ -66,12 +66,12 @@
                                                         {{ Form::select('event_id',$all_events,null
                                                       ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-12">
-                                                <div class="form-actions center">
-                                                    {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
-                                                    {{ Form::close() }}
-                                                </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-actions center">
+                                                {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
+                                                {{ Form::close() }}
                                             </div>
                                         </div>
                                     </div>
@@ -127,12 +127,12 @@
                                                         {{ Form::select('event_id',$all_events,null
                                                       ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-12">
-                                                <div class="form-actions center">
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <div class="form-actions center">
                                                     {{ Form::button( trans('admin.done') ,['class'=>'btn btn-info btn-min-width mr-1 mb-1','style'=>'width: 90px;','id'=>'save_event_Button','type'=>'submit']) }}
                                                     {{ Form::close() }}
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                                             <img src="{{ url($selected_match->getAwayclub->image) }}" style="width: 55px;" alt="user-img" class="img-circle"> 
                                         </a>
                                 </div>  
-                                <div style="margin-right: 330px;">
+                                <div style="margin-right: 100px;">
                                     {{ Form::open( ['url' => ['monitor_match/destroy'],'method'=>'post' ,'id'=>'match_event_end'])}}
                                         {{ csrf_field() }}
                                         {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
