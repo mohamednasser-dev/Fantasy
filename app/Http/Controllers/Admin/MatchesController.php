@@ -226,7 +226,7 @@ public function view_match_events()
         $match = Match::where('id',$request->match_id)->first();
         //$match->status = 'ended';
         //$match->save();
-        SendPointsToUsers::dispatch($match)->delay(now()->addMinutes(10));;
+        SendPointsToUsers::dispatch($match)->delay(now()->addMinutes(1));;
     }    
      // in create Match page
      // For Get Gawalat Options
