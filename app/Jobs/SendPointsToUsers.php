@@ -9,6 +9,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Match;
+use App\Event;
+use App\Player;
+use App\MatchEvent;
 
 class SendPointsToUsers implements ShouldQueue
 {
@@ -32,7 +35,15 @@ class SendPointsToUsers implements ShouldQueue
      */
     public function handle()
     {
-        //  
-        return $this->match;
+        //
+        $events = MatchEvent::where('match_id',$this->match->id)->get();
+        $clubs  = [$this->match->home_club_id,$this->match->away_club_id];
+        $players= Player::whereIn('club_id',$clubs)->get();
+        dd($players);
+        foreach ($events as $event) {
+            $points = Event::find($event->event_id);
+            dd($points);
+        }
+        return dd($events);
     }
 }
