@@ -19,8 +19,7 @@ class CreateMatchEventsTable extends Migration
             $table->bigInteger('player_id')->unsigned()->nullable();
             $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
 
-            // $table->bigInteger('match_id')->unsigned()->nullable();
-            // $table->foreign('match_id')->references('id')->on('matches')->onDelete('cascade');
+            $table->bigInteger('match_id')->nullable();
 
             $table->bigInteger('event_id')->unsigned()->nullable();
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');

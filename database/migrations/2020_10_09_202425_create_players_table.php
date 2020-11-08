@@ -20,7 +20,6 @@ class CreatePlayersTable extends Migration
             $table->string('center_name');
             $table->string('desc')->nullable();
             $table->string('image');
-
             $table->bigInteger('club_id')->unsigned();
             $table->foreign('club_id')->references('id')->on('clubs')->onDelete('cascade');
             
