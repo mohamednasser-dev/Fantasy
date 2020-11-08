@@ -52,7 +52,7 @@ class MatchesController extends Controller
     public function monitor_match($match_id)
     {
         $events = MatchEvent::where('match_id',$match_id)->get();
-        $all_events = Event::where('opacity','1')->pluck('name','value');
+        $all_events = Event::where('opacity','1')->pluck('name','id');
         $selected_match=Match::where('id',$match_id)->first();
         $home_club =Club::where('id',$selected_match->home_club_id)->first();
         $away_club =Club::where('id',$selected_match->away_club_id)->first();
@@ -100,12 +100,12 @@ class MatchesController extends Controller
         $matches = $this->objectName::where('gwla_id',$id)->paginate(10);
         return view($this->folderView.'matches',\compact('matches'));
     }
-  // to prepar to add new club
+    // to prepar to add new club
     public function create()
     {
         return view($this->folderView.'create');
     }
-// this to add new recourd of club in database
+    // this to add new recourd of club in database
     public function store(Request $request)
     {
         //this two lines for get today date
@@ -151,15 +151,29 @@ class MatchesController extends Controller
     
      public function store_match_event(Request $request)
     {
+        $match_data[] =null;
         parse_str($request->inputs, $data);
         try
         {
             $match_event = MatchEvent::create($data);
+            if($match_event->event_id == 3)
+            {
+                $club_scored = $match_event->Player->club_id;
+                $match = Match::where('id',$match_event->match_id)->first();
+                if($match->home_club_id == $club_scored){
+                    $new_home_score = $match->home_score + 1;
+                    $match_data['home_score'] = $new_home_score;
+                }else if($match->home_club_id == $club_scored){
+                    $new_away_score = $match->away_score + 1;
+                    $match_data['away_score'] = $new_away_score;
+                }
+                $updated_match = Match::where('id',$match_event->match_id)->update($match_data);
+            }
             return response(['status' => true, 'msg' => trans('admin.Event_success'),'data' => $match_event]);
         }catch(QueryException $ex)
-         {
+        {
             return response(['status' => false, 'msg' => 'من فضلك اختر الاعب والحدث !!!']);                   
-         }
+        }
     }
     public function show($id)
     {

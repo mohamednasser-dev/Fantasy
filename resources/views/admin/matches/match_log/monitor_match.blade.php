@@ -200,7 +200,6 @@
         });
         $('#match_event_form').submit(function (e) {
             e.preventDefault();
-            // console.log($('#match_event_form').serialize());
             $.ajax({
                 url: "{{url('monitor_match/store')}}",
                 type:'POST',

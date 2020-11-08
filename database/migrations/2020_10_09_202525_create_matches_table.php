@@ -22,8 +22,8 @@ class CreateMatchesTable extends Migration
             $table->bigInteger('away_club_id')->unsigned();
             $table->time('time');
             $table->date('date');
-            $table->string('home_score')->default('0');
-            $table->string('away_score')->default('0');
+            $table->bigInteger('home_score')->default('0');
+            $table->bigInteger('away_score')->default('0');
             $table->enum('status',['not started','started','ended'])->default('not started');
             $table->bigInteger('stadium_id')->unsigned();
             $table->bigInteger('tour_id')->unsigned();

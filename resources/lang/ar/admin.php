@@ -57,7 +57,7 @@ return [
     
     
 
-//home page
+    //home page
     'today_matches' => 'مباريات اليوم',
     'logout' => 'تسجيل الخروج',
     
@@ -86,12 +86,7 @@ return [
     'match_ended' => 'انتهت المباراه',
     'Event_success' => 'تم إضافة الحدث بنجاح',
     'done' => 'تنفيذ',
-    
-    
-    
-    
-    
-    
+
     //Categories
     'add_new_cat' => 'اضافة تصنيف جديد',
     'name' => 'الاسم',
@@ -114,7 +109,6 @@ return [
     'update_club' => 'تعديل بيانات النادى',
 
     //coaches
-    
     'coach_info' => 'بيانات المدرب',
     'add_new_coach' => 'اضافة مدرب جديد',
     'coach_name' => 'اسم المدرب',
@@ -139,15 +133,12 @@ return [
     'match_formation' => 'تشكيلة الفرق',
     'choose_player' => 'اختر لاعب',
     'choose_event' => 'اختر الحدث',
-    
-    
     'stadium' => 'الملعب',
     'tour' => 'البطولة',
     'gwla' => 'الجولة',
     'match_info' => 'بيانات المباراه',
     'second_class_hint' => 'اختار فرق الناشئين التى سيراقبها ',
     'first_class_hint' => 'اختار فرق الشباب التى سيراقبها ',
-    
     'time' => 'الوقت',
     'started' => 'بدأت المباراة',
     'ended' => 'انتهت المباراة',
@@ -160,13 +151,12 @@ return [
     'choose_away_club' => 'اختار النادى الثانى',
     'choose_classification' => 'اختر الفئة',
     'choose_gwala' => 'اختار الجولة',
-    
-    
     'choose_stad' => 'اختار الملعب',
     'choose_tour' => 'اختار بطولة',
     'match_date' => 'تاريخ المباراه',
     'match_time' => 'ميعاد المباراه',
     'update_match' => 'تعديل بيانات المباراة',
+    'emptyEvents' => 'لايوجد احداث',
 
     //match_formations
     'GK' => 'حارس المرمى',
@@ -177,8 +167,6 @@ return [
     'SB1' => 'اللاعب البديل الاول',
     'SB2' => 'اللاعب البديل الثانى',
     'save_formation' => 'حفظ التشكيل',
-    
-
 
     //player
     'add_new_player' => 'اضافة لاعب جديد',
@@ -192,9 +180,7 @@ return [
     'player_info' => 'بيانات اللاعب',
     'samePlayer_name' => ' اللاعب مختار من قبل',
   
-
     //Stadium
-    
     'stad_info' => 'بيانات الملعب',
     'add_new_stad' => 'اضافة ملعب جديد',
     'stad_name' => 'اسم الملعب',
@@ -206,19 +192,16 @@ return [
     //tournament
     'tour_info' => 'بيانات البطولة',
     'add_new_tour' => 'اضافة بطولة جديدة',
-    
     'tour_name' => 'اسم البطولة',
     'gwalat' => 'الجولات',
     'gwla_name' => 'اسم الجولة',
     'gwla_matches' => 'مباريات الجولة',    
     'gwla_info' => 'بيانات الجولة',    
-    
     'start' => ' يبدأ فى',
     'end' => 'ينتهى فى',
     'add_new_gawla' => 'اضافة جولة جديدة',
     'update_tour' => 'تعديل بيانات البطولة',
     
-
     //news
     'add_new_news' => 'اضافة خبر جديد',
     'title' => 'العنوان',

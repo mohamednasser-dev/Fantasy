@@ -37,13 +37,29 @@ class SendPointsToUsers implements ShouldQueue
     {
         //
         $events = MatchEvent::where('match_id',$this->match->id)->get();
-        $clubs  = [$this->match->home_club_id,$this->match->away_club_id];
-        $players= Player::whereIn('club_id',$clubs)->get();
-        dd($players);
-        foreach ($events as $event) {
-            $points = Event::find($event->event_id);
-            dd($points);
+        $match = Match::where('id',$this->match->id)->first();
+        if($match->home_score >$match->away_score)
+        {
+            $win_club  = $this->match->home_club_id;
+        }else  if($match->home_score <$match->away_score)
+        {
+            $win_club  = $this->match->away_club_id;
         }
-        return dd($events);
+        $clubs  = [$this->match->home_club_id,$this->match->away_club_id];
+        $players= Player::where('club_id',$win_club)->get();
+        $win_event = Event::find(5);
+        foreach ($players as $player) 
+        {
+            $selected_player =  Player::find($player->id);
+            $final_point = $selected_player->points + $win_event->value;
+            $data['points'] = $final_point;
+            $Player_win = Player::where('id',$player->id)->update($data);
+        }
+        // foreach ($events as $event) 
+        // {
+        //     $points = Event::find($event->event_id);
+        //     dd($points);
+        // }
+        // return dd($events);
     }
 }
