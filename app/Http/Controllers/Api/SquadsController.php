@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\User;
 use App\Squad;
+use App\Player;
 use App\Squad_player;
 use Illuminate\Database\QueryException;
 
@@ -14,7 +15,6 @@ class SquadsController extends Controller
 {
     public function sendResponse($code = null, $msg = null, $data = null)
     {
-
         return response(
             [
                 'code' => $code,
@@ -22,9 +22,7 @@ class SquadsController extends Controller
                 'data' => $data
             ]
         );
-
     }
-
     public function validationErrorsToString($errArray)
     {
         $valArr = array();
@@ -37,7 +35,6 @@ class SquadsController extends Controller
 
     public function makeValidate($inputs, $rules)
     {
-
         $validator = Validator::make($inputs, $rules);
         if ($validator->fails()) {
             return $this->validationErrorsToString($validator->messages());
@@ -45,12 +42,9 @@ class SquadsController extends Controller
             return true;
         }
     }
-  
-
-public function store_squad(Request $request)
+    public function store_squad(Request $request)
     {
         $input = $request->all();
-       
         $validate = $this->makeValidate($input,[
                 'api_token' => 'required',
                 'user_id' => 'required|exists:users,id',
@@ -59,42 +53,31 @@ public function store_squad(Request $request)
                 'squad_type' => 'required',
                 ]);
             if (!is_array($validate)) {
-            $api_token = $request->input('api_token');
-            $user = User::where('api_token',$api_token)->first();
-
-            if($user != null){
-                
-                //for limit user to add only one squad with each type 1st & 2nd ...
-            $user_id = $request->input('user_id');
-            $squad_type = $request->input('squad_type');
-                
-            $mySquad = Squad::where('user_id',$user_id)
-            ->where('squad_type',$squad_type)
-            ->get();
-                
-if(count($mySquad)>0){
-    return $this->sendResponse(403, 'لقد قمت بأنشاء فريق من الفئة المختارة من قبل', null);
-}else{
-    $squad = Squad::create($input);
-    return $this->sendResponse(200, 'تم اضافة فريق',$squad);
-
-}
-               
-          
-        
-        }else{
-            return $this->sendResponse(403, $this->LoginWarning,null);
-        }
-    }else {
-        return $this->sendResponse(403, $validate, null);
+                $api_token = $request->input('api_token');
+                $user = User::where('api_token',$api_token)->first();
+                if($user != null){
+                    //for limit user to add only one squad with each type 1st & 2nd ...
+                    $user_id = $request->input('user_id');
+                    $squad_type = $request->input('squad_type');
+                    $mySquad = Squad::where('user_id',$user_id)
+                    ->where('squad_type',$squad_type)
+                    ->get(); 
+                    if(count($mySquad)>0){
+                        return $this->sendResponse(403, 'لقد قمت بأنشاء فريق من الفئة المختارة من قبل', null);
+                    }else{
+                        $squad = Squad::create($input);
+                        return $this->sendResponse(200, 'تم اضافة فريق',$squad);
+                    }
+                }else{
+                    return $this->sendResponse(403, $this->LoginWarning,null);
+                }
+            }else {
+                return $this->sendResponse(403, $validate, null);
+            }
     }
-
-    }
-
     public function store_squad_player(Request $request)
     {
         $input = $request->all();
-       
         $validate = $this->makeValidate($input,[
                 'api_token' => 'required',
                 'player_id' => 'required|exists:players,id',
@@ -102,44 +85,42 @@ if(count($mySquad)>0){
                 'position' => 'required',
                 'is_captain' => 'required',
                 ]);
-            if (!is_array($validate)) {
+        if (!is_array($validate)) {
             $api_token = $request->input('api_token');
             $user = User::where('api_token',$api_token)->first();
-
             if($user != null){
-            
-                $input['points'] = 0;
-
-
                 // to limit squad team number  to 7 players only in team
-
                 $squad_id = $request->input('squad_id');                
+                $player_id = $request->input('player_id');                
+                $selected_player =Player::where('id',$player_id)->first();
                 $selected_squad =Squad_player::where('squad_id',$squad_id)->get();
-
                 if(count($selected_squad)==7){
                     return $this->sendResponse(403,'هذا الفريق وصل لعدد اللاعبين المطلوب');
                 }else{
-
-                    //this try catch to block user to add two same players in single squad
-                    // or two sam position in single squad
-                         try{
-
-                                    $squad_player = Squad_player::create($input);
-                            }catch(QueryException $ex){
-                                return $this->sendResponse(403,'هذا اللاعب موجود من قبل');
-                                
-                            }
+                    // this to make user to choose to players only from one club ...
+                    $squad_players =Squad_player::where('club_id',$selected_player->club_id)
+                    ->where('squad_id',$squad_id)
+                    ->get();
+                    if(count($squad_players) == 2){
+                        return $this->sendResponse(403,'لا يمكن اختيار اكثر من لاعبين لنفس الفريق',null);
+                    }else{
+                        //this try catch to block user to add two same players in single squad
+                        // or two sam position in single squad
+                        try{
+                            $input['club_id'] = $selected_player->club_id;
+                            $squad_player = Squad_player::create($input);
+                        }catch(QueryException $ex){
+                            return $this->sendResponse(403,'هذا اللاعب موجود من قبل'); 
+                        }
                             //end try catch
-                          return $this->sendResponse(200, 'تم اضافة لاعب بالفريق',$squad_player);
+                            return $this->sendResponse(200, 'تم اضافة لاعب بالفريق',$squad_player);
+                        }
                     }
-        
-        }else{
-            return $this->sendResponse(403, $this->LoginWarning,null);
+            }else{
+                return $this->sendResponse(403, $this->LoginWarning,null);
+            }
+        }else {
+            return $this->sendResponse(403, $validate, null);
         }
-    }else {
-        return $this->sendResponse(403, $validate, null);
     }
-
-    }
-
 }

@@ -22,8 +22,10 @@ class CreateSquadPlayersTable extends Migration
             $table->foreign('squad_id')->references('id')->on('squads')->onDelete('cascade');
             $table->bigInteger('player_id')->unsigned();
             $table->foreign('player_id')->references('id')->on('players')->onDelete('cascade');
+            $table->bigInteger('club_id')->unsigned();
+            $table->foreign('club_id')->references('id')->on('clubs')->onDelete('cascade');
             $table->string('position')->nullable();
-            $table->bigInteger('points');            
+            $table->bigInteger('points')->default('0');            
             $table->enum('is_captain',['0','1'])->default('0');
 
             $table->timestamps();

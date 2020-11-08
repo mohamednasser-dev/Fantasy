@@ -57,7 +57,6 @@ class SendPointsToUsers implements ShouldQueue
             // }
         }
         $clubs  = [$this->match->home_club_id,$this->match->away_club_id];
-
         foreach ($events as $event) 
         {
             $current_event  = Event::find($event->event_id);
