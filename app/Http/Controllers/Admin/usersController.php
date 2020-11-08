@@ -18,7 +18,7 @@ class usersController extends Controller
     }
     public function index()
     {
-        $users = $this->objectName::where('type','user')->paginate(10);
+        $users = $this->objectName::where('type','user')->orderBy('points','desc')->paginate(10);
         // dd($categories);
         return view($this->folderView.'users',compact('users'));
     }

@@ -16,10 +16,6 @@ return [
     'public_delete' => 'حذف',
     'public_cancel' => 'الغاء',
 
-    
-    
-
-
     // messages
     'addedsuccess' => 'تم الاضافة بنجاح',
     'statuschanged' => 'تم تعديل الحالة',
@@ -55,7 +51,6 @@ return [
     'view_tours' => 'جميع البطولات',
 
     
-    
 
     //home page
     'today_matches' => 'مباريات اليوم',
@@ -86,6 +81,7 @@ return [
     'match_ended' => 'انتهت المباراه',
     'Event_success' => 'تم إضافة الحدث بنجاح',
     'done' => 'تنفيذ',
+    'points' => 'النقاط',
 
     //Categories
     'add_new_cat' => 'اضافة تصنيف جديد',
