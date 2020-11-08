@@ -12,6 +12,7 @@ use App\Player;
 use App\User_club;
 use App\Club_formation;
 use App\MatchEvent;
+use App\Event;
 use Illuminate\Database\QueryException;
 use App\Events\MatchEnded;
 use App\Jobs\SendPointsToUsers;
@@ -51,6 +52,7 @@ class MatchesController extends Controller
     public function monitor_match($match_id)
     {
         $events = MatchEvent::where('match_id',$match_id)->get();
+        $all_events = Event::where('opacity','1')->pluck('name','value');
         $selected_match=Match::where('id',$match_id)->first();
         $home_club =Club::where('id',$selected_match->home_club_id)->first();
         $away_club =Club::where('id',$selected_match->away_club_id)->first();
@@ -90,7 +92,7 @@ class MatchesController extends Controller
         }else{
             $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)->get();     
         }
-        return view($this->folderView.'match_log.monitor_match',compact('events','selected_match','home_players','away_players','home_replacement_players',
+        return view($this->folderView.'match_log.monitor_match',compact('events','all_events','selected_match','home_players','away_players','home_replacement_players',
             'away_replacement_players','monitor_clubArray'));
     }   
     public function gwla_matches($id)

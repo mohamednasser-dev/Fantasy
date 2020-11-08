@@ -17,7 +17,7 @@ class ClubsController extends Controller
     // this function to  select all clubs
     public function index()
     {
-        $clubs = $this->objectName::all();
+        $clubs = $this->objectName::orderBy('classification','asc')->get();
         return view($this->folderView.'clubs',\compact('clubs'));
     }
   // to prepar to add new club

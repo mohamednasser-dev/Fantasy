@@ -173,7 +173,7 @@
                                                 {{ csrf_field() }}
                                                 {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
                                                 {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txtPlayer" ]) }}
-                                                {{ Form::select('event_id',App\Event::pluck('name','id'),null
+                                                {{ Form::select('event_id',$all_events,null
                                               ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
                                         </div>
                                     </div>

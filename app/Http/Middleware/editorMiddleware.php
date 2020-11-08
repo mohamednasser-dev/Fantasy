@@ -16,7 +16,7 @@ class editorMiddleware
      */
     public function handle($request, Closure $next)
     {
-         if (Auth::check() && Auth::user()->type == 'editor') {
+         if (Auth::check() && Auth::user()->type == 'editor' || Auth::check() && Auth::user()->type == 'admin') {
             return $next($request);
         } else {
             return redirect()->route('home')->with('danger',trans('admin.preventAlert'));

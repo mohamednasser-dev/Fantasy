@@ -17,6 +17,9 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('key');
             $table->string('value');
+            $table->string('name');
+            $table->string('is_captain');
+            $table->enum('opacity',['0','1'])->default('1');
             $table->timestamps();
         });
     }
