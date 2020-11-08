@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth','monitor']], function ()
 	Route::post('getPlayerInfo_away', 'Editor\ClubFormationsController@getPlayerInfo_away');
 });
 
-Route::group(['middleware' => ['auth','admin'],'middleware' => ['auth','editor']], function () 
+Route::group(['middleware' => ['auth','admin']], function () 
 {
 	//Club routes
 	Route::get('clubs', 'Admin\ClubsController@index');

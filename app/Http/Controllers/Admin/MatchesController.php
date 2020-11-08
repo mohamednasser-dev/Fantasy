@@ -14,7 +14,7 @@ use App\Club_formation;
 use App\MatchEvent;
 use Illuminate\Database\QueryException;
 use App\Events\MatchEnded;
-
+use App\Jobs\SendPointsToUsers;
 
 class MatchesController extends Controller
 {
@@ -224,9 +224,9 @@ public function view_match_events()
     public function match_destroy(Request $request)
     {
         $match = Match::where('id',$request->match_id)->first();
-        $match->status = 'ended';
-        $match->save();
-        event(new MatchEnded($match));
+        //$match->status = 'ended';
+        //$match->save();
+        SendPointsToUsers::dispatch($match)->delay(now()->addMinutes(10));;
     }    
      // in create Match page
      // For Get Gawalat Options
