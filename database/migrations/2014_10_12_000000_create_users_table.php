@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('lat')->nullable();
             $table->string('gender')->nullable();
             $table->string('phone')->nullable();
+            $table->string('image')->nullable();
             $table->bigInteger('points')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

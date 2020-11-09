@@ -27,6 +27,7 @@ class CreateSquadPlayersTable extends Migration
             $table->string('position')->nullable();
             $table->bigInteger('points')->default('0');            
             $table->enum('is_captain',['0','1'])->default('0');
+            $table->enum('type',['basic','replace'])->default('basic');
 
             $table->timestamps();
         });

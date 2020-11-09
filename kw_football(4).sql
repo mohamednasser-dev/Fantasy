@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2020 at 03:51 PM
+-- Generation Time: Nov 09, 2020 at 10:24 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -239,7 +239,7 @@ CREATE TABLE `matches` (
 --
 
 INSERT INTO `matches` (`id`, `home_club_id`, `away_club_id`, `time`, `date`, `home_score`, `away_score`, `status`, `stadium_id`, `tour_id`, `gwla_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, '22:30:00', '2020-10-30', 5, 6, 'started', 1, 1, 1, '2020-10-27 13:21:13', '2020-11-08 13:22:27'),
+(1, 1, 2, '22:30:00', '2020-10-30', 7, 6, 'started', 1, 1, 1, '2020-10-27 13:21:13', '2020-11-09 08:56:24'),
 (2, 3, 4, '16:30:00', '2020-11-05', 0, 0, 'started', 2, 3, 4, '2020-10-27 13:21:47', '2020-10-27 13:21:47'),
 (3, 8, 5, '16:00:00', '2020-11-21', 0, 0, 'not started', 1, 1, 1, '2020-11-08 11:41:39', '2020-11-08 11:41:39');
 
@@ -309,7 +309,9 @@ INSERT INTO `match_events` (`id`, `player_id`, `match_id`, `event_id`, `created_
 (53, 17, 1, 3, '2020-11-08 13:21:35', '2020-11-08 13:21:35'),
 (54, 21, 1, 3, '2020-11-08 13:21:48', '2020-11-08 13:21:48'),
 (55, 17, 1, 3, '2020-11-08 13:22:18', '2020-11-08 13:22:18'),
-(56, 4, 1, 3, '2020-11-08 13:22:27', '2020-11-08 13:22:27');
+(56, 4, 1, 3, '2020-11-08 13:22:27', '2020-11-08 13:22:27'),
+(57, 12, 1, 3, '2020-11-09 08:56:01', '2020-11-09 08:56:01'),
+(58, 11, 1, 3, '2020-11-09 08:56:24', '2020-11-09 08:56:24');
 
 -- --------------------------------------------------------
 
@@ -476,29 +478,34 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`id`, `player_name`, `age`, `center_name`, `desc`, `image`, `club_id`, `created_at`, `updated_at`, `points`) VALUES
-(1, 'رمضان صبحى', '28', 'RB', 'سءؤس', 'img_1603801339.jpg', 1, '2020-10-27 12:22:19', '2020-11-08 13:31:45', 13),
-(2, 'محمود عبد المنعم كهربا', '31', 'RB', 'يسبسي', 'img_1603801642.jpg', 1, '2020-10-27 12:27:22', '2020-11-08 10:23:22', 12),
-(3, 'على معلول', '35', 'LF', 'سبيسب', 'img_1603801989.jpg', 1, '2020-10-27 12:33:09', '2020-11-08 10:23:22', 12),
-(4, 'صالح جمعة', '33', 'RF', 'ئسءسشي', 'img_1603802025.jpg', 1, '2020-10-27 12:33:45', '2020-11-08 13:31:46', 16),
-(5, 'شريف اكرامى', '32', 'GK', 'سئي', 'img_1603802147.jpg', 1, '2020-10-27 12:35:47', '2020-11-08 10:23:22', 12),
-(6, 'محمد فخري', '32', 'LB', NULL, 'img_1603802423.jpg', 1, '2020-10-27 12:40:23', '2020-11-08 13:31:45', 14),
-(7, 'الشناوى', '32', 'GK', NULL, 'img_1603802477.jpg', 1, '2020-10-27 12:41:17', '2020-11-08 13:31:46', 10),
-(8, 'حسام عاشور', '29', 'CF', NULL, 'img_1603802509.jpg', 1, '2020-10-27 12:41:49', '2020-11-08 10:23:22', 12),
-(9, 'احمد فتحى', '34', 'LF', NULL, 'img_1603802581.jpg', 1, '2020-10-27 12:43:01', '2020-11-08 13:31:45', 14),
-(10, 'مروان محسن', '27', 'RF', 'سيس', 'img_1603802612.jpg', 1, '2020-10-27 12:43:32', '2020-11-08 13:31:45', 9),
-(11, 'حسين الشحات', '30', 'CF', NULL, 'img_1603802865.jpg', 1, '2020-10-27 12:47:45', '2020-11-08 13:31:45', 22),
-(12, 'اليو بادجى', '30', 'CM', NULL, 'img_1603802897.jpg', 1, '2020-10-27 12:48:17', '2020-11-08 10:23:22', 12),
-(13, 'محمود جنش', '30', 'GK', 'سشي', 'img_1603803210.PNG', 2, '2020-10-27 12:53:30', '2020-11-08 13:31:45', 20),
-(14, 'اشرف بن شرقى', '30', 'LWB', NULL, 'img_1603803235.PNG', 2, '2020-10-27 12:53:55', '2020-11-08 10:49:18', 6),
-(15, 'حسام اشرف', '25', 'CDM', 'شي', 'img_1603803258.PNG', 2, '2020-10-27 12:54:18', '2020-11-08 13:31:45', 4),
-(16, 'شيكابالا', '42', 'CM', 'سشي', 'img_1603803281.PNG', 2, '2020-10-27 12:54:41', '2020-11-08 13:31:46', 6),
-(17, 'طارق حامد', '32', 'LM', 'سيش', 'img_1603803303.PNG', 2, '2020-10-27 12:55:03', '2020-11-08 13:31:46', 20),
-(18, 'فرجانى ساسى', '25', 'CAM', NULL, 'img_1603803332.PNG', 2, '2020-10-27 12:55:32', '2020-11-08 10:49:18', 6),
-(19, 'محمد ابو جبل', '32', 'GK', NULL, 'img_1603803357.PNG', 2, '2020-10-27 12:55:57', '2020-11-08 13:31:46', 5),
-(20, 'محمود علاء الدين', '28', 'CF', 'شبسشس', 'img_1603803381.PNG', 2, '2020-10-27 12:56:21', '2020-11-08 13:31:46', 10),
-(21, 'مصطفى فتحى', '25', 'CDM', 'شس', 'img_1603803406.PNG', 2, '2020-10-27 12:56:46', '2020-11-08 13:31:46', 16),
-(22, 'مصطفى محمد احمد', '25', 'LM', NULL, 'img_1603803430.PNG', 2, '2020-10-27 12:57:10', '2020-11-08 13:31:46', 9),
-(25, 'مصطفى محمد احمد', '20', 'LM', NULL, 'img_1603804419.PNG', 2, '2020-10-27 13:13:39', '2020-11-08 13:31:45', 3);
+(1, 'رمضان صبحى', '28', 'RB', 'سءؤس', 'img_1603801339.jpg', 1, '2020-10-27 12:22:19', '2020-11-09 08:58:10', 2),
+(2, 'محمود عبد المنعم كهربا', '31', 'RB', 'يسبسي', 'img_1603801642.jpg', 1, '2020-10-27 12:27:22', '2020-11-09 08:58:10', 3),
+(3, 'على معلول', '35', 'LF', 'سبيسب', 'img_1603801989.jpg', 1, '2020-10-27 12:33:09', '2020-11-08 10:23:22', 0),
+(4, 'صالح جمعة', '33', 'RF', 'ئسءسشي', 'img_1603802025.jpg', 1, '2020-10-27 12:33:45', '2020-11-08 13:31:46', 0),
+(5, 'شريف اكرامى', '32', 'GK', 'سئي', 'img_1603802147.jpg', 1, '2020-10-27 12:35:47', '2020-11-08 10:23:22', 0),
+(6, 'محمد فخري', '32', 'LB', NULL, 'img_1603802423.jpg', 1, '2020-10-27 12:40:23', '2020-11-08 13:31:45', 0),
+(7, 'الشناوى', '32', 'GK', NULL, 'img_1603802477.jpg', 1, '2020-10-27 12:41:17', '2020-11-08 13:31:46', 0),
+(8, 'حسام عاشور', '29', 'CF', NULL, 'img_1603802509.jpg', 1, '2020-10-27 12:41:49', '2020-11-08 10:23:22', 0),
+(9, 'احمد فتحى', '34', 'LF', NULL, 'img_1603802581.jpg', 1, '2020-10-27 12:43:01', '2020-11-08 13:31:45', 0),
+(10, 'مروان محسن', '27', 'RF', 'سيس', 'img_1603802612.jpg', 1, '2020-10-27 12:43:32', '2020-11-08 13:31:45', 0),
+(11, 'حسين الشحات', '30', 'CF', NULL, 'img_1603802865.jpg', 1, '2020-10-27 12:47:45', '2020-11-08 13:31:45', 0),
+(12, 'اليو بادجى', '30', 'CM', NULL, 'img_1603802897.jpg', 1, '2020-10-27 12:48:17', '2020-11-08 10:23:22', 0),
+(13, 'محمود جنش', '30', 'GK', 'سشي', 'img_1603803210.PNG', 2, '2020-10-27 12:53:30', '2020-11-09 08:58:09', 14),
+(14, 'اشرف بن شرقى', '30', 'LWB', NULL, 'img_1603803235.PNG', 2, '2020-10-27 12:53:55', '2020-11-08 10:49:18', 0),
+(15, 'حسام اشرف', '25', 'CDM', 'شي', 'img_1603803258.PNG', 2, '2020-10-27 12:54:18', '2020-11-08 13:31:45', 0),
+(16, 'شيكابالا', '42', 'CM', 'سشي', 'img_1603803281.PNG', 2, '2020-10-27 12:54:41', '2020-11-08 13:31:46', 0),
+(17, 'طارق حامد', '32', 'LM', 'سيش', 'img_1603803303.PNG', 2, '2020-10-27 12:55:03', '2020-11-08 13:31:46', 0),
+(18, 'فرجانى ساسى', '25', 'CAM', NULL, 'img_1603803332.PNG', 2, '2020-10-27 12:55:32', '2020-11-08 10:49:18', 0),
+(19, 'محمد ابو جبل', '32', 'GK', NULL, 'img_1603803357.PNG', 2, '2020-10-27 12:55:57', '2020-11-08 13:31:46', 0),
+(20, 'محمود علاء الدين', '28', 'CF', 'شبسشس', 'img_1603803381.PNG', 2, '2020-10-27 12:56:21', '2020-11-08 13:31:46', 0),
+(21, 'مصطفى فتحى', '25', 'CDM', 'شس', 'img_1603803406.PNG', 2, '2020-10-27 12:56:46', '2020-11-08 13:31:46', 0),
+(22, 'مصطفى محمد احمد', '25', 'LM', NULL, 'img_1603803430.PNG', 2, '2020-10-27 12:57:10', '2020-11-08 13:31:46', 0),
+(25, 'مصطفى محمد احمد', '20', 'LM', NULL, 'img_1603804419.PNG', 2, '2020-10-27 13:13:39', '2020-11-08 13:31:45', 0),
+(26, 'messi', '35', 'RF', NULL, 'img_1604912766.jpg', 3, '2020-11-09 09:06:06', '2020-11-09 09:06:06', 0),
+(27, 'محمد صلاح', '28', 'RB', NULL, 'img_1604912813.jpg', 4, '2020-11-09 09:06:53', '2020-11-09 09:06:53', 0),
+(28, 'نيمار', '25', 'LF', NULL, 'img_1604912862.jpg', 3, '2020-11-09 09:07:42', '2020-11-09 09:07:42', 0),
+(29, 'الننى', '27', 'RM', NULL, 'img_1604912890.jpg', 5, '2020-11-09 09:08:10', '2020-11-09 09:08:10', 0),
+(30, 'ابوتريكه', '45', 'CAM', NULL, 'img_1604912928.jpg', 8, '2020-11-09 09:08:48', '2020-11-09 09:08:48', 0);
 
 -- --------------------------------------------------------
 
@@ -547,7 +554,8 @@ CREATE TABLE `squads` (
 --
 
 INSERT INTO `squads` (`id`, `squad_name`, `squad_type`, `points`, `coach_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Elahlam_team', '1st', 0, 1, 7, '2020-11-08 13:34:46', '2020-11-08 13:34:46');
+(1, 'Elahlam_team', '1st', 19, 1, 7, '2020-11-08 13:34:46', '2020-11-09 08:58:10'),
+(2, 'Die', '1st', 19, 2, 6, '2020-11-08 13:34:46', '2020-11-09 08:58:10');
 
 -- --------------------------------------------------------
 
@@ -562,6 +570,7 @@ CREATE TABLE `squad_players` (
   `position` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `points` bigint(20) NOT NULL DEFAULT 0,
   `is_captain` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `type` enum('basic','replace') COLLATE utf8mb4_unicode_ci DEFAULT 'basic',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -570,11 +579,16 @@ CREATE TABLE `squad_players` (
 -- Dumping data for table `squad_players`
 --
 
-INSERT INTO `squad_players` (`squad_id`, `player_id`, `club_id`, `position`, `points`, `is_captain`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'GK', 0, '0', '2020-11-08 14:01:05', '2020-11-08 14:01:05'),
-(1, 2, 1, 'LB', 0, '0', '2020-11-08 14:02:42', '2020-11-08 14:02:42'),
-(1, 13, 2, 'RB', 0, '0', '2020-11-08 14:03:55', '2020-11-08 14:03:55'),
-(1, 14, 2, 'RS1', 0, '0', '2020-11-08 14:04:08', '2020-11-08 14:04:08');
+INSERT INTO `squad_players` (`squad_id`, `player_id`, `club_id`, `position`, `points`, `is_captain`, `type`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'GK', 2, '1', 'basic', '2020-11-08 14:01:05', '2020-11-09 08:58:10'),
+(1, 2, 1, 'LB', 3, '0', 'basic', '2020-11-08 14:02:42', '2020-11-09 08:58:10'),
+(1, 13, 2, 'RB', 14, '0', 'basic', '2020-11-08 14:03:55', '2020-11-09 08:58:09'),
+(1, 14, 2, 'RS1', 0, '0', 'basic', '2020-11-08 14:04:08', '2020-11-08 14:04:08'),
+(1, 28, 3, 'RS2', 0, '0', 'basic', '2020-11-09 09:11:24', '2020-11-09 09:11:24'),
+(1, 29, 5, 'LF', 0, '0', 'basic', '2020-11-09 09:11:07', '2020-11-09 09:11:07'),
+(1, 30, 8, 'RF', 0, '0', 'basic', '2020-11-09 09:10:33', '2020-11-09 09:10:33'),
+(2, 27, 4, 'RS2', 0, '0', 'basic', '2020-11-09 09:18:59', '2020-11-09 09:18:59'),
+(2, 30, 8, 'GK', 0, '0', 'basic', '2020-11-09 09:20:51', '2020-11-09 09:20:51');
 
 -- --------------------------------------------------------
 
@@ -642,6 +656,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `api_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` enum('admin','user','monitor','editor') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -653,13 +668,13 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `lng`, `lat`, `gender`, `phone`, `points`, `email`, `email_verified_at`, `password`, `api_token`, `type`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', NULL, NULL, 'mal', '01201636129', 0, 'admin@admin.com', NULL, '$2y$10$MhZXXgZipzVXZn/wiH7lW.eR/aJb1PyjMBDqLwFdldeUMkofB6iBG', NULL, 'admin', NULL, NULL, NULL),
-(4, 'monitor', NULL, NULL, NULL, NULL, 0, 'monitor@gmail.com', NULL, '$2y$10$MhZXXgZipzVXZn/wiH7lW.eR/aJb1PyjMBDqLwFdldeUMkofB6iBG', NULL, 'monitor', NULL, '2020-10-29 01:01:28', '2020-10-29 01:01:28'),
-(5, 'kareem', NULL, NULL, NULL, NULL, 0, 'ahmed@gmail.com', NULL, '$2y$10$.qOdLRLM8zo40f9id.VoceQE8qwdgcWx4uGIKLc1w24CqSjk7neH.', NULL, 'monitor', NULL, '2020-11-04 22:40:12', '2020-11-04 22:40:12'),
-(6, 'mohamed', NULL, NULL, NULL, NULL, 100, 'mohamed@gmail.com', NULL, '$2y$10$paRqAS4zin3yvYUUcOSf6OkAwLjqj84guDpsSLGk3s/PmHvcbL7SG', NULL, 'user', NULL, '2020-11-05 05:23:49', '2020-11-05 05:23:49'),
-(7, 'omnia', NULL, NULL, NULL, NULL, 0, 'omnia@gmail.com', NULL, '$2y$10$z//vu/5Wk9awvK5gX/C4kOdtmkd8/5bNH1LCE33mj2YcijDhUzhZS', '8Ocke3wOk0TH0njaigqqUNwxr4MXcyl6KgilnygYgH8gfbWtlfcfQXr0tBkH', 'user', NULL, '2020-11-05 05:25:17', '2020-11-05 05:25:17'),
-(8, 'editor', NULL, NULL, NULL, NULL, 0, 'editor@editor.com', NULL, '$2y$10$Q7SGtpapWZxXrKM0QerKX.aEhoRVGqdVLFuPVdYUuQYyp7r1hlnP2', NULL, 'editor', NULL, '2020-11-07 23:21:01', '2020-11-07 23:21:01');
+INSERT INTO `users` (`id`, `name`, `lng`, `lat`, `gender`, `phone`, `points`, `email`, `email_verified_at`, `password`, `image`, `api_token`, `type`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', NULL, NULL, 'mal', '01201636129', 0, 'admin@admin.com', NULL, '$2y$10$MhZXXgZipzVXZn/wiH7lW.eR/aJb1PyjMBDqLwFdldeUMkofB6iBG', NULL, NULL, 'admin', NULL, NULL, NULL),
+(4, 'monitor', NULL, NULL, NULL, NULL, 0, 'monitor@gmail.com', NULL, '$2y$10$MhZXXgZipzVXZn/wiH7lW.eR/aJb1PyjMBDqLwFdldeUMkofB6iBG', NULL, NULL, 'monitor', NULL, '2020-10-29 01:01:28', '2020-10-29 01:01:28'),
+(5, 'kareem', NULL, NULL, NULL, NULL, 0, 'ahmed@gmail.com', NULL, '$2y$10$.qOdLRLM8zo40f9id.VoceQE8qwdgcWx4uGIKLc1w24CqSjk7neH.', NULL, NULL, 'monitor', NULL, '2020-11-04 22:40:12', '2020-11-04 22:40:12'),
+(6, 'mohamed', NULL, NULL, NULL, NULL, 0, 'mohamed@gmail.com', NULL, '$2y$10$paRqAS4zin3yvYUUcOSf6OkAwLjqj84guDpsSLGk3s/PmHvcbL7SG', NULL, 'tjUMtoAwOJHZ7A7n42Bs2gxRyF5yqOZowMCDklgRhpQx2EPfXEX0AISLDjPH', 'user', NULL, '2020-11-05 05:23:49', '2020-11-09 08:31:16'),
+(7, 'omnia', NULL, NULL, NULL, NULL, 19, 'omnia@gmail.com', NULL, '$2y$10$z//vu/5Wk9awvK5gX/C4kOdtmkd8/5bNH1LCE33mj2YcijDhUzhZS', NULL, '8Ocke3wOk0TH0njaigqqUNwxr4MXcyl6KgilnygYgH8gfbWtlfcfQXr0tBkH', 'user', NULL, '2020-11-05 05:25:17', '2020-11-09 08:58:10'),
+(8, 'editor', NULL, NULL, NULL, NULL, 0, 'editor@editor.com', NULL, '$2y$10$Q7SGtpapWZxXrKM0QerKX.aEhoRVGqdVLFuPVdYUuQYyp7r1hlnP2', NULL, NULL, 'editor', NULL, '2020-11-07 23:21:01', '2020-11-07 23:21:01');
 
 -- --------------------------------------------------------
 
@@ -947,7 +962,7 @@ ALTER TABLE `matches`
 -- AUTO_INCREMENT for table `match_events`
 --
 ALTER TABLE `match_events`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -983,7 +998,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -995,7 +1010,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `squads`
 --
 ALTER TABLE `squads`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `stadiums`

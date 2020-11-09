@@ -165,7 +165,8 @@ class AuthController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null)
             {
-                $top_ten_users =User::select('id','name','points')
+                //top ten users by points ...
+                $top_ten_users =User::select('id','name','points','image')
                     ->where('type', 'user' )
                     ->orderBy('points','desc')
                     ->limit(10)
@@ -179,41 +180,40 @@ class AuthController extends Controller
         }
     }
     public function rank_user(Request $request) {
-
+        $user_Rank = null;
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'api_token' => 'required',        
         ]);
-        if (!is_array($validate)) 
-        {
+        if (!is_array($validate)){
             $api_token = $request->input('api_token');
-            $user = User::where('api_token',$api_token)->first();
-            if($user != null)
-            {
-                $rank_user = DB::select("SELECT @curRow := @curRow + 1 AS RANK_POS, a.id
-                            FROM users AS a
-                            where type = 'user'
-                            order by points desc ");
-
-                return $this->sendResponse(200, 'تم اظهار اول 10 مستخدمين بواسطه النقاط', $rank_user);
+            $my_user = User::where('api_token',$api_token)->first();
+            if($my_user != null){
+                //to get user rank by points
+                $top_users =User::select('id','name','points','image')
+                ->where('type', 'user' )
+                ->orderBy('points','desc')
+                ->get();
+                foreach ($top_users as $key => $user) {
+                    if($user->id == $my_user->id){
+                        $user_Rank = $key+1;
+                    }
+                }
+                //top ten users by points ...
+                $top_ten_users =User::select('id','name','points','image')
+                    ->where('type', 'user' )
+                    ->orderBy('points','desc')
+                    ->limit(10)
+                    ->get();
+                return $this->sendResponse(200, 'تم اظهار الترتيب بناء على النقاط',
+                    array('top_ten_users' => $top_ten_users,'rank_user'=>$user_Rank ,'user'=>$user));
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
                 return $this->sendResponse(403, $validate[0], null);
         }
-
-        return DB::select("SELECT @curRow := @curRow + 1 AS RANK_POS, a.id as uid, a.user, 
-                            IFNULL(b.NUMBER_OF_POSTS, 0) AS NUMBER_OF_POSTS
-                            FROM users AS a
-                            LEFT JOIN (
-                               SELECT uid, count(*) as NUMBER_OF_POSTS
-                               FROM posts
-                               GROUP BY uid
-                            ) AS b ON a.id = b.uid  
-                            JOIN  (SELECT @curRow := 0) r
-                            order by NUMBER_OF_POSTS desc ");
-        }
+    }
     public function logout(Request $request)
     {
         $input = $request->all();
