@@ -2,12 +2,12 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Sposer_image;
+use App\Sponser_image;
 class sponserController extends Controller
 {
     public $objectName;
     public $folderView;
-    public function __construct(Sposer_image $model)
+    public function __construct(Sponser_image $model)
     {
         $this->middleware('auth');
         $this->objectName = $model;

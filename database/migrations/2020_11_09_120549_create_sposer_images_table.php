@@ -13,7 +13,7 @@ class CreateSposerImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sposer_images', function (Blueprint $table) {
+        Schema::create('sponser_images', function (Blueprint $table) {
             $table->id();
             $table->string('image');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateSposerImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sposer_images');
+        Schema::dropIfExists('sponser_images');
     }
 }

@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\User;
-use App\Sposer_image;
+use App\Sponser_image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -245,8 +245,8 @@ class AuthController extends Controller
         }
     }
     public function sponsers(){
-        $sposer_image =Sposer_image::all()->random(1); // The amount of items you wish to receive
-        if(count($sposer_image)>0){
+        if (Sponser_image::count() != 0) {
+            $sposer_image =Sponser_image::all()->random(1); // The amount of items you wish to receive
             return $this->sendResponse(200, 'تم اظهار جميع الاعلانات !!', $sposer_image);
         }else{
             return $this->sendResponse(403, 'لا يوجد اعلانات', null);

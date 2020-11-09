@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sposer_image extends Model
+class Sponser_image extends Model
 {
     protected $fillable = [
       'image'
