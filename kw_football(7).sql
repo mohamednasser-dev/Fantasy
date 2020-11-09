@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2020 at 10:24 AM
+-- Generation Time: Nov 09, 2020 at 05:19 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -86,16 +86,16 @@ CREATE TABLE `club_formations` (
 --
 
 INSERT INTO `club_formations` (`id`, `position`, `player_id`, `club_id`, `created_at`, `updated_at`) VALUES
-(67, 'GK', 5, 1, '2020-10-31 18:05:25', '2020-10-31 18:05:25'),
-(68, 'RB', 10, 1, '2020-10-31 18:05:25', '2020-10-31 18:05:25'),
-(69, 'LB', 9, 1, '2020-10-31 18:05:25', '2020-10-31 18:05:25'),
-(70, 'RF', 6, 1, '2020-10-31 18:05:25', '2020-10-31 18:05:25'),
-(71, 'LF', 1, 1, '2020-10-31 18:05:25', '2020-10-31 18:05:25'),
-(72, 'GK', 13, 2, '2020-10-31 18:06:03', '2020-10-31 18:06:03'),
-(73, 'RB', 21, 2, '2020-10-31 18:06:03', '2020-10-31 18:06:03'),
-(74, 'LB', 15, 2, '2020-10-31 18:06:03', '2020-10-31 18:06:03'),
-(75, 'RF', 17, 2, '2020-10-31 18:06:03', '2020-10-31 18:06:03'),
-(76, 'LF', 16, 2, '2020-10-31 18:06:03', '2020-10-31 18:06:03');
+(135, 'GK', 3, 1, '2020-11-09 15:28:09', '2020-11-09 15:28:09'),
+(136, 'RB', 4, 1, '2020-11-09 15:28:09', '2020-11-09 15:28:09'),
+(137, 'LB', 5, 1, '2020-11-09 15:28:09', '2020-11-09 15:28:09'),
+(138, 'RF', 7, 1, '2020-11-09 15:28:09', '2020-11-09 15:28:09'),
+(139, 'LF', 8, 1, '2020-11-09 15:28:09', '2020-11-09 15:28:09'),
+(173, 'GK', 14, 2, '2020-11-09 16:16:35', '2020-11-09 16:16:35'),
+(174, 'RB', 13, 2, '2020-11-09 16:16:35', '2020-11-09 16:16:35'),
+(175, 'LB', 15, 2, '2020-11-09 16:16:35', '2020-11-09 16:16:35'),
+(176, 'RF', 16, 2, '2020-11-09 16:16:35', '2020-11-09 16:16:35'),
+(177, 'LF', 17, 2, '2020-11-09 16:16:35', '2020-11-09 16:16:35');
 
 -- --------------------------------------------------------
 
@@ -230,6 +230,8 @@ CREATE TABLE `matches` (
   `stadium_id` bigint(20) UNSIGNED NOT NULL,
   `tour_id` bigint(20) UNSIGNED NOT NULL,
   `gwla_id` bigint(20) UNSIGNED NOT NULL,
+  `home_formation` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `away_formation` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -238,10 +240,10 @@ CREATE TABLE `matches` (
 -- Dumping data for table `matches`
 --
 
-INSERT INTO `matches` (`id`, `home_club_id`, `away_club_id`, `time`, `date`, `home_score`, `away_score`, `status`, `stadium_id`, `tour_id`, `gwla_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, '22:30:00', '2020-10-30', 7, 6, 'started', 1, 1, 1, '2020-10-27 13:21:13', '2020-11-09 08:56:24'),
-(2, 3, 4, '16:30:00', '2020-11-05', 0, 0, 'started', 2, 3, 4, '2020-10-27 13:21:47', '2020-10-27 13:21:47'),
-(3, 8, 5, '16:00:00', '2020-11-21', 0, 0, 'not started', 1, 1, 1, '2020-11-08 11:41:39', '2020-11-08 11:41:39');
+INSERT INTO `matches` (`id`, `home_club_id`, `away_club_id`, `time`, `date`, `home_score`, `away_score`, `status`, `stadium_id`, `tour_id`, `gwla_id`, `home_formation`, `away_formation`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, '22:30:00', '2020-10-30', 7, 6, 'started', 1, 1, 1, '1', '1', '2020-10-27 13:21:13', '2020-11-09 16:16:35'),
+(2, 3, 4, '16:30:00', '2020-10-30', 0, 0, 'not started', 2, 3, 4, '0', '0', '2020-10-27 13:21:47', '2020-10-27 13:21:47'),
+(3, 8, 5, '16:00:00', '2020-11-21', 0, 0, 'not started', 1, 1, 1, '0', '0', '2020-11-08 11:41:39', '2020-11-08 11:41:39');
 
 -- --------------------------------------------------------
 
@@ -352,7 +354,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2020_10_27_133623_add_forign_to_matches', 1),
 (21, '2020_11_01_210714_create_events_table', 2),
 (22, '2020_11_04_203440_create_jobs_table', 3),
-(23, '2020_11_08_103204_add_to_players', 4);
+(23, '2020_11_08_103204_add_to_players', 4),
+(25, '2020_11_09_120549_create_sposer_images_table', 5);
 
 -- --------------------------------------------------------
 
@@ -535,6 +538,26 @@ CREATE TABLE `role_has_permissions` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sponser_images`
+--
+
+CREATE TABLE `sponser_images` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sponser_images`
+--
+
+INSERT INTO `sponser_images` (`id`, `image`, `created_at`, `updated_at`) VALUES
+(1, 'img_1604929394.jpg', '2020-11-09 13:43:14', '2020-11-09 13:43:14');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `squads`
 --
 
@@ -656,7 +679,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'default_avatar.jpg',
   `api_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` enum('admin','user','monitor','editor') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -673,7 +696,7 @@ INSERT INTO `users` (`id`, `name`, `lng`, `lat`, `gender`, `phone`, `points`, `e
 (4, 'monitor', NULL, NULL, NULL, NULL, 0, 'monitor@gmail.com', NULL, '$2y$10$MhZXXgZipzVXZn/wiH7lW.eR/aJb1PyjMBDqLwFdldeUMkofB6iBG', NULL, NULL, 'monitor', NULL, '2020-10-29 01:01:28', '2020-10-29 01:01:28'),
 (5, 'kareem', NULL, NULL, NULL, NULL, 0, 'ahmed@gmail.com', NULL, '$2y$10$.qOdLRLM8zo40f9id.VoceQE8qwdgcWx4uGIKLc1w24CqSjk7neH.', NULL, NULL, 'monitor', NULL, '2020-11-04 22:40:12', '2020-11-04 22:40:12'),
 (6, 'mohamed', NULL, NULL, NULL, NULL, 0, 'mohamed@gmail.com', NULL, '$2y$10$paRqAS4zin3yvYUUcOSf6OkAwLjqj84guDpsSLGk3s/PmHvcbL7SG', NULL, 'tjUMtoAwOJHZ7A7n42Bs2gxRyF5yqOZowMCDklgRhpQx2EPfXEX0AISLDjPH', 'user', NULL, '2020-11-05 05:23:49', '2020-11-09 08:31:16'),
-(7, 'omnia', NULL, NULL, NULL, NULL, 19, 'omnia@gmail.com', NULL, '$2y$10$z//vu/5Wk9awvK5gX/C4kOdtmkd8/5bNH1LCE33mj2YcijDhUzhZS', NULL, '8Ocke3wOk0TH0njaigqqUNwxr4MXcyl6KgilnygYgH8gfbWtlfcfQXr0tBkH', 'user', NULL, '2020-11-05 05:25:17', '2020-11-09 08:58:10'),
+(7, 'amera', '005', '250', 'femal', '01094641332', 19, 'amera@gmail.com', NULL, '$2y$10$z//vu/5Wk9awvK5gX/C4kOdtmkd8/5bNH1LCE33mj2YcijDhUzhZS', 'img_1604917144.jpg', '8Ocke3wOk0TH0njaigqqUNwxr4MXcyl6KgilnygYgH8gfbWtlfcfQXr0tBkH', 'user', NULL, '2020-11-05 05:25:17', '2020-11-09 10:19:04'),
 (8, 'editor', NULL, NULL, NULL, NULL, 0, 'editor@editor.com', NULL, '$2y$10$Q7SGtpapWZxXrKM0QerKX.aEhoRVGqdVLFuPVdYUuQYyp7r1hlnP2', NULL, NULL, 'editor', NULL, '2020-11-07 23:21:01', '2020-11-07 23:21:01');
 
 -- --------------------------------------------------------
@@ -857,6 +880,12 @@ ALTER TABLE `role_has_permissions`
   ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
 
 --
+-- Indexes for table `sponser_images`
+--
+ALTER TABLE `sponser_images`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `squads`
 --
 ALTER TABLE `squads`
@@ -920,7 +949,7 @@ ALTER TABLE `clubs`
 -- AUTO_INCREMENT for table `club_formations`
 --
 ALTER TABLE `club_formations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT for table `coaches`
@@ -968,7 +997,7 @@ ALTER TABLE `match_events`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -1005,6 +1034,12 @@ ALTER TABLE `players`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sponser_images`
+--
+ALTER TABLE `sponser_images`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `squads`
