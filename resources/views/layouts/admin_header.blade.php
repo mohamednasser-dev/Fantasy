@@ -10,10 +10,10 @@
     <meta name="author" content="">
 
  <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap">
+          href="https://fonts.googleapis.com/earlyaccess/droidarabickufi.css">
     <style>
       body {
-        font-family: 'Lalezar', cursive;
+        font-family: 'Droid Arabic Kufi', serif !important;
         font-size: 48px;
       }
     </style>
