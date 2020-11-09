@@ -10,7 +10,7 @@ class Match extends Model
 
     protected $fillable = [
         'home_club_id', 'away_club_id', 'time', 'date', 'home_score','away_score','status',
-        'stadium_id','tour_id','gwla_id','id'
+        'stadium_id','tour_id','gwla_id','id','home_formation','away_formation'
     ];
     public function getHomeclub()
     {

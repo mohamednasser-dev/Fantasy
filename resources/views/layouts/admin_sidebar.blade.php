@@ -51,6 +51,15 @@
                             <li><a href="{{url('tournaments/create')}} ">{{trans('admin.add_new_tour')}}</a></li>
                         </ul>
                     </li>
+                    <li> 
+                        <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">{{trans('admin.nav_sponsers')}}</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="{{url('sponsers')}}">{{trans('admin.view_sponsers')}}</a></li>
+                            <li><a href="{{url('sponsers/create')}} ">{{trans('admin.add_new_sponser')}}</a></li>
+                        </ul>
+                    </li>
+                @endif
+                @if(Auth::user()->type != "user" )
                     <li>
                         <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-alarm"></i><span class="hide-menu">{{trans('admin.nav_matches')}}</span></a>        
                         <ul aria-expanded="false" class="collapse">
@@ -60,15 +69,7 @@
                             @endif
                         </ul>
                     </li>
-                    <li> 
-                        <a class="has-arrow waves-effect waves-dark"  aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">{{trans('admin.nav_sponsers')}}</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li><a href="{{url('sponsers')}}">{{trans('admin.view_sponsers')}}</a></li>
-                            <li><a href="{{url('sponsers/create')}} ">{{trans('admin.add_new_sponser')}}</a></li>
-                        </ul>
-                    </li>
-                @endif
-
+                @endif  
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

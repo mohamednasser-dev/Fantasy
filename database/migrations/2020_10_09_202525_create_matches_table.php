@@ -28,6 +28,8 @@ class CreateMatchesTable extends Migration
             $table->bigInteger('stadium_id')->unsigned();
             $table->bigInteger('tour_id')->unsigned();
             $table->bigInteger('gwla_id')->unsigned();
+            $table->enum('home_formation',['0','1'])->default('0');
+            $table->enum('away_formation',['0','1'])->default('0');
             $table->timestamps();
         });
     }

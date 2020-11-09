@@ -22,6 +22,7 @@
                         {{ Form::open( ['url' => ['club_formations/store'],'method'=>'post' ,'id'=>'home_Form'] ) }}
                             {{ csrf_field() }}
                             {{ Form::hidden('club_id',$match_data->home_club_id,["class"=>"form-control" ]) }}
+                            {{ Form::hidden('match_data',$match_data,["class"=>"form-control" ]) }}
                                 <div class="row">
                                     <div class="col-lg-6 col-md-10">
                                         <h6 class="card-title club-title-style">{{trans('admin.home_team')}}</h6>
@@ -170,6 +171,7 @@
                           {{ Form::open( ['url' => ['club_formations/store'],'method'=>'post' ,'id'=>'away_Form'] ) }}
                             {{ csrf_field() }}
                             {{ Form::hidden('club_id_away',$match_data->away_club_id,["class"=>"form-control" ]) }}
+                            {{ Form::hidden('match_data',$match_data,["class"=>"form-control" ]) }}
                                 <div class="row">
                                     <div class="col-lg-6 col-md-10">
                                         <h6 class="card-title club-title-style">{{trans('admin.away_team')}}</h6>
@@ -452,11 +454,15 @@
                 type:'POST',
                 data: {inputs: $('#home_Form').serialize(),"_token": "{{ csrf_token() }}"},
                 success: function (data) {
-                   if(data.status){
-                            toastr.success(data.msg);
-                        }else{
-                            toastr.error(data.msg);
-                        }
+                    if(data == 'done'){
+                        var url = "{{url('matches')}}";
+                        window.location.replace(url);
+                    }
+                    if(data.status == 'true'){
+                        toastr.success(data.msg);
+                    }else if(data.status == 'false'){
+                        toastr.error(data.msg);
+                    }
                 }
             })
         });
@@ -467,11 +473,15 @@
                 type:'POST',
                 data: {inputs: $('#away_Form').serialize(),"_token": "{{ csrf_token() }}"},
                 success: function (data) {
-                   if(data.status){
-                            toastr.success(data.msg);
-                        }else{
-                            toastr.error(data.msg);
-                        }
+                    if(data == 'done'){
+                        var url = "{{url('matches')}}";
+                        window.location.replace(url);
+                    }
+                    if(data.status == 'true'){
+                        toastr.success(data.msg);
+                    }else if(data.status == 'false'){
+                        toastr.error(data.msg);
+                    }
                 }
             })
         });
