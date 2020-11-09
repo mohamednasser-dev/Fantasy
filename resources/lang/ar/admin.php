@@ -49,13 +49,11 @@ return [
     'view_stadiums' => 'جميع الملاعب',
     'view_matches' => 'جميع المباريات',
     'view_tours' => 'جميع البطولات',
-
-    
+    'nav_sponsers' => 'الاعلانات',
 
     //home page
     'today_matches' => 'مباريات اليوم',
     'logout' => 'تسجيل الخروج',
-    
 
     //editors
     'add_new_editor' => 'اضافة مراقب جديد',
@@ -103,6 +101,13 @@ return [
     'choose_classification' => 'اختر الفئة',
     'change_club_image' => 'تغير صورة النادى',
     'update_club' => 'تعديل بيانات النادى',
+
+    //sponsers
+    'add_new_sponser' => 'اضافة اعلان جديد',
+    'view_sponsers' => 'جميع الاعلانات',
+    'sponser_info' => 'بيانات الاعلان',
+    'sponser' => 'الاعلان',
+    'sponser_image' => 'صوره الاعلان',
 
     //coaches
     'coach_info' => 'بيانات المدرب',

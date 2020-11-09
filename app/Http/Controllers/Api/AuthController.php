@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\User;
+use App\Sposer_image;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +14,7 @@ class AuthController extends Controller
     public function __construct(User $model){
         $this->objectName = $model;
     }
-    public function sendResponse($code = null, $msg = null, $data = null)
-    {
+    public function sendResponse($code = null, $msg = null, $data = null){
         return response(
             [
                 'code' => $code,
@@ -23,8 +23,7 @@ class AuthController extends Controller
             ]
         );
     }
-    public function validationErrorsToString($errArray)
-    {
+    public function validationErrorsToString($errArray){
         $valArr = array();
         foreach ($errArray->toArray() as $key => $value) 
         {
@@ -33,8 +32,7 @@ class AuthController extends Controller
         }
         return $valArr;
     }
-    public function makeValidate($inputs, $rules)
-    {
+    public function makeValidate($inputs, $rules){
         $validator = Validator::make($inputs, $rules);
         if ($validator->fails()) 
         {
@@ -43,8 +41,7 @@ class AuthController extends Controller
             return true;
         }
     }
-    public function login(Request $request)
-    {
+    public function login(Request $request){
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'email'=>'required|email',
@@ -75,8 +72,7 @@ class AuthController extends Controller
         }
     
     }
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $input = $request->all();
         $validate = $this->makeValidate($input,
             [
@@ -100,29 +96,39 @@ class AuthController extends Controller
             return $this->sendResponse(403, $validate[0], null);
         }
     }
-    public function update_user_data(Request $request)
-    {
+    public function update_user_data(Request $request){
         $input = $request->all();
-        $id = $request->id;
+        $api_token = $request->input('api_token');
+        $auth_user = User::where('api_token', $api_token)->first();
+        $id =$auth_user->id;
         $validate = $this->makeValidate($input,
             [
                 'api_token' => 'required',
-                'id' => 'required|exists:users,id',
                 'email' => 'required|email|unique:users,email,' . $id,
                 'phone' => 'required|numeric|unique:users,phone,' . $id,
                 'gender' => 'required',
                 'name' => 'required',
                 'lng' => 'required',
                 'lat' => 'required',
+                'image' => '',
             ]);
         if (!is_array($validate)) {
-
-            $api_token = $request->input('api_token');
-            $auth_user = User::where('api_token', $api_token)->first();
             if (empty($auth_user)) {
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ', null);
             }
-
+            if ($request['image'] != null) {
+                // This is Image Information ...
+                $file = $request->file('image');
+                $name = $file->getClientOriginalName();
+                $ext = $file->getClientOriginalExtension();
+                // Move Image To Folder ..
+                $fileNewName = 'img_' . time() . '.' . $ext;
+                $file->move(public_path('uploads/users_images'), $fileNewName);
+                $input['image'] = $fileNewName;
+            }else{
+                $input['image'] = 'default_avatar.jpg';
+                
+            }
             $user_data = User::find(intval($id))->update($input);
 
             return $this->sendResponse(200, 'تم  تعديل البيانات بنجاح', $user_data);
@@ -131,8 +137,7 @@ class AuthController extends Controller
         }
 
     }
-    public function select_user_data(Request $request)
-    {
+    public function select_user_data(Request $request){
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'api_token' => 'required',        
@@ -214,8 +219,7 @@ class AuthController extends Controller
                 return $this->sendResponse(403, $validate[0], null);
         }
     }
-    public function logout(Request $request)
-    {
+    public function logout(Request $request){
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'api_token'=>'required',
@@ -238,6 +242,14 @@ class AuthController extends Controller
             }
         }else {
         return $this->sendResponse(403, $validate, null);
+        }
+    }
+    public function sponsers(){
+        $sposer_image =Sposer_image::all()->random(1); // The amount of items you wish to receive
+        if(count($sposer_image)>0){
+            return $this->sendResponse(200, 'تم اظهار جميع الاعلانات !!', $sposer_image);
+        }else{
+            return $this->sendResponse(403, 'لا يوجد اعلانات', null);
         }
     }
 }
