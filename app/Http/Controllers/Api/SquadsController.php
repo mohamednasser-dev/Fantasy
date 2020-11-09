@@ -92,11 +92,19 @@ class SquadsController extends Controller
                 // to limit squad team number  to 7 players only in team
                 $squad_id = $request->input('squad_id');                
                 $player_id = $request->input('player_id');                
+                $is_captain = $request->input('is_captain');                
                 $selected_player =Player::where('id',$player_id)->first();
                 $selected_squad =Squad_player::where('squad_id',$squad_id)->get();
                 if(count($selected_squad)==7){
                     return $this->sendResponse(403,'هذا الفريق وصل لعدد اللاعبين المطلوب');
                 }else{
+                    // to force user to select only one capain in squade
+                    if($is_captain == 1){
+                        $selected_captin_squad =Squad_player::where('squad_id',$squad_id)->where('is_captain','1')->get();
+                        if(count($selected_captin_squad)==1){
+                            return $this->sendResponse(403,'لقد تم اختيار الكابتن من قبل !!!',null);
+                        }
+                    }
                     // this to make user to choose to players only from one club ...
                     $squad_players =Squad_player::where('club_id',$selected_player->club_id)
                     ->where('squad_id',$squad_id)
