@@ -240,9 +240,14 @@ public function view_match_events()
     public function match_destroy(Request $request)
     {
         $match = Match::where('id',$request->match_id)->first();
-        //$match->status = 'ended';
-        //$match->save();
+        $match->status = 'ended';
+        $match->save();
         SendPointsToUsers::dispatch($match)->delay(now()->addMinutes(1));
+        if($match->status == 'ended'){
+          $match_clubs =[$match->home_club_id,$match->away_club_id];
+          $match_formation = Club_formation::wherein('club_id', $match_clubs)->delete();
+          return redirect(url('matches'));
+        } 
     }    
      // in create Match page
      // For Get Gawalat Options

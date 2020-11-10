@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use Illuminate\Database\QueryException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +8,6 @@ use App\Player;
 use Validator;
 use App\Squad;
 use App\User;
-
 class SquadsController extends Controller
 {
     public function sendResponse($code = null, $msg = null, $data = null)

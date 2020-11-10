@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row">
-                             <!-- ----------------------Begain Home Club formations---------------------- -->
+    <!-- ----------------------Begain Home Club formations---------------------- -->
         @foreach($editor_clubArray as $club_id )
             @if($club_id == $match_data->home_club_id)
                 <div class="col-lg-6">
@@ -454,13 +454,12 @@
                 type:'POST',
                 data: {inputs: $('#home_Form').serialize(),"_token": "{{ csrf_token() }}"},
                 success: function (data) {
-                    if(data == 'done'){
+                    if(data.final_status == 'done'){
                         var url = "{{url('matches')}}";
                         window.location.replace(url);
-                    }
-                    if(data.status == 'true'){
+                    }else if(data.status = true){
                         toastr.success(data.msg);
-                    }else if(data.status == 'false'){
+                    }else if(data.status = false){
                         toastr.error(data.msg);
                     }
                 }
@@ -473,13 +472,12 @@
                 type:'POST',
                 data: {inputs: $('#away_Form').serialize(),"_token": "{{ csrf_token() }}"},
                 success: function (data) {
-                    if(data == 'done'){
+                    if(data.final_status == 'done'){
                         var url = "{{url('matches')}}";
                         window.location.replace(url);
-                    }
-                    if(data.status == 'true'){
+                    }else if(data.status = true){
                         toastr.success(data.msg);
-                    }else if(data.status == 'false'){
+                    }else if(data.status = false){
                         toastr.error(data.msg);
                     }
                 }

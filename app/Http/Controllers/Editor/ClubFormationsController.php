@@ -156,23 +156,23 @@ class ClubFormationsController extends Controller
     // this to add new recourd of club_formations in database
     public function store(Request $request)
     {
-            parse_str($request->inputs, $data);
-       
-            $club_id = $data['club_id'];
-            $match_data = $data['match_data'];
-            $match_data =json_decode($match_data);
-            $newPosition = $data['newPosition'];
+        parse_str($request->inputs, $data);
+        $club_id = $data['club_id'];
+        $match_data = $data['match_data'];
+        $match_data =json_decode($match_data);
+        $newPosition = $data['newPosition'];
+        if(count($data['squad']) == 5){
             foreach ($data['squad'] as $key => $player_id) 
             {
-                  $data_formation['player_id'] = $player_id;
-                  $data_formation['club_id'] = $club_id;
-                  $data_formation['position'] = $newPosition[$key];
-                  try{
-                       $club_formation = $this->objectName::create($data_formation);
-                       $club_formation->save();
-                     }catch(QueryException $ex){
-                    return response(['status' => false, 'msg' => trans('admin.samePlayer_name')]);                   
-                     }
+                $data_formation['player_id'] = $player_id;
+                $data_formation['club_id'] = $club_id;
+                $data_formation['position'] = $newPosition[$key];
+                try{
+                    $club_formation = $this->objectName::create($data_formation);
+                    $club_formation->save();
+                }catch(QueryException $ex){
+                    return response(['status' => false, 'msg' => trans('admin.samePlayer_name')]);
+                }
             }
             if($club_id == $match_data->home_club_id){
                 $done_home_data['home_formation'] = '1';
@@ -180,48 +180,53 @@ class ClubFormationsController extends Controller
             }
             $new_match_data = Match::where('id', $match_data->id)->first();
             if($new_match_data->home_formation == '1' && $new_match_data->away_formation == '1'){
-                    $match_ststus['status'] = 'started';
-                    $club = Match::where('id', $match_data->id)->update($match_ststus);
-                    session()->flash('success',trans('admin.formationAdded'));
-                    return 'done';
+                $match_ststus['status'] = 'started';
+                $club = Match::where('id', $match_data->id)->update($match_ststus);
+                session()->flash('success',trans('admin.formationAdded'));
+                return response(['final_status' => 'done' , 'msg' => '']);
             }
-            return response(['status' => true, 'msg' => trans('admin.formationAdded')]);
+            return response(['status' => true , 'msg' => trans('admin.formationAdded')]);
+        }else{
+            return response(['status' => false , 'msg' => trans('admin.formation_num_error')]);
+        }
     }
 
     public function store_away(Request $request)
     {
             parse_str($request->inputs, $data);
-       
             $club_id = $data['club_id_away'];
             $match_data = $data['match_data'];
             $match_data =json_decode($match_data);
             $newPosition = $data['newPosition_away'];
-            foreach ($data['squad_away'] as $key => $player_id) 
-            {
-                $data_formation['player_id'] = $player_id;
-                $data_formation['club_id'] = $club_id;
-                $data_formation['position'] = $newPosition[$key];
-                try{
-                   $club_formation = $this->objectName::create($data_formation);
-                   $club_formation->save();
-                }catch(QueryException $ex){
-                    return response(['status' => false, 'msg' => trans('admin.samePlayer_name')]);             
+            if(count($data['squad_away']) == 5){
+                foreach ($data['squad_away'] as $key => $player_id) 
+                {
+                    $data_formation['player_id'] = $player_id;
+                    $data_formation['club_id'] = $club_id;
+                    $data_formation['position'] = $newPosition[$key];
+                    try{
+                       $club_formation = $this->objectName::create($data_formation);
+                       $club_formation->save();
+                    }catch(QueryException $ex){
+                        return response(['status' => false, 'msg' => trans('admin.samePlayer_name')]);             
+                    }
                 }
-            }
-            if($club_id == $match_data->away_club_id){
-                $done_away_data['away_formation'] = '1';
-                $club = Match::where('id', $match_data->id)->update($done_away_data);
-            }
-            $new_match_data = Match::where('id', $match_data->id)->first();
-            if($new_match_data->home_formation == '1' && $new_match_data->away_formation == '1'){
+                if($club_id == $match_data->away_club_id){
+                    $done_away_data['away_formation'] = '1';
+                    $club = Match::where('id', $match_data->id)->update($done_away_data);
+                }
+                $new_match_data = Match::where('id', $match_data->id)->first();
+                if($new_match_data->home_formation == '1' && $new_match_data->away_formation == '1'){
                     $match_ststus['status'] = 'started';
                     $club = Match::where('id', $match_data->id)->update($match_ststus);
                     session()->flash('success',trans('admin.formationAdded'));
-                    return 'done';
-            }
-            return response(['status' => true, 'msg' => trans('admin.formationAdded')]);
+                    return response(['final_status' => 'done' , 'msg' => '']);
+                }
+                return response(['status' => true, 'msg' => trans('admin.formationAdded')]);
+            }else{
+            return response(['status' => false , 'msg' => trans('admin.formation_num_error')]);
+        }
     }
-
     public function destroy($id)
     {
         $player = $this->objectName::where('player_id', $id)->first();
