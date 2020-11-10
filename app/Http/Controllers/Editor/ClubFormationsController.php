@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Club_formation;
 use App\User_club;
 use App\Player;
-use App\coach;
+use App\Coach;
 use App\Match;
 use App\Club;
 use App\User;
