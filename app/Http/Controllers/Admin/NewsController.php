@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\News;
+use App\News_target;
+use App\Tournament;
 use App\Player;
 use App\Coach;
-use App\Tournament;
-use App\Club;
 use App\Match;
-use App\News_target;
+use App\News;
+use App\Club;
 
 
 

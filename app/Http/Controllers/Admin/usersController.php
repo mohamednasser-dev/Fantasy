@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers\Admin;
+use Illuminate\Database\QueryException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\User_club;
 use App\User;
 use App\Club;
-use App\User_club;
-use Illuminate\Database\QueryException;
 class usersController extends Controller
 {
     public $objectName;

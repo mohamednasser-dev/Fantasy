@@ -1,13 +1,13 @@
 <?php
 namespace App\Http\Controllers\Api;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use App\User;
-use App\Sponser_image;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use App\Sponser_image;
+use App\User;
 class AuthController extends Controller
 {
     public $objectName;
@@ -56,7 +56,7 @@ class AuthController extends Controller
             {
                 $user = auth()->user();
                 if($user->type =='admin'){
-                    return $this->sendResponse(401, 'غير مصرح لك الدخول',null);
+                    return $this->sendResponse(403, 'غير مصرح لك الدخول',null);
                 }
                 $user->api_token = Str::random(60);
                 $api_token = $user->api_token;
@@ -70,7 +70,6 @@ class AuthController extends Controller
         }else {
             return $this->sendResponse(403, $validate[0], null);
         }
-    
     }
     public function store(Request $request){
         $input = $request->all();

@@ -46,7 +46,8 @@
             <div class="card-body">
                 <form class="form-horizontal form-material" id="loginform" method="POST" action="{{route('login') }}">
                      @csrf
-                    <a href="javascript:void(0)" class="text-center db"><img src="{{ asset('/assets/images/logo-icon.png') }}" alt="Home" /><br/><img src="{{ asset('/assets/images/logo-text.png') }}" alt="Home" /></a>
+                    <a href="javascript:void(0)" class="text-center db">
+                        <img src="{{ asset('/assets/images/logo-text.png') }}" style="width: 220px;" alt="Home" /></a>
                     <div class="form-group m-t-40">
                         <div class="col-xs-12">
                             <input class="form-control" type="email" name="email" id="email" required="" placeholder="{{trans('admin.email')}}" required="">

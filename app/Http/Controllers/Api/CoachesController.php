@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
-use App\User;
 use App\Coach;
+use App\User;
 
 class CoachesController extends Controller
 {

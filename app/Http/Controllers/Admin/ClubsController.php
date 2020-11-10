@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Club;
 use Carbon\Carbon;
+use App\Club;
 class ClubsController extends Controller
 {
     public $objectName;

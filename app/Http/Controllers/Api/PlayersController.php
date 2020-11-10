@@ -4,11 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Squad_player;
+use App\Player;
 use Validator;
 use App\User;
-use App\Player;
-use App\Squad_player;
-
 
 class PlayersController extends Controller
 {

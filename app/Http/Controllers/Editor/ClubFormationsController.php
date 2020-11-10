@@ -1,15 +1,15 @@
 <?php
 namespace App\Http\Controllers\Editor;
+use Illuminate\Database\QueryException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Match;
-use App\Club;
-use App\coach;
-use App\User;
-use App\Player;
 use App\Club_formation;
 use App\User_club;
-use Illuminate\Database\QueryException;
+use App\Player;
+use App\coach;
+use App\Match;
+use App\Club;
+use App\User;
 class ClubFormationsController extends Controller
 {
     public $objectName;

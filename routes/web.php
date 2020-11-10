@@ -7,6 +7,7 @@
 	// all type of users have appelety to view all this routes ..
 	// this route for login and register
 	Auth::routes();
+	Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('matches', 'Admin\MatchesController@index');
 

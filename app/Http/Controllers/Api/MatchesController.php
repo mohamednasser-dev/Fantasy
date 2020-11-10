@@ -1,14 +1,13 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Validator;
-use App\User;
-use App\Match;
 use App\MatchEvent;
 use Carbon\Carbon;
+use Validator;
+use App\Match;
+use App\User;
 class MatchesController extends Controller
 {
     public function sendResponse($code = null, $msg = null, $data = null)

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Database\QueryException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Validator;
-use App\User;
-use App\Squad;
-use App\Player;
 use App\Squad_player;
-use Illuminate\Database\QueryException;
+use App\Player;
+use Validator;
+use App\Squad;
+use App\User;
 
 class SquadsController extends Controller
 {

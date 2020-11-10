@@ -1,21 +1,21 @@
 <?php
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Match;
-use App\Gwalat;
-use App\Club;
-use App\Tournament;
-use Carbon\Carbon;
-use App\User;
-use App\Player;
-use App\User_club;
-use App\Club_formation;
-use App\MatchEvent;
-use App\Event;
 use Illuminate\Database\QueryException;
-use App\Events\MatchEnded;
+use App\Http\Controllers\Controller;
 use App\Jobs\SendPointsToUsers;
+use Illuminate\Http\Request;
+use App\Events\MatchEnded;
+use App\Club_formation;
+use App\Tournament;
+use App\MatchEvent;
+use Carbon\Carbon;
+use App\User_club;
+use App\Gwalat;
+use App\Player;
+use App\Match;
+use App\Event;
+use App\Club;
+use App\User;
 
 class MatchesController extends Controller
 {
