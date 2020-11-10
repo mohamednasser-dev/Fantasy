@@ -69,7 +69,8 @@ class ManulPasswordController extends Controller
         if (!is_array($validate)) {
             $pass_reset = Manual_pass_reset::where('email',$input['email'])->first();
             if( $input['token'] == $pass_reset->email ){
-
+                // $data['']
+                $user =User::where('email',$input['email'])->update($data);
             }
             $pass_reset = Manual_pass_reset::where('email',$input['email'])->first();
                 // dd($pass_reset);

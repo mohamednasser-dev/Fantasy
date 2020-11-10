@@ -42,6 +42,7 @@ class ForgotPasswordController extends Controller
             $user->password =bcrypt($password);
             $user->save();
         });
+
         if ($reset_password_status == Password::INVALID_TOKEN) {
         	return $this->sendResponse(403,"Token invaled" ,null);
         }
