@@ -37,6 +37,7 @@ class ForgotPasswordController extends Controller
         return $this->sendResponse(200,'Reset password link sent on your email.',null);
     }
     public function reset(ResetPasswordRequest $request) {
+        
         $reset_password_status = Password::reset($request->validated(), function ($user, $password) {
             $user->password =bcrypt($password);
             $user->save();

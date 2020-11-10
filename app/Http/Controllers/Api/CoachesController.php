@@ -71,7 +71,7 @@ class CoachesController extends Controller
             return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
         }
     }else {
-        return $this->sendResponse(403, $validate, null);
+        return $this->sendResponse(403, $validate[0], null);
     }
 }
 

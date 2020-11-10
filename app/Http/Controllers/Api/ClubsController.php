@@ -45,13 +45,12 @@ class ClubsController extends Controller
         }
     }
 
-    public function coaches_by_classif(Request $request)
+    public function clubs_by_classif(Request $request)
     {
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'classif' => 'required',
             'api_token' => 'required',
-            
             ]);
             if (!is_array($validate)) {
 
@@ -68,7 +67,7 @@ class ClubsController extends Controller
             return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
         }
     }else {
-        return $this->sendResponse(403, $validate, null);
+        return $this->sendResponse(403, $validate[0], null);
     }
 }
 

@@ -68,7 +68,7 @@ class MatchesController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     } 
     public function match_by_date(Request $request){
@@ -96,7 +96,7 @@ class MatchesController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     public function results_by_match_id(Request $request){
@@ -137,7 +137,7 @@ class MatchesController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     public function last_results(Request $request){
@@ -165,7 +165,7 @@ class MatchesController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
 }
