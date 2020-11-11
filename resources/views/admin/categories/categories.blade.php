@@ -27,66 +27,48 @@
                             <a href="{{url('categories/create')}} "
                                class="btn btn-info btn-bg">{{trans('admin.add_new_cat')}}</a>
                             <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
-                            <div class="heading-elements">
-                                <ul class="list-inline mb-0">
-           
-                                </ul>
-                            </div>
                         </div>
                         <div class="card-body">
-
                             <div class="card-body collapse in">
-
                                 <div class="table-responsive">
                                     <table class="table table-bordered mb-0">
                                         <thead>
-                                        <tr>
-                    
-                                            <th class="text-lg-center">{{trans('admin.name')}}</th>
-                                            <th class="text-lg-center">{{trans('admin.actions')}}</th>
-
-                                        </tr>
+                                            <tr>
+                                                <th class="text-lg-center">{{trans('admin.name')}}</th>
+                                                <th class="text-lg-center">{{trans('admin.actions')}}</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($categories as $cat)
-                                            <tr>
-                                                <td class="text-lg-center">{{$cat->name}}</td>
-                                                <td class="text-lg-center"><a class='btn btn-raised btn-success btn-sml'
-                                                                              href=" {{url('categories/'.$cat->id.'/edit')}}"><i
-                                                            class="icon-edit"></i></a>
+                                            @foreach($categories as $cat)
+                                                <tr>
+                                                    <td class="text-lg-center">{{$cat->name}}</td>
+                                                    <td class="text-lg-center"><a class='btn btn-raised btn-success btn-sml'
+                                                                                  href=" {{url('categories/'.$cat->id.'/edit')}}"><i
+                                                                class="icon-edit"></i></a>
 
-                                                    <form method="get" id='delete-form-{{ $cat->id }}'
-                                                          action="{{url('categories/'.$cat->id.'/delete')}}"
-                                                          style='display: none;'>
-                                                    {{csrf_field()}}
-                                                    <!-- {{method_field('delete')}} -->
-                                                    </form>
-                                                    <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
-                                                        {
-                                                        event.preventDefault();
-                                                        document.getElementById('delete-form-{{ $cat->id }}').submit();
-                                                        }else {
-                                                        event.preventDefault();
-                                                        }
-
-                                                        "
-                                                            class='btn btn-raised btn-danger btn-sml' href=" "><i
-                                                            class="icon-android-delete" aria-hidden='true'>
-                                                        </i>
-
-
-                                                    </button>
-                                                </td>
-
-                                            </tr>
-                                        @endforeach
+                                                        <form method="get" id='delete-form-{{ $cat->id }}'
+                                                              action="{{url('categories/'.$cat->id.'/delete')}}"
+                                                              style='display: none;'>
+                                                            {{csrf_field()}}
+                                                            <!-- {{method_field('delete')}} -->
+                                                        </form>
+                                                        <button onclick="if(confirm('{{trans('admin.deleteConfirmation')}}'))
+                                                            {
+                                                            event.preventDefault();
+                                                            document.getElementById('delete-form-{{ $cat->id }}').submit();
+                                                            }else {
+                                                            event.preventDefault();
+                                                            }"
+                                                            class='btn btn-raised btn-danger btn-sml' href=" ">
+                                                            <i class="icon-android-delete" aria-hidden='true'></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
-
-
 @endsection
 

@@ -1,14 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Squad_player;
 use App\Player;
 use Validator;
 use App\User;
-
 class PlayersController extends Controller
 {
     public function sendResponse($code = null, $msg = null, $data = null)

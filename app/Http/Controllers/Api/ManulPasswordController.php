@@ -9,7 +9,6 @@ use Validator;
 use App\User;
 class ManulPasswordController extends Controller
 {
-
     public function sendResponse($code = null, $msg = null, $data = null){
         return response([
                 'code' => $code,

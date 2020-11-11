@@ -1,18 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
 use App\Coach;
 use App\User;
-
 class CoachesController extends Controller
 {
     public function sendResponse($code = null, $msg = null, $data = null)
     {
-
         return response(
             [
                 'code' => $code,
@@ -20,9 +16,7 @@ class CoachesController extends Controller
                 'data' => $data
             ]
         );
-
     }
-
     public function validationErrorsToString($errArray)
     {
         $valArr = array();
@@ -32,10 +26,8 @@ class CoachesController extends Controller
         }
         return $valArr;
     }
-
     public function makeValidate($inputs, $rules)
     {
-
         $validator = Validator::make($inputs, $rules);
         if ($validator->fails()) {
             return $this->validationErrorsToString($validator->messages());
@@ -43,36 +35,31 @@ class CoachesController extends Controller
             return true;
         }
     }
-
     public function coaches_by_classif(Request $request)
     {
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'classif' => 'required',
             'api_token' => 'required',
-            
             ]);
-            if (!is_array($validate)) {
-
+        if (!is_array($validate)) {
             $api_token = $request->input('api_token');
             $user = User::where('api_token',$api_token)->first();
-
             if($user != null){
-            $classification = $request->input('classif');
-            
-            $coaches_with_classif =Coach::with('getClub')
-            ->whereHas('getClub', function ($q) use ($classification) {
-                $q->where('classification', '=', $classification);
-            })
-            ->get();
-           
-            return $this->sendResponse(200, 'تم  اظهار مدربين الفئة المطلوبة ', $coaches_with_classif);
-        }else{
-            return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                $classification = $request->input('classif');
+                
+                $coaches_with_classif =Coach::with('getClub')
+                ->whereHas('getClub', function ($q) use ($classification) {
+                    $q->where('classification', '=', $classification);
+                })
+                ->get();
+               
+                return $this->sendResponse(200, 'تم  اظهار مدربين الفئة المطلوبة ', $coaches_with_classif);
+            }else{
+                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+            }
+        }else {
+            return $this->sendResponse(403, $validate[0], null);
         }
-    }else {
-        return $this->sendResponse(403, $validate[0], null);
     }
-}
-
 }

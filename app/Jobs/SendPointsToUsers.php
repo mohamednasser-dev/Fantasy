@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Jobs;
-
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -14,20 +12,16 @@ use App\Squad;
 use App\User;
 use App\Squad_player;
 use App\MatchEvent;
-
 class SendPointsToUsers implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     protected $match;
-
     public function __construct(Match $match)
     {
-        //
         $this->match = $match;
     }
     public function handle()
     {
-        //
         $events = MatchEvent::where('match_id',$this->match->id)->get();
         $match = Match::where('id',$this->match->id)->first();
         $win_club  = null;
@@ -80,7 +74,6 @@ class SendPointsToUsers implements ShouldQueue
             if ($player->is_captain == "1") {
                 $player_data['points'] = $player->points + $win_event->is_captain; 
                 $Player_win = Squad_player::where('player_id',$player->player_id)->update($player_data);
-
                 $playerInWinClub = Player::where('id',$player->player_id)->first();
                 $playerInWinClub_data['points'] = $playerInWinClub->points + $win_event->is_captain; 
                 $Player_win = Player::where('id',$player->player_id)->update($playerInWinClub_data);
@@ -88,7 +81,6 @@ class SendPointsToUsers implements ShouldQueue
             }else{
                 $player_data['points'] = $player->points + $win_event->value; 
                 $Player_win = Squad_player::where('player_id',$player->player_id)->update($player_data);
-
                 $playerInWinClub = Player::where('id',$player->player_id)->first();
                 $playerInWinClub_data['points'] = $playerInWinClub->points + $win_event->value; 
                 $Player_win = Player::where('id',$player->player_id)->update($playerInWinClub_data);                
@@ -107,7 +99,6 @@ class SendPointsToUsers implements ShouldQueue
             $squad->points += array_sum($Squad[$SquadId]);
             $squad->save();
         }
-
         //Get Total Squad Points  And Giv To Users
         $squads_players = Squad_player::whereIn('club_id',$clubs)->get();
         $Squad = [];
@@ -121,8 +112,6 @@ class SendPointsToUsers implements ShouldQueue
             $user  = User::find($squad->user_id);
             $user->points += $squad->points;
             $user->save();
-        }
-
-         
+        }   
     }
 }

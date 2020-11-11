@@ -1,6 +1,4 @@
 @extends('admin_temp')
-
-
 @section('content')
     <br>
     <div class="app-content content container-fluid">
@@ -12,7 +10,6 @@
                 </li>
                 <li class="breadcrumb-item"> {{trans('admin.add_new_cat')}}
                 </li>
-
             </ol>
         </div>
     </div>
@@ -24,28 +21,22 @@
                 <div class="card-header">
                     <h3 class="card-title">{{trans('admin.add_new_cat')}}</h3>
                 </div>
-     
-            <!-- /.card-header -->
+                <!-- /.card-header -->
                 <div class="card-body">
                     <div class="card-block">
-                    <div class="col-md-6 offset-md-3">
-
-                        {{ Form::open( ['url' => ['categories'],'method'=>'post', 'files'=>'true'] ) }}
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            {{ Form::text('name',old('name'),["class"=>"form-control" ,"required",'placeholder'=>trans('admin.name') ]) }}
+                        <div class="col-md-6 offset-md-3">
+                            {{ Form::open( ['url' => ['categories'],'method'=>'post', 'files'=>'true'] ) }}
+                                {{ csrf_field() }}
+                                <div class="form-group">
+                                    {{ Form::text('name',old('name'),["class"=>"form-control" ,"required",'placeholder'=>trans('admin.name') ]) }}
+                                </div>
+                                <div class="form-actions center">
+                                    {{ Form::submit( trans('admin.public_Add'),['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
+                                </div>
+                            {{ Form::close() }}
                         </div>
-
-                        <div class="center">
-                            {{ Form::submit( trans('admin.public_Add'),['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
-
-                            <div class="form-actions center">
-                        {{ Form::close() }}
                     </div>
                 </div>
-                </div>
             </div>
-        </div>
-    </div>
 @endsection
 

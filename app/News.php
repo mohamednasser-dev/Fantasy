@@ -9,7 +9,6 @@ class News extends Model
     protected $fillable = [
         'title', 'key_words', 'description','type','club_id','player_id','coach_id','tour_id','news_category_id','image'
     ];
-
     public function getImageAttribute($img)
     {
         if ($img)
@@ -17,12 +16,10 @@ class News extends Model
         else
             return "";
     }
-
     public function getClub()
     {
         return $this->hasOne('App\Club', 'id', 'club_id');
     }
-
     public function getCategory()
     {
         return $this->hasOne('App\News_category', 'id', 'news_category_id');
