@@ -107,25 +107,11 @@ class AuthController extends Controller
                 'phone' => 'required|numeric|unique:users,phone,' . $id,
                 'gender' => 'required',
                 'name' => 'required',
-                'address' => 'required',
-                'image' => '',
+                'address' => 'required'
             ]);
         if (!is_array($validate)) {
             if (empty($auth_user)) {
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ', null);
-            }
-            if ($request['image'] != null) {
-                // This is Image Information ...
-                $file = $request->file('image');
-                $name = $file->getClientOriginalName();
-                $ext = $file->getClientOriginalExtension();
-                // Move Image To Folder ..
-                $fileNewName = 'img_' . time() . '.' . $ext;
-                $file->move(public_path('uploads/users_images'), $fileNewName);
-                $input['image'] = $fileNewName;
-            }else{
-                $input['image'] = 'default_avatar.jpg';
-                
             }
             $user_data = User::find(intval($id))->update($input);
 
@@ -190,7 +176,8 @@ class AuthController extends Controller
         ]);
         if (!is_array($validate)){
             $api_token = $request->input('api_token');
-            $my_user = User::where('api_token',$api_token)->select('id','name','email','points','image','api_token')->first();
+            $my_user = User::where('api_token',$api_token)->select('id','name','email','points','api_token')->first();
+            $user_selected = User::where('id',$my_user->id)->select('id','name','points')->first();
             if($my_user != null){
                 //to get user rank by points
                 $all_users =User::select('id','name','points','image')
@@ -203,13 +190,13 @@ class AuthController extends Controller
                     }
                 }
                 //top ten users by points ...
-                $top_ten_users =User::select('id','name','points','image')
+                $top_ten_users =User::select('id','name','points')
                     ->where('type', 'user' )
                     ->orderBy('points','desc')
                     ->limit(10)
                     ->get();
                 return $this->sendResponse(200, 'تم اظهار الترتيب بناء على النقاط',
-                    array('top_ten_users' => $top_ten_users,'rank_user'=>$user_Rank ,'user'=>$my_user));
+                    array('top_ten_users' => $top_ten_users,'rank_user'=>$user_Rank ,'user'=>$user_selected));
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
