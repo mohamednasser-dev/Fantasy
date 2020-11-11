@@ -68,6 +68,8 @@ return [
     'password_confirmation' => 'تأكيد كلمة المرور',
     'secialization' => 'التخصص',
     'monitor_clubs' => 'النوادى',
+    'user_info' => 'بيانات المستخدم',
+    'add_new_user' => 'اضافة مستخدم جديد',
     'add_new_clubs' => 'اختيار فريق جديد',
     'add_new_monitor_club' => 'اضافة فريق جديد للمراقب',
 

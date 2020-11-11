@@ -22,6 +22,27 @@ class usersController extends Controller
         // dd($categories);
         return view($this->folderView.'users',compact('users'));
     }
+    public function create()
+    {
+        return view($this->folderView.'create_user');
+    }
+        public function store(Request $request)
+    {
+        $data = $this->validate(\request(),
+        [
+            'name' => 'required|unique:users',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6', 
+        ]);
+        if($request['password'] != null  && $request['password_confirmation'] != null ){
+            $data['password'] = bcrypt(request('password'));
+            $user = User::create($data);
+            $user->save();
+            session()->flash('success', trans('admin.addedsuccess'));
+            return redirect(url('users/create'));
+        }
+    }
     public function destroy($id)
     {
         $user = $this->objectName::where('id', $id)->first();
@@ -44,22 +65,21 @@ class usersController extends Controller
     }
     public function store_editor(Request $request)
     {
-             $data = $this->validate(\request(),
-            [
-                    'name' => 'required|unique:users',
-                    'type' => 'required',
-                    'email' => 'required|unique:users',
-                    'password' => 'required|min:6|confirmed',
-                    'password_confirmation' => 'required|min:6', 
-                ]);
-
-            if($request['password'] != null  && $request['password_confirmation'] != null ){
-                $data['password'] = bcrypt(request('password'));
-                $user = User::create($data);
-                $user->save();
-                session()->flash('success', trans('admin.addedsuccess'));
-                return redirect(url('editors/create'));
-            }
+         $data = $this->validate(\request(),
+        [
+            'name' => 'required|unique:users',
+            'type' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6', 
+        ]);
+        if($request['password'] != null  && $request['password_confirmation'] != null ){
+            $data['password'] = bcrypt(request('password'));
+            $user = User::create($data);
+            $user->save();
+            session()->flash('success', trans('admin.addedsuccess'));
+            return redirect(url('editors/create'));
+        }
     }
     public function monitor_Clubs($user_id)
     {
@@ -72,11 +92,11 @@ class usersController extends Controller
         $selected_user = User::where('id',$user_id)->first();
         $user_clubs = User_club::where('type',$selected_user->type)->get();
         if(count($user_clubs)!=0){
-             $clubArray;
-             $i=0;
+            $clubArray;
+            $i=0;
             foreach ($user_clubs as $monitor_clubs) {
-               $clubArray[$i]= $monitor_clubs->club_id;
-               $i++;
+                $clubArray[$i]= $monitor_clubs->club_id;
+                $i++;
             }
             $first_clubs = Club::where('classification','1st')
             ->whereNotIn('id',$clubArray)->get();
@@ -90,29 +110,29 @@ class usersController extends Controller
     }
     public function store_monitor_clubs(Request $request)
     {  
-           $request->validate([
-             'user_id' => 'required',
-             'selectedClubs' => 'required'
-               ]);
-            $input = $request->all();
-            $user_id = $input['user_id'];
-            $selected_user = User::where('id',$user_id)->first();
-          // for saving selected monitor`s clubs ....
-            // dd($input['selectedClubs']);
-           foreach ($input['selectedClubs'] as $club_id) 
-           {
-              $monitor_club_data['user_id']=$user_id ;
-              $monitor_club_data['club_id']=$club_id ;
-              $monitor_club_data['type']=$selected_user->type;
-              try{
-                   $User_clubs = User_club::create($monitor_club_data);
-                   $User_clubs->save();
-                 }catch(QueryException $ex){
-                    return $this->sendResponse(403,'لقد تم اختيار النادى من قبل');                 
-                 }
+        $request->validate([
+         'user_id' => 'required',
+         'selectedClubs' => 'required'
+        ]);
+        $input = $request->all();
+        $user_id = $input['user_id'];
+        $selected_user = User::where('id',$user_id)->first();
+        // for saving selected monitor`s clubs ....
+        // dd($input['selectedClubs']);
+        foreach ($input['selectedClubs'] as $club_id) 
+        {
+            $monitor_club_data['user_id']=$user_id ;
+            $monitor_club_data['club_id']=$club_id ;
+            $monitor_club_data['type']=$selected_user->type;
+            try{
+                $User_clubs = User_club::create($monitor_club_data);
+                $User_clubs->save();
+            }catch(QueryException $ex){
+                return $this->sendResponse(403,'لقد تم اختيار النادى من قبل');                 
             }
-            session()->flash('success', trans('admin.addedsuccess'));
-            return redirect(url('monitor_Clubs/'.$user_id));
+        }
+        session()->flash('success', trans('admin.addedsuccess'));
+        return redirect(url('monitor_Clubs/'.$user_id));
     }
     public function destroy_monitor_club($club_id)
     {

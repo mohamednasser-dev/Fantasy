@@ -15,6 +15,10 @@
      <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header">
+                    <a href="{{url('users/create')}} "
+                       class="btn btn-info btn-bg">{{trans('admin.add_new_user')}}</a>
+                </div>
                 <div class="card-body">
                    <!-- Start home table -->
                     <table id="myTable" class="table full-color-table full-primary-table">
