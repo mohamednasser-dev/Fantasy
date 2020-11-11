@@ -186,17 +186,33 @@ class AuthController extends Controller
                 ->get();
                 foreach ($all_users as $key => $user) {
                     if($user->id == $my_user->id){
-                        $user_Rank = $key+1;
+                        $user_Rank[0]['position'] = $key+1;
+                        $user_Rank[0]['id'] = $user->id;
+                        $user_Rank[0]['name'] = $user->name;
+                        $user_Rank[0]['points'] = $user->points;
                     }
                 }
                 //top ten users by points ...
-                $top_ten_users =User::select('id','name','points')
+                $top_ten_users =User::select(DB::raw(' ROW_NUMBER() OVER(ORDER BY points DESC) AS position,id,name,points '))
                     ->where('type', 'user' )
+                    ->groupBy('id','name','points')
                     ->orderBy('points','desc')
                     ->limit(10)
-                    ->get();
-                return $this->sendResponse(200, 'تم اظهار الترتيب بناء على النقاط',
-                    array('top_ten_users' => $top_ten_users,'rank_user'=>$user_Rank ,'user'=>$user_selected));
+                    ->get()->toArray();
+                $new_rank = array_merge($top_ten_users,$user_Rank);
+                $result = array();
+                foreach ($new_rank as $key => $value){
+                  if(!in_array($value, $result))
+                    $result[$key]=$value;
+                }
+                foreach ($result as $key => $value) {
+                    if ($value['id'] == $user_selected->id) {
+                        $result[$key]['flag'] = 1;
+                    }else{
+                        $result[$key]['flag'] = 0;
+                    }
+                }
+                return $this->sendResponse(200, 'تم اظهار الترتيب بناء على النقاط',$result);
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
