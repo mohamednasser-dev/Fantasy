@@ -23,7 +23,7 @@
                 <div class="form-group row">
                     <label for="example-month-input" class="col-md-2 col-form-label">{{trans('admin.club_name')}}</label>
                     <div class="col-md-10">
-                        {{ Form::select('club_id',App\Club::pluck('club_name','id'),null,["class"=>"form-control" ,'placeholder'=>trans('admin.choose_club') ]) }}
+                        {{ Form::select('club_id',App\Club::pluck('club_name','id'),null,["class"=>"custom-select col-12" ,'placeholder'=>trans('admin.choose_club') ]) }}
                     </div>
                 </div>
                 <div class="form-group m-t-40 row">
@@ -38,17 +38,14 @@
                                         <div class="col-md-10">
                                  
                                  {{Form::select('center_name',
-                            ['GK' => 'GK : Goal Keeper',
-                             'RB' => 'LWB : Left Wing Back',
-                             'LB' => 'CDM : Center Defensive Midfielder',
-                             'RF' => 'CM : Center Midfielder',
-                             'LF' => 'LM : Left Midfielder', 
-                             'RM' => 'RM : Right Midfielder',
-                             'CAM' => 'CAM : Central Attacking Midfielder',
-                             'CF' => 'CF : Center Forward', 
-                             'ST' => 'ST : Striker'],
+                            ['GK' => trans('admin.GK'),
+                             'RB' => trans('admin.RB'),
+                             'LB' => trans('admin.LB'),
+                             'RF' => trans('admin.RF'),
+                             'LF' => trans('admin.LF')
+                             ],
                              null
-                             ,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.choose_center_name') ])}}
+                             ,["class"=>"custom-select col-12" ,"required",'placeholdeform-controlr'=>trans('admin.choose_center_name') ])}}
                                               </div>
                                     </div>
 

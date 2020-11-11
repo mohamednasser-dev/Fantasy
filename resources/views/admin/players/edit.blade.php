@@ -33,7 +33,7 @@
 
                                           <div class="col-md-10">
                                     {{ Form::select('club_id',App\Club::pluck('club_name','id'),$player_data->club_id
-                                ,["class"=>"form-control" ,'placeholder'=>trans('admin.choose_club') ]) }}
+                                ,["class"=>"custom-select col-12" ,'placeholder'=>trans('admin.choose_club') ]) }}
 
                                      </div>
                                                 </div>
@@ -50,16 +50,14 @@
                                         <div class="col-md-10">
                                  
                                  {{Form::select('center_name',
-                            ['LWB' => 'LWB : Left Wing Back',
-                             'CDM' => 'CDM : Center Defensive Midfielder',
-                             'CM' => 'CM : Center Midfielder',
-                             'LM' => 'LM : Left Midfielder', 
-                             'RM' => 'RM : Right Midfielder',
-                             'CAM' => 'CAM : Central Attacking Midfielder',
-                             'CF' => 'CF : Center Forward', 
-                             'ST' => 'ST : Striker'],
+                           ['GK' => trans('admin.GK'),
+                             'RB' => trans('admin.RB'),
+                             'LB' => trans('admin.LB'),
+                             'RF' => trans('admin.RF'),
+                             'LF' => trans('admin.LF')
+                             ],
                              $player_data->center_name
-                             ,["class"=>"form-control" ,"required",'placeholder'=>trans('admin.choose_center_name') ])}}
+                             ,["class"=>"custom-select col-12" ,"required",'placeholder'=>trans('admin.choose_center_name') ])}}
                                               </div>
                                     </div>
 

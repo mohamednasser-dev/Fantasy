@@ -75,20 +75,41 @@ class MatchesController extends Controller
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'api_token' => 'required',
-            'date' => 'required|date',
+            'duration' => 'required',
             ]);
         if (!is_array($validate)) {
             $api_token = $request->input('api_token');
+            $duration = $request->input('duration');
             $user = User::where('api_token',$api_token)->first();
             if($user != null){
-                // to get  matches by selected date
-                $matches = Match::where('date', $request->input('date'))
-                ->with('getHomeclub')
-                ->with('getAwayclub')
-                ->get();
+                //this for yesterday/now/tomorrow matches
+                if($duration == 'Y'){
+                    $yesterday = Carbon::yesterday();
+                    $yesterday =  Carbon::parse($yesterday->toDateTimeString())->format('Y-m-d');
+              
+                    $matches = Match::where('date', $yesterday)
+                    ->with('getHomeclub')
+                    ->with('getAwayclub')
+                    ->get();
+                }else if($duration == 'N'){
+                    $now = Carbon::now();
+                    $now =  Carbon::parse($now->toDateTimeString())->format('Y-m-d');
+              
+                    $matches = Match::where('date', $now)
+                    ->with('getHomeclub')
+                    ->with('getAwayclub')
+                    ->get();
+                }else if($duration == 'T'){
+                    $tomorrow = Carbon::tomorrow();
+                    $tomorrow =  Carbon::parse($tomorrow->toDateTimeString())->format('Y-m-d');
+                    $matches = Match::where('date', $tomorrow)
+                    ->with('getHomeclub')
+                    ->with('getAwayclub')
+                    ->get();
+                }
                 // this line for check numbers of matches if exists
                 if(count($matches)>0){
-                    return $this->sendResponse(200, 'تم اظهار مباريات اليوم ',  $matches);
+                    return $this->sendResponse(200, 'تم اظهار مباريات  ',  $matches);
                 }else{
                     return $this->sendResponse(403, 'لا يوجد مباريات اليوم',null);
                 }

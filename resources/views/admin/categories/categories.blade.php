@@ -13,21 +13,12 @@
             </ol>
         </div>
     </div>
-
-
     <!-- /.card-header -->
-
-
     <div class="app-content content container-fluid">
         <div class="content-wrapper">
-        @include('layouts.errors')
-        @include('layouts.messages')
-            <div class="content-header row">
-            </div>
-
+            @include('layouts.errors')
+            @include('layouts.messages')
             <div class="content-body">
-
-
                 <!-- stats -->
                 <div class="row">
 
