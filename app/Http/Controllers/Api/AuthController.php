@@ -107,8 +107,7 @@ class AuthController extends Controller
                 'phone' => 'required|numeric|unique:users,phone,' . $id,
                 'gender' => 'required',
                 'name' => 'required',
-                'lng' => 'required',
-                'lat' => 'required',
+                'address' => 'required',
                 'image' => '',
             ]);
         if (!is_array($validate)) {
@@ -191,14 +190,14 @@ class AuthController extends Controller
         ]);
         if (!is_array($validate)){
             $api_token = $request->input('api_token');
-            $my_user = User::where('api_token',$api_token)->first();
+            $my_user = User::where('api_token',$api_token)->select('id','name','email','points','image','api_token')->first();
             if($my_user != null){
                 //to get user rank by points
-                $top_users =User::select('id','name','points','image')
+                $all_users =User::select('id','name','points','image')
                 ->where('type', 'user' )
                 ->orderBy('points','desc')
                 ->get();
-                foreach ($top_users as $key => $user) {
+                foreach ($all_users as $key => $user) {
                     if($user->id == $my_user->id){
                         $user_Rank = $key+1;
                     }
@@ -210,7 +209,7 @@ class AuthController extends Controller
                     ->limit(10)
                     ->get();
                 return $this->sendResponse(200, 'تم اظهار الترتيب بناء على النقاط',
-                    array('top_ten_users' => $top_ten_users,'rank_user'=>$user_Rank ,'user'=>$user));
+                    array('top_ten_users' => $top_ten_users,'rank_user'=>$user_Rank ,'user'=>$my_user));
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
