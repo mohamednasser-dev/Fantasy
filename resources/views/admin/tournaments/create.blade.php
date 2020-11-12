@@ -44,7 +44,7 @@
                         <div class="center">
                             {{ Form::submit( trans('admin.public_Add') ,['class'=>'btn btn-success btn-min-width mr-1 mb-1','style'=>'margin:10px']) }}
                         </div>
-                    {{ Form::c=lose() }}
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>

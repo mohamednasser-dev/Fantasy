@@ -48,7 +48,7 @@ class CoachesController extends Controller
             if($user != null){
                 $classification = $request->input('classif');
                 
-                $coaches_with_classif =Coach::select('id','coach_name','club_id')->with('getClub')
+                $coaches_with_classif =Coach::select('id','coach_name','club_id','image')->with('getClub')
                 ->whereHas('getClub', function ($q) use ($classification) {
                     $q->where('classification', '=', $classification);
                 })

@@ -130,11 +130,15 @@ class MatchesController extends Controller
             if(count($matches_number) == 0)
             {
                 //to put started and end gwla duration in selected gwla
+
                 $data_gwla['start'] = $request['date'];                
+                $data_gwla['start_time'] = $request['time'];                
                 $data_gwla['end'] = $request['date'];
+                $data_gwla['end_time'] = $request['time'];                
             }else
             {
-                $data_gwla['end'] = $request['date'];                
+                $data_gwla['end'] = $request['date']; 
+                $data_gwla['end_time'] = $request['time'];                       
             }
             $match = $this->objectName::create($data);
             $match->save();

@@ -110,7 +110,7 @@ class MatchesController extends Controller
                 if(count($matches)>0){
                     return $this->sendResponse(200, 'تم اظهار مباريات  ',  $matches);
                 }else{
-                    return $this->sendResponse(403, 'لا يوجد مباريات اليوم',null);
+                    return $this->sendResponse(403, 'لا يوجد مباريات ',null);
                 }
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);

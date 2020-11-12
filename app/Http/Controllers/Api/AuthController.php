@@ -105,7 +105,7 @@ class AuthController extends Controller
                 'api_token' => 'required',
                 'email' => 'required|email|unique:users,email,' . $id,
                 'phone' => 'required|numeric|unique:users,phone,' . $id,
-                'gender' => 'required',
+                'gender' => '',
                 'name' => 'required',
                 'address' => 'required'
             ]);
@@ -132,8 +132,7 @@ class AuthController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null)
             {
-                $id = $request->input('id');
-                $user_data =User::select('name','email','gender','points','address')->where('id', $user->id)->get();
+                $user_data =User::select('name','email','gender','points','address')->where('id', $user->id)->first();
                 return $this->sendResponse(200, 'تم  اظهار بيانات المستخدم    ', $user_data);
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
@@ -154,7 +153,7 @@ class AuthController extends Controller
             if($user != null)
             {
                 //top ten users by points ...
-                $top_ten_users =User::select('id','name','points','image')
+                $top_ten_users =User::select('id','name','points')
                     ->where('type', 'user' )
                     ->orderBy('points','desc')
                     ->limit(10)

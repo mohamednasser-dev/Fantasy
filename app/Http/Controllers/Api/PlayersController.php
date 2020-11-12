@@ -49,7 +49,7 @@ class PlayersController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null){
                 $classification = $request->input('classif');
-                $players_with_classif =Player::select('id','player_name','center_name','club_id')->with('getClub')
+                $players_with_classif =Player::select('id','player_name','center_name','club_id','image')->with('getClub')
                 ->whereHas('getClub', function ($q) use ($classification) {
                     $q->where('classification', '=', $classification);
                 })
@@ -74,7 +74,7 @@ class PlayersController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null){
                 $club_id = $request->input('club_id');
-                $players_with_club =Player::select('id','player_name','center_name','club_id')->where('club_id', $club_id )->get();
+                $players_with_club =Player::select('id','player_name','center_name','club_id','image')->where('club_id', $club_id )->get();
                 return $this->sendResponse(200, 'تم  اظهار لاعبين النادى المطلوبة ', $players_with_club);
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);

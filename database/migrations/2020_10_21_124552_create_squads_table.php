@@ -19,7 +19,7 @@ class CreateSquadsTable extends Migration
             $table->enum('squad_type',['1st','2nd'])->default('1st');
             $table->bigInteger('points')->default('0');         
 
-            $table->bigInteger('coach_id')->unsigned();
+            $table->bigInteger('coach_id')->unsigned()->nullable();
             $table->foreign('coach_id')->references('id')->on('coaches')->onDelete('cascade');
 
             $table->bigInteger('user_id')->unsigned();
