@@ -47,7 +47,7 @@ class ClubsController extends Controller{
             if($user != null){
                 $classification = $request->input('classif');
                 
-                $coach_with_classif =Club::where('classification',$classification)->get();
+                $coach_with_classif =Club::select('id','club_name','classification')->where('classification',$classification)->get();
                
                 return $this->sendResponse(200, 'تم  اظهار نوادى الفئة المطلوبة ', $coach_with_classif);
             }else{

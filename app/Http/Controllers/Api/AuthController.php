@@ -124,8 +124,7 @@ class AuthController extends Controller
     public function select_user_data(Request $request){
         $input = $request->all();
         $validate = $this->makeValidate($input,[
-            'api_token' => 'required',        
-            'id' => 'required|exists:users,id',
+            'api_token' => 'required',    
         ]);
         if (!is_array($validate)) 
         {
@@ -134,7 +133,7 @@ class AuthController extends Controller
             if($user != null)
             {
                 $id = $request->input('id');
-                $user_data =User::select('name','email','gender','points')->where('id', $id )->get();
+                $user_data =User::select('name','email','gender','points','address')->where('id', $user->id)->get();
                 return $this->sendResponse(200, 'تم  اظهار بيانات المستخدم    ', $user_data);
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);

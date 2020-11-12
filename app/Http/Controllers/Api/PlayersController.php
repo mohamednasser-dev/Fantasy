@@ -49,7 +49,7 @@ class PlayersController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null){
                 $classification = $request->input('classif');
-                $players_with_classif =Player::with('getClub')
+                $players_with_classif =Player::select('id','player_name','center_name','club_id')->with('getClub')
                 ->whereHas('getClub', function ($q) use ($classification) {
                     $q->where('classification', '=', $classification);
                 })
@@ -70,13 +70,11 @@ class PlayersController extends Controller
             'club_id' => 'required',
             ]);
         if (!is_array($validate)) {
-                $api_token = $request->input('api_token');
-                $user = User::where('api_token',$api_token)->first();
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
             if($user != null){
                 $club_id = $request->input('club_id');
-                
-                $players_with_club =Player::where('club_id', $club_id )->get();
-               
+                $players_with_club =Player::select('id','player_name','center_name','club_id')->where('club_id', $club_id )->get();
                 return $this->sendResponse(200, 'تم  اظهار لاعبين النادى المطلوبة ', $players_with_club);
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
@@ -97,7 +95,7 @@ class PlayersController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null){
                 $player_id = $request->input('player_id');
-                $player_info =Player::where('id', $player_id )->get();
+                $player_info =Player::select('id','player_name','center_name','club_id','age','desc','image')->where('id', $player_id )->get();
                 return $this->sendResponse(200, 'تم اظهار بيانات اللاعب !!!', $player_info);
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
