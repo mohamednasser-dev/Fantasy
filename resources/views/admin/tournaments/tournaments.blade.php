@@ -28,8 +28,9 @@
                     <table id="myTable" class="table full-color-table full-primary-table">
                         <thead>
                             <tr>
-                                <th class="text-lg-center">{{trans('admin.tour_name')}}</th>                   
-                                <th class="text-lg-center">{{trans('admin.classification')}}</th> 
+                                <th class="text-lg-center">{{trans('admin.tour_name')}}</th>
+                                <th class="text-lg-center">{{trans('admin.classification')}}</th>
+                                <th class="text-lg-center">{{trans('admin.status')}}</th> 
                                 <th class="text-lg-center">{{trans('admin.actions')}}</th>
                             </tr>
                         </thead>
@@ -43,6 +44,20 @@
                                         @elseif($tour->classification =='2nd')
                                             {{trans('admin.2nd')}}
                                         @endif
+                                    </td>
+                                    <td class="text-lg-center">
+                                        @if($tour->status == 'started')
+                                            <a class='btn btn-danger' href=" {{url('tournaments/'.$tour->status.'/'.$tour->id.'/'.$tour->classification.'/change_tour_status')}}">
+                                                {{trans('admin.end_tour')}}
+                                            </a>
+                                        @elseif($tour->status == 'inprogres')
+                                            <a class='btn btn-success' href=" {{url('tournaments/'.$tour->status.'/'.$tour->id.'/'.$tour->classification.'/change_tour_status')}}">
+                                                {{trans('admin.tour_begin')}}
+                                            </a>
+                                        @elseif($tour->status == 'ended')
+                                            {{trans('admin.tour_ended')}}
+                                        @endif
+
                                     </td>
                                     <td class="text-lg-center">
                                         <a class='btn waves-effect waves-light btn-secondary' href=" {{url('gwalat/'.$tour->id)}}">

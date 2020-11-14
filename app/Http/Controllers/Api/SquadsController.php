@@ -261,7 +261,7 @@ class SquadsController extends Controller
                 ->whereHas('Tournament', function ($q) use ($classification) {
                     $q->where('classification', '=', $classification);
                 })
-                ->where('status','inprogres')
+                ->where('status','started')
                 ->first();
                 // to disable any user to change  squad formation befor gwla by 24 hours
                 // to get today`s matches

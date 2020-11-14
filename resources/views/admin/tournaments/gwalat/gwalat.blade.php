@@ -28,6 +28,7 @@
                                 <th class="text-lg-center">{{trans('admin.name')}}</th>
                                 <th class="text-lg-center">{{trans('admin.start')}}</th> 
                                 <th class="text-lg-center">{{trans('admin.end')}}</th> 
+                                <th class="text-lg-center">{{trans('admin.status')}}</th> 
                                 <th class="text-lg-center">{{trans('admin.actions')}}</th> 
                             </tr>
                         </thead>
@@ -37,6 +38,20 @@
                                     <td class="text-lg-center">{{$gwala->name}}</td>
                                     <td class="text-lg-center">{{$gwala->start}}</td>
                                     <td class="text-lg-center">{{$gwala->end}}</td>
+                                    <td class="text-lg-center">
+                                        @if($gwala->status == 'started')
+                                            <a class='btn btn-danger' href=" {{url('gwla_matches/'.$gwala->status.'/'.$gwala->id.'/'.$tour_id.'/change_gwla_status')}}">
+                                                {{trans('admin.end_gwla')}}
+                                            </a>
+                                        @elseif($gwala->status == 'inprogres')
+                                            <a class='btn btn-success' href=" {{url('gwla_matches/'.$gwala->status.'/'.$gwala->id.'/'.$tour_id.'/change_gwla_status')}}">
+                                                {{trans('admin.gwla_begin')}}
+                                            </a>
+                                        @elseif($gwala->status == 'ended')
+                                            {{trans('admin.gwla_ended')}}
+                                        @endif
+
+                                    </td>
                                     <td class="text-lg-center">
                                         <a class='btn waves-effect waves-light btn-secondary' href=" {{url('gwla_matches/'.$gwala->id)}}">
                                             {{trans('admin.gwla_matches')}}

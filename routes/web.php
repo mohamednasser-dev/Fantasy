@@ -63,12 +63,14 @@
 		Route::get('tournaments/{id}/edit', 'Admin\TournamentsController@edit');
 		Route::post('tournaments/{id}/update', 'Admin\TournamentsController@update');
 		Route::get('tournaments/{id}/delete', 'Admin\TournamentsController@destroy');
+		Route::get('tournaments/{status}/{tour_id}/{type}/change_tour_status', 'Admin\TournamentsController@change_tour_status');
 		//tournament gwalat routes
 		Route::get('gwalat/{id}', 'Admin\TournamentsController@gwalat');
 		Route::get('gwalat/{id}/create', 'Admin\TournamentsController@create_gawla');
 		Route::post('gwalat/store', 'Admin\TournamentsController@store_gawla');
 		Route::get('gwalat/{id}/delete', 'Admin\TournamentsController@destroy_gawla');
 		Route::get('gwla_matches/{id}', 'Admin\MatchesController@gwla_matches');
+		Route::get('gwla_matches/{status}/{id}/{tour_id}/change_gwla_status', 'Admin\TournamentsController@change_gwla_status');
 		//match routes
 		Route::post('matches/store', 'Admin\MatchesController@store');
 		Route::get('matches/create', 'Admin\MatchesController@create');

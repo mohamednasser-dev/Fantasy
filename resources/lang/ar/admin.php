@@ -203,8 +203,24 @@ return [
     'gwla_info' => 'بيانات الجولة',    
     'start' => ' يبدأ فى',
     'end' => 'ينتهى فى',
+    'tour_status_change_success' => 'تم  تغير حالة البطولة',
+    'last_tour_not_ended' => 'لم تنتهى البطولة الاخيره',
+    'tour_should_end_first' => 'يجب انهاء البطولة الاخيره اولا',
+    'tour_begin' => 'بدء البطولة',
+    'end_tour' => 'انهاء البطولة',
+    'tour_ended' => 'البطولة انتهت',
+
+    //gwalat
     'add_new_gawla' => 'اضافة جولة جديدة',
     'update_tour' => 'تعديل بيانات البطولة',
+    'gwla_status_change_success' => 'تم  تغير حالة الجولة',
+    'last_gwla_not_ended' => 'لم تنتهى الجولة الاخيره',
+    'gwla_should_end_first' => 'يجب انهاء الجولة الاخيره اولا',
+    'gwla_begin' => 'بدء الجولة',
+    'end_gwla' => 'انهاء الجولة',
+    'gwla_ended' => 'الجولة انتهت',
+    
+    
     
     //news
     'add_new_news' => 'اضافة خبر جديد',

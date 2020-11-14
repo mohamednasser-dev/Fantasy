@@ -17,6 +17,7 @@ class CreateTournamentsTable extends Migration
             $table->id();
             $table->string('tour_name');
             $table->enum('classification',['1st','2nd'])->default('1st');
+            $table->enum('status',['inprogres','started','ended'])->default('inprogres');
             $table->timestamps();
         });
     }
