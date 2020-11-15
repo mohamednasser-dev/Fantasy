@@ -32,7 +32,7 @@ class MatchesController extends Controller
     {
        $monitor_clubArray=null;
        $monitor_clubs=null;
-       $matches = $this->objectName::paginate(10);
+       $matches = $this->objectName::orderBy('tour_id','desc')->paginate(10);
         if(auth()->user()->type == 'monitor')
         {
        // dd(auth()->user()->id);

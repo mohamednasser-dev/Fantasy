@@ -42,7 +42,21 @@
                                     <td class="text-lg-center">{{$player->player_name}}</td>
                                     <td class="text-lg-center">{{$player->age}}</td>
                                     <td class="text-lg-center">{{$player->getClub->club_name}}</td>
-                                    <td class="text-lg-center">{{$player->center_name}}</td>
+                                    <td class="text-lg-center">
+                                        @if($player->center_name == 'GK')
+                                            {{trans('admin.GK')}}
+                                        @elseif($player->center_name == 'RB')
+                                            {{trans('admin.RB')}}
+                                        @elseif($player->center_name == 'LB')
+                                            {{trans('admin.LB')}}
+                                        @elseif($player->center_name == 'RF')
+                                            {{trans('admin.RF')}}
+                                        @elseif($player->center_name == 'LF')
+                                            {{trans('admin.LF')}}
+                                        @else
+                                            {{$player->center_name}}
+                                        @endif
+                                    </td>
                                     <td class="text-lg-center">
                                         <img src="{{ url($player->image) }}" style="width:75px;height:75px;"/>
                                     </td>
@@ -70,6 +84,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $players->links()}} 
                 </div>
             </div>
         </div>

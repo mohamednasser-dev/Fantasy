@@ -1,5 +1,4 @@
 <?php
-
 return [
     // Public translation
     'public_Web_title' => 'عنوان الموقع',
@@ -15,7 +14,6 @@ return [
     'public_delete_modal_text' => 'هل تريد الحذف',
     'public_delete' => 'حذف',
     'public_cancel' => 'الغاء',
-
     // messages
     'addedsuccess' => 'تم الاضافة بنجاح',
     'statuschanged' => 'تم تعديل الحالة',
@@ -25,8 +23,6 @@ return [
     'adsAddedSuccess' => 'تم اضافة الاعلان بتجاح',
     'adsExisting' => 'هذا المنتج يوجد له اعلان بالفعل',
     'formationAdded' => 'تم اضافة تشكيل الفريق بنجاح',
-
-
     //navigation  sidebar
     'nav_home' => 'الصفحة الرئيسية',
     'nav_clubs' => 'النوادى',
@@ -50,11 +46,9 @@ return [
     'view_matches' => 'جميع المباريات',
     'view_tours' => 'جميع البطولات',
     'nav_sponsers' => 'الاعلانات',
-
     //home page
     'today_matches' => 'مباريات اليوم',
     'logout' => 'تسجيل الخروج',
-
     //editors
     'add_new_editor' => 'اضافة مراقب جديد',
     'editor_info' => 'بيانات المراقب',
@@ -72,7 +66,6 @@ return [
     'add_new_user' => 'اضافة مستخدم جديد',
     'add_new_clubs' => 'اختيار فريق جديد',
     'add_new_monitor_club' => 'اضافة فريق جديد للمراقب',
-
     //monitor
     'monitor_match' => 'متابعة المباراه',
     'play' => 'لاعبى',
@@ -83,11 +76,9 @@ return [
     'done' => 'تنفيذ',
     'points' => 'النقاط',
     'formation_num_error' => 'عدد اللاعبين فى تشكيلة المباراه غير كامل  ...',
-
     //Categories
     'add_new_cat' => 'اضافة تصنيف جديد',
     'name' => 'الاسم',
-
     //Clubs
     'add_new_club' => 'اضافة نادى جديد',
     'club_info' => 'بيانات النادى',
@@ -104,14 +95,12 @@ return [
     'choose_classification' => 'اختر الفئة',
     'change_club_image' => 'تغير صورة النادى',
     'update_club' => 'تعديل بيانات النادى',
-
     //sponsers
     'add_new_sponser' => 'اضافة اعلان جديد',
     'view_sponsers' => 'جميع الاعلانات',
     'sponser_info' => 'بيانات الاعلان',
     'sponser' => 'الاعلان',
     'sponser_image' => 'صوره الاعلان',
-
     //coaches
     'coach_info' => 'بيانات المدرب',
     'add_new_coach' => 'اضافة مدرب جديد',
@@ -123,7 +112,6 @@ return [
     'coach_image' => 'صورة المدرب',
     'update_coach' => 'تعديل بيانات المدرب',
     'change_coach_image' => 'تغير صورة المدرب',
-
     //matches
     'add_new_match' => 'اضافة مباراة جديدة',
     'home_club' => 'النادى الاول',
@@ -161,7 +149,6 @@ return [
     'match_time' => 'ميعاد المباراه',
     'update_match' => 'تعديل بيانات المباراة',
     'emptyEvents' => 'لايوجد احداث',
-
     //match_formations
     'GK' => 'حارس المرمى',
     'RF' => 'لاعب هجوم يمين',
@@ -171,7 +158,6 @@ return [
     'SB1' => 'اللاعب البديل الاول',
     'SB2' => 'اللاعب البديل الثانى',
     'save_formation' => 'حفظ التشكيل',
-
     //player
     'add_new_player' => 'اضافة لاعب جديد',
     'player_name' => 'اسم اللاعب',
@@ -183,7 +169,6 @@ return [
     'change_player_image' => 'تغير صورة اللاعب',
     'player_info' => 'بيانات اللاعب',
     'samePlayer_name' => ' اللاعب مختار من قبل',
-  
     //Stadium
     'stad_info' => 'بيانات الملعب',
     'add_new_stad' => 'اضافة ملعب جديد',
@@ -192,7 +177,6 @@ return [
     'stad_image' => 'صورة الملعب',
     'change_stad_image' => 'تغير صورة الملعب',
     'update_stad' => 'تعديل بيانات الملعب',
-
     //tournament
     'tour_info' => 'بيانات البطولة',
     'add_new_tour' => 'اضافة بطولة جديدة',
@@ -209,7 +193,6 @@ return [
     'tour_begin' => 'بدء البطولة',
     'end_tour' => 'انهاء البطولة',
     'tour_ended' => 'البطولة انتهت',
-
     //gwalat
     'add_new_gawla' => 'اضافة جولة جديدة',
     'update_tour' => 'تعديل بيانات البطولة',
@@ -219,9 +202,6 @@ return [
     'gwla_begin' => 'بدء الجولة',
     'end_gwla' => 'انهاء الجولة',
     'gwla_ended' => 'الجولة انتهت',
-    
-    
-    
     //news
     'add_new_news' => 'اضافة خبر جديد',
     'title' => 'العنوان',
@@ -236,14 +216,11 @@ return [
     'change_news_image' => 'تغير صورة الخبر',
     'choose_new_target' => 'اختار المحتوى الجديد للخبر',
     'old_target_info' => 'بيانات محتوى الخبر ',
-    
     'target' => 'الاسم',
     'model' => 'التصنيف',
     'delete' => 'حذف',
     'target_player' => 'لاعب',
     'target_coach' => 'مدرب',
-     
-
     //login
     'email' => 'البريد الالكترونى',
     'password' => 'كلمة المرور',
@@ -254,8 +231,4 @@ return [
     'i_have_Already_account' => 'انا امتلك حساب بالفعل !',
     'confirm_pass' => 'تأكيد كلمة المرور',
     'user_name' => 'اسم المستخدم',
-
-    
-
 ];
-

@@ -26,7 +26,7 @@ class PlayersController extends Controller
     // this function to  select all Coaches
     public function index()
     {
-        $players = $this->objectName::all();
+        $players = $this->objectName::orderBy('id','desc')->paginate(25);
         return view($this->folderView.'players',\compact('players'));
     }
 

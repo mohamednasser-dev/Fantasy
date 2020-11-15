@@ -255,7 +255,7 @@ class SquadsController extends Controller
             $api_token = $request->input('api_token');
             $user = User::where('api_token',$api_token)->first();
             if($user != null){
-                // to get the only inprogress gwla in the tournament ..
+                // to get the only started gwla in the tournament ..
                 $classification = $request->input('classification');
                 $gwla =Gwalat::with('Tournament')
                 ->whereHas('Tournament', function ($q) use ($classification) {
@@ -263,26 +263,25 @@ class SquadsController extends Controller
                 })
                 ->where('status','started')
                 ->first();
-                // to disable any user to change  squad formation befor gwla by 24 hours
-                // to get today`s matches
+                // to avoid any user to change squad formation befor gwla by 24 hours  ..
+                // to get today date by time & date ..
                 $mytime = Carbon::now();
                 $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d H:i');
-                $mytomorrowtime = Carbon::tomorrow();
-                $tomorrow =  Carbon::parse($mytomorrowtime->toDateTimeString())->format('Y-m-d H:i');
-    
-
+                //get start date of active selected gwla ...
                 $startDate =  $gwla->start;
                 $startTime =  $gwla->start_time;
                 $start = $startDate.' '.$startTime ;
                 $final_Start = date("Y-m-d H:i", strtotime($start));
                 $final_Start = Carbon::createFromFormat('Y-m-d H:i', $final_Start);
-                $final_Start_yesterday =  Carbon::parse($final_Start->toDateTimeString())->format('Y-m-d H:i');
-                // dd($final_Start_yesterday);
+                //get start date befor 24 hour ...
+                $yesterday_gwla_start = $final_Start->subDay();
+                //get end date of active selected gwla ...
                 $endDate =  $gwla->end;
                 $endTime =  $gwla->end_time;
                 $end = $endDate.' '.$endTime ;
                 $final_end = date("Y-m-d H:i", strtotime($end));
-                if(($today >= $final_Start_yesterday && $today <= $final_end)){
+                //make if statement to avoid user to change his squad formation during active gwla ...
+                if(($today >= $yesterday_gwla_start && $today <= $final_end)){
                     return $this->sendResponse(403,'لا يمكن تعديل التشكيلة اثناء الجولة'); 
                 }else{
                     return $this->sendResponse(200, 'تعديل التشكيلة مسموح ',null);
