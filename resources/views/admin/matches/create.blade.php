@@ -12,11 +12,17 @@
           </ol>
       </div>
    </div>
+
+   <div class="alert alert-warning"> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+    <h3 class="text-warning"><i class="fa fa-exclamation-triangle"></i> {{trans('admin.attention')}}</h3>
+    {{trans('admin.create_match_hint')}}              
+   </div>
    <div class="row">
       <div class="col-sm-12">
           <div class="card">
               <div class="card-body">
-                 <h4 class="card-title">{{trans('admin.stad_info')}}</h4>
+                 <h4 class="card-title">{{trans('admin.match_info')}}</h4>
                  <hr>   
                     {{ Form::open( ['url' => ['matches/store'],'method'=>'post', 'files'=>'true'] ) }}
                     {{ csrf_field() }}
