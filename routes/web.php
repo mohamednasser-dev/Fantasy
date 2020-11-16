@@ -7,16 +7,17 @@
 	// all type of users have appelety to view all this routes ..
 	// this route for login and register
 	Auth::routes();
-	Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
+	// Route::view('forgot_password', 'auth.reset_password')->name('password.reset');
+	Route::get('forgot', 'ForgotPasswordController@forgot');
+	Route::post('reset', 'ForgotPasswordController@reset');
+	Route::get('support', 'Guest\supportController@index');
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('matches', 'Admin\MatchesController@index');
-
 	Route::group(['middleware' => ['auth','monitor']], function () 
 	{
 		Route::get('monitor_match/{match_id}', 'Admin\MatchesController@monitor_match');
 		Route::post('monitor_match/store', 'Admin\MatchesController@store_match_event');
 		Route::post('monitor_match/destroy', 'Admin\MatchesController@match_destroy');
-
 		//match formation
 		Route::get('match/{match_id}/{home_id}/{away_id}/view_match_formation', 'Editor\ClubFormationsController@index');
 		Route::post('club_formations/store', 'Editor\ClubFormationsController@store');

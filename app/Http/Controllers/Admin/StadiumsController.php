@@ -10,9 +10,6 @@ class StadiumsController extends Controller
 {
     public $objectName;
     public $folderView;
-
-
-
     public function __construct(Stadium $model)
     {
         $this->middleware('auth');
