@@ -373,7 +373,7 @@
                         </div>
                     </div>
                  </div> 
-               <!-- confirm delete modal -->
+                <!-- confirm delete modal -->
                 <div id="confirmModala" class="modal fade" role="dialog">
                     <div class="modal-dialog" style="width: 230px;">
                         <div class="modal-content">

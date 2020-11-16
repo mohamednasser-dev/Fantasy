@@ -114,8 +114,9 @@ class AuthController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ', null);
             }
             $user_data = User::find(intval($id))->update($input);
+            $user = User::where('id',$id)->first();
 
-            return $this->sendResponse(200, 'تم  تعديل البيانات بنجاح', $user_data);
+            return $this->sendResponse(200, 'تم  تعديل البيانات بنجاح', $user);
         } else {
             return $this->sendResponse(403, $validate[0], null);
         }
@@ -132,7 +133,7 @@ class AuthController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null)
             {
-                $user_data =User::select('name','email','gender','points','address')->where('id', $user->id)->first();
+                $user_data =User::select('name','email','gender','points','address','phone')->where('id', $user->id)->first();
                 return $this->sendResponse(200, 'تم  اظهار بيانات المستخدم    ', $user_data);
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
