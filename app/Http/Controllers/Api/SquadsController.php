@@ -268,23 +268,30 @@ class SquadsController extends Controller
                 $mytime = Carbon::now();
                 $today =  Carbon::parse($mytime->toDateTimeString())->format('Y-m-d H:i');
                 //get start date of active selected gwla ...
-                $startDate =  $gwla->start;
-                $startTime =  $gwla->start_time;
-                $start = $startDate.' '.$startTime ;
-                $final_Start = date("Y-m-d H:i", strtotime($start));
-                $final_Start = Carbon::createFromFormat('Y-m-d H:i', $final_Start);
-                //get start date befor 24 hour ...
-                $yesterday_gwla_start = $final_Start->subDay();
-                //get end date of active selected gwla ...
-                $endDate =  $gwla->end;
-                $endTime =  $gwla->end_time;
-                $end = $endDate.' '.$endTime ;
-                $final_end = date("Y-m-d H:i", strtotime($end));
-                //make if statement to avoid user to change his squad formation during active gwla ...
-                if(($today >= $yesterday_gwla_start && $today <= $final_end)){
-                    return $this->sendResponse(403,'لا يمكن تعديل التشكيلة اثناء الجولة'); 
+                if($gwla != null){
+                    $startDate =  $gwla->start;
+                    $startTime =  $gwla->start_time;
+                    $start = $startDate.' '.$startTime ;
+                    $final_Start = date("Y-m-d H:i", strtotime($start));
+                    $final_Start = Carbon::createFromFormat('Y-m-d H:i', $final_Start);
+                    //get start date befor 24 hour ...
+                    $yesterday_gwla_start = $final_Start->subDay();
+                    //get end date of active selected gwla ...
+                    $endDate =  $gwla->end;
+                    $endTime =  $gwla->end_time;
+                    $end = $endDate.' '.$endTime ;
+                    $final_end = date("Y-m-d H:i", strtotime($end));
+                    //make if statement to avoid user to change his squad formation during active gwla ...
+                    if(($today >= $yesterday_gwla_start && $today <= $final_end)){
+                         $data['status'] = false;
+                        return $this->sendResponse(403,'لا يمكن تعديل التشكيلة اثناء الجولة',$data); 
+                    }else{
+                        $data['status'] = true;
+                        return $this->sendResponse(200, 'تعديل التشكيلة مسموح ',$data);
+                    }    
                 }else{
-                    return $this->sendResponse(200, 'تعديل التشكيلة مسموح ',null);
+                    $data['status'] = false;
+                    return $this->sendResponse(403,'لا توجد جولات مفتوحة الان ...',$data);
                 }
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
