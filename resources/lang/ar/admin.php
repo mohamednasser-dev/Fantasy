@@ -160,6 +160,8 @@ return [
     'SB1' => 'اللاعب البديل الاول',
     'SB2' => 'اللاعب البديل الثانى',
     'save_formation' => 'حفظ التشكيل',
+    'clear_formation' => 'حذف التشكيل',
+    'delete_formation_Success' => 'تم حذف التشكيل بنجاح ',
     //player
     'add_new_player' => 'اضافة لاعب جديد',
     'player_name' => 'اسم اللاعب',

@@ -23,6 +23,7 @@
 		Route::post('club_formations/store', 'Editor\ClubFormationsController@store');
 		Route::post('club_formations/store_away', 'Editor\ClubFormationsController@store_away');
 		Route::get('club_formations/{id}/delete', 'Editor\ClubFormationsController@destroy');
+		Route::get('club_formations/delete_formation', 'Editor\ClubFormationsController@destroy_formation');
 		Route::post('getPlayerInfo', 'Editor\ClubFormationsController@getPlayerInfo');
 		Route::post('getPlayerInfo_away', 'Editor\ClubFormationsController@getPlayerInfo_away');
 	});

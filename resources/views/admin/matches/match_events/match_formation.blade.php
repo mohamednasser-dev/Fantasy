@@ -35,7 +35,11 @@
                                         <h4 class="card-title" style="margin-right: 120px;">{{$home_coach->coach_name}}</h4>
                                     </div>
                                 </div>
-                            <hr>  
+                            <hr> 
+                            <!-- to delete all players in club formation by club id ....  -->
+                            <button  id="delete_home_formation" name="delete_home_formation" data-club-name="{{$match_data->home_club_id}}" class="btn btn-danger waves-effect add_btn-style" data-whatever="@mdo" type="button" style="margin-right: 0px;">
+                                    {{trans('admin.clear_formation')}} 
+                            </button>
                             <!-- Player info in formation   -->
                                      <!-- ----------------------Begain Goal keeper player---------------------- -->
                              @foreach($home_players_in_match['GK_Players'] as $gkPlayer)
@@ -185,6 +189,10 @@
                                     </div>
                                 </div>
                             <hr>  
+                            <!-- to delete all players in club formation by club id ....  -->
+                            <button  id="delete_home_formation" name="delete_home_formation" data-club-name="{{$match_data->away_club_id}}" class="btn btn-danger waves-effect add_btn-style" data-whatever="@mdo" type="button" style="margin-right: 0px;">
+                                    {{trans('admin.clear_formation')}} 
+                            </button>
                             <!-- Player info in formation   -->
                                      <!-- ----------------------Begain Goal keeper player---------------------- -->
                              @foreach($away_players_in_match['GK_Players_away'] as $gkPlayer_away)
@@ -365,18 +373,26 @@
                         </div>
                     </div>
                  </div> 
-                                                                       <!-- confirm delete modal -->
+               <!-- confirm delete modal -->
                 <div id="confirmModala" class="modal fade" role="dialog">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog" style="width: 230px;">
                         <div class="modal-content">
                             <div class="modal-body">
                                 <h4 align="center" style="margin:0;">{{trans('admin.public_delete_modal_text')}}</h4>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" name="okbutton" id="okbutton"
-                                        class="btn btn-danger">{{trans('admin.public_delete')}}</button>
-                                <button type="button" class="btn btn-default"
-                                        data-dismiss="modal">{{trans('admin.public_cancel')}}</button>
+                                <form method="get" action="{{url('club_formations/delete_formation')}}">
+                                    {{csrf_field()}}  
+                                    <div class="center">
+                                        <input type="hidden" name="club_id" id="txt_club_id">   
+                                        <button type="submit" name="ok_delete_but" id="ok_delete_but" class="btn btn-danger">
+                                            {{trans('admin.public_delete')}}
+                                        </button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                            {{trans('admin.public_cancel')}}
+                                        </button>  
+                                    </div>     
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -384,10 +400,16 @@
 @endsection
 @section('scripts')
     <script>
+        var club_id ;
         var player_id ;
         var position ;
         var order ;
         var el ;
+        $(document).on('click', '#delete_home_formation', function () {
+            club_id = $(this).data('club-name');
+            $("#txt_club_id").val(club_id);
+            $('#confirmModala').modal('show');
+        });
         $(document).on('click', '#delete_home_player', function () {
             position = $(this).data('position-name');
             order = $(this).attr('data-order');

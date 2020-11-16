@@ -234,4 +234,11 @@ class ClubFormationsController extends Controller
         session()->flash('success',trans('admin.deleteSuccess'));
         return back();
     }
+    public function destroy_formation(Request $request)
+    {    
+        $club_id = $request['club_id'];
+        $club_formation = $this->objectName::where('club_id', $club_id)->delete();
+        session()->flash('success',trans('admin.delete_formation_Success'));
+        return back();
+    }
 }
