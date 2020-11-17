@@ -1,23 +1,17 @@
 <?php
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
-
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 	//this routes for user actions
 	Route::post('login', 'Api\AuthController@login');
 	Route::post('logout', 'Api\AuthController@logout');
+	Route::post('changePass', 'Api\AuthController@changePass');
     // Route::post('password/forgot', 'Api\ManulPasswordController@forgot');
     // Route::post('password/reset', 'Api\ManulPasswordController@reset'); 
-    
     Route::post('password/forgot', 'ForgotPasswordController@forgot');
     Route::post('password/reset', 'ForgotPasswordController@reset');
-
 	Route::post('register', 'Api\AuthController@store');
 	Route::post('update_user_data', 'Api\AuthController@update_user_data');
 	Route::post('select_user_data', 'Api\AuthController@select_user_data');
@@ -45,7 +39,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	Route::post('remove_player_squad', 'Api\PlayersController@remove_player_squad');
 	Route::post('transfer_player_position', 'Api\PlayersController@transfer_player_position');
 	Route::post('player_info', 'Api\PlayersController@player_info');
-
+	//this route to view my player in squad and coach
 	Route::post('my_squad', 'Api\SquadsController@index');
 	//sponser images in Begain of application
 	Route::get('sponsers', 'Api\AuthController@sponsers');

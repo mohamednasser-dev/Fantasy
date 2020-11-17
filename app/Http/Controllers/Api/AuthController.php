@@ -3,10 +3,12 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Sponser_image;
+use App\Squad;
 use App\User;
 class AuthController extends Controller
 {
@@ -122,6 +124,49 @@ class AuthController extends Controller
         }
 
     }
+    public function changePass(Request $request)
+    {
+        $input = $request->all();
+        $validate = $this->makeValidate($input,
+        [
+            'api_token' => 'required',
+            'old_password' => 'required',
+            'new_password' => 'required|min:6',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+        if (!is_array($validate)){
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                if($request->input('old_password') != null  && $request->input('confirm_password')!= null ){
+                    try{
+                        if ((Hash::check(request('old_password'), $user->password)) == false){
+                            return $this->sendResponse(403, 'الرقم السرى القديم خطأ', null);
+                        }else if ((Hash::check(request('new_password'),  $user->password)) == true){
+                            return $this->sendResponse(403, 'ادخل رقم سرى جديد غير الموجود مسبقا', null);
+                        }else{
+                            User::where('id', $user->id)->update(['password' => Hash::make($input['new_password'])]);
+                            $user_data = User::where('id', $user->id)->first();
+                            return $this->sendResponse(200, ' تم تغير الرقم السرى بنجاح', $user_data);
+                        }
+                    }catch (\Exception $ex){
+                        if (isset($ex->errorInfo[2])){
+                            $msg = $ex->errorInfo[2];
+                        }else{
+                            $msg = $ex->getMessage();
+                        }
+                        $arr = array("status" => 400, "message" => $msg, "data" => array());
+                    }
+                }else{
+                    return $this->sendResponse(403, 'يجب ملئ الحقول', null);
+                }
+            }else{
+                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+            }
+        }else {
+            return $this->sendResponse(403, $validate[0], null);
+        }
+    }
     public function select_user_data(Request $request){
         $input = $request->all();
         $validate = $this->makeValidate($input,[
@@ -133,8 +178,42 @@ class AuthController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null)
             {
-                $user_data =User::select('name','email','gender','points','address','phone')->where('id', $user->id)->first();
-                return $this->sendResponse(200, 'تم  اظهار بيانات المستخدم    ', $user_data);
+                $user_data = User::select('name','email','gender','points','address','phone')
+                            ->where('id', $user->id)
+                            ->get();
+                $user_squads =Squad::select('user_id','squad_name','squad_type','points')
+                            ->where('user_id', $user->id)
+                            ->get();
+                foreach ($user_squads as $key => $squad) {
+                    if($key == 0){
+                        if($squad['squad_type']== '1st'){
+                            $squad_one = $squad['squad_name'];
+                            $squad_one_points = $squad['points'];
+
+                            $user_data[0]['squad_one'] = $squad_one;
+                            $user_data[0]['squad_one_points'] = $squad_one_points;
+                        }else{
+                            $squad_two = $squad['squad_name'];
+                            $squad_two_points = $squad['points'];
+                            $user_data[0]['squad_two'] = $squad_two;
+                            $user_data[0]['squad_two_points'] = $squad_two_points;
+                        }
+                    }
+                    if($key == 1){
+                        if($squad['squad_type']== '1st'){
+                            $squad_one = $squad['squad_name'];
+                            $squad_one_points = $squad['points'];
+                            $user_data[0]['squad_one'] = $squad_one;
+                            $user_data[0]['squad_one_points'] = $squad_one_points;
+                        }else{
+                            $squad_two = $squad['squad_name'];
+                            $squad_two_points = $squad['points'];
+                            $user_data[0]['squad_two'] = $squad_two;
+                            $user_data[0]['squad_two_points'] = $squad_two_points;
+                        }
+                    }
+                }
+                return $this->sendResponse(200, 'تم  اظهار بيانات المستخدم ',$user_data);
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }

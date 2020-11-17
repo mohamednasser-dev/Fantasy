@@ -290,8 +290,8 @@ class SquadsController extends Controller
                         return $this->sendResponse(200, 'تعديل التشكيلة مسموح ',$data);
                     }    
                 }else{
-                    $data['status'] = false;
-                    return $this->sendResponse(403,'لا توجد جولات مفتوحة الان ...',$data);
+                    $data['status'] = true;
+                    return $this->sendResponse(200,'لا توجد جولات مفتوحة الان ...',$data);
                 }
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
