@@ -58,6 +58,9 @@ class SquadsController extends Controller
                     ->where('squad_type',$squad_type)
                     ->get(); 
                     if(count($mySquad)>0){
+                        $mySquad= Squad::where('user_id',$user->id)
+                                ->where('squad_type',$squad_type)
+                                ->first(); 
                         return $this->sendResponse(200, 'يوجد فريق',$mySquad);
                     }else{
                         return $this->sendResponse(403, 'يجب انشاء فريق !', null);

@@ -427,7 +427,6 @@
             $("#txt_order_away").val(order);
             $('#away_club_modal').modal('show');
         });
-        
         $(document).on('click', '#add_home_player', function () {
             position = $(this).data('position-name');
             order = $(this).attr('data-order');
@@ -436,7 +435,6 @@
             $("#txt_order").val(order);
             $('#home_club_modal').modal('show');
         });
-
         $(document).on('click', '#add_away_player', function () {
             position = $(this).data('position-name');
             order = $(this).attr('data-order');
