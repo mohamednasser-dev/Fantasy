@@ -12,6 +12,8 @@ use App\Squad;
 use App\User;
 use App\Squad_player;
 use App\MatchEvent;
+
+
 class SendPointsToUsers implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -68,8 +70,8 @@ class SendPointsToUsers implements ShouldQueue
         }
         //Get All Win Club Players & Giv Points In Squad Player
         $players = Squad_player::where('club_id',$win_club)->get();
+        $win_event = Event::find(5);
         foreach ($players as $player) {
-            $win_event = Event::find(5);
             $player_data = null;
             if ($player->is_captain == "1") {
                 $player_data['points'] = $player->points + $win_event->is_captain; 
@@ -86,6 +88,15 @@ class SendPointsToUsers implements ShouldQueue
                 $Player_win = Player::where('id',$player->player_id)->update($playerInWinClub_data);                
             }
         }
+
+        //Get Squad And Give Point For Coche Win
+        $Coche = Coche::where('club_id',$win_club)->first();
+        $CocheSquads = Squad::where('coach_id',$Coche->id)->get();
+        foreach ($CocheSquads as $squad) {
+            $squad->increment('points',$win_event->value);
+        }
+        //End Give Point For Coche Win
+
         //Get Total Squad Points 
         $squads_players = Squad_player::whereIn('club_id',$clubs)->get();
         $Squad = [];
