@@ -213,7 +213,7 @@ class AuthController extends Controller
                         }
                     }
                 }
-                return $this->sendResponse(200, 'تم  اظهار بيانات المستخدم ',$user_data);
+                return $this->sendResponse(200, 'تم  اظهار بيانات المستخدم ',$user_data[0]);
             }else{
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
