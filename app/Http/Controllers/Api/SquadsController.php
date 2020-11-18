@@ -93,9 +93,10 @@ class SquadsController extends Controller
                             ->where('squad_id',$mySquad->id)
                             ->with('getPlayer')
                             ->get();
-                    $mySquad= Squad::select('id','squad_name')
+                    $mySquad= Squad::select('id','squad_name','coach_id')
                             ->where('id',$mySquad->id)
                             ->first(); 
+                            $players = null;
                     foreach ($squad_players as $key => $player) {
                         $players[$key]['squad_name'] = $player->getSquad->squad_name;
                         $players[$key]['player_id'] = $player->player_id;
@@ -104,10 +105,21 @@ class SquadsController extends Controller
                         $players[$key]['position'] = $player->position;
                         $players[$key]['is_captain'] = $player->is_captain;
                     } 
-                    return $this->sendResponse(200, 'تم اظهار الفريق',$players);
+                    $coach_location_array = count($squad_players);
+                    $players[$coach_location_array]['squad_name'] = $mySquad->squad_name;
+                    $players[$coach_location_array]['player_id'] = $mySquad->getCoah->id;
+                    $players[$coach_location_array]['player_name'] = $mySquad->getCoah->coach_name;
+                    $players[$coach_location_array]['image'] = $mySquad->getCoah->image;
+                    $players[$coach_location_array]['position'] = 'CO';
+                    $players[$coach_location_array]['is_captain'] = '0';
+
+                    if($players != null){
+                        return $this->sendResponse(200, 'تم اظهار الفريق',$players);
+                    }else{
+                        return $this->sendResponse(403, 'لا يوجد لاعبين بالفريق',null);
+                    }
                 }else{
                     return $this->sendResponse(403, 'لا يوجد فريق',null);
-
                 }
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
@@ -168,10 +180,12 @@ class SquadsController extends Controller
                     $squad_player = Squad_player::where('player_id',$old_player_id)
                                     ->where('squad_id',$squad_id)
                                     ->update($data);
+
                 }catch(QueryException $ex){
                     return $this->sendResponse(403,'هذا اللاعب موجود من قبل'); 
                 }
-                 return $this->sendResponse(200, 'تم التعديل بنجاح',$squad_player);
+                 $data['status'] = true ;
+                return $this->sendResponse(200, 'تم التعديل بنجاح',$data);
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
             }
