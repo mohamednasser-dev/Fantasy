@@ -88,22 +88,27 @@ class SquadsController extends Controller
                 $mySquad= Squad::where('user_id',$user->id)
                         ->where('squad_type',$squad_type)
                         ->first(); 
-                $squad_players= Squad_player::select('squad_id','player_id','position','is_captain')
-                        ->where('squad_id',$mySquad->id)
-                        ->with('getPlayer')
-                        ->get();
-                $mySquad= Squad::select('id','squad_name')
-                        ->where('id',$mySquad->id)
-                        ->first(); 
-                foreach ($squad_players as $key => $player) {
-                    $players[$key]['squad_name'] = $player->getSquad->squad_name;
-                    $players[$key]['player_id'] = $player->player_id;
-                    $players[$key]['player_name'] = $player->getPlayer->player_name;
-                    $players[$key]['image'] = $player->getPlayer->image;
-                    $players[$key]['position'] = $player->position;
-                    $players[$key]['is_captain'] = $player->is_captain;
-                } 
-                return $this->sendResponse(200, 'تم اظهار الفريق',$players);
+                if($mySquad != null){
+                    $squad_players= Squad_player::select('squad_id','player_id','position','is_captain')
+                            ->where('squad_id',$mySquad->id)
+                            ->with('getPlayer')
+                            ->get();
+                    $mySquad= Squad::select('id','squad_name')
+                            ->where('id',$mySquad->id)
+                            ->first(); 
+                    foreach ($squad_players as $key => $player) {
+                        $players[$key]['squad_name'] = $player->getSquad->squad_name;
+                        $players[$key]['player_id'] = $player->player_id;
+                        $players[$key]['player_name'] = $player->getPlayer->player_name;
+                        $players[$key]['image'] = $player->getPlayer->image;
+                        $players[$key]['position'] = $player->position;
+                        $players[$key]['is_captain'] = $player->is_captain;
+                    } 
+                    return $this->sendResponse(200, 'تم اظهار الفريق',$players);
+                }else{
+                    return $this->sendResponse(403, 'لا يوجد فريق',null);
+
+                }
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
             }
