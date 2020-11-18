@@ -79,28 +79,37 @@ class SquadsController extends Controller
                 'api_token' => 'required',
                 'squad_type' => 'required'
                 ]);
-            if (!is_array($validate)) {
-                $api_token = $request->input('api_token');
-                $user = User::where('api_token',$api_token)->first();
-                if($user != null){
-                    //for limit user to add only one squad with each type 1st & 2nd ...
-                    $squad_type = $request->input('squad_type');
-                    $mySquad= Squad::where('user_id',$user->id)
-                            ->where('squad_type',$squad_type)
-                            ->first(); 
-                    $squad_player= Squad_player::select('squad_id','player_id','club_id','position','is_captain')
-                            ->where('squad_id',$mySquad->id)
-                            ->with('getPlayer')
-                            ->get(); 
-
-                    return $this->sendResponse(200, 'تم اظهار الفريق',array('mySquad' => $mySquad,'squad_player' => $squad_player));
-                   
-                }else{
-                    return $this->sendResponse(403, $this->LoginWarning,null);
-                }
-            }else {
-                return $this->sendResponse(403, $validate, null);
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                //for limit user to add only one squad with each type 1st & 2nd ...
+                $squad_type = $request->input('squad_type');
+                $mySquad= Squad::where('user_id',$user->id)
+                        ->where('squad_type',$squad_type)
+                        ->first(); 
+                $squad_players= Squad_player::select('squad_id','player_id','position','is_captain')
+                        ->where('squad_id',$mySquad->id)
+                        ->with('getPlayer')
+                        ->get();
+                $mySquad= Squad::select('id','squad_name')
+                        ->where('id',$mySquad->id)
+                        ->first(); 
+                foreach ($squad_players as $key => $player) {
+                    $players[$key]['squad_name'] = $player->getSquad->squad_name;
+                    $players[$key]['player_id'] = $player->player_id;
+                    $players[$key]['player_name'] = $player->getPlayer->player_name;
+                    $players[$key]['image'] = $player->getPlayer->image;
+                    $players[$key]['position'] = $player->position;
+                    $players[$key]['is_captain'] = $player->is_captain;
+                } 
+                return $this->sendResponse(200, 'تم اظهار الفريق',$players);
+            }else{
+                return $this->sendResponse(403, $this->LoginWarning,null);
             }
+        }else {
+            return $this->sendResponse(403, $validate, null);
+        }
     }
     public function store_squad(Request $request)
     {
@@ -110,28 +119,28 @@ class SquadsController extends Controller
                 'squad_name' => 'required|min:8',
                 'squad_type' => 'required',
                 ]);
-            if (!is_array($validate)) {
-                $api_token = $request->input('api_token');
-                $user = User::where('api_token',$api_token)->first();
-                if($user != null){
-                    //for limit user to add only one squad with each type 1st & 2nd ...
-                    $squad_type = $request->input('squad_type');
-                    $mySquad = Squad::where('user_id',$user->id)
-                    ->where('squad_type',$squad_type)
-                    ->get(); 
-                    if(count($mySquad)>0){
-                        return $this->sendResponse(403, 'لقد قمت بأنشاء فريق من الفئة المختارة من قبل', null);
-                    }else{
-                        $input['user_id'] = $user->id;
-                        $squad = Squad::create($input);
-                        return $this->sendResponse(200, 'تم اضافة فريق',$squad);
-                    }
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                //for limit user to add only one squad with each type 1st & 2nd ...
+                $squad_type = $request->input('squad_type');
+                $mySquad = Squad::where('user_id',$user->id)
+                ->where('squad_type',$squad_type)
+                ->get(); 
+                if(count($mySquad)>0){
+                    return $this->sendResponse(403, 'لقد قمت بأنشاء فريق من الفئة المختارة من قبل', null);
                 }else{
-                    return $this->sendResponse(403, $this->LoginWarning,null);
+                    $input['user_id'] = $user->id;
+                    $squad = Squad::create($input);
+                    return $this->sendResponse(200, 'تم اضافة فريق',$squad);
                 }
-            }else {
-                return $this->sendResponse(403, $validate, null);
+            }else{
+                return $this->sendResponse(403, $this->LoginWarning,null);
             }
+        }else {
+            return $this->sendResponse(403, $validate, null);
+        }
     }
     public function update_squad_player(Request $request)
     {
@@ -142,28 +151,28 @@ class SquadsController extends Controller
                 'old_player_id' => 'required',
                 'new_player_id' => 'required',
                 ]);
-            if (!is_array($validate)) {
-                $api_token = $request->input('api_token');
-                $user = User::where('api_token',$api_token)->first();
-                if($user != null){
-                    //for limit user to add only one squad with each type 1st & 2nd ...
-                    try{
-                        $squad_id = $request->input('squad_id');
-                        $old_player_id = $request->input('old_player_id');
-                        $data['player_id'] = $request->input('new_player_id');
-                        $squad_player = Squad_player::where('player_id',$old_player_id)
-                                        ->where('squad_id',$squad_id)
-                                        ->update($data);
-                    }catch(QueryException $ex){
-                        return $this->sendResponse(403,'هذا اللاعب موجود من قبل'); 
-                    }
-                     return $this->sendResponse(200, 'تم التعديل بنجاح',$squad_player);
-                }else{
-                    return $this->sendResponse(403, $this->LoginWarning,null);
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                //for limit user to add only one squad with each type 1st & 2nd ...
+                try{
+                    $squad_id = $request->input('squad_id');
+                    $old_player_id = $request->input('old_player_id');
+                    $data['player_id'] = $request->input('new_player_id');
+                    $squad_player = Squad_player::where('player_id',$old_player_id)
+                                    ->where('squad_id',$squad_id)
+                                    ->update($data);
+                }catch(QueryException $ex){
+                    return $this->sendResponse(403,'هذا اللاعب موجود من قبل'); 
                 }
-            }else {
-                return $this->sendResponse(403, $validate, null);
+                 return $this->sendResponse(200, 'تم التعديل بنجاح',$squad_player);
+            }else{
+                return $this->sendResponse(403, $this->LoginWarning,null);
             }
+        }else {
+            return $this->sendResponse(403, $validate, null);
+        }
     }
     public function update_squad_coach(Request $request)
     {
@@ -173,23 +182,23 @@ class SquadsController extends Controller
                 'squad_type' => 'required',
                 'coach_id' => 'required',
                 ]);
-            if (!is_array($validate)) {
-                $api_token = $request->input('api_token');
-                $user = User::where('api_token',$api_token)->first();
-                if($user != null){
-                    //for limit user to add only one squad with each type 1st & 2nd ...
-                    $squad_type = $request->input('squad_type');
-                    $data['coach_id'] = $request->input('coach_id');
-                    $mySquad = Squad::where('user_id',$user->id)
-                    ->where('squad_type',$squad_type)
-                    ->update($data);
-                     return $this->sendResponse(200, 'تم اضافة مدرب للفريق ',$mySquad);
-                }else{
-                    return $this->sendResponse(403, $this->LoginWarning,null);
-                }
-            }else {
-                return $this->sendResponse(403, $validate, null);
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                //for limit user to add only one squad with each type 1st & 2nd ...
+                $squad_type = $request->input('squad_type');
+                $data['coach_id'] = $request->input('coach_id');
+                $mySquad = Squad::where('user_id',$user->id)
+                ->where('squad_type',$squad_type)
+                ->update($data);
+                 return $this->sendResponse(200, 'تم اضافة مدرب للفريق ',$mySquad);
+            }else{
+                return $this->sendResponse(403, $this->LoginWarning,null);
             }
+        }else {
+            return $this->sendResponse(403, $validate, null);
+        }
     }
     public function store_squad_player(Request $request)
     {

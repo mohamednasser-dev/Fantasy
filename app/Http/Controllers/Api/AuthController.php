@@ -77,7 +77,7 @@ class AuthController extends Controller
         $input = $request->all();
         $validate = $this->makeValidate($input,
             [
-                'name' => 'required|unique:users',
+                'name' => 'required',
                 'email' => 'required|unique:users',
                 'password' => 'required|min:6|confirmed',
                 'password_confirmation' => 'required|min:6',
