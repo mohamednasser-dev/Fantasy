@@ -28,6 +28,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	Route::post('store_squad', 'Api\SquadsController@store_squad');
 	Route::post('store_squad_player', 'Api\SquadsController@store_squad_player');
 	Route::post('update_squad_player', 'Api\SquadsController@update_squad_player');
+	Route::post('update_to_captain', 'Api\SquadsController@update_to_captain');
 	Route::post('test_gwla_open', 'Api\SquadsController@test_gwla_open');
 	Route::post('test_squad', 'Api\SquadsController@test_squad');
 	Route::post('update_squad_coach', 'Api\SquadsController@update_squad_coach');

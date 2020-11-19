@@ -187,10 +187,12 @@ class SquadsController extends Controller
                  $data['status'] = true ;
                 return $this->sendResponse(200, 'تم التعديل بنجاح',$data);
             }else{
-                return $this->sendResponse(403, $this->LoginWarning,null);
+                $data['status'] = false ;
+                return $this->sendResponse(403, $this->LoginWarning,$data);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            $data['status'] = false ;
+            return $this->sendResponse(403, $validate, $data);
         }
     }
     public function update_squad_coach(Request $request)
@@ -209,14 +211,49 @@ class SquadsController extends Controller
                 $squad_type = $request->input('squad_type');
                 $data['coach_id'] = $request->input('coach_id');
                 $mySquad = Squad::where('user_id',$user->id)
-                ->where('squad_type',$squad_type)
-                ->update($data);
-                 return $this->sendResponse(200, 'تم اضافة مدرب للفريق ',$mySquad);
+                          ->where('squad_type',$squad_type)
+                          ->update($data);
+                $data_out['status'] = true ;
+                return $this->sendResponse(200, 'تم اضافة مدرب للفريق ',$data_out);
             }else{
-                return $this->sendResponse(403, $this->LoginWarning,null);
+                $data_out['status'] = false ;
+                return $this->sendResponse(403, $this->LoginWarning,$data_out);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            $data_out['status'] = false ;
+            return $this->sendResponse(403, $validate, $data_out);
+        }
+    }
+    public function update_to_captain(Request $request)
+    {
+        $input = $request->all();
+        $validate = $this->makeValidate($input,[
+                'api_token' => 'required',
+                'player_id' => 'required|exists:squad_players,player_id',
+                'squad_id' => 'required',
+                ]);
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                //for limit user to add only one squad with each type 1st & 2nd ...
+                $squad_id = $request->input('squad_id');
+                $player_id = $request->input('player_id');
+                
+                $data_remove_cap['is_captain'] = '0';
+                $updated_squad = Squad_player::where('squad_id',$squad_id)->where('is_captain','1')->update($data_remove_cap);
+                $data_add_cap['is_captain'] = '1';
+                $updated_squad = Squad_player::where('squad_id',$squad_id)->where('player_id',$player_id)->update($data_add_cap);
+
+                $data['status'] = true ;
+                return $this->sendResponse(200, 'تم تغير الكابتين بنجاح',$data);
+            }else{
+                $data['status'] = false ;
+                return $this->sendResponse(403, $this->LoginWarning,$data);
+            }
+        }else {
+            $data['status'] = false ;
+            return $this->sendResponse(403, $validate, $data);
         }
     }
     public function store_squad_player(Request $request)
