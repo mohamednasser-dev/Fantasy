@@ -245,7 +245,6 @@ class SquadsController extends Controller
                 $updated_squad = Squad_player::where('squad_id',$squad_id)->where('is_captain','1')->update($data_remove_cap);
                 $data_add_cap['is_captain'] = '1';
                 $updated_squad = Squad_player::where('squad_id',$squad_id)->where('player_id',$player_id)->update($data_add_cap);
-
                 $data['status'] = true ;
                 return $this->sendResponse(200, 'تم تغير الكابتين بنجاح',$data);
             }else{
@@ -273,10 +272,12 @@ class SquadsController extends Controller
             if($user != null){
                 // to limit squad team number  to 7 players only in team
                 $squad_id = $request->input('squad_id');                
+                $position = $request->input('position');                
                 $player_id = $request->input('player_id');                
                 $is_captain = $request->input('is_captain');                
                 $selected_player =Player::where('id',$player_id)->first();
                 $selected_squad =Squad_player::where('squad_id',$squad_id)->get();
+                // $squad_players_not_cap =Squad_player::where('squad_id',$squad_id)->where('is_captain','0')->get();
                 if(count($selected_squad)==7){
                     $data['status'] = false ;
                     return $this->sendResponse(403,'هذا الفريق وصل لعدد اللاعبين المطلوب',$data);
@@ -300,18 +301,30 @@ class SquadsController extends Controller
                         //this try catch to block user to add two same players in single squad
                         // or two sam position in single squad
                         try{
+                            //this to make user to select only one player captain
+                                    // if(count($squad_players_not_cap) == 6){
+                                    //     if($is_captain == 0){
+                                    //         $data['status'] = false ;
+                                    //         return $this->sendResponse(403,'يجب اختيار لاعب كابتن فالفريق',$data);
+                                    //     }
+                                    // }
+                            if($position == 'RP1' ||$position == 'RP2'){
+                                if($is_captain == 1){
+                                    $data['status'] = false ;
+                                    return $this->sendResponse(403,'لا يمكن للبدلاء ان يكونو كابتن فالفريق',$data);
+                                }
+                            }
                             $input['club_id'] = $selected_player->club_id;
                             $squad_player = Squad_player::create($input);
-      
                         }catch(QueryException $ex){
                             $data['status'] = false ;
                             return $this->sendResponse(403,'هذا اللاعب موجود من قبل',$data); 
                         }
-                            //end try catch
+                        //end try catch
                         $data['status'] = true ;
                             return $this->sendResponse(200, 'تم اضافة لاعب بالفريق',$data);
-                        }
                     }
+                }
             }else{
                 $data['status'] = false ;
                 return $this->sendResponse(403, $this->LoginWarning,$data);
