@@ -105,14 +105,15 @@ class SquadsController extends Controller
                         $players[$key]['position'] = $player->position;
                         $players[$key]['is_captain'] = $player->is_captain;
                     } 
-                    $coach_location_array = count($squad_players);
-                    $players[$coach_location_array]['squad_name'] = $mySquad->squad_name;
-                    $players[$coach_location_array]['player_id'] = $mySquad->getCoah->id;
-                    $players[$coach_location_array]['player_name'] = $mySquad->getCoah->coach_name;
-                    $players[$coach_location_array]['image'] = $mySquad->getCoah->image;
-                    $players[$coach_location_array]['position'] = 'CO';
-                    $players[$coach_location_array]['is_captain'] = '0';
-
+                    if($mySquad->coach_id != null){
+                        $coach_location_array = count($squad_players);
+                        $players[$coach_location_array]['squad_name'] = $mySquad->squad_name;
+                        $players[$coach_location_array]['player_id'] = $mySquad->getCoah->id;
+                        $players[$coach_location_array]['player_name'] = $mySquad->getCoah->coach_name;
+                        $players[$coach_location_array]['image'] = $mySquad->getCoah->image;
+                        $players[$coach_location_array]['position'] = 'CO';
+                        $players[$coach_location_array]['is_captain'] = '0';
+                    }
                     if($players != null){
                         return $this->sendResponse(200, 'تم اظهار الفريق',$players);
                     }else{
@@ -277,13 +278,15 @@ class SquadsController extends Controller
                 $selected_player =Player::where('id',$player_id)->first();
                 $selected_squad =Squad_player::where('squad_id',$squad_id)->get();
                 if(count($selected_squad)==7){
-                    return $this->sendResponse(403,'هذا الفريق وصل لعدد اللاعبين المطلوب');
+                    $data['status'] = false ;
+                    return $this->sendResponse(403,'هذا الفريق وصل لعدد اللاعبين المطلوب',$data);
                 }else{
                     // to force user to select only one capain in squade
                     if($is_captain == 1){
                         $selected_captin_squad =Squad_player::where('squad_id',$squad_id)->where('is_captain','1')->get();
                         if(count($selected_captin_squad)==1){
-                            return $this->sendResponse(403,'لقد تم اختيار الكابتن من قبل !!!',null);
+                            $data['status'] = false ;
+                            return $this->sendResponse(403,'لقد تم اختيار الكابتن من قبل !!!',$data);
                         }
                     }
                     // this to make user to choose to players only from one club ...
@@ -291,25 +294,31 @@ class SquadsController extends Controller
                     ->where('squad_id',$squad_id)
                     ->get();
                     if(count($squad_players) == 2){
-                        return $this->sendResponse(403,'لا يمكن اختيار اكثر من لاعبين لنفس الفريق',null);
+                        $data['status'] = false ;
+                        return $this->sendResponse(403,'لا يمكن اختيار اكثر من لاعبين لنفس الفريق',$data);
                     }else{
                         //this try catch to block user to add two same players in single squad
                         // or two sam position in single squad
                         try{
                             $input['club_id'] = $selected_player->club_id;
                             $squad_player = Squad_player::create($input);
+      
                         }catch(QueryException $ex){
-                            return $this->sendResponse(403,'هذا اللاعب موجود من قبل'); 
+                            $data['status'] = false ;
+                            return $this->sendResponse(403,'هذا اللاعب موجود من قبل',$data); 
                         }
                             //end try catch
-                            return $this->sendResponse(200, 'تم اضافة لاعب بالفريق',$squad_player);
+                        $data['status'] = true ;
+                            return $this->sendResponse(200, 'تم اضافة لاعب بالفريق',$data);
                         }
                     }
             }else{
-                return $this->sendResponse(403, $this->LoginWarning,null);
+                $data['status'] = false ;
+                return $this->sendResponse(403, $this->LoginWarning,$data);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            $data['status'] = false ;
+            return $this->sendResponse(403, $validate, $data);
         }
     }
     public function test_gwla_open(Request $request)
