@@ -185,15 +185,15 @@ class SquadsController extends Controller
                 }catch(QueryException $ex){
                     return $this->sendResponse(403,'هذا اللاعب موجود من قبل'); 
                 }
-                 $data['status'] = true ;
-                return $this->sendResponse(200, 'تم التعديل بنجاح',$data);
+                 $data_final['status'] = true ;
+                return $this->sendResponse(200, 'تم التعديل بنجاح',$data_final);
             }else{
-                $data['status'] = false ;
-                return $this->sendResponse(403, $this->LoginWarning,$data);
+                $data_final['status'] = false ;
+                return $this->sendResponse(403, $this->LoginWarning,$data_final);
             }
         }else {
-            $data['status'] = false ;
-            return $this->sendResponse(403, $validate, $data);
+            $data_final['status'] = false ;
+            return $this->sendResponse(403, $validate, $data_final);
         }
     }
     public function update_squad_coach(Request $request)
