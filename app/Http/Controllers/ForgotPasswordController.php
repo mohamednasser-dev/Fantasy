@@ -34,6 +34,7 @@ class ForgotPasswordController extends Controller
         }
     }
     public function forgot() {
+        $data_final['status']=false;
         $input = request()->all();
         $email = request()->input('email');
         $user = User::where('email',$email)->first();
@@ -43,11 +44,11 @@ class ForgotPasswordController extends Controller
             if (count((array)$credentials) == 1) 
             {
                 Password::sendResetLink($credentials);
-                $data['title_message']=  'Reset password link sent on your email.';
-                return $this->sendResponse(200,'Reset password link sent on your email.',$data);
+                $data_final['status']=true;
+                return $this->sendResponse(200,'لقد تم ارسال رسالة الى بريدك الالكترونى ...!',$data_final);
             }
         }else {
-            return $this->sendResponse(403, 'your email is invaled ...!', null);
+            return $this->sendResponse(403, 'تأكد من ادخال البريد الالكترونى الصحيح ...!', $data_final);
         }    
     }
     public function reset(ResetPasswordRequest $request) {

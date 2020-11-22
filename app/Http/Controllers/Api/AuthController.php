@@ -126,6 +126,7 @@ class AuthController extends Controller
     }
     public function changePass(Request $request)
     {
+        $data_final['status']=false;
         $input = $request->all();
         $validate = $this->makeValidate($input,
         [
@@ -141,13 +142,14 @@ class AuthController extends Controller
                 if($request->input('old_password') != null  && $request->input('confirm_password')!= null ){
                     try{
                         if ((Hash::check(request('old_password'), $user->password)) == false){
-                            return $this->sendResponse(403, 'الرقم السرى القديم خطأ', null);
+                            return $this->sendResponse(403, 'الرقم السرى القديم خطأ', $data_final);
                         }else if ((Hash::check(request('new_password'),  $user->password)) == true){
-                            return $this->sendResponse(403, 'ادخل رقم سرى جديد غير الموجود مسبقا', null);
+                            return $this->sendResponse(403, 'ادخل رقم سرى جديد غير الموجود مسبقا', $data_final);
                         }else{
                             User::where('id', $user->id)->update(['password' => Hash::make($input['new_password'])]);
                             $user_data = User::where('id', $user->id)->first();
-                            return $this->sendResponse(200, ' تم تغير الرقم السرى بنجاح', $user_data);
+                            $data_final['status']=true;
+                            return $this->sendResponse(200, ' تم تغير الرقم السرى بنجاح', $data_final);
                         }
                     }catch (\Exception $ex){
                         if (isset($ex->errorInfo[2])){
@@ -158,13 +160,13 @@ class AuthController extends Controller
                         $arr = array("status" => 400, "message" => $msg, "data" => array());
                     }
                 }else{
-                    return $this->sendResponse(403, 'يجب ملئ الحقول', null);
+                    return $this->sendResponse(403, 'يجب ملئ الحقول', $data_final);
                 }
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',$data_final);
             }
         }else {
-            return $this->sendResponse(403, $validate[0], null);
+            return $this->sendResponse(403, $validate[0], $data_final);
         }
     }
     public function select_user_data(Request $request){
