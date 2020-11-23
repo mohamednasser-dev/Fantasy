@@ -11,7 +11,7 @@
     <link rel="icon" href="https://web.myloverra.com/public/images/favicon/10.png" type="image/x-icon">
     <meta name="csrf-token" content="yjFF99PhdW6Oq73lJ3dDZrNayoUVjh70xnfaO436">
 
-    <title>Mla3b</title>
+    <title>Fantasy</title>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="stylesheet" type="text/css" href="https://web.myloverra.com/public/css/fontawesome.css">
@@ -70,7 +70,7 @@
     </div>
     <div class="container">
         <div class="row header-content">
-            <div class="col-12">
+            <div class="col-12" style="height: 80px;">
                 <div class="left-part">
            
                     <div class="search-bar">
@@ -83,9 +83,9 @@
                         </form>   
                     </div>
                 </div>
-      <!--           <div class="brand-logo">
-                    <a href="https://web.myloverra.com"> <img src="https://web.myloverra.com/public/images/icon/brand-logo/logo1.png" class="img-fluid" alt="" style="border: none;"></a>
-                </div> -->
+                <div class="brand-logo">
+                    <a href="https://web.myloverra.com"> <img src="{{ asset('/uploads/fantasy_logo.jpg') }}" class="img-fluid" alt="" style="border: none; width: 100px;"></a>
+                </div>
             </div>
         </div>
     </div>
@@ -111,7 +111,7 @@
                                     <div class="scroll">
                                         <div class="card-body">
                                             <p id="privacyFirstTitle">DATA CONTROLLER AND OWNER</p>
-                                            <p id="privacySecondTitle">info@Mla3b.com</p>
+                                            <p id="privacySecondTitle">http://kora.bit-kw.com</p>
                                             <p id="privacyFirstTitle">TYPES OF DATA COLLECTED</p>
                                             <p id="privacySecondTitle">The owner does not provide a list of Personal Data types collected.<br><br>
 
@@ -197,7 +197,7 @@
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12">
                         <div class="footer-end">
-                            <p class="text-sm-center">All Rights Reserved ©  <script>document.write(new Date().getFullYear());</script>  mla3b</p>
+                            <p class="text-sm-center">All Rights Reserved ©  <script>document.write(new Date().getFullYear());</script>  Fantasy</p>
                         </div>
                     </div>
 
