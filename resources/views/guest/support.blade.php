@@ -11,7 +11,7 @@
     <link rel="icon" href="https://web.myloverra.com/public/images/favicon/10.png" type="image/x-icon">
     <meta name="csrf-token" content="yjFF99PhdW6Oq73lJ3dDZrNayoUVjh70xnfaO436">
 
-    <title>Loverra</title>
+    <title>Mla3b</title>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="stylesheet" type="text/css" href="https://web.myloverra.com/public/css/fontawesome.css">
@@ -65,191 +65,53 @@
 </head>
 
 <body class="card-no-border">
-<header class="header-4 header-center">
+<header class="header-4 header-center" style="background-color:  #3582d4;">
     <div class="mobile-fix-header">
     </div>
     <div class="container">
         <div class="row header-content">
             <div class="col-12">
                 <div class="left-part">
-                    <div class="navbar">
-                        <a href="javascript:void(0)" onclick="openNav()">
-                            <div class="bar-style"><i class="fa fa-bars sidebar-bar text-dark" aria-hidden="true"></i></div>
-                        </a>
-                        <div id="mySidenav" class="sidenav">
-                            <a href="javascript:void(0)" class="sidebar-overlay" onclick="closeNav()"></a>
-                            <nav class="">
-                                <div onclick="closeNav()">
-                                    <div class="sidebar-back text-left">Back</div>
-                                </div>
-                               
-                                <ul id="sub-menu" class="sm pixelstrap sm-vertical " data-smartmenus-id="16060593856553857">
-                                                                                                                                                                         <li><a href="https://web.myloverra.com/7/category-page" class="has-submenu" id="sm-16060593856553857-1" aria-haspopup="true" aria-controls="sm-16060593856553857-2" aria-expanded="false">Arabic Perfumes<span class="sub-arrow"></span></a>
-                                                                <ul id="sm-16060593856553857-2" role="group" aria-hidden="true" aria-labelledby="sm-16060593856553857-1" aria-expanded="false">
-                                                                                                                                                <li><a href="https://web.myloverra.com/17/category-page">Men</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/18/category-page">Womens</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/19/category-page">Unisex</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/29/category-page">Sprinkle</a></li>
-                                                                    
-                                                                </ul>
-                                                                                                    </li>
-                                                                                                                                         <li><a href="https://web.myloverra.com/8/category-page" class="has-submenu" id="sm-16060593856553857-3" aria-haspopup="true" aria-controls="sm-16060593856553857-4" aria-expanded="false">International Perfumes<span class="sub-arrow"></span></a>
-                                                                <ul id="sm-16060593856553857-4" role="group" aria-hidden="true" aria-labelledby="sm-16060593856553857-3" aria-expanded="false">
-                                                                                                                                                <li><a href="https://web.myloverra.com/21/category-page">Men</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/22/category-page">Womens</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/23/category-page">Unisex</a></li>
-                                                                    
-                                                                </ul>
-                                                                                                    </li>
-                                                                                                                                         <li><a href="https://web.myloverra.com/9/category-page" class="has-submenu" id="sm-16060593856553857-5" aria-haspopup="true" aria-controls="sm-16060593856553857-6" aria-expanded="false">Incense<span class="sub-arrow"></span></a>
-                                                                <ul id="sm-16060593856553857-6" role="group" aria-hidden="true" aria-labelledby="sm-16060593856553857-5" aria-expanded="false">
-                                                                                                                                                <li><a href="https://web.myloverra.com/25/category-page">Incense</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/26/category-page">Applicable</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/27/category-page">Indian Oud</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/30/category-page">Grease The Oud</a></li>
-                                                                    
-                                                                </ul>
-                                                                                                    </li>
-                                                                                                                                             <li><a href="https://web.myloverra.com/13/category-page">Skin Care</a>
-                                                                                                    </li>
-                                                                                                                                             <li><a href="https://web.myloverra.com/14/category-page">Niche Perfumes</a>
-                                                                                                    </li>
-                                                                    </ul>
-                            </nav>
-                        </div>
-                    </div>
+           
                     <div class="search-bar">
-                    <form action="https://web.myloverra.com/searchnames" method="get">
-                        <input type="hidden" name="_token" value="yjFF99PhdW6Oq73lJ3dDZrNayoUVjh70xnfaO436">                        <input class="search__input" name="search_input" id="search_input" type="text" placeholder="Search a product" required="" value="">
-                        <button type="submit" class="search-icon "></button>
-                         <div class="dropdown">
-                            <div class="dropdown-content" id="show-list">
-                                <a href=""></a>
+                        <form action="https://web.myloverra.com/searchnames" method="get">
+                            <div class="dropdown">
+                                <div class="dropdown-content" id="show-list">
+                                    <a href=""></a>
+                                </div>
                             </div>
-                        </div>
-                    </form>   
-
+                        </form>   
                     </div>
-                    
                 </div>
-                
-            
-
-
-                            <div class="brand-logo">
+      <!--           <div class="brand-logo">
                     <a href="https://web.myloverra.com"> <img src="https://web.myloverra.com/public/images/icon/brand-logo/logo1.png" class="img-fluid" alt="" style="border: none;"></a>
-                </div>
-            
-            
-                <div class="nav-right">
-
-                    <div class="nav-icon">
-                        <ul>
-                        <!--  -->
-                            <li class="onhover-div user-icon" onclick="openAccount()">
-                                <img src="https://web.myloverra.com/public/images/icon/black-icon/profile.png" alt="" class="user-img">
-                                <i class="ti-user mobile-icon"></i>
-                            </li>
-                            <li class="onhover-div setting-icon">
-                                <div>
-                                    
-                                        <a href="https://web.myloverra.com/switchlang/ar"> <i class="ti-settings mobile-icon"></i><img src="https://web.myloverra.com/public/images/icon/black-icon/UAE.png" title="AR" class=" img-fluid setting-img" alt=""></a>
-                                                                        
-                                    <!-- <i class="ti-settings mobile-icon"></i> -->
-                                </div>
-                                <!-- <div class="show-div setting">
-                                    <h6>language</h6>
-                                    <ul>
-                                        <li><a href="ar/https://web.myloverra.com/en">Arabic</a> </li>
-                                        
-                                    </ul>
-                                   
-                                </div> -->
-                            </li>
-                            <!-- <li >
-                                <div class="">
-                                    <select class="form-control" size="1" id="CountryCurr" >
-                                                                                    <option value="KWD"  >Kuwait</option>
-                                                                            </select>
-                                </div>
-                            </li> -->
-                                                        <li class="onhover-div cart-icon" onclick="openCart()">
-                                <img src="https://web.myloverra.com/public/images/icon/black-icon/shopping-cart.png" alt="" class="cart-image">
-                                <i class="ti-shopping-cart mobile-icon"></i>
-                                <div class="cart">
-                                    <span id="cartcount">0 Item</span>
-                                    <h6>My Cart</h6>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bg-class">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav id="main-nav">
-                        <div class="toggle-nav">
-                            <i class="ti-menu-alt"></i>
-                        </div>
-                        <ul id="main-menu" class="sm pixelstrap sm-horizontal dark-font" data-smartmenus-id="1606059385609483">
-                            <li>
-                                <div class="mobile-back text-right">
-                                    Back<i class="fa fa-angle-right pl-2" aria-hidden="true"></i>
-                                </div>
-                            </li>
-                            <li class="icon-cls"><a href="https://web.myloverra.com"><i class="fa fa-home home-icon" aria-hidden="true"></i></a></li>
-                                                                                                                                                                        <li><a href="https://web.myloverra.com/7/category-page" class="has-submenu" id="sm-1606059385609483-1" aria-haspopup="true" aria-controls="sm-1606059385609483-2" aria-expanded="false">Arabic Perfumes<span class="sub-arrow"></span></a>
-                                                                <ul id="sm-1606059385609483-2" role="group" aria-hidden="true" aria-labelledby="sm-1606059385609483-1" aria-expanded="false" style="width: auto; min-width: 10em; display: none; max-width: 20em; top: auto; left: 0px; margin-left: 0px; margin-top: 0px;" class="sm-nowrap">
-                                                                                                                                                <li><a href="https://web.myloverra.com/17/category-page">Men</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/18/category-page">Womens</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/19/category-page">Unisex</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/29/category-page">Sprinkle</a></li>
-                                                                    
-                                                                </ul>
-                                                                                                    </li>
-                                                                                                                                         <li><a href="https://web.myloverra.com/8/category-page" class="has-submenu" id="sm-1606059385609483-3" aria-haspopup="true" aria-controls="sm-1606059385609483-4" aria-expanded="false">International Perfumes<span class="sub-arrow"></span></a>
-                                                                <ul id="sm-1606059385609483-4" role="group" aria-hidden="true" aria-labelledby="sm-1606059385609483-3" aria-expanded="false">
-                                                                                                                                                <li><a href="https://web.myloverra.com/21/category-page">Men</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/22/category-page">Womens</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/23/category-page">Unisex</a></li>
-                                                                    
-                                                                </ul>
-                                                                                                    </li>
-                                                                                                                                         <li><a href="https://web.myloverra.com/9/category-page" class="has-submenu" id="sm-1606059385609483-5" aria-haspopup="true" aria-controls="sm-1606059385609483-6" aria-expanded="false">Incense<span class="sub-arrow"></span></a>
-                                                                <ul id="sm-1606059385609483-6" role="group" aria-hidden="true" aria-labelledby="sm-1606059385609483-5" aria-expanded="false">
-                                                                                                                                                <li><a href="https://web.myloverra.com/25/category-page">Incense</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/26/category-page">Applicable</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/27/category-page">Indian Oud</a></li>
-                                                                                                                                                <li><a href="https://web.myloverra.com/30/category-page">Grease The Oud</a></li>
-                                                                    
-                                                                </ul>
-                                                                                                    </li>
-                                                                                                                                             <li><a href="https://web.myloverra.com/13/category-page">Skin Care</a>
-                                                                                                    </li>
-                                                                                                                                             <li><a href="https://web.myloverra.com/14/category-page">Niche Perfumes</a>
-                                                                                                    </li>
-                                                            </ul>
-                    </nav>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
 </header>
-    <section id="wrapper">
+    <section id="wrapper" class="breadcrumb-section section-b-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title">
+                        <h2>privacy Police</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="" style="background-image:url(../assets/images/background/login-register.jpg);">
             <div class="login-box card" style="width: 1350px;">
                 <div class="card-body">
+                 <section class="about-page section-b-space">
+                   <div class="container">   
                    <div class="row">
                         <div class="col-12">
                             <div class="card">
                                 <div class="scroll">
                                     <div class="card-body">
                                         <p id="privacyFirstTitle">DATA CONTROLLER AND OWNER</p>
-                                        <p id="privacySecondTitle">info@loverra.com</p>
+                                        <p id="privacySecondTitle">info@Mla3b.com</p>
                                         <p id="privacyFirstTitle">TYPES OF DATA COLLECTED</p>
                                         <p id="privacySecondTitle">The owner does not provide a list of Personal Data types collected.<br><br>
 
@@ -297,7 +159,6 @@
 
                                           </p>
                                         <p id="privacyFirstTitle">ADDITIONAL INFORMATION ABOUT DATA COLLECTION AND PROCESSING</p>
-
                                     </div>
                                 </div>
                             </div>
@@ -308,226 +169,40 @@
         </div>
     </section>
     <footer>
-  
-    <div class="subscribe-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="subscribe-content">
-                        <h4> <i class="fa fa-envelope-o" aria-hidden="true"></i>Newsletter</h4>
-                        <p>If you are going to use a passage of Loverra you need. </p>
-                        <form class="form-inline subscribe-form" action="" method="post">
-                            <input type="hidden" name="newsletter-sub-msg" id="newsletter-sub-msg" value="You successfully subscribed to Newsletter">
-                            <input type="hidden" name="newsletter-unsub-msg" id="newsletter-unsub-msg" value="You already Subsribed to Newsletter">
+        <div class="subscribe-section" style="background-color: #3582d4;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="subscribe-content">
+                            <p>If you want to give us subscribtion ... we will be happy  </p>
+                            <form class="form-inline subscribe-form" action="" method="post">
+                                <input type="hidden" name="newsletter-sub-msg" id="newsletter-sub-msg" value="You successfully subscribed to Newsletter">
+                                <input type="hidden" name="newsletter-unsub-msg" id="newsletter-unsub-msg" value="You already Subsribed to Newsletter">
 
-                            <div class="form-group mb-0">
-                                <input type="text" class="form-control" name="email" id="email" placeholder="Email..." required="required">
-                            </div>
-                            <button type="button" id="newsletter-btn" class="btn btn-solid">subscribe</button>
-                        </form>
-                        <br>
-                                            </div>
+                                <div class="form-group mb-0">
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Email..." required="required">
+                                </div>
+                                <button type="button" id="newsletter-btn" class="btn btn-solid">subscribe</button>
+                            </form>
+                            <br>
+                                                </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="footer-section">
-        <div class="container">
-            <div class="row section-t-space section-b-space">
-                <div class="col-xl-4 col-lg-4 about-section">
-                    <div class="footer-title footer-mobile-title">
-                        <h4>about</h4>
-                    </div>
-                    <div class="footer-content">
-                        <div class="footer-logo">
-                            <img src="https://web.myloverra.com/public/images/icon/brand-logo/logo1.png" class="img-fluid" alt="">
+        <div class="sub-footer" style="background-color: #a1cbf7;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-md-12 col-sm-12">
+                        <div class="footer-end">
+                            <p class="text-sm-center">All Rights Reserved ©  <script>document.write(new Date().getFullYear());</script>  mla3b</p>
                         </div>
-                        <div class="footer-social">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
                     </div>
+
                 </div>
-                                                                                                                                                                                                                                                                                          
-                    
-                       
-                        <div class="col-xl-3 col-lg-4 footer-link">
-                            <div>
-                                <div class="footer-title">
-                                    <h4>Main Menu</h4>
-                                </div>
-                                                                                     <div class="footer-content">
-                                    <ul>
-                                            <li><a href="https://web.myloverra.com/7/category-page">Arabic Perfumes</a></li>
-                                            
-                                    </ul>
-                                </div>
-                                                            <div class="footer-content">
-                                    <ul>
-                                            <li><a href="https://web.myloverra.com/8/category-page">International Perfumes</a></li>
-                                            
-                                    </ul>
-                                </div>
-                                                            <div class="footer-content">
-                                    <ul>
-                                            <li><a href="https://web.myloverra.com/9/category-page">Incense</a></li>
-                                            
-                                    </ul>
-                                </div>
-                                                            <div class="footer-content">
-                                    <ul>
-                                            <li><a href="https://web.myloverra.com/13/category-page">Skin Care</a></li>
-                                            
-                                    </ul>
-                                </div>
-                                                            <div class="footer-content">
-                                    <ul>
-                                            <li><a href="https://web.myloverra.com/14/category-page">Niche Perfumes</a></li>
-                                            
-                                    </ul>
-                                </div>
-                                                                                 </div>
-                        </div>
-                        
-                  
-                <div class="col-xl-2 col-lg-4 footer-link">
-                    <div>
-                        <div class="footer-title">
-                            <h4>Quick Links</h4>
-                        </div>
-                        <div class="footer-content">
-                            <ul>
-                                <li><a href="https://web.myloverra.com/about">About Us</a></li>
-                                <li><a href="https://web.myloverra.com/contact">Contact Us</a></li>
-                                <li><a href="https://web.myloverra.com/terms-conditions">Terms &amp; Conditions</a></li>
-                                <li><a href="https://web.myloverra.com/return-exchange">Return &amp; Exchanges</a></li>
-                                <li><a href="https://web.myloverra.com/shipping">Shipping &amp; Delivery</a></li>
-                                <li><a href="https://web.myloverra.com/privacy">privacy Police</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-2 footer-link">
-                    <div>
-                        <div class="footer-title">
-                            <h4>My Account</h4>
-                        </div>
-                        <div class="footer-content">
-                            <ul>
-                                                                
-                                    <li><a href="https://web.myloverra.com/login">Login</a></li>
-                                    <li><a href="https://web.myloverra.com/register">Regitser</a></li>
-                                    <li><a href="https://web.myloverra.com/forgot-password">Forget Password</a></li>
-                                                                    
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-               
-           
-            </div>
-            <!-- <div class="row">
-                <div class="col">
-                    <div class="call-us">
-                        <img src="../assets/images/call-us.jpg" alt="" class="bg-img bg-left">
-                        <div class="footer-banner-content">
-                            <div class="call-text">
-                                <div>
-                                    <h3>call us:</h3>
-                                    <span class="call-no">+965 2209021 <span>(24 X 7)</span></span>
-                                </div>
-                            </div>
-                            <div class="footer-social">
-                                <ul>
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="address-section">
-                                <h6>address</h6>
-                                <p>Kuwait Kuwait Kuwait<br>
-                                   Kuwait </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="footer-bottom">
-                        <ul>
-                                <ul>
-                                        <li><a href="about-page.html">about us</a></li>
-                                        <li><a href="contact.html">contact us</a></li>
-                                        <li><a href="#">trems</a></li>
-                                        <li><a href="wishlist.html">wishlist</a></li>
-                                        
-                                        <li><a href="dashboard.html">Dashboard</a></li>
-                                        <li><a href="cart.html">cart</a></li>
-                                        <li><a href="order-history.html">my order</a></li>
-                                    </ul>
-                        </ul>
-                    </div>
-                </div>
-            </div> -->
-        </div>
-    </div>
-    <div class="sub-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-12 col-md-12 col-sm-12">
-                    <div class="footer-end">
-                        <p class="text-sm-center">All Rights Reserved ©  <script>document.write(new Date().getFullYear());</script>2020  Loverra</p>
-                    </div>
-                </div>
-                <!-- <div class="col-xl-6 col-md-6 col-sm-12">
-                    <div class="payment-card-bottom">
-                        <ul>
-                            <li>
-                                <a href="#"><img src="../assets/images/icon/visa.png" alt=""></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="../assets/images/icon/mastercard.png" alt=""></a>
-                            </li>
-                            <li>
-                                <a href="#"><img src="../assets/images/icon/paypal.png" alt=""></a>
-                            </li>
-                             
-                        </ul>
-                    </div>
-                </div> -->
             </div>
         </div>
-    </div>
-</footer>
+    </footer>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
@@ -602,16 +277,13 @@
                       } ,function(isConfirm){
 
                         if (isConfirm){
-                         // location.reload();
                         }
                       }) ;
                 },
         });
     }
-    
     function DeleteCart(id,prodId){
         let _token   = $('meta[name="csrf-token"]').attr('content');
-
         $.ajax({
                 url:  "/delete-cart",
                 type:"POST",
@@ -629,7 +301,6 @@
                 },
         });
     }
-
     function DeleteWishlist(id){
         let _token   = $('meta[name="csrf-token"]').attr('content');
          // var quantity = document.getElementById('quantity').value;
