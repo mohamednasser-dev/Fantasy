@@ -129,6 +129,94 @@ class SquadsController extends Controller
             return $this->sendResponse(403, $validate, null);
         }
     }
+    public function select_squad_players(Request $request)
+    {
+        $players = null ;
+        $input = $request->all();
+        $validate = $this->makeValidate($input,[
+                'api_token' => 'required',
+                'squad_type' => 'required'
+                ]);
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                //for limit user to add only one squad with each type 1st & 2nd ...
+                $squad_type = $request->input('squad_type');
+                $mySquad= Squad::where('user_id',$user->id)
+                        ->where('squad_type',$squad_type)
+                        ->first(); 
+                if($mySquad != null){
+                    $squad_players= Squad_player::select('squad_id','player_id','position','is_captain')
+                            ->where('squad_id',$mySquad->id)
+                            ->with('getPlayer')
+                            ->with('getSquad')
+                            ->get();
+                    foreach ($squad_players as $key => $player) {
+                        if($player->position != 'RP1' && $player->position != 'RP2'){
+                            $players[$key]['squad_name'] = $player->getSquad->squad_name;
+                            $players[$key]['player_id'] = $player->player_id;
+                            $players[$key]['player_name'] = $player->getPlayer->player_name;
+                            $players[$key]['image'] = $player->getPlayer->image;
+                            $players[$key]['position'] = $player->position;
+                            $players[$key]['is_captain'] = $player->is_captain;
+                        }
+                    }
+                    if($players != null){
+                        return $this->sendResponse(200, 'تم اظهار الفريق',$players);
+                    }else{
+                        return $this->sendResponse(403, 'لا يوجد لاعبين بالفريق',null);
+                    }
+                }else{
+                    return $this->sendResponse(403, 'لا يوجد فريق',null);
+                }
+            }else{
+                return $this->sendResponse(403, $this->LoginWarning,null);
+            }
+        }else {
+            return $this->sendResponse(403, $validate, null);
+        }
+    }
+    public function test_captain(Request $request)
+    {
+        $players = null ;
+        $input = $request->all();
+        $validate = $this->makeValidate($input,[
+                'api_token' => 'required',
+                'squad_type' => 'required'
+                ]);
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                //for limit user to add only one squad with each type 1st & 2nd ...
+                $squad_type = $request->input('squad_type');
+                $mySquad= Squad::where('user_id',$user->id)
+                        ->where('squad_type',$squad_type)
+                        ->first(); 
+                if($mySquad != null){
+                    $squad_players= Squad_player::select('squad_id','player_id','position','is_captain')
+                            ->where('squad_id',$mySquad->id)
+                            ->where('is_captain', '1')
+                            ->get();
+                    if(count($squad_players) > 0){
+                        $final_out['status'] = true ;
+                        return $this->sendResponse(200, 'يوجد كابتن',$final_out);
+                    }else{
+                        $final_out['status'] = false ;
+                        return $this->sendResponse(200, 'لا يوجد كابتن',$final_out);
+                    }
+                }else{
+                    $final_out['status'] = false ;
+                    return $this->sendResponse(403, 'لا يوجد فريق',null);
+                }
+            }else{
+                return $this->sendResponse(403, $this->LoginWarning,null);
+            }
+        }else {
+            return $this->sendResponse(403, $validate, null);
+        }
+    }
     public function store_squad(Request $request)
     {
         $input = $request->all();

@@ -25,12 +25,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	Route::post('last_results', 'Api\MatchesController@last_results');
 	// Squad Routes
 	Route::post('select_squad', 'Api\SquadsController@select_squad');
+	Route::post('select_squad_players', 'Api\SquadsController@select_squad_players');
 	Route::post('store_squad', 'Api\SquadsController@store_squad');
 	Route::post('store_squad_player', 'Api\SquadsController@store_squad_player');
 	Route::post('update_squad_player', 'Api\SquadsController@update_squad_player');
 	Route::post('update_to_captain', 'Api\SquadsController@update_to_captain');
 	Route::post('test_gwla_open', 'Api\SquadsController@test_gwla_open');
 	Route::post('test_squad', 'Api\SquadsController@test_squad');
+	Route::post('test_captain', 'Api\SquadsController@test_captain');
 	Route::post('update_squad_coach', 'Api\SquadsController@update_squad_coach');
 	// to fill option component with data
 	Route::post('coaches_by_classif', 'Api\CoachesController@coaches_by_classif');
