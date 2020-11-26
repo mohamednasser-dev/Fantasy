@@ -153,6 +153,7 @@ class SquadsController extends Controller
                             ->where('position' ,'<>','RP2')
                             ->with('getPlayer')
                             ->with('getSquad')
+                            ->orderBy('position', 'asc')
                             ->get();
                     foreach ($squad_players as $key => $player) {
                             $players[$key]['squad_name'] = $player->getSquad->squad_name;
