@@ -31,7 +31,6 @@ class SquadsController extends Controller
         }
         return $valArr;
     }
-
     public function makeValidate($inputs, $rules)
     {
         $validator = Validator::make($inputs, $rules);
@@ -96,7 +95,7 @@ class SquadsController extends Controller
                     $mySquad= Squad::select('id','squad_name','coach_id')
                             ->where('id',$mySquad->id)
                             ->first(); 
-                            $players = null;
+                    $players = null;
                     foreach ($squad_players as $key => $player) {
                         $players[$key]['squad_name'] = $player->getSquad->squad_name;
                         $players[$key]['player_id'] = $player->player_id;
@@ -131,7 +130,7 @@ class SquadsController extends Controller
     }
     public function select_squad_players(Request $request)
     {
-        $players = null ;
+        $players[] = null;
         $input = $request->all();
         $validate = $this->makeValidate($input,[
                 'api_token' => 'required',
@@ -147,20 +146,22 @@ class SquadsController extends Controller
                         ->where('squad_type',$squad_type)
                         ->first(); 
                 if($mySquad != null){
+                    // to get all players in squad without replace players
                     $squad_players= Squad_player::select('squad_id','player_id','position','is_captain')
                             ->where('squad_id',$mySquad->id)
+                            ->where('position' ,'<>','RP1')
+                            ->where('position' ,'<>','RP2')
                             ->with('getPlayer')
                             ->with('getSquad')
                             ->get();
                     foreach ($squad_players as $key => $player) {
-                        if($player->position != 'RP1' && $player->position != 'RP2'){
                             $players[$key]['squad_name'] = $player->getSquad->squad_name;
                             $players[$key]['player_id'] = $player->player_id;
                             $players[$key]['player_name'] = $player->getPlayer->player_name;
                             $players[$key]['image'] = $player->getPlayer->image;
                             $players[$key]['position'] = $player->position;
                             $players[$key]['is_captain'] = $player->is_captain;
-                        }
+                       
                     }
                     if($players != null){
                         return $this->sendResponse(200, 'تم اظهار الفريق',$players);
