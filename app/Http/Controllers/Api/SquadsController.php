@@ -68,7 +68,7 @@ class SquadsController extends Controller
                     return $this->sendResponse(403, $this->LoginWarning,null);
                 }
             }else {
-                return $this->sendResponse(403, $validate, null);
+                return $this->sendResponse(403, $validate[0], null);
             }
     }
     public function select_squad(Request $request)
@@ -125,7 +125,7 @@ class SquadsController extends Controller
                 return $this->sendResponse(403, $this->LoginWarning,null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     public function select_squad_players(Request $request)
@@ -176,7 +176,7 @@ class SquadsController extends Controller
                 return $this->sendResponse(403, $this->LoginWarning,null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     public function test_captain(Request $request)
@@ -216,7 +216,7 @@ class SquadsController extends Controller
                 return $this->sendResponse(403, $this->LoginWarning,null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     public function store_squad(Request $request)
@@ -247,7 +247,7 @@ class SquadsController extends Controller
                 return $this->sendResponse(403, $this->LoginWarning,null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     public function update_squad_player(Request $request)
@@ -283,7 +283,7 @@ class SquadsController extends Controller
             }
         }else {
             $data_final['status'] = false ;
-            return $this->sendResponse(403, $validate, $data_final);
+            return $this->sendResponse(403, $validate[0], $data_final);
         }
     }
     public function update_squad_coach(Request $request)
@@ -312,7 +312,7 @@ class SquadsController extends Controller
             }
         }else {
             $data_out['status'] = false ;
-            return $this->sendResponse(403, $validate, $data_out);
+            return $this->sendResponse(403, $validate[0], $data_out);
         }
     }
     public function update_to_captain(Request $request)
@@ -343,7 +343,7 @@ class SquadsController extends Controller
             }
         }else {
             $data['status'] = false ;
-            return $this->sendResponse(403, $validate, $data);
+            return $this->sendResponse(403, $validate[0], $data);
         }
     }
     public function store_squad_player(Request $request)
@@ -421,7 +421,7 @@ class SquadsController extends Controller
             }
         }else {
             $data['status'] = false ;
-            return $this->sendResponse(403, $validate, $data);
+            return $this->sendResponse(403, $validate[0], $data);
         }
     }
     public function test_gwla_open(Request $request)
@@ -477,7 +477,7 @@ class SquadsController extends Controller
                 return $this->sendResponse(403, $this->LoginWarning,null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
 }

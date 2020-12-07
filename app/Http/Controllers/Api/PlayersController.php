@@ -59,7 +59,7 @@ class PlayersController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     public function players_by_club(Request $request)
@@ -83,7 +83,7 @@ class PlayersController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     public function player_info(Request $request)
@@ -104,7 +104,7 @@ class PlayersController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     //to remove player from my squad ...
@@ -130,7 +130,7 @@ class PlayersController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
     public function transfer_player_position(Request $request)
@@ -176,7 +176,7 @@ class PlayersController extends Controller
                 return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
             }
         }else {
-            return $this->sendResponse(403, $validate, null);
+            return $this->sendResponse(403, $validate[0], null);
         }
     }
 }
