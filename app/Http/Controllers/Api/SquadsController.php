@@ -429,7 +429,7 @@ class SquadsController extends Controller
         $input = $request->all();
         $validate = $this->makeValidate($input,[
                 'api_token' => 'required',
-                'classification' => 'required|exists:players,id'
+                'classification' => 'required'
                 ]);
         if (!is_array($validate)) {
             $api_token = $request->input('api_token');
