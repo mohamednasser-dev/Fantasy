@@ -224,7 +224,7 @@ class SquadsController extends Controller
         $input = $request->all();
         $validate = $this->makeValidate($input,[
                 'api_token' => 'required',
-                'squad_name' => 'required|min:8',
+                'squad_name' => 'required',
                 'squad_type' => 'required',
                 ]);
         if (!is_array($validate)) {
