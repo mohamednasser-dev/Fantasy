@@ -170,9 +170,9 @@ class MatchesController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null){
                 // to get  matches by selected date
-                $matches = Match::with('getHomeclub')
+                $matches = Match::where('status','ended')->with('getHomeclub')
                 ->with('getAwayclub')
-                ->orderBy('id','desc')
+                ->orderBy('date','desc')
                 ->limit(5)
                 ->get();
                 // this line for check numbers of matches if exists
