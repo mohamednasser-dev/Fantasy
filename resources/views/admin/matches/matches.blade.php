@@ -16,9 +16,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    @if(Auth::user()->type == "admin" )
+                    
                     <a href="{{url('matches/create')}} " class="btn btn-info btn-bg">{{trans('admin.add_new_match')}}</a>
-                    @endif
+                    
                     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
