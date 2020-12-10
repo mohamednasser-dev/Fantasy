@@ -52,21 +52,21 @@
                         <div class="form-group m-t-40">
                             <div class="col-xs-12">
                                 <input class="form-control" type="email" name="email" id="email" required="" placeholder="{{trans('admin.email')}}" required="">
-                                @error('email')
+                               <!--  @error('email')
                                     <span role="alert">
                                         <strong class="red">{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror -->
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <input class="form-control" type="password" name="password" id="password" required="" placeholder="{{trans('admin.password')}}">
-                                @error('password')
+                              <!--   @error('password')
                                     <span role="alert">
                                         <strong class="red">{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                @enderror -->
                             </div>
                         </div>
                         

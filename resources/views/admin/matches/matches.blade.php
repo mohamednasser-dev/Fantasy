@@ -16,9 +16,9 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    
+                    @if(Auth::user()->type == "admin" || Auth::user()->type == "editor" )
                     <a href="{{url('matches/create')}} " class="btn btn-info btn-bg">{{trans('admin.add_new_match')}}</a>
-                    
+                    @endif
                     <a class="heading-elements-toggle"><i class="icon-ellipsis font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -76,10 +76,13 @@
                                     <td class="text-lg-center">{{$match->time}}</td>                                                
                                     <td class="text-lg-center">{{$match->date}}</td>
                                     <td class="text-lg-center">
-                                        @if(Auth::user()->type == "admin" )
+
+                                        @if(Auth::user()->type == "admin" || Auth::user()->type == "editor" )
                                             <a class='btn btn-success btn-circle' href=" {{url('matches/'.$match->gwla_id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/edit')}}">
                                             <i class="fa fa-edit"></i>
                                             </a>
+                                        @endif
+                                        @if(Auth::user()->type == "admin" )
                                             <form method="get" id='delete-form-{{ $match->id }}' action="{{url('matches/'.$match->gwla_id.'/'.$match->home_club_id.'/'.$match->away_club_id.'/delete')}}" style='display: none;'>
                                             {{csrf_field()}}
                                             <!-- {{method_field('delete')}} -->

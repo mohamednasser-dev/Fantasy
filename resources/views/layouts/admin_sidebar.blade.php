@@ -64,7 +64,7 @@
                             <a class="has-arrow waves-effect waves-dark" aria-expanded="false"><i class="mdi mdi-alarm"></i><span class="hide-menu">{{trans('admin.nav_matches')}}</span></a>        
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="{{url('matches')}}">{{trans('admin.view_matches')}}</a></li>
-                                @if(Auth::user()->type == "admin" )
+                                @if(Auth::user()->type == "admin" || Auth::user()->type == "editor" )
                                 <li><a href="{{url('matches/create')}} ">{{trans('admin.add_new_match')}}</a></li>
                                 @endif
                             </ul>
