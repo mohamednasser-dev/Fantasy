@@ -49,9 +49,9 @@ class ClubsController extends Controller{
                 
                 $coach_with_classif =Club::select('id','club_name','classification','image')->where('classification',$classification)->get();
                
-                return $this->sendResponse(200, 'تم  اظهار نوادى الفئة المطلوبة ', $coach_with_classif);
+                return $this->sendResponse(200, 'The required class clubs are shown', $coach_with_classif);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

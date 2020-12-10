@@ -58,13 +58,13 @@ class MatchesController extends Controller
                 ->get();
                 // this line for check numbers of matches if exists
                 if(count($matches)>0){
-                    return $this->sendResponse(200, 'تم اظهار مباريات اليوم ',  $matches);
+                    return $this->sendResponse(200, ' Today`s matches are shown ',  $matches);
 
                 }else{
-                    return $this->sendResponse(403, 'لا يوجد مباريات اليوم',null);
+                    return $this->sendResponse(403, 'There are no matches today',null);
                 }
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -108,12 +108,12 @@ class MatchesController extends Controller
                 }
                 // this line for check numbers of matches if exists
                 if(count($matches)>0){
-                    return $this->sendResponse(200, 'تم اظهار مباريات  ',  $matches);
+                    return $this->sendResponse(200, 'Matches are shown',  $matches);
                 }else{
-                    return $this->sendResponse(403, 'لا يوجد مباريات ',null);
+                    return $this->sendResponse(403, 'There are no matches ',null);
                 }
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -154,7 +154,7 @@ class MatchesController extends Controller
                 return $this->sendResponse(200,'',array('selected_match' => $selected_match,
                         'home_events' => $home_events,'away_events' => $away_events));
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -177,12 +177,12 @@ class MatchesController extends Controller
                 ->get();
                 // this line for check numbers of matches if exists
                 if(count($matches)>0){
-                    return $this->sendResponse(200, 'تم اظهار اخر 5 مباريات !!!',  $matches);
+                    return $this->sendResponse(200, 'The last 5 matches were shown !!!',  $matches);
                 }else{
-                    return $this->sendResponse(403, 'لا يوجد مباريات اليوم',null);
+                    return $this->sendResponse(403, 'There are no matches today',null);
                 }
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

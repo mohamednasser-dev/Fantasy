@@ -58,16 +58,16 @@ class AuthController extends Controller
             {
                 $user = auth()->user();
                 if($user->type =='admin'){
-                    return $this->sendResponse(403, 'غير مصرح لك الدخول',null);
+                    return $this->sendResponse(403, 'You are not authorized to enter',null);
                 }
                 $user->api_token = Str::random(60);
                 $api_token = $user->api_token;
                 $user->save();
-                return $this->sendResponse(200, 'تم تسجيل الدخول بنجاح',$user);
+                return $this->sendResponse(200, 'You have logged in successfully',$user);
             }
             else
             {
-                return $this->sendResponse(403, 'البريد الالكترونى او الرقم السري غير صحيح',null);
+                return $this->sendResponse(403, 'email or password not correct',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -91,7 +91,7 @@ class AuthController extends Controller
                 $user->api_token = Str::random(60);
                 $api_token = $user->api_token;
                 $user->save();
-                return $this->sendResponse(200, 'تم أضافة حساب جديد بنجاح', $user);
+                return $this->sendResponse(200, 'new user added successfuly', $user);
             }
         } else {
             return $this->sendResponse(403, $validate[0], null);
@@ -113,12 +113,12 @@ class AuthController extends Controller
             ]);
         if (!is_array($validate)) {
             if (empty($auth_user)) {
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ', null);
+                return $this->sendResponse(403, 'Please log in', null);
             }
             $user_data = User::find(intval($id))->update($input);
             $user = User::where('id',$id)->first();
 
-            return $this->sendResponse(200, 'تم  تعديل البيانات بنجاح', $user);
+            return $this->sendResponse(200, 'Data has been updated successfuly', $user);
         } else {
             return $this->sendResponse(403, $validate[0], null);
         }
@@ -142,14 +142,14 @@ class AuthController extends Controller
                 if($request->input('old_password') != null  && $request->input('confirm_password')!= null ){
                     try{
                         if ((Hash::check(request('old_password'), $user->password)) == false){
-                            return $this->sendResponse(403, 'الرقم السرى القديم خطأ', $data_final);
+                            return $this->sendResponse(403, 'The old password is wrong', $data_final);
                         }else if ((Hash::check(request('new_password'),  $user->password)) == true){
-                            return $this->sendResponse(403, 'ادخل رقم سرى جديد غير الموجود مسبقا', $data_final);
+                            return $this->sendResponse(403, 'Enter a new password that does not already exist.', $data_final);
                         }else{
                             User::where('id', $user->id)->update(['password' => Hash::make($input['new_password'])]);
                             $user_data = User::where('id', $user->id)->first();
                             $data_final['status']=true;
-                            return $this->sendResponse(200, ' تم تغير الرقم السرى بنجاح', $data_final);
+                            return $this->sendResponse(200, 'The password has been changed successfully', $data_final);
                         }
                     }catch (\Exception $ex){
                         if (isset($ex->errorInfo[2])){
@@ -160,10 +160,10 @@ class AuthController extends Controller
                         $arr = array("status" => 400, "message" => $msg, "data" => array());
                     }
                 }else{
-                    return $this->sendResponse(403, 'يجب ملئ الحقول', $data_final);
+                    return $this->sendResponse(403, 'Fields must be filled', $data_final);
                 }
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',$data_final);
+                return $this->sendResponse(403, 'Please log in',$data_final);
             }
         }else {
             return $this->sendResponse(403, $validate[0], $data_final);
@@ -215,9 +215,9 @@ class AuthController extends Controller
                         }
                     }
                 }
-                return $this->sendResponse(200, 'تم  اظهار بيانات المستخدم ',$user_data[0]);
+                return $this->sendResponse(200, 'User data shown',$user_data[0]);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
                 return $this->sendResponse(403, $validate[0], null);
@@ -240,9 +240,9 @@ class AuthController extends Controller
                     ->orderBy('points','desc')
                     ->limit(10)
                     ->get();
-                return $this->sendResponse(200, 'تم اظهار اول 10 مستخدمين بواسطه النقاط', $top_ten_users);
+                return $this->sendResponse(200, 'The first 10 users are shown with points', $top_ten_users);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
                 return $this->sendResponse(403, $validate[0], null);
@@ -292,9 +292,9 @@ class AuthController extends Controller
                         $result[$key]['flag'] = 0;
                     }
                 }
-                return $this->sendResponse(200, 'تم اظهار الترتيب بناء على النقاط',$result);
+                return $this->sendResponse(200, 'Rank is shown based on points',$result);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
                 return $this->sendResponse(403, $validate[0], null);
@@ -311,15 +311,15 @@ class AuthController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if(empty($user))
             {
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403,  'Please log in',null);
             }
             $user->api_token = null;
             if($user->save())
             {
                 Auth::logout();
-                return $this->sendResponse(200, 'تم تسجيل الخروج بنجاح',null);
+                return $this->sendResponse(200, 'You have logout successfully',null);
             }else{
-                return $this->sendResponse(401, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(401, 'Please log in',null);
             }
         }else {
         return $this->sendResponse(403, $validate, null);
@@ -328,9 +328,9 @@ class AuthController extends Controller
     public function sponsers(){
         if (Sponser_image::count() != 0) {
             $sposer_image =Sponser_image::all()->random(1); // The amount of items you wish to receive
-            return $this->sendResponse(200, 'تم اظهار جميع الاعلانات !!', $sposer_image);
+            return $this->sendResponse(200, 'All ads are shown !!', $sposer_image);
         }else{
-            return $this->sendResponse(403, 'لا يوجد اعلانات', null);
+            return $this->sendResponse(403, 'There are no ads', null);
         }
     }
 }

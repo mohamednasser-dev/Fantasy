@@ -54,9 +54,9 @@ class CoachesController extends Controller
                 })
                 ->get();
                
-                return $this->sendResponse(200, 'تم  اظهار مدربين الفئة المطلوبة ', $coaches_with_classif);
+                return $this->sendResponse(200, 'The required class coaches were shown', $coaches_with_classif);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

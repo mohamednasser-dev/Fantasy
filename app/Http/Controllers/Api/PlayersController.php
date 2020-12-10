@@ -54,9 +54,9 @@ class PlayersController extends Controller
                     $q->where('classification', '=', $classification);
                 })
                 ->get();
-                return $this->sendResponse(200, 'تم  اظهار لاعبين الفئة المطلوبة ', $players_with_classif);
+                return $this->sendResponse(200, 'Players of the required classification are shown ', $players_with_classif);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -78,9 +78,9 @@ class PlayersController extends Controller
                                     ->where('club_id', $club_id )
                                     ->orderBy('center_name','asc')
                                     ->get();
-                return $this->sendResponse(200, 'تم  اظهار لاعبين النادى المطلوبة ', $players_with_club);
+                return $this->sendResponse(200, 'The required club players have been shown ', $players_with_club);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -99,9 +99,9 @@ class PlayersController extends Controller
             if($user != null){
                 $player_id = $request->input('player_id');
                 $player_info =Player::select('id','player_name','center_name','club_id','age','desc','image')->where('id', $player_id )->get();
-                return $this->sendResponse(200, 'تم اظهار بيانات اللاعب !!!', $player_info);
+                return $this->sendResponse(200, 'Player data shown !', $player_info);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -125,9 +125,9 @@ class PlayersController extends Controller
                 $player =Squad_player::where('player_id', $player_id )
                 ->where('squad_id', $squad_id )
                 ->delete();
-                return $this->sendResponse(200, ' تم حذف اللاعب !',);
+                return $this->sendResponse(200, 'The player has been deleted!',);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -171,9 +171,9 @@ class PlayersController extends Controller
                 Squad_player::where('player_id',$player2_id)
                 ->where('squad_id',$squad_id)
                 ->update($player2_input);
-                return $this->sendResponse(200, ' تم تغير مركز اللعب ! !',);
+                return $this->sendResponse(200, 'The player position has changed!',);
             }else{
-                return $this->sendResponse(403, 'يرجى تسجيل الدخول ',null);
+                return $this->sendResponse(403, 'Please log in',null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

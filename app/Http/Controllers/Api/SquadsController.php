@@ -60,9 +60,9 @@ class SquadsController extends Controller
                         $mySquad= Squad::where('user_id',$user->id)
                                 ->where('squad_type',$squad_type)
                                 ->first(); 
-                        return $this->sendResponse(200, 'يوجد فريق',$mySquad);
+                        return $this->sendResponse(200, 'There is a team',$mySquad);
                     }else{
-                        return $this->sendResponse(403, 'يجب انشاء فريق !', null);
+                        return $this->sendResponse(403, 'You must create a team !', null);
                     }
                 }else{
                     return $this->sendResponse(403, $this->LoginWarning,null);
@@ -114,12 +114,12 @@ class SquadsController extends Controller
                         $players[$coach_location_array]['is_captain'] = '0';
                     }
                     if($players != null){
-                        return $this->sendResponse(200, 'تم اظهار الفريق',$players);
+                        return $this->sendResponse(200, 'The team has been shown',$players);
                     }else{
-                        return $this->sendResponse(403, 'لا يوجد لاعبين بالفريق',null);
+                        return $this->sendResponse(403, 'There are no players on the team',null);
                     }
                 }else{
-                    return $this->sendResponse(403, 'لا يوجد فريق',null);
+                    return $this->sendResponse(403, 'There is no team',null);
                 }
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
@@ -165,12 +165,12 @@ class SquadsController extends Controller
                        
                     }
                     if($players != null){
-                        return $this->sendResponse(200, 'تم اظهار الفريق',$players);
+                        return $this->sendResponse(200, 'The team has been shown',$players);
                     }else{
-                        return $this->sendResponse(403, 'لا يوجد لاعبين بالفريق',null);
+                        return $this->sendResponse(403, 'There are no players on the team',null);
                     }
                 }else{
-                    return $this->sendResponse(403, 'لا يوجد فريق',null);
+                    return $this->sendResponse(403, 'There is no team',null);
                 }
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
@@ -203,14 +203,14 @@ class SquadsController extends Controller
                             ->get();
                     if(count($squad_players) > 0){
                         $final_out['status'] = true ;
-                        return $this->sendResponse(200, 'يوجد كابتن',$final_out);
+                        return $this->sendResponse(200, 'There is a captain',$final_out);
                     }else{
                         $final_out['status'] = false ;
-                        return $this->sendResponse(200, 'لا يوجد كابتن',$final_out);
+                        return $this->sendResponse(200, 'There is no captain',$final_out);
                     }
                 }else{
                     $final_out['status'] = false ;
-                    return $this->sendResponse(403, 'لا يوجد فريق',null);
+                    return $this->sendResponse(403, 'There is no team',null);
                 }
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
@@ -237,11 +237,11 @@ class SquadsController extends Controller
                 ->where('squad_type',$squad_type)
                 ->get(); 
                 if(count($mySquad)>0){
-                    return $this->sendResponse(403, 'لقد قمت بأنشاء فريق من الفئة المختارة من قبل', null);
+                    return $this->sendResponse(403, 'You have already created a team from the selected category', null);
                 }else{
                     $input['user_id'] = $user->id;
                     $squad = Squad::create($input);
-                    return $this->sendResponse(200, 'تم اضافة فريق',$squad);
+                    return $this->sendResponse(200, 'A team has been added',$squad);
                 }
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
@@ -273,10 +273,10 @@ class SquadsController extends Controller
                                     ->update($data);
 
                 }catch(QueryException $ex){
-                    return $this->sendResponse(403,'هذا اللاعب موجود من قبل'); 
+                    return $this->sendResponse(403,'This player already exists'); 
                 }
                  $data_final['status'] = true ;
-                return $this->sendResponse(200, 'تم التعديل بنجاح',$data_final);
+                return $this->sendResponse(200, 'Modified successfully',$data_final);
             }else{
                 $data_final['status'] = false ;
                 return $this->sendResponse(403, $this->LoginWarning,$data_final);
@@ -305,7 +305,7 @@ class SquadsController extends Controller
                           ->where('squad_type',$squad_type)
                           ->update($data);
                 $data_out['status'] = true ;
-                return $this->sendResponse(200, 'تم اضافة مدرب للفريق ',$data_out);
+                return $this->sendResponse(200, 'A coach has been added to the team ',$data_out);
             }else{
                 $data_out['status'] = false ;
                 return $this->sendResponse(403, $this->LoginWarning,$data_out);
@@ -336,7 +336,7 @@ class SquadsController extends Controller
                 $data_add_cap['is_captain'] = '1';
                 $updated_squad = Squad_player::where('squad_id',$squad_id)->where('player_id',$player_id)->update($data_add_cap);
                 $data['status'] = true ;
-                return $this->sendResponse(200, 'تم تغير الكابتين بنجاح',$data);
+                return $this->sendResponse(200, 'The captain has changed successfully',$data);
             }else{
                 $data['status'] = false ;
                 return $this->sendResponse(403, $this->LoginWarning,$data);
@@ -370,14 +370,14 @@ class SquadsController extends Controller
                 // $squad_players_not_cap =Squad_player::where('squad_id',$squad_id)->where('is_captain','0')->get();
                 if(count($selected_squad)==7){
                     $data['status'] = false ;
-                    return $this->sendResponse(403,'هذا الفريق وصل لعدد اللاعبين المطلوب',$data);
+                    return $this->sendResponse(403,'This team has reached the required number of players',$data);
                 }else{
                     // to force user to select only one capain in squade
                     if($is_captain == 1){
                         $selected_captin_squad =Squad_player::where('squad_id',$squad_id)->where('is_captain','1')->get();
                         if(count($selected_captin_squad)==1){
                             $data['status'] = false ;
-                            return $this->sendResponse(403,'لقد تم اختيار الكابتن من قبل !!!',$data);
+                            return $this->sendResponse(403,'The captain has been chosen before !!!',$data);
                         }
                     }
                     // this to make user to choose to players only from one club ...
@@ -386,7 +386,7 @@ class SquadsController extends Controller
                     ->get();
                     if(count($squad_players) == 2){
                         $data['status'] = false ;
-                        return $this->sendResponse(403,'لا يمكن اختيار اكثر من لاعبين لنفس الفريق',$data);
+                        return $this->sendResponse(403,'It is not possible to select more than two players for the same team',$data);
                     }else{
                         //this try catch to block user to add two same players in single squad
                         // or two sam position in single squad
@@ -401,18 +401,18 @@ class SquadsController extends Controller
                             if($position == 'RP1' ||$position == 'RP2'){
                                 if($is_captain == 1){
                                     $data['status'] = false ;
-                                    return $this->sendResponse(403,'لا يمكن للبدلاء ان يكونو كابتن فالفريق',$data);
+                                    return $this->sendResponse(403,'Substitutes cannot be captain for a team',$data);
                                 }
                             }
                             $input['club_id'] = $selected_player->club_id;
                             $squad_player = Squad_player::create($input);
                         }catch(QueryException $ex){
                             $data['status'] = false ;
-                            return $this->sendResponse(403,'هذا اللاعب موجود من قبل',$data); 
+                            return $this->sendResponse(403,'This player already exists',$data); 
                         }
                         //end try catch
                         $data['status'] = true ;
-                            return $this->sendResponse(200, 'تم اضافة لاعب بالفريق',$data);
+                            return $this->sendResponse(200, 'A player has been added to the team',$data);
                     }
                 }
             }else{
@@ -464,14 +464,14 @@ class SquadsController extends Controller
                     //make if statement to avoid user to change his squad formation during active gwla ...
                     if(($today >= $yesterday_gwla_start && $today <= $final_end)){
                          $data['status'] = false;
-                        return $this->sendResponse(403,'لا يمكن تعديل التشكيلة اثناء الجولة',$data); 
+                        return $this->sendResponse(403,'The formation cannot be modified during the tour',$data); 
                     }else{
                         $data['status'] = true;
-                        return $this->sendResponse(200, 'تعديل التشكيلة مسموح ',$data);
+                        return $this->sendResponse(200, 'formation modification is permitted',$data);
                     }    
                 }else{
                     $data['status'] = true;
-                    return $this->sendResponse(200,'لا توجد جولات مفتوحة الان ...',$data);
+                    return $this->sendResponse(200,'No tours are open right now ...',$data);
                 }
             }else{
                 return $this->sendResponse(403, $this->LoginWarning,null);
