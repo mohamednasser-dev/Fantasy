@@ -101,7 +101,11 @@ class SquadsController extends Controller
                         $players[$key]['player_id'] = $player->player_id;
                         $players[$key]['player_name'] = $player->getPlayer->player_name;
                         $players[$key]['image'] = $player->getPlayer->image;
-                        $players[$key]['position'] = $player->position;
+                        if($player->position == 'GK'){
+                            $players[$key]['position'] = $player->position;
+                        }else{
+                            $players[$key]['position'] = '';
+                        }
                         $players[$key]['is_captain'] = $player->is_captain;
                     } 
                     if($mySquad->coach_id != null){
@@ -160,7 +164,11 @@ class SquadsController extends Controller
                             $players[$key]['player_id'] = $player->player_id;
                             $players[$key]['player_name'] = $player->getPlayer->player_name;
                             $players[$key]['image'] = $player->getPlayer->image;
-                            $players[$key]['position'] = $player->position;
+                            if($player->position == 'GK'){
+                                $players[$key]['position'] = $player->position;
+                            }else{
+                                $players[$key]['position'] = '';
+                            }
                             $players[$key]['is_captain'] = $player->is_captain;
                        
                     }

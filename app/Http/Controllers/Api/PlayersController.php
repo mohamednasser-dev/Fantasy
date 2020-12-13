@@ -64,6 +64,7 @@ class PlayersController extends Controller
     }
     public function players_by_club(Request $request)
     {
+        $players[] = null;
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'api_token' => 'required',        
@@ -78,7 +79,20 @@ class PlayersController extends Controller
                                     ->where('club_id', $club_id )
                                     ->orderBy('center_name','asc')
                                     ->get();
-                return $this->sendResponse(200, 'The required club players have been shown ', $players_with_club);
+                foreach ($players_with_club as $key => $player) {
+
+                            $players[$key]['id'] = $player->id;
+                            $players[$key]['player_name'] = $player->player_name;
+                            if($player->center_name == 'GK'){
+                                $players[$key]['center_name'] = $player->center_name;
+                            }else{
+                                $players[$key]['center_name'] = '';
+                            }
+                            $players[$key]['club_id'] = $player->club_id;
+                            $players[$key]['image'] = $player->image;
+                    }
+
+                return $this->sendResponse(200, 'The required club players have been shown ', $players);
             }else{
                 return $this->sendResponse(403, 'Please log in',null);
             }
