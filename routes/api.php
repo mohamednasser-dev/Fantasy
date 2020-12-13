@@ -21,6 +21,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	//main home page 
 	Route::post('today_matches', 'Api\MatchesController@today_matches');
 	Route::post('match_by_date', 'Api\MatchesController@match_by_date');
+	Route::post('get_tour_open', 'Api\MatchesController@get_tour_open');
+	Route::post('get_gwla_matches', 'Api\MatchesController@get_gwla_matches');
 	Route::post('results_by_match_id', 'Api\MatchesController@results_by_match_id');
 	Route::post('last_results', 'Api\MatchesController@last_results');
 	// Squad Routes

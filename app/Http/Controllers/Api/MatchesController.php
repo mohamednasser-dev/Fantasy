@@ -3,7 +3,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\MatchEvent;
+use App\Tournament;
 use Carbon\Carbon;
+use App\Gwalat;
 use Validator;
 use App\Match;
 use App\User;
@@ -110,7 +112,7 @@ class MatchesController extends Controller
                 if(count($matches)>0){
                     return $this->sendResponse(200, 'Matches are shown',  $matches);
                 }else{
-                    return $this->sendResponse(403, 'There are no matches ',null);
+                    return $this->sendResponse(403, 'There are no Matches ',null);
                 }
             }else{
                 return $this->sendResponse(403, 'Please log in',null);
@@ -183,6 +185,59 @@ class MatchesController extends Controller
                 }
             }else{
                 return $this->sendResponse(403, 'Please log in',null);
+            }
+        }else {
+            return $this->sendResponse(403, $validate[0], null);
+        }
+    }
+    public function get_tour_open(Request $request){
+        $input = $request->all();
+        $validate = $this->makeValidate($input,[
+                'api_token' => 'required',
+                'classification' => 'required'
+                ]);
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                // to get the only started gwla in the tournament ..
+                $classification = $request->input('classification');
+                $tour =Tournament::where('classification',  $classification)->where('status','started')->first();
+                if($tour != null){
+                    $gwlat =Gwalat::select('id','name','tour_id')->where('tour_id',$tour->id)->get();
+                    return $this->sendResponse(200, 'tournament gwlat selected',$gwlat);
+                }else{
+                    return $this->sendResponse(403, 'There are no open tournaments in this classification',null);
+                }
+            }else{
+                return $this->sendResponse(403, $this->LoginWarning,null);
+            }
+        }else {
+            return $this->sendResponse(403, $validate[0], null);
+        }
+    }
+    public function get_gwla_matches(Request $request){
+        $input = $request->all();
+        $validate = $this->makeValidate($input,[
+                'api_token' => 'required',
+                'gwla_id' => 'required'
+                ]);
+        if (!is_array($validate)) {
+            $api_token = $request->input('api_token');
+            $user = User::where('api_token',$api_token)->first();
+            if($user != null){
+                // to get the only started gwla in the tournament ..
+                $matches = Match::where('gwla_id', $request->input('gwla_id'))
+                        ->with('getHomeclub')
+                        ->with('getAwayclub')
+                        ->get();
+                if( count($matches) > 0 ){
+                    return $this->sendResponse(200,  'Matches are shown',  $matches);
+                }else{
+                    return $this->sendResponse(403, 'There are no Matches',null);
+                }
+            }else{
+                return $this->sendResponse(403, $this->LoginWarning,null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
