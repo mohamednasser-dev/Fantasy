@@ -91,7 +91,10 @@ class MatchesController extends Controller
                     $matches = Match::where('date', $yesterday)
                     ->with('getHomeclub')
                     ->with('getAwayclub')
-                    ->get();
+                    ->get()->map(function($matche) {
+                            $matche->time = date("g:i a", strtotime("$matche->time"));
+                            return $matche;
+                        });
                 }else if($duration == 'N'){
                     $now = Carbon::now();
                     $now =  Carbon::parse($now->toDateTimeString())->format('Y-m-d');
@@ -99,14 +102,20 @@ class MatchesController extends Controller
                     $matches = Match::where('date', $now)
                     ->with('getHomeclub')
                     ->with('getAwayclub')
-                    ->get();
+                    ->get()->map(function($matche) {
+                            $matche->time = date("g:i a", strtotime("$matche->time"));
+                            return $matche;
+                        });
                 }else if($duration == 'T'){
                     $tomorrow = Carbon::tomorrow();
                     $tomorrow =  Carbon::parse($tomorrow->toDateTimeString())->format('Y-m-d');
                     $matches = Match::where('date', $tomorrow)
                     ->with('getHomeclub')
                     ->with('getAwayclub')
-                    ->get();
+                    ->get()->map(function($matche) {
+                            $matche->time = date("g:i a", strtotime("$matche->time"));
+                            return $matche;
+                        });
                 }
                 // this line for check numbers of matches if exists
                 if(count($matches)>0){
@@ -230,7 +239,10 @@ class MatchesController extends Controller
                 $matches = Match::where('gwla_id', $request->input('gwla_id'))
                         ->with('getHomeclub')
                         ->with('getAwayclub')
-                        ->get();
+                        ->get()->map(function($matche) {
+                            $matche->time = date("g:i a", strtotime("$matche->time"));
+                            return $matche;
+                        });
                 if( count($matches) > 0 ){
                     return $this->sendResponse(200,  'Matches are shown',  $matches);
                 }else{
