@@ -32,6 +32,7 @@ class CoachesController extends Controller
             [
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
                 'coach_name' => 'required|unique:coaches,coach_name',
+                'coach_name_en' => 'required|unique:coaches,coach_name_en',
                 'club_id' => 'required|unique:coaches,club_id',
                 'age' => 'required',                
                 'desc' => '',
@@ -81,6 +82,7 @@ class CoachesController extends Controller
             [
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
                 'coach_name' => 'required|unique:coaches,coach_name,'.$id,
+                'coach_name_en' => 'required|unique:coaches,coach_name_en,'.$id,
                 'age' => 'required',
                 'club_id' => 'required',
                 'desc' => '',

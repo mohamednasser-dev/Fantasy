@@ -33,6 +33,12 @@
                       </div>
                   </div>
                   <div class="form-group m-t-40 row">
+                      <label for="example-text-input" class="col-md-2 col-form-label">{{trans('admin.player_name_en')}}</label>
+                      <div class="col-md-10">
+                          {{ Form::text('player_name_en',old('player_name_en'),["class"=>"form-control" ,"required"]) }}
+                      </div>
+                  </div>
+                  <div class="form-group m-t-40 row">
                       <label for="example-text-input" class="col-md-2 col-form-label">
                           {{trans('admin.center_name')}}
                       </label>

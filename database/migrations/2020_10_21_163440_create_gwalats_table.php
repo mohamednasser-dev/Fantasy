@@ -16,6 +16,7 @@ class CreateGwalatsTable extends Migration
         Schema::create('gwalats', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('name_en');
             $table->time('start_time')->nullable();
             $table->date('start')->nullable();
             $table->date('end')->nullable();

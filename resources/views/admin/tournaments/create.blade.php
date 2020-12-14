@@ -29,6 +29,14 @@
                             </div>
                         </div> 
                         <div class="form-group row">
+                            <label for="example-month-input" class="col-md-2 col-form-label">
+                                {{trans('admin.tour_name_en')}}
+                            </label>
+                            <div class="col-md-10">
+                                {{ Form::text('tour_name_en',old('tour_name_en'),["class"=>"form-control" ,"required"]) }}
+                            </div>
+                        </div> 
+                        <div class="form-group row">
                             <label for="example-tel-input" class="col-md-2 col-form-label">
                                 {{trans('admin.classification')}}
                             </label>

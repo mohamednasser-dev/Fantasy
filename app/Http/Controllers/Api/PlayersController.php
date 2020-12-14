@@ -50,13 +50,13 @@ class PlayersController extends Controller
             if($user != null){
                 $classification = $request->input('classif');
                 $players_with_classif =Player::select('id','player_name','center_name','club_id','image')->with('getClub')
-                ->whereHas('getClub', function ($q) use ($classification) {
-                    $q->where('classification', '=', $classification);
-                })
-                ->get();
-                return $this->sendResponse(200, 'Players of the required classification are shown ', $players_with_classif);
+                    ->whereHas('getClub', function ($q) use ($classification) {
+                        $q->where('classification', '=', $classification);
+                    })
+                    ->get();
+                return $this->sendResponse(200, trans('admin.player_class_shown'), $players_with_classif);
             }else{
-                return $this->sendResponse(403, 'Please log in',null);
+                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -80,21 +80,20 @@ class PlayersController extends Controller
                                     ->orderBy('center_name','asc')
                                     ->get();
                 foreach ($players_with_club as $key => $player) {
-
-                            $players[$key]['id'] = $player->id;
-                            $players[$key]['player_name'] = $player->player_name;
-                            if($player->center_name == 'GK'){
-                                $players[$key]['center_name'] = $player->center_name;
-                            }else{
-                                $players[$key]['center_name'] = '';
-                            }
-                            $players[$key]['club_id'] = $player->club_id;
-                            $players[$key]['image'] = $player->image;
+                    $players[$key]['id'] = $player->id;
+                    $players[$key]['player_name'] = $player->player_name;
+                    if($player->center_name == 'GK'){
+                        $players[$key]['center_name'] = $player->center_name;
+                    }else{
+                        $players[$key]['center_name'] = '';
                     }
+                    $players[$key]['club_id'] = $player->club_id;
+                    $players[$key]['image'] = $player->image;
+                }
 
-                return $this->sendResponse(200, 'The required club players have been shown ', $players);
+                return $this->sendResponse(200, trans('admin.club_players_shown'), $players);
             }else{
-                return $this->sendResponse(403, 'Please log in',null);
+                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -102,6 +101,7 @@ class PlayersController extends Controller
     }
     public function player_info(Request $request)
     {
+        $lang = $request->header('lang');
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'api_token' => 'required',        
@@ -112,10 +112,16 @@ class PlayersController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if($user != null){
                 $player_id = $request->input('player_id');
-                $player_info =Player::select('id','player_name','center_name','club_id','age','desc','image')->where('id', $player_id )->get();
-                return $this->sendResponse(200, 'Player data shown !', $player_info);
+                $player_info =Player::select('id','player_name','center_name','club_id','age','desc','image')
+                ->where('id', $player_id )->get()->map(function($player) use ($lang) {
+                                if($lang == 'en'){
+                                    $player->player_name = $player->player_name_en;
+                                }
+                                return $player;
+                            });
+                return $this->sendResponse(200, trans('admin.player_shown'), $player_info);
             }else{
-                return $this->sendResponse(403, 'Please log in',null);
+                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -139,9 +145,9 @@ class PlayersController extends Controller
                 $player =Squad_player::where('player_id', $player_id )
                 ->where('squad_id', $squad_id )
                 ->delete();
-                return $this->sendResponse(200, 'The player has been deleted!',);
+                return $this->sendResponse(200, trans('admin.player_deleted'),null);
             }else{
-                return $this->sendResponse(403, 'Please log in',null);
+                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -185,9 +191,9 @@ class PlayersController extends Controller
                 Squad_player::where('player_id',$player2_id)
                 ->where('squad_id',$squad_id)
                 ->update($player2_input);
-                return $this->sendResponse(200, 'The player position has changed!',);
+                return $this->sendResponse(200, trans('admin.player_position_change') , null);
             }else{
-                return $this->sendResponse(403, 'Please log in',null);
+                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

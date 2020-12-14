@@ -41,23 +41,19 @@ class TournamentsController extends Controller
         // }
         return view($this->folderView.'create');
     }
-
-// this to add new recourd of tournament in database
+    // this to add new recourd of tournament in database
     public function store(Request $request)
     {
         $data = $this->validate(\request(),
             [
                 'tour_name' => 'required|unique:tournaments,tour_name',
+                'tour_name_en' => 'required|unique:tournaments,tour_name_en',
                 'classification' => 'required',
-
             ]);
-
         $tournament = $this->objectName::create($data);
         $tournament->save();
         session()->flash('success',  trans('admin.addedsuccess'));
         return redirect(url('tournaments/create'));
-
-
     }
     public function edit($id)
     {
@@ -69,6 +65,7 @@ class TournamentsController extends Controller
         $data = $this->validate(\request(),
             [
                 'tour_name' => 'required|unique:tournaments,tour_name,'.$id,
+                'tour_name_en' => 'required|unique:tournaments,tour_name_en,'.$id,
                 'classification' => 'required',
             ]);
         $tournament = $this->objectName::where('id',$id)->update($data);
@@ -129,6 +126,7 @@ class TournamentsController extends Controller
         $data = $this->validate(\request(),
             [
                 'name' => 'required',
+                'name_en' => 'required',
                 'tour_id' => 'required',
             ]);
         $tournament = Gwalat::create($data);
@@ -162,5 +160,4 @@ class TournamentsController extends Controller
         session()->flash('success', trans('admin.gwla_status_change_success'));
         return back();
     }
-   
 }

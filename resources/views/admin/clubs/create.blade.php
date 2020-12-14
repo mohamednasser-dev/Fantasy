@@ -37,6 +37,12 @@
                          {{ Form::text('club_name',old('club_name'),["class"=>"form-control" ,"required",'placeholder'=>trans('admin.club_name')]) }}
                       </div>
                   </div>
+                  <div class="form-group m-t-40 row">
+                      <label for="example-text-input" class="col-md-2 col-form-label">{{trans('admin.club_name_en')}}</label>
+                      <div class="col-md-10">
+                         {{ Form::text('club_name_en',old('club_name_en'),["class"=>"form-control" ,"required",'placeholder'=>trans('admin.club_name_en')]) }}
+                      </div>
+                  </div>
                   <div class="form-group row">
                       <label for="example-search-input" class="col-md-2 col-form-label">{{trans('admin.tours')}}</label>
                       <div class="col-md-10">

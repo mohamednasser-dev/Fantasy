@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gwalat extends Model
 {
     protected $fillable = [
-        'name', 'tour_id', 'start', 'end','status','start_time','end_time'
+        'name', 'name_en', 'tour_id', 'start', 'end','status','start_time','end_time'
     ];
     public function getTournament()
     {

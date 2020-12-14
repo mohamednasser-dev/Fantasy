@@ -9,6 +9,7 @@ use App\Match;
 use App\Event;
 use App\Player;
 use App\Squad;
+use App\Coach;
 use App\User;
 use App\Squad_player;
 use App\MatchEvent;
@@ -89,8 +90,8 @@ class SendPointsToUsers implements ShouldQueue
             }
         }
 
-        //Get Squad And Give Point For Coche Win
-        $Coche = Coche::where('club_id',$win_club)->first();
+        //Get Squad And Give Point For Coche Win by nasser
+        $Coche = Coach::where('club_id',$win_club)->first();
         $CocheSquads = Squad::where('coach_id',$Coche->id)->get();
         foreach ($CocheSquads as $squad) {
             $squad->increment('points',$win_event->value);

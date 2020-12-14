@@ -37,6 +37,7 @@ class CoachesController extends Controller
     }
     public function coaches_by_classif(Request $request)
     {
+        $lang = $request->header('lang');
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'classif' => 'required',
@@ -52,11 +53,16 @@ class CoachesController extends Controller
                 ->whereHas('getClub', function ($q) use ($classification) {
                     $q->where('classification', '=', $classification);
                 })
-                ->get();
+                ->get()->map(function($coaches) use ($lang) {
+                                if($lang == 'en'){
+                                    $coaches->coach_name = $coaches->coach_name_en;
+                                }
+                                return $coaches;
+                            });
                
-                return $this->sendResponse(200, 'The required class coaches were shown', $coaches_with_classif);
+                return $this->sendResponse(200, trans('admin.coach_class_shown'), $coaches_with_classif);
             }else{
-                return $this->sendResponse(403, 'Please log in',null);
+                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

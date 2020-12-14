@@ -35,6 +35,12 @@
                               {{ Form::text('coach_name',old('coach_name'),["class"=>"form-control" ,"required"]) }}
                           </div>
                       </div>
+                      <div class="form-group m-t-40 row">
+                          <label for="example-text-input" class="col-md-2 col-form-label">{{trans('admin.coach_name_en')}}</label>
+                          <div class="col-md-10">
+                              {{ Form::text('coach_name_en',old('coach_name_en'),["class"=>"form-control" ,"required"]) }}
+                          </div>
+                      </div>
                       <div class="form-group row">
                           <label for="example-search-input" class="col-md-2 col-form-label">{{trans('admin.age')}}</label>
                           <div class="col-md-10">

@@ -29,6 +29,7 @@
                         <thead>
                             <tr>
                                 <th class="text-lg-center">{{trans('admin.tour_name')}}</th>
+                                <th class="text-lg-center">{{trans('admin.tour_name_en')}}</th>
                                 <th class="text-lg-center">{{trans('admin.classification')}}</th>
                                 <th class="text-lg-center">{{trans('admin.status')}}</th> 
                                 <th class="text-lg-center">{{trans('admin.actions')}}</th>
@@ -38,6 +39,7 @@
                             @foreach($tournaments as $tour)
                                 <tr>
                                     <td class="text-lg-center">{{$tour->tour_name}}</td>
+                                    <td class="text-lg-center">{{$tour->tour_name_en}}</td>
                                     <td class="text-lg-center">
                                         @if($tour->classification =='1st')
                                             {{trans('admin.1st')}}

@@ -29,6 +29,7 @@
                         <thead>
                             <tr>
                                 <th class="text-lg-center">{{trans('admin.coach_name')}}</th>
+                                <th class="text-lg-center">{{trans('admin.coach_name_en')}}</th>
                                 <th class="text-lg-center">{{trans('admin.age')}}</th>
                                 <th class="text-lg-center">{{trans('admin.club_name')}}</th>
                                 <th class="text-lg-center">{{trans('admin.image')}}</th>
@@ -39,6 +40,7 @@
                             @foreach($coaches as $coach)
                                 <tr>
                                     <td class="text-lg-center">{{$coach->coach_name}}</td>
+                                    <td class="text-lg-center">{{$coach->coach_name_en}}</td>
                                     <td class="text-lg-center">{{$coach->age}}</td>
                                     <td class="text-lg-center">{{$coach->getClub->club_name}}</td>
                                     <td class="text-lg-center">

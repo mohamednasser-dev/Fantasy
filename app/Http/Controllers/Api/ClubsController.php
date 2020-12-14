@@ -36,6 +36,7 @@ class ClubsController extends Controller{
     }
     public function clubs_by_classif(Request $request)
     {
+        $lang = $request->header('lang');
         $input = $request->all();
         $validate = $this->makeValidate($input,[
             'classif' => 'required',
@@ -47,11 +48,18 @@ class ClubsController extends Controller{
             if($user != null){
                 $classification = $request->input('classif');
                 
-                $coach_with_classif =Club::select('id','club_name','classification','image')->where('classification',$classification)->get();
+                $coach_with_classif =Club::select('id','club_name','classification','image')
+                        ->where('classification',$classification)
+                        ->get()->map(function($club) use ($lang) {
+                                if($lang == 'en'){
+                                    $club->club_name = $club->club_name_en;
+                                }
+                                return $club;
+                            });
                
-                return $this->sendResponse(200, 'The required class clubs are shown', $coach_with_classif);
+                return $this->sendResponse(200, trans('admin.club_class_shown'), $coach_with_classif);
             }else{
-                return $this->sendResponse(403, 'Please log in',null);
+                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

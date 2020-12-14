@@ -9,7 +9,7 @@ class Stadium extends Model
     protected $table = 'stadiums';
 
     protected $fillable = [
-        'stadium_name', 'image'
+        'stadium_name', 'stadium_name_en','image'
     ];
     public function getImageAttribute($img)
     {

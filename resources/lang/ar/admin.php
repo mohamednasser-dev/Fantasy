@@ -79,10 +79,12 @@ return [
     //Categories
     'add_new_cat' => 'اضافة تصنيف جديد',
     'name' => 'الاسم',
+    'name_en' => 'الاسم بالانجليزى',
     //Clubs
     'add_new_club' => 'اضافة نادى جديد',
     'club_info' => 'بيانات النادى',
-    'club_name' => 'اسم النادى',
+    'club_name' => 'اسم النادى Ar',
+    'club_name_en' => 'اسم النادى En',
     'club' => 'نادى',
     'date_created' => 'تاريخ الانشاء',
     'classification' => 'الفئة',
@@ -104,7 +106,8 @@ return [
     //coaches
     'coach_info' => 'بيانات المدرب',
     'add_new_coach' => 'اضافة مدرب جديد',
-    'coach_name' => 'اسم المدرب',
+    'coach_name' => 'اسم المدرب Ar',
+    'coach_name_en' => 'اسم المدرب En',
     'coach' => 'المدرب',
     'age' => 'العمر',
     'choose_club' => 'اختار النادى',
@@ -164,7 +167,8 @@ return [
     'delete_formation_Success' => 'تم حذف التشكيل بنجاح ',
     //player
     'add_new_player' => 'اضافة لاعب جديد',
-    'player_name' => 'اسم اللاعب',
+    'player_name' => 'اسم اللاعب Ar',
+    'player_name_en' => 'اسم اللاعب En',
     'center_name' => 'مركز اللاعب',
     'choose_center_name' => 'اختار مركز الاعب',
     'write_player_desc' => 'اكتب وصف الاعب',
@@ -176,7 +180,8 @@ return [
     //Stadium
     'stad_info' => 'بيانات الملعب',
     'add_new_stad' => 'اضافة ملعب جديد',
-    'stad_name' => 'اسم الملعب',
+    'stad_name' => 'اسم الملعب Ar',
+    'stad_name_en' => 'اسم الملعب En',
     'stad' => 'الملعب',
     'stad_image' => 'صورة الملعب',
     'change_stad_image' => 'تغير صورة الملعب',
@@ -184,9 +189,11 @@ return [
     //tournament
     'tour_info' => 'بيانات البطولة',
     'add_new_tour' => 'اضافة بطولة جديدة',
-    'tour_name' => 'اسم البطولة',
+    'tour_name' => 'اسم البطولة Ar',
+    'tour_name_en' => 'اسم البطولة En',
     'gwalat' => 'الجولات',
-    'gwla_name' => 'اسم الجولة',
+    'gwla_name' => 'اسم الجولة Ar',
+    'gwla_name_en' => 'اسم الجولة En',
     'gwla_matches' => 'مباريات الجولة',    
     'gwla_info' => 'بيانات الجولة',    
     'start' => ' يبدأ فى',
@@ -235,4 +242,67 @@ return [
     'i_have_Already_account' => 'انا امتلك حساب بالفعل !',
     'confirm_pass' => 'تأكيد كلمة المرور',
     'user_name' => 'اسم المستخدم',
+
+    //api
+    //api squadApiController
+    'team_exist' => 'يوجد فريق',
+    'create_team' => 'يجب عليك إنشاء فريق !',
+    'LoginWarning' => 'الرجاء تسجيل الدخول أولا',
+    'teamShow' => 'تم عرض الفريق',
+    'no_player_team' => 'لا يوجد لاعبون في الفريق',
+    'no_team' => 'لا يوجد فريق',
+    'cap_here' => 'يوجد كابتن',
+    'no_cap' => 'لا يوجد كابتن',
+    'already_team' => 'لقد قمت بالفعل بإنشاء فريق من الفئة المختارة',
+    'already_player' => 'هذا اللاعب موجود بالفعل',
+    'success_update' => 'تم التعديل بنجاح',
+    'team_added' => 'A team has been added',
+    'coach_added' => 'تمت إضافة الفريق',
+    'player_added' => 'تمت إضافة لاعب إلى الفريق',
+    'change_cap' => 'تم تغير الكابتن بنجاح',
+    'reach_num_player' => 'لقد وصل هذا الفريق إلى العدد المطلوب من اللاعبين',
+    'cap_choosen' => 'تم اختيار الكابتن من قبل !!!',
+    'no_possiple_two_players' => 'لا يمكن اختيار أكثر من لاعبين لنفس الفريق',
+    'replace_no_cap' => 'لا يمكن للبدلاء أن يكونوا كابتن فريق',
+    'no_modify_tour' => 'لا يمكن تعديل التشكيل أثناء الجولة',
+    'ok_modify_tour' => 'تعديل التشكيلة مسموح به',
+    'no_tour_open' => 'لا توجد جولات مفتوحة الآن ...',
+
+    //api playerApiController
+    'player_class_shown' => 'تم عرض اللاعبين من التصنيف المطلوب',
+    'player_position_change' => 'لقد تم تغير مركز اللاعب!',
+    'player_deleted' => 'تم حذف اللاعب!',
+    'player_shown' => 'تم عرض بيانات اللاعب !',
+    'club_players_shown' => 'تم عرض لاعبي النادي المطلوب ',
+
+    //api MatchesController
+    'match_shown' => 'تم عرض المباريات',
+    'no_match' => 'لا يوجد مباريات',
+    'no_open_tour_class' => 'لا توجد بطولات مفتوحة في هذا التصنيف',
+    'tour_gwla_selected' => 'تم اختيار جولات البطولة',
+    'no_match_today' => 'لا توجد مباريات اليوم',
+    'last_five_shown' => 'تم عرض آخر 5 مباريات !!!',
+    'today_matches_shown' => ' تم عرض مباريات اليوم ',
+
+    //api CoachesApiController
+    'coach_class_shown' => 'تم عرض مدربي التصنيف المطلوب',
+
+    //api ClubApiController
+    'club_class_shown' => 'تم عرض نوادي التصنيف المطلوبة',
+
+    //api AuthApiController
+    'not_authorized' => 'أنت غير مٌصرح لك تسجيل الدخول',
+    'login_success' => 'لقد قمت بتسجيل الدخول بنجاح',
+    'email_pass_not_correct' => 'البريد الإلكتروني أو كلمة المرور غير صحيحة',
+    'new_user_added' => 'تمت إضافة مستخدم جديد بنجاح',
+    'data_updated' => 'تم تحديث البيانات بنجاح',
+    'enter_pass_not_already_exixt' => 'أدخل كلمة مرور جديدة غير موجودة بالفعل.',
+    'pass_changed' => 'تم تغيير كلمة المرور بنجاح',
+    'fields_m_filled' => 'يجب ملء الحقول',
+    'user_data_shown' => 'تم عرض بيانات المستخدم',
+    'first_ten_users_shown' => 'تم عرض أول 10 مستخدمين بالنقاط',
+    'rank_shown' => 'تم عرض الترتيب على أساس النقاط',
+    'logout_success' => ' تم تسجيل الخروج بنجاح',
+    'all_ads_shown' => 'تم عرض جميع الإعلانات !!',
+    'no_ads' => 'لا توجد إعلانات'
 ];

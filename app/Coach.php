@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Coach extends Model
 {
     protected $fillable = [
-        'coach_name', 'age', 'image', 'desc', 'club_id'
+        'coach_name', 'coach_name_en', 'age', 'image', 'desc', 'club_id'
     ];
     public function getImageAttribute($img)
     {

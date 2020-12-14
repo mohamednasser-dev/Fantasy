@@ -148,6 +148,26 @@ return [
 
     'attributes' => [
         'club_id'=>'club name',
+        'home_club_id'=>'first club',
+        'away_club_id'=>'second club',
+        'stadium_id'=>'stadium',
+        'tour_id'=>'tournament',
+        'gwla_id'=>'gwla',
+        'player_id'=>'player',
+        
+        'player_name'=>'player name',
+        'tour_name'=>'tournament name',
+        'date'=>'date',
+        'date_created'=>'date_created',
+        'status'=>'status',
+       
+        //for login page and register ..
+        'password'=>'password',
+        'email'=>'email',
+        'name'=>'name',
+
+        'squad_name'=>'squad name',
+        'stadium_id'=>'stadium',
     ],
 
 ];

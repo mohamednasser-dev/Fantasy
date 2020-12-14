@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\App;
 use Illuminate\Pagination\Paginator;
 use ConsoleTVs\Charts\Registrar as Charts;
 
@@ -30,5 +31,8 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\SalonChart::class
         ]);
         Paginator::viewFactory();
+
+        $lang = request()->header('lang');
+        App::setLocale($lang);
     }
 }

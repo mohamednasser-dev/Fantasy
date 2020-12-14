@@ -44,6 +44,7 @@ class PlayersController extends Controller
             [
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
                 'player_name' => 'required',
+                'player_name_en' => 'required',
                 'club_id' => 'required',
                 'center_name' => 'required',
                 'age' => 'required',                
@@ -106,6 +107,7 @@ class PlayersController extends Controller
             [
                 'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,bmp',
                 'player_name' => 'required',
+                'player_name_en' => 'required',
                 'club_id' => 'required',
                 'center_name' => 'required',
                 'age' => 'required',                

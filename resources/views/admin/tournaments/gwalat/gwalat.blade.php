@@ -26,6 +26,7 @@
                         <thead>
                             <tr>
                                 <th class="text-lg-center">{{trans('admin.name')}}</th>
+                                <th class="text-lg-center">{{trans('admin.name_en')}}</th>
                                 <th class="text-lg-center">{{trans('admin.start')}}</th> 
                                 <th class="text-lg-center">{{trans('admin.end')}}</th> 
                                 <th class="text-lg-center">{{trans('admin.status')}}</th> 
@@ -36,6 +37,7 @@
                             @foreach($gwalat_data as $gwala)
                                 <tr>
                                     <td class="text-lg-center">{{$gwala->name}}</td>
+                                    <td class="text-lg-center">{{$gwala->name_en}}</td>
                                     <td class="text-lg-center">{{$gwala->start}}</td>
                                     <td class="text-lg-center">{{$gwala->end}}</td>
                                     <td class="text-lg-center">

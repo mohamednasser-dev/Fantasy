@@ -154,7 +154,6 @@ return [
         'tour_id'=>'البطولة',
         'gwla_id'=>'الجولة',
         'player_id'=>'اسم اللاعب',
-        
         'player_name'=>'اسم اللاعب',
         'tour_name'=>'اسم البطولة',
         'date'=>'تاريخ المباراه',
@@ -165,11 +164,8 @@ return [
         'password'=>'كلمة المرور',
         'email'=>'البريد الالكترونى',
         'name'=>'الاسم',
-
         'squad_name'=>'الفريق',
-
-        
-        'stadium_id'=>'staduim',
+        'stadium_id'=>'الاستاد',
         
         
         

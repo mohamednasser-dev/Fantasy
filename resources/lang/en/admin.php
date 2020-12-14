@@ -129,8 +129,67 @@ return [
     'i_have_Already_account' => 'i have Already account !',
     'confirm_pass' => 'Confirm Password',
     'user_name' => 'User Name',
+    //api
+    //api squadApiController
+    'team_exist' => 'There is a team',
+    'create_team' => 'You must create a team !',
+    'LoginWarning' => 'Please login first',
+    'teamShow' => 'The team has been shown',
+    'no_player_team' => 'There are no players on the team',
+    'no_team' => 'There is no team',
+    'cap_here' => 'There is a captain',
+    'no_cap' => 'There is no captain',
+    'already_team' => 'You have already created a team from the selected category',
+    'already_player' => 'This player already exists',
+    'success_update' => 'Modified successfully',
+    'team_added' => 'A team has been added',
+    'coach_added' => 'A coach has been added to the team ',
+    'player_added' => 'A player has been added to the team',
+    'change_cap' => 'The captain has changed successfully',
+    'reach_num_player' => 'This team has reached the required number of players',
+    'cap_choosen' => 'The captain has been chosen before !!!',
+    'no_possiple_two_players' => 'It is not possible to select more than two players for the same team',
+    'replace_no_cap' => 'Substitutes cannot be captain for a team',
+    'no_modify_tour' => 'The formation cannot be modified during the tour',
+    'ok_modify_tour' => 'formation modification is permitted',
+    'no_tour_open' => 'No tours are open right now ...',
 
-    
+    //api playerApiController
+    'player_class_shown' => 'Players of the required classification are shown ',
+    'player_position_change' => 'The player position has changed!',
+    'player_deleted' => 'The player has been deleted!',
+    'player_shown' => 'Player data shown !',
+    'club_players_shown' => 'The required club players have been shown ',
 
+    //api MatchesController
+    'match_shown' => 'Matches are shown',
+    'no_match' => 'There are no Matches',
+    'no_open_tour_class' => 'There are no open tournaments in this classification',
+    'tour_gwla_selected' => 'tournament gwlat selected',
+    'no_match_today' => 'There are no matches today',
+    'last_five_shown' => 'The last 5 matches were shown !!!',
+    'today_matches_shown' => ' Today`s matches are shown ',
+
+    //api CoachesApiController
+    'coach_class_shown' => 'The required class coaches were shown',
+
+    //api ClubApiController
+    'club_class_shown' => 'The required class clubs are shown',
+
+    //api AuthApiController
+    'not_authorized' => 'You are not authorized to enter',
+    'login_success' => 'You have logged in successfully',
+    'email_pass_not_correct' => 'email or password not correct',
+    'new_user_added' => 'new user added successfuly',
+    'data_updated' => 'Data has been updated successfuly',
+    'enter_pass_not_already_exixt' => 'Enter a new password that does not already exist.',
+    'pass_changed' => 'The password has been changed successfully',
+    'fields_m_filled' => 'Fields must be filled',
+    'user_data_shown' => 'User data shown',
+    'first_ten_users_shown' => 'The first 10 users are shown with points',
+    'rank_shown' => 'Rank is shown based on points',
+    'logout_success' => 'You have logout successfully',
+    'all_ads_shown' => 'All ads are shown !!',
+    'no_ads' => 'There are no ads'
 ];
 

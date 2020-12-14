@@ -32,7 +32,7 @@ class MatchesController extends Controller
     {
        $monitor_clubArray=null;
        $monitor_clubs=null;
-       $matches = $this->objectName::orderBy('tour_id','desc')->paginate(10);
+       $matches = $this->objectName::orderBy('date','asc')->paginate(10);
         if(auth()->user()->type == 'monitor')
         {
        // dd(auth()->user()->id);
@@ -44,6 +44,10 @@ class MatchesController extends Controller
                $i_monitor++;
             }
             // dd($monitor_clubArray);
+            if($monitor_clubArray == null){
+              $monitor_clubArray[0] = 0;
+              session()->flash('danger','يجب تخصيص نوادى لك لمتابعتها ..  !');
+            }
             return view($this->folderView.'matches',\compact('matches','monitor_clubArray','monitor_clubs'));
         }else{
             return view($this->folderView.'matches',\compact('matches','monitor_clubArray','monitor_clubs'));

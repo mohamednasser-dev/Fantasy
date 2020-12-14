@@ -31,6 +31,7 @@
                         <thead>
                             <tr>
                                 <th class="text-lg-center">{{trans('admin.club_name')}}</th>
+                                <th class="text-lg-center">{{trans('admin.club_name_en')}}</th>
                                 <th class="text-lg-center">{{trans('admin.date_created')}}</th>
                                 <th class="text-lg-center">{{trans('admin.classification')}}</th>
                                 <th class="text-lg-center">{{trans('admin.image')}}</th>
@@ -42,6 +43,7 @@
                             @foreach($clubs as $club)
                                 <tr>
                                     <td class="text-lg-center">{{$club->club_name}}</td>
+                                    <td class="text-lg-center">{{$club->club_name_en}}</td>
                                     <td class="text-lg-center">{{$club->date_created}}</td>
                                     <td class="text-lg-center">
                                         @if($club->classification =='1st')

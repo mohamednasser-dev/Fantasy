@@ -29,6 +29,14 @@
                               {{ Form::text('name',old('name'),["class"=>"form-control" ,"required",'placeholder'=>trans('admin.name') ]) }}
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="example-month-input" class="col-md-2 col-form-label">
+                              {{trans('admin.gwla_name_en')}}
+                            </label>
+                            <div class="col-md-10">
+                              {{ Form::text('name_en',old('name_en'),["class"=>"form-control" ,"required",'placeholder'=>trans('admin.name_en') ]) }}
+                            </div>
+                        </div>
                         <div class="form-group">
                             {{ Form::hidden('tour_id',$id,["class"=>"form-control" ]) }}
                         </div>
