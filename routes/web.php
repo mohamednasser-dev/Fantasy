@@ -11,10 +11,13 @@
 	Route::get('forgot', 'ForgotPasswordController@forgot');
 	Route::post('reset', 'ForgotPasswordController@reset');
 	Route::get('support', 'Guest\supportController@index');
-	Route::get('/home', 'HomeController@index')->name('home');
-	Route::get('matches', 'Admin\MatchesController@index');
-	Route::group(['middleware' => ['auth','monitor']], function () 
-	{
+    Route::get('fLoop', 'Admin\MatchesController@fLoop');
+	Route::group(['middleware' => ['auth']], function (){
+		Route::get('/home', 'HomeController@index')->name('home');
+		Route::get('matches', 'Admin\MatchesController@index');
+	});
+
+	Route::group(['middleware' => ['auth','monitor']], function (){
 		Route::get('monitor_match/{match_id}', 'Admin\MatchesController@monitor_match');
 		Route::post('monitor_match/store', 'Admin\MatchesController@store_match_event');
 		Route::post('monitor_match/destroy', 'Admin\MatchesController@match_destroy');
@@ -28,8 +31,7 @@
 		Route::post('getPlayerInfo_away', 'Editor\ClubFormationsController@getPlayerInfo_away');
 	});
 
-	Route::group(['middleware' => ['auth','editor']], function () 
-	{
+	Route::group(['middleware' => ['auth','editor']], function (){
 		//Club routes
 		Route::get('clubs', 'Admin\ClubsController@index');
 		Route::post('clubs/store', 'Admin\ClubsController@store');
