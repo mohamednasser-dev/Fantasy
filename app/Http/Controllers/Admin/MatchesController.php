@@ -26,53 +26,9 @@ class MatchesController extends Controller
     public $folderView;
     public function __construct(Match $model)
     {
-        // $this->middleware('auth');
+        $this->middleware('auth');
         $this->objectName = $model;
         $this->folderView = 'admin.matches.';
-    }
-    public function fLoop()
-    {
-      $clubs = Club::all();
-      foreach ($clubs as $key => $club) {
-         $clubSelected = Club::where('id',$club->id)->first();
-         $clubSelected->club_name_en = $club->club_name;
-         $clubSelected->save();
-      }
-
-      $coaches = Coach::all();
-      foreach ($coaches as $key => $coache) {
-         $coachesSelected = Coach::where('id',$coache->id)->first();
-         $coachesSelected->coach_name_en = $coache->coach_name;
-         $coachesSelected->save();
-      }
-
-      $Gwalats = Gwalat::all();
-      foreach ($Gwalats as $key => $Gwala) {
-         $GwalatsSelected = Gwalat::where('id',$Gwala->id)->first();
-         $GwalatsSelected->name_en = $Gwala->name;
-         $GwalatsSelected->save();
-      }
-
-      $Players = Player::all();
-      foreach ($Players as $key => $Player) {
-         $PlayerSelected = Player::where('id',$Player->id)->first();
-         $PlayerSelected->player_name_en = $Player->player_name;
-         $PlayerSelected->save();
-      }
-
-      $Stadiums = Stadium::all();
-      foreach ($Stadiums as $key => $Stadium) {
-         $StadiumSelected = Stadium::where('id',$Stadium->id)->first();
-         $StadiumSelected->stadium_name_en = $Stadium->stadium_name;
-         $StadiumSelected->save();
-      }
-
-      $Tournaments = Tournament::all();
-      foreach ($Tournaments as $key => $Tournament) {
-         $TournamentSelected = Tournament::where('id',$Tournament->id)->first();
-         $TournamentSelected->tour_name_en = $Tournament->tour_name;
-         $TournamentSelected->save();
-      }
     }
 
     // this function to  select all Coaches
