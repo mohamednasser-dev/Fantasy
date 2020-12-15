@@ -62,7 +62,7 @@ class CoachesController extends Controller
                
                 return $this->sendResponse(200, trans('admin.coach_class_shown'), $coaches_with_classif);
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

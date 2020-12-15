@@ -58,7 +58,7 @@ class AuthController extends Controller
             {
                 $user = auth()->user();
                 if($user->type =='admin'){
-                    return $this->sendResponse(403, trans('admin.not_authorized'),null);
+                    return $this->sendResponse(404, trans('admin.not_authorized'),null);
                 }
                 $user->api_token = Str::random(60);
                 $api_token = $user->api_token;
@@ -113,7 +113,7 @@ class AuthController extends Controller
             ]);
         if (!is_array($validate)) {
             if (empty($auth_user)) {
-                return $this->sendResponse(403, trans('admin.LoginWarning'), null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'), null);
             }
             $user_data = User::find(intval($id))->update($input);
             $user = User::where('id',$id)->first();
@@ -163,7 +163,7 @@ class AuthController extends Controller
                     return $this->sendResponse(403, trans('admin.fields_m_filled'), $data_final);
                 }
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),$data_final);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),$data_final);
             }
         }else {
             return $this->sendResponse(403, $validate[0], $data_final);
@@ -217,7 +217,7 @@ class AuthController extends Controller
                 }
                 return $this->sendResponse(200, trans('admin.user_data_shown'),$user_data[0]);
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
                 return $this->sendResponse(403, $validate[0], null);
@@ -242,7 +242,7 @@ class AuthController extends Controller
                     ->get();
                 return $this->sendResponse(200, trans('admin.first_ten_users_shown'), $top_ten_users);
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
                 return $this->sendResponse(403, $validate[0], null);
@@ -294,7 +294,7 @@ class AuthController extends Controller
                 }
                 return $this->sendResponse(200, trans('admin.rank_shown'),$result);
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
                 return $this->sendResponse(403, $validate[0], null);
@@ -311,7 +311,7 @@ class AuthController extends Controller
             $user = User::where('api_token',$api_token)->first();
             if(empty($user))
             {
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),null);
             }
             $user->api_token = null;
             if($user->save())
@@ -319,7 +319,7 @@ class AuthController extends Controller
                 Auth::logout();
                 return $this->sendResponse(200, trans('admin.logout_success'),null);
             }else{
-                return $this->sendResponse(401, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
         return $this->sendResponse(403, $validate, null);

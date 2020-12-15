@@ -56,7 +56,7 @@ class PlayersController extends Controller
                     ->get();
                 return $this->sendResponse(200, trans('admin.player_class_shown'), $players_with_classif);
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -93,7 +93,7 @@ class PlayersController extends Controller
 
                 return $this->sendResponse(200, trans('admin.club_players_shown'), $players);
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -121,7 +121,7 @@ class PlayersController extends Controller
                             });
                 return $this->sendResponse(200, trans('admin.player_shown'), $player_info);
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -147,7 +147,7 @@ class PlayersController extends Controller
                 ->delete();
                 return $this->sendResponse(200, trans('admin.player_deleted'),null);
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -193,7 +193,7 @@ class PlayersController extends Controller
                 ->update($player2_input);
                 return $this->sendResponse(200, trans('admin.player_position_change') , null);
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

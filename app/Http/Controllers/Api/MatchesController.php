@@ -65,7 +65,7 @@ class MatchesController extends Controller
                     return $this->sendResponse(403, trans('admin.no_match_today'),null);
                 }
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -154,7 +154,7 @@ class MatchesController extends Controller
                     return $this->sendResponse(403, trans('admin.no_match'),null);
                 }
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -206,7 +206,7 @@ class MatchesController extends Controller
                 return $this->sendResponse(200,'',array('selected_match' => $selected_match,
                         'home_events' => $home_events,'away_events' => $away_events));
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -249,7 +249,7 @@ class MatchesController extends Controller
                     return $this->sendResponse(403, trans('admin.no_match'),null);
                 }
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -283,7 +283,7 @@ class MatchesController extends Controller
                     return $this->sendResponse(403, trans('admin.no_open_tour_class'),null);
                 }
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -324,7 +324,7 @@ class MatchesController extends Controller
                     return $this->sendResponse(403, trans('admin.no_match'),null);
                 }
             }else{
-                return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404, trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);

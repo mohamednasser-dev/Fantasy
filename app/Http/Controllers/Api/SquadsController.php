@@ -65,7 +65,7 @@ class SquadsController extends Controller
                         return $this->sendResponse(403, trans('admin.create_team'), null);
                     }
                 }else{
-                    return $this->sendResponse(403, trans('admin.LoginWarning'),null);
+                    return $this->sendResponse(404, trans('admin.LoginWarning'),null);
                 }
             }else {
                 return $this->sendResponse(403, $validate[0], null);
@@ -131,7 +131,7 @@ class SquadsController extends Controller
                     return $this->sendResponse(403, trans('admin.no_team'),null);
                 }
             }else{
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -190,7 +190,7 @@ class SquadsController extends Controller
                     return $this->sendResponse(403, trans('admin.no_team'),null);
                 }
             }else{
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -230,7 +230,7 @@ class SquadsController extends Controller
                     return $this->sendResponse(403, trans('admin.no_team'),null);
                 }
             }else{
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -261,7 +261,7 @@ class SquadsController extends Controller
                     return $this->sendResponse(200, trans('admin.team_added'),$squad);
                 }
             }else{
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
@@ -289,7 +289,7 @@ class SquadsController extends Controller
                 return $this->sendResponse(200,  trans('admin.coach_added'),$data_out);
             }else{
                 $data_out['status'] = false ;
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),$data_out);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),$data_out);
             }
         }else {
             $data_out['status'] = false ;
@@ -320,7 +320,7 @@ class SquadsController extends Controller
                 return $this->sendResponse(200, trans('admin.change_cap'),$data);
             }else{
                 $data['status'] = false ;
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),$data);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),$data);
             }
         }else {
             $data['status'] = false ;
@@ -392,7 +392,7 @@ class SquadsController extends Controller
                 }
             }else{
                 $data['status'] = false ;
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),$data);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),$data);
             }
         }else {
             $data['status'] = false ;
@@ -438,7 +438,7 @@ class SquadsController extends Controller
                 return $this->sendResponse(200, trans('admin.success_update'),$data_final);
             }else{
                 $data_final['status'] = false ;
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),$data_final);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),$data_final);
             }
         }else {
             $data_final['status'] = false ;
@@ -495,7 +495,7 @@ class SquadsController extends Controller
                     return $this->sendResponse(200,trans('admin.no_tour_open'),$data);
                 }
             }else{
-                return $this->sendResponse(403,  trans('admin.LoginWarning'),null);
+                return $this->sendResponse(404,  trans('admin.LoginWarning'),null);
             }
         }else {
             return $this->sendResponse(403, $validate[0], null);
