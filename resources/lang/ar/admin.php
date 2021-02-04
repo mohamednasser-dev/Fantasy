@@ -75,6 +75,7 @@ return [
     'Event_success' => 'تم إضافة الحدث بنجاح',
     'done' => 'تنفيذ',
     'points' => 'النقاط',
+    'out' => 'طرد',
     'formation_num_error' => 'عدد اللاعبين فى تشكيلة المباراه غير كامل  ...',
     //Categories
     'add_new_cat' => 'اضافة تصنيف جديد',

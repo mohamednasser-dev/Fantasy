@@ -28,47 +28,51 @@ class SendPointsToUsers implements ShouldQueue
         $events = MatchEvent::where('match_id',$this->match->id)->get();
         $match = Match::where('id',$this->match->id)->first();
         $win_club  = null;
-        if($match->home_score > $match->away_score)
-        {
+
+        // To Choose which club is win
+        if($match->home_score > $match->away_score){
             $win_club  = $this->match->home_club_id;
-        }elseif($match->home_score < $match->away_score)
-        {
+        }elseif($match->home_score < $match->away_score){
             $win_club  = $this->match->away_club_id;
         }
+        //This Variable to store match clubs        
         $clubs  = [$this->match->home_club_id,$this->match->away_club_id]; 
-        //Giv Event Points To Players    
-        foreach ($events as $event) 
-        {
-            $current_event  = Event::find($event->event_id);
-            $current_player = Player::find($event->player_id);
-            $captins        = Squad_player::where('player_id',$event->player_id)->where('is_captain',"1")->count();
-            if($captins > 0){
-                $final_points = $current_player->points + ($captins * $current_event->is_captain);
-                $not_captain_data['points'] = $final_points;
-                $Player_win = Player::where('id',$current_player->id)->update($not_captain_data);
-                $squads     = Squad_player::where('player_id',$event->player_id)->where('is_captain',"1")->get();
-                foreach ($squads as $squad) {
-                    $squad_points = $squad->points + $current_event->is_captain;
-                    $data['points'] = $squad_points;
-                    $Player_win = Squad_player::where('player_id',$squad->player_id)->update($data);
-                    $Player_win = Squad_player::where('player_id',$squad->player_id)->sum('points');
-                }
 
-            }
-            $not_captains    = Squad_player::where('player_id',$event->player_id)->where('is_captain',"0")->count();
-            if($not_captains > 0){
-                $final_points = $current_player->points + ($not_captains * $current_event->value);
-                $not_captain_data['points'] = $final_points;
-                $Player_win = Player::where('id',$current_player->id)->update($not_captain_data);
-                $squads     = Squad_player::where('player_id',$event->player_id)->where('is_captain',"0")->get();
-                foreach ($squads as $squad) {
-                    $squad_points = $squad->points + $current_event->value;
-                    $data['points'] = $squad_points;
-                    $Player_win = Squad_player::where('player_id',$squad->player_id)->update($data);
+        //Give Event Points To real Players    
+        foreach ($events as $event){
+            $current_event  = Event::find($event->event_id);
+            if($event->person == 'player'){
+                $current_player = Player::find($event->player_id);
+                $captins        = Squad_player::where('player_id',$event->player_id)->where('is_captain',"1")->count();
+                if($captins > 0){
+                    $final_points = $current_player->points + ($captins * $current_event->is_captain);
+                    $not_captain_data['points'] = $final_points;
+                    $Player_win = Player::where('id',$current_player->id)->update($not_captain_data);
+                    $squads     = Squad_player::where('player_id',$event->player_id)->where('is_captain',"1")->get();
+                    foreach ($squads as $squad) {
+                        $squad_points = $squad->points + $current_event->is_captain;
+                        $data['points'] = $squad_points;
+                        $Player_win = Squad_player::where('player_id',$squad->player_id)->update($data);
+                        $Player_win = Squad_player::where('player_id',$squad->player_id)->sum('points');
+                    }
+
                 }
-                          
+                $not_captains    = Squad_player::where('player_id',$event->player_id)->where('is_captain',"0")->count();
+                if($not_captains > 0){
+                    $final_points = $current_player->points + ($not_captains * $current_event->value);
+                    $not_captain_data['points'] = $final_points;
+                    $Player_win = Player::where('id',$current_player->id)->update($not_captain_data);
+                    $squads     = Squad_player::where('player_id',$event->player_id)->where('is_captain',"0")->get();
+                    foreach ($squads as $squad) {
+                        $squad_points = $squad->points + $current_event->value;
+                        $data['points'] = $squad_points;
+                        $Player_win = Squad_player::where('player_id',$squad->player_id)->update($data);
+                    }
+                              
+                }
             }
         }
+
         //Get All Win Club Players & Giv Points In Squad Player
         $players = Squad_player::where('club_id',$win_club)->get();
         $win_event = Event::find(5);
@@ -80,7 +84,6 @@ class SendPointsToUsers implements ShouldQueue
                 $playerInWinClub = Player::where('id',$player->player_id)->first();
                 $playerInWinClub_data['points'] = $playerInWinClub->points + $win_event->is_captain; 
                 $Player_win = Player::where('id',$player->player_id)->update($playerInWinClub_data);
-
             }else{
                 $player_data['points'] = $player->points + $win_event->value; 
                 $Player_win = Squad_player::where('player_id',$player->player_id)->update($player_data);
@@ -89,12 +92,13 @@ class SendPointsToUsers implements ShouldQueue
                 $Player_win = Player::where('id',$player->player_id)->update($playerInWinClub_data);                
             }
         }
-
-        //Get Squad And Give Point For Coche Win by nasser
+        //Get Squad And Give Point For Coche Win by mo nasser
         $Coche = Coach::where('club_id',$win_club)->first();
         $CocheSquads = Squad::where('coach_id',$Coche->id)->get();
         foreach ($CocheSquads as $squad) {
-            $squad->increment('points',$win_event->value);
+            $squad = Squad::find($squad->id);
+            $squad->points += $win_event->value;
+            $squad->save();
         }
         //End Give Point For Coche Win
 

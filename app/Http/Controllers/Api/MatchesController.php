@@ -270,7 +270,7 @@ class MatchesController extends Controller
                 $classification = $request->input('classification');
                 $tour =Tournament::where('classification',  $classification)->where('status','started')->first();
                 if($tour != null){
-                    $gwlat =Gwalat::select('id','name','tour_id')
+                    $gwlat =Gwalat::select('id','name','name_en','tour_id')
                             ->where('tour_id',$tour->id)
                             ->get()->map(function($gwla) use ($lang) {
                                     if($lang == 'en'){

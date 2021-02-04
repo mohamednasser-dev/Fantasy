@@ -20,6 +20,7 @@
 		Route::get('monitor_match/{match_id}', 'Admin\MatchesController@monitor_match');
 		Route::post('monitor_match/store', 'Admin\MatchesController@store_match_event');
 		Route::post('monitor_match/destroy', 'Admin\MatchesController@match_destroy');
+		Route::get('monitor_match/{coach_id}/{match_id}/fire_coach', 'Admin\MatchesController@fire_coach');
 		//match formation
 		Route::get('match/{match_id}/{home_id}/{away_id}/view_match_formation', 'Editor\ClubFormationsController@index');
 		Route::post('club_formations/store', 'Editor\ClubFormationsController@store');

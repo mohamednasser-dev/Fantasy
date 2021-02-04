@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
 class Club extends Model
 {
     protected $hidden = ['club_name_en'];
@@ -16,5 +15,9 @@ class Club extends Model
             return asset('/uploads/clubs_images') . '/' . $img;
         else
             return "";
+    }
+    public function Coach()
+    {
+        return $this->hasOne('App\Coach', 'club_id', 'id');
     }
 }

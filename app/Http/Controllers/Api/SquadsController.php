@@ -422,11 +422,13 @@ class SquadsController extends Controller
                     $squad_players =Squad_player::where('club_id',$player_new->club_id)
                     ->where('squad_id',$squad_id)
                     ->get();
-                    if(count($squad_players) == 2){
+                    if(count($squad_players) >= 2){
                         $data['status'] = false ;
                         return $this->sendResponse(403,trans('admin.no_possiple_two_players'),$data);
                     }else{
+                        $selected_player =  Player::findOrFail($request->input('new_player_id'));
                         $data['player_id'] = $request->input('new_player_id');
+                        $data['club_id'] = $selected_player->club_id;
                         $squad_player = Squad_player::where('player_id',$old_player_id)
                                     ->where('squad_id',$squad_id)
                                     ->update($data);
@@ -476,7 +478,7 @@ class SquadsController extends Controller
                     $final_Start = date("Y-m-d H:i", strtotime($start));
                     $final_Start = Carbon::createFromFormat('Y-m-d H:i', $final_Start);
                     //get start date befor 24 hour ...
-                    $yesterday_gwla_start = $final_Start->subDay();
+                    $yesterday_gwla_start = $final_Start->subHours(2);
                     //get end date of active selected gwla ...
                     $endDate =  $gwla->end;
                     $endTime =  $gwla->end_time;

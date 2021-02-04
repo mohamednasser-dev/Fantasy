@@ -27,29 +27,38 @@
                                 <div class="scroll">
                                     <div class="card-body">
                                         <div class="card-block">
+                                            <h5>{{trans('admin.coach')}}</h5>
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        {{$home_coach->coach_name}}
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href=" {{url('monitor_match/'.$home_coach->id.'/'.$selected_match->id.'/fire_coach')}}">{{trans('admin.out')}}</a>
+                                                    </div>
+                                                </div>
                                             <h5>{{trans('admin.basic')}}</h5>
-                                                @foreach($home_players as $player)
-                                                    <div class="radio-list">
-                                                        <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="home_player_id" data-player="{{$player->player_id}}" type="radio" checked="" class="custom-control-input">
-                                                            <span class="custom-control-indicator"></span>
-                                                            <span class="custom-control-description">{{$player->getPlayer->player_name}}</span>
-                                                            <small style="position: absolute;left: 0;color: red;">{{$player->getPlayer->center_name}}</small>
-                                                        </label>
-                                                    </div>
-                                                @endforeach
-                                                <hr>
-                                                <h5>{{trans('admin.replacement')}}</h5>
-                                                @foreach($home_replacement_players as $player)
-                                                    <div class="radio-list">
-                                                        <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="home_player_id" data-player="{{$player->id}}" type="radio" class="custom-control-input">
-                                                            <span class="custom-control-indicator"></span>
-                                                            <span class="custom-control-description">{{$player->player_name}} </span>
-                                                            <small style="position: absolute;left: 0;color: red;">{{$player->center_name}}</small>
-                                                        </label>
-                                                    </div>
-                                                @endforeach
+                                            @foreach($home_players as $player)
+                                                <div class="radio-list">
+                                                    <label class="custom-control custom-radio" style="width: 100%;">
+                                                        <input id="radio3" name="home_player_id" data-player="{{$player->player_id}}" type="radio" checked="" class="custom-control-input">
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">{{$player->getPlayer->player_name}}</span>
+                                                        <small style="position: absolute;left: 0;color: red;">{{$player->position}}</small>
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                            <hr>
+                                            <h5>{{trans('admin.replacement')}}</h5>
+                                            @foreach($home_replacement_players as $player)
+                                                <div class="radio-list">
+                                                    <label class="custom-control custom-radio" style="width: 100%;">
+                                                        <input id="radio3" name="home_player_id" data-player="{{$player->id}}" type="radio" class="custom-control-input">
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">{{$player->player_name}} </span>
+                                                        <small style="position: absolute;left: 0;color: red;">{{$player->center_name}}</small>
+                                                    </label>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -89,29 +98,38 @@
                                 <div class="scroll">
                                     <div class="card-body">
                                         <div class="card-block">
+                                            <h5>{{trans('admin.coach')}}</h5>
+                                            <div class="btn-group" role="group">
+                                                <button id="btnGroupDrop1" type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    {{$away_coach->coach_name}}
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                    <a class="dropdown-item">{{trans('admin.out')}}</a>
+                                                </div>
+                                            </div>
                                             <h5>{{trans('admin.basic')}}</h5>
-                                                @foreach($away_players as $player)
-                                                    <div class="radio-list">
-                                                        <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="away_player_id" data-player="{{$player->player_id}}" type="radio"  class="custom-control-input">
-                                                            <span class="custom-control-indicator"></span>
-                                                            <span class="custom-control-description">{{$player->getPlayer->player_name}}</span>
-                                                            <small style="position: absolute;left: 0;color: red;">{{$player->getPlayer->center_name}}</small>
-                                                        </label>
-                                                    </div>
-                                                @endforeach
-                                                <hr>
-                                                <h5>{{trans('admin.replacement')}}</h5>
-                                                @foreach($away_replacement_players as $player)
-                                                    <div class="radio-list">
-                                                        <label class="custom-control custom-radio" style="width: 100%;">
-                                                            <input id="radio3" name="away_player_id" data-player="{{$player->id}}" type="radio" class="custom-control-input">
-                                                            <span class="custom-control-indicator"></span>
-                                                            <span class="custom-control-description">{{$player->player_name}} </span>
-                                                            <small style="position: absolute;left: 0;color: red;">{{$player->center_name}}</small>
-                                                        </label>
-                                                    </div>
-                                                @endforeach
+                                            @foreach($away_players as $player)
+                                                <div class="radio-list">
+                                                    <label class="custom-control custom-radio" style="width: 100%;">
+                                                        <input id="radio3" name="away_player_id" data-player="{{$player->player_id}}" type="radio"  class="custom-control-input">
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">{{$player->getPlayer->player_name}}</span>
+                                                        <small style="position: absolute;left: 0;color: red;">{{$player->position}}</small>
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                            <hr>
+                                            <h5>{{trans('admin.replacement')}}</h5>
+                                            @foreach($away_replacement_players as $player)
+                                                <div class="radio-list">
+                                                    <label class="custom-control custom-radio" style="width: 100%;">
+                                                        <input id="radio3" name="away_player_id" data-player="{{$player->id}}" type="radio" class="custom-control-input">
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">{{$player->player_name}} </span>
+                                                        <small style="position: absolute;left: 0;color: red;">{{$player->center_name}}</small>
+                                                    </label>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -121,11 +139,10 @@
                                     <div class="form-group row">
                                         <div class="col-md-10">
                                            {{ Form::open( [null,'method'=>'post' ,'id'=>'match_away_event_form'])}}
-                                                        {{ csrf_field() }}
-                                                        {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
-                                                        {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txt_away_Player" ]) }}
-                                                        {{ Form::select('event_id',$all_events,null
-                                                      ,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
+                                                {{ csrf_field() }}
+                                                {{ Form::hidden('match_id',$selected_match->id,["class"=>"form-control" ]) }}
+                                                {{ Form::hidden('player_id',null,["class"=>"form-control","id"=>"txt_away_Player" ]) }}
+                                                {{ Form::select('event_id',$all_events,null,["class"=>"form-control custom-select" ,'placeholder'=>trans('admin.choose_event') ]) }}
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -184,10 +201,16 @@
                                                         $label = 'label-danger';
                                                     }elseif($event->Event->key == 'score_goal'){
                                                         $label = 'label-success';
+                                                    }elseif($event->Event->key == 'coach_fired'){
+                                                        $label = 'label-danger';
                                                     }
                                                 @endphp
                                                     <tr class="unread">
-                                                        <td class="hidden-xs-down">{{$event->Player->player_name}}</td>
+                                                        @if($event->person == 'player')
+                                                            <td class="hidden-xs-down">{{$event->Player->player_name}}</td>
+                                                        @elseif($event->person == 'coach')
+                                                            <td class="hidden-xs-down">{{$event->Coach->coach_name}}</td>
+                                                        @endif
                                                         <td class="max-texts">
                                                             <a href="javascript:;">
                                                                 <span class="label {{$label}} m-r-10">{{$event->Event->name}}</span> 

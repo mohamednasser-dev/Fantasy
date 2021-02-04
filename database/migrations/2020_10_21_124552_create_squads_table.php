@@ -22,6 +22,8 @@ class CreateSquadsTable extends Migration
             $table->bigInteger('coach_id')->unsigned()->nullable();
             $table->foreign('coach_id')->references('id')->on('coaches')->onDelete('cascade');
 
+            $table->bigInteger('coach_points')->default(0);
+
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             

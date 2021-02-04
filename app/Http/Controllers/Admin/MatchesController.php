@@ -61,10 +61,12 @@ class MatchesController extends Controller
     {
         $events = MatchEvent::where('match_id',$match_id)->orderby('id','desc')->get();
         $all_events = Event::where('opacity','1')->pluck('name','id');
-        $selected_match=Match::where('id',$match_id)->first();
-        $home_club =Club::where('id',$selected_match->home_club_id)->first();
-        $away_club =Club::where('id',$selected_match->away_club_id)->first();
-        $home_players =club_formation::where('club_id',$selected_match->home_club_id)->orderBy('position','ASC')->get();
+        $selected_match = Match::where('id',$match_id)->first();
+        $home_club = Club::where('id',$selected_match->home_club_id)->first();
+        $home_coach = Coach::where('club_id',$home_club->id)->first();
+        $away_club = Club::where('id',$selected_match->away_club_id)->first();
+        $away_coach = Coach::where('club_id',$away_club->id)->first();
+        $home_players = club_formation::where('club_id',$selected_match->home_club_id)->orderBy('position','ASC')->get();
         $away_players = club_formation::where('club_id',$selected_match->away_club_id)->orderBy('position','ASC')->get();
         if(auth()->user()->type == 'monitor')
         {
@@ -100,13 +102,24 @@ class MatchesController extends Controller
         }else{
             $away_replacement_players = Player::where('club_id',$selected_match->away_club_id)->get();     
         }
+        // dd($home_coach);
         return view($this->folderView.'match_log.monitor_match',compact('events','all_events','selected_match','home_players','away_players','home_replacement_players',
-            'away_replacement_players','monitor_clubArray'));
+            'away_replacement_players','monitor_clubArray','home_coach','away_coach'));
     }   
     public function gwla_matches($id)
     {
         $matches = $this->objectName::where('gwla_id',$id)->paginate(10);
         return view($this->folderView.'matches',\compact('matches'));
+    }
+
+    public function fire_coach($coach_id , $match_id){
+            $low_home_goal_data['event_id'] = 7 ;
+            $low_home_goal_data['coach_id'] = $coach_id ;
+            $low_home_goal_data['person'] = 'coach' ;
+            $low_home_goal_data['match_id'] = $match_id ;
+            MatchEvent::create($low_home_goal_data);
+            session()->flash('success','تم طرد المدرب');
+            return back();
     }
     // to prepar to add new club
     public function create()
@@ -166,10 +179,25 @@ class MatchesController extends Controller
         parse_str($request->inputs, $data);
         try
         {
+
             $match_event = MatchEvent::create($data);
 
-            if($match_event->event_id == 3)
-            {
+            if($match_event->event_id == 3){
+              $playerGoals = MatchEvent::where('match_id',$match_event->match_id)
+                                        ->where('player_id',$match_event->player_id)
+                                        ->where('event_id',$match_event->event_id)
+                                        ->get();
+              if(count($playerGoals) == 3){
+                foreach ($playerGoals as $key => $match_event) {
+                     $match_event_goals = MatchEvent::where('player_id',$match_event->player_id)
+                                                     ->where('event_id', $match_event->event_id)
+                                                     ->first();
+                     $match_event_goals->delete();
+                }
+                // hat-trek 
+                $data['event_id'] = 6 ;
+                $match_event = MatchEvent::create($data);
+              }                          
                 $club_scored = $match_event->Player->club_id;
                 $match = Match::where('id',$match_event->match_id)->first();
                 if($match->home_club_id == $club_scored){
